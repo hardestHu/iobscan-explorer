@@ -102,6 +102,7 @@ export default {
 	watch: {
 		tabList: {
 			handler(newValue, oldValue) {
+       
                 this.runTypeListData(newValue);
 			},
 			deep: true
@@ -113,6 +114,7 @@ export default {
 		}
 	},
 	mounted() {
+   
 		this.getTxTypeData()
 		let typeListData = null,moduleData = null;
 		if(sessionStorage.getItem('typeList')){
@@ -218,6 +220,7 @@ export default {
 		},
 		selectMsgType(msgType, index,childrenTabs) {
 			this.childrenTabs.forEach((item) => {
+        
 				if (item.active) {
 					item.active = 0
 				}
@@ -237,6 +240,7 @@ export default {
 
 		},
         runTypeListData(typeListData) {
+          
 		    const {txType} = Tools.urlParser();
             if(typeListData?.length){
                 typeListData.forEach( (item,index) =>{

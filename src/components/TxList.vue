@@ -68,7 +68,11 @@ export default {
 	components: {
 		TxResetButtonComponent,
 		TxCountComponent,
-		TxStatusTabsComponents, TabsComponent, ListComponent, MPagination, TxListComponent
+		TxStatusTabsComponents, 
+    TabsComponent, 
+    ListComponent, 
+    MPagination, 
+    TxListComponent
 	},
 	mixins: [parseTimeMixin],
 	data() {
@@ -153,6 +157,7 @@ export default {
 		this.setMainToken();
     this.setIsShowIbc();
     this.setIsShowHashLock();
+
 	},
 	methods: {
     async setIsShowIbc() {
