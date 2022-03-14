@@ -918,8 +918,8 @@ export const needAddColumn = {
     stake: [
         {
             label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue: 'pool_id',
-            nativeValue: 'pool_id',
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
             isFormatPoolId: true,
         },
         {
@@ -945,8 +945,8 @@ export const needAddColumn = {
     unstake: [
         {
             label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue: 'pool_id',
-            nativeValue: 'pool_id',
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
             isFormatPoolId: true,
         },
         {
@@ -972,8 +972,8 @@ export const needAddColumn = {
     harvest: [
         {
             label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue: 'pool_id',
-            nativeValue: 'pool_id',
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
             isFormatPoolId: true,
         },
         {
@@ -988,7 +988,7 @@ export const needAddColumn = {
     ],
     create_pool: [
         {
-            label: i18n.t('ExplorerLang.table.total_reward1'),
+            label: i18n.t('ExplorerLang.table.totalReward1'),
             displayValue: 'amount',
             isRight: true
         },
@@ -998,7 +998,7 @@ export const needAddColumn = {
             isShowDenomTip: true,
         },
         {
-            label: i18n.t('ExplorerLang.table.total_reward2'),
+            label: i18n.t('ExplorerLang.table.totalReward2'),
             displayValue: 'amount',
             isRight: true
         },
@@ -1045,8 +1045,8 @@ export const needAddColumn = {
     destroy_pool: [
         {
             label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue: 'pool_id',
-            nativeValue: 'pool_id',
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
             isFormatPoolId: true,
         },
         {
@@ -1062,8 +1062,8 @@ export const needAddColumn = {
     adjust_pool: [
         {
             label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue: 'pool_id',
-            nativeValue: 'pool_id',
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
             isFormatPoolId: true,
         },
         {

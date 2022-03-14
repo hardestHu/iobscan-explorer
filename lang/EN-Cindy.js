@@ -169,8 +169,8 @@ export const ExplorerLang = {
         sequence:'Sequence',
         destinationChain:'Destination Chain',
         poolId: 'Pool ID',
-        total_reward1: 'Total Reward',
-        total_reward2: 'Total Reward ',
+        totalReward1: 'Total Reward',
+        totalReward2: 'Total Reward ',
     },
     unit:{
         ellipsis:' ,...',
@@ -560,12 +560,12 @@ export const ExplorerLang = {
             poolId: 'Pool ID',
             amount: 'Amount',
             sender: 'Sender',
-            total_reward1: 'Total Reward',
-            total_reward2: 'Total Reward ',
+            totalReward1: 'Total Reward',
+            totalReward2: 'Total Reward ',
             creator: 'Creator',
             proposer: 'Proposer',
             title: 'Title',
-            initial_deposit: 'Initial Deposit'
+            initialDeposit: 'Initial Deposit'
         }
     },
     addressDetail: {

@@ -520,7 +520,11 @@ export default class Tools {
      */
     static formatPoolId(poolId) {
         if(poolId) {
-            return poolId.split('-')[1];
+            if(poolId.indexOf('-') !== '-1') {
+                return poolId.split('-')[1];
+            } else {
+                return poolId;
+            }
         }
         return '';
     }
