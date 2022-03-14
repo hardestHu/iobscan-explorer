@@ -569,6 +569,7 @@ export default {
 							chain_nameArr = [],
 							signer='--',
 							signers=[],
+                            pool_id='--',
 							msg;
 
 
@@ -579,7 +580,6 @@ export default {
 										msg=item
 									}
 								})
-								
 							}
 
 						/*
@@ -932,6 +932,15 @@ export default {
 							if(msg?.type=== TX_TYPE.update_request_context && msg?.msg?.ex && msg?.msg?.ex?.service_name){
 								serviceName = msg.msg.ex.service_name
 							}
+                            // Farm
+                            if(msg?.type === TX_TYPE.stake) {
+                                if(msg?.msg?.pool_id) {
+                                    pool_id = Tools.formatPoolId(msg.msg.pool_id);
+                                }
+                                if(msg?.msg?.sender) {
+                                    sender = msg.msg.sender;
+                                }
+                            }
 						}
 						if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.id) {
 							nftId = msg.msg.id
@@ -1103,6 +1112,7 @@ export default {
 							source_chain: source_chainArr?.length > 1 ? ' ' : source_chainArr?.length === 1 ? source_chainArr[0] : source_chain,
 							sequence: sequenceArr?.length > 1 ? ' ' : sequenceArr?.length === 1 ? sequenceArr[0] : sequence,
 							chain_name: chain_nameArr?.length > 1 ? ' ' : chain_nameArr?.length === 1 ? chain_nameArr[0] : chain_name,
+                            pool_id
 						})
 						/**
 						 * @description: from parseTimeMixin

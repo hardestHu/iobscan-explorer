@@ -355,7 +355,7 @@ export class TxHelper {
             },
             // 新增farm 
             farmObj={
-              value: LEVEL_TX_TYPE.Farm,
+                value: LEVEL_TX_TYPE.Farm,
                 label: LEVEL_TX_TYPE.Farm,
                 children:[]
             },
@@ -439,13 +439,6 @@ export class TxHelper {
 
               // farm
               //#region 
-
-              // case 'stake':
-              //   farmObj.children.push({
-              //       value: 'stake',
-              //       label: 'Farm'
-              //   });
-              //   break;  
 
               case TX_TYPE.stake:
                     farmObj.children.push({
@@ -1085,7 +1078,7 @@ export class TxHelper {
 
         // 添加Farm
         
-		allTxType.push(tansferObj, nftObj,tibcObj, identityObj, ibcObj, stakingObj, coinswapObj, farmObj,htlcObj, assetObj, govObj, oracleObj, randomObj, recordObj, iServiceObj,crossChainObj,othersObj);
+		allTxType.push(tansferObj, nftObj,tibcObj, identityObj, ibcObj, stakingObj, coinswapObj, farmObj, htlcObj, assetObj, govObj, oracleObj, randomObj, recordObj, iServiceObj,crossChainObj,othersObj);
         allTxType = allTxType.filter(item => item.children.length)
         allTxType.forEach(item=>{
             if(item?.children?.length && item.children.length > 1){

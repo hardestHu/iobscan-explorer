@@ -515,6 +515,15 @@ export default class Tools {
       return false;
     }
 
+    /**
+     * Format PoolID
+     */
+    static formatPoolId(poolId) {
+        if(poolId) {
+            return poolId.split('-')[1];
+        }
+        return '';
+    }
     static MultKeyValueObjToOneMap (objArr) {
       var map = new Map();
       objArr.forEach(obj => {
