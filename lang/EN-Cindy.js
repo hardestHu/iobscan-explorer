@@ -169,9 +169,9 @@ export const ExplorerLang = {
         sequence:'Sequence',
         destinationChain:'Destination Chain',
         //Farm
-        poolId: 'Pool Id',
-        totalRewardLeft: 'Total Reward',
-        totalRewardRight: 'Total Reward ',
+        poolId: 'Pool ID',
+        totalReward1: 'Total Reward',
+        totalReward2: 'Total Reward ',
         creator: 'Creator',
         proposer:'Proposer',
     },
@@ -558,6 +558,17 @@ export const ExplorerLang = {
             id: 'ID',
             secret: 'Secret',
             recipient: 'Recipient'
+        },
+        farm: {
+            poolId: 'Pool ID',
+            amount: 'Amount',
+            sender: 'Sender',
+            totalReward1: 'Total Reward',
+            totalReward2: 'Total Reward ',
+            creator: 'Creator',
+            proposer: 'Proposer',
+            title: 'Title',
+            initialDeposit: 'Initial Deposit'
         }
     },
     addressDetail: {

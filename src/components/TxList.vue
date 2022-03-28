@@ -576,8 +576,8 @@ export default {
 							amount = '--',
 							amountArr =[],
 							// farm => create pool
-							totalRewardLeft = '--',
-							totalRewardRight = '--',
+							totalReward1 = '--',
+							totalReward2 = '--',
 							poolCreator = '--',
 							// farm => Create Pool With Community Pool
 							proposer = '--',
@@ -591,7 +591,6 @@ export default {
 										msg=item
 									}
 								})
-								
 							}
 
 						/*
@@ -944,6 +943,15 @@ export default {
 							if(msg?.type=== TX_TYPE.update_request_context && msg?.msg?.ex && msg?.msg?.ex?.service_name){
 								serviceName = msg.msg.ex.service_name
 							}
+                            // Farm
+                            if(msg?.type === TX_TYPE.stake) {
+                                if(msg?.msg?.pool_id) {
+                                    poolId = Tools.formatPoolId(msg.msg.pool_id);
+                                }
+                                if(msg?.msg?.sender) {
+                                    sender = msg.msg.sender;
+                                }
+                            }
 						}
 						if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.id) {
 							nftId = msg.msg.id
@@ -1031,8 +1039,8 @@ export default {
 						}
 						// farm -> create pool
 						if(msg?.type === TX_TYPE.create_pool){
-							totalRewardLeft = `${msg.msg.total_reward[0]['amount']} ${msg.msg.total_reward[0]['denom'].toLocaleUpperCase()}`;
-							totalRewardRight = msg.msg.total_reward[1] ? `${msg.msg.total_reward[1]['amount']} ${msg.msg.total_reward[1]['denom'].toLocaleUpperCase()}` : '--';
+							totalReward1 = `${msg.msg.total_reward[0]['amount']} ${msg.msg.total_reward[0]['denom'].toLocaleUpperCase()}`;
+							totalReward2 = msg.msg.total_reward[1] ? `${msg.msg.total_reward[1]['amount']} ${msg.msg.total_reward[1]['denom'].toLocaleUpperCase()}` : '--';
 							poolCreator = msg.msg.creator;
 						}
 
@@ -1149,8 +1157,8 @@ export default {
 							poolId: poolId,
 							amount: amount,
 							// farm create_pool
-							totalRewardLeft: totalRewardLeft,
-							totalRewardRight: totalRewardRight,
+							totalReward1: totalReward1,
+							totalReward2: totalReward2,
 							poolCreator: poolCreator,
 							// farm create_pool_with_community_pool
 							proposer,

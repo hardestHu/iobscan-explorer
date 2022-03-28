@@ -11,115 +11,6 @@ const i18n = new VueI18n({
 })
 export const needAddColumn = {
 
-	// Farm start
-    stake:[
-        {
-            label: i18n.t('ExplorerLang.table.poolId'),
-            displayValue:'poolId'
-        },
-        {
-            label:i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
-        },
-        {
-            label: i18n.t('ExplorerLang.table.sender'),
-			displayValue: 'sender',
-			nativeValue: 'sender',
-			isNeedFormat: true,
-			isFormatAddress: true,
-        }
-    ],
-	unstake:[
-		{
-			label: i18n.t('ExplorerLang.table.poolId'),
-			displayValue:'poolId'
-		},
-		{
-            label:i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
-        },
-		{
-			label: i18n.t('ExplorerLang.table.sender'),
-			displayValue: 'sender',
-			nativeValue: 'sender',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		}
-	],
-    harvest:[
-		{
-			label: i18n.t('ExplorerLang.table.poolId'),
-			displayValue:'poolId'
-		},
-		{
-			label: i18n.t('ExplorerLang.table.sender'),
-			displayValue: 'sender',
-			nativeValue: 'sender',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		}
-	],
-	create_pool:[
-		{
-			label: i18n.t('ExplorerLang.table.totalRewardLeft'),
-			displayValue:'totalRewardLeft',
-		},
-		{
-			label: i18n.t('ExplorerLang.table.totalRewardRight'),
-			displayValue:'totalRewardRight',
-		},
-		{
-			label: i18n.t('ExplorerLang.table.creator'),
-			displayValue:'poolCreator',
-			nativeValue: 'poolCreator',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		}
-	],
-	create_pool_with_community_pool:[
-		{
-			label: i18n.t('ExplorerLang.table.proposer'),
-			displayValue:'proposer',
-			nativeValue:'proposer',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		},
-		{
-			label: i18n.t('ExplorerLang.table.title'),
-			displayValue:'title',
-		},
-		{
-			label: i18n.t('ExplorerLang.table.initialDeposit'),
-			displayValue:'deposit',
-		},
-	],
-	destroy_pool:[
-		{
-			label: i18n.t('ExplorerLang.table.poolId'),
-			displayValue:'poolId',
-		},
-		{
-			label: i18n.t('ExplorerLang.table.creator'),
-			displayValue:'poolCreator',
-			nativeValue: 'poolCreator',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		},
-	],
-	adjust_pool:[
-		{
-			label: i18n.t('ExplorerLang.table.poolId'),
-			displayValue:'poolId',
-		},
-		{
-			label: i18n.t('ExplorerLang.table.creator'),
-			displayValue:'poolCreator',
-			nativeValue: 'poolCreator',
-			isNeedFormat: true,
-			isFormatAddress: true,
-		},
-	],
-	//Farm end
     send: [
         {
             label:i18n.t('ExplorerLang.table.amount'),
@@ -1023,6 +914,156 @@ export const needAddColumn = {
             isShowDenomTip: true,
         },
     ],
+    // Farm 各二级标签列名
+    stake: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.amount'),
+            displayValue: 'amount',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'denom',
+            isShowDenomTip: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    unstake: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.amount'),
+            displayValue: 'amount',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'denom',
+            isShowDenomTip: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    harvest: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    create_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.totalReward1'),
+            displayValue: 'totalReward1',
+        },
+        {
+            label: i18n.t('ExplorerLang.table.totalReward2'),
+            displayValue: 'totalReward2',
+        },
+        
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    create_pool_with_community_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.proposer'),
+            displayValue: 'proposer',
+            nativeValue: 'proposer',
+            isFormatAddress: true,
+            isNeedFormat: true,
+            isLink: true,
+            linkRoute: '/address/',
+        },
+        {
+            label: i18n.t('ExplorerLang.table.title'),
+            displayValue: 'title',
+            nativeValue: 'title',
+            isNeedFormat: true,
+            isFormatMoniker: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.initialDeposit'),
+            displayValue: 'initialDeposit',
+            nativeValue: 'initialDeposit',
+        },
+    ],
+    destroy_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    adjust_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+
     transfer: [
         {
             label: i18n.t('ExplorerLang.table.amount'),

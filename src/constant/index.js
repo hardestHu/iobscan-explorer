@@ -148,14 +148,14 @@ export const TX_TYPE = {
 
 // 展示 abandon
 export const TX_TYPE_DISPLAY = {
-    //farm
-  stake:'stake',
-  unstake:'unstake',
-  harvest:'harvest',
-  create_pool:'create_pool',
-  create_pool_with_community_pool:'create_pool_with_community_pool',
-  destroy_pool:'destroy_pool',
-  adjust_pool:'adjust_pool',
+  //farm
+  stake:'Stake',
+  unstake:'Unstake',
+  harvest:'Harvest',
+  create_pool:'Create Pool',
+  create_pool_with_community_pool:'Create Pool With Community Pool',
+  destroy_pool:'Destroy Pool',
+  adjust_pool:'Adjust Pool',
 
   // service
   define_service: 'Define Service',
@@ -276,7 +276,7 @@ export const TX_TYPE_DISPLAY = {
 }
 
 export const LEVEL_TX_TYPE = {
-  Farm:'Farm',
+  Farm: 'Farm',
   Transfer: 'Transfer',
   Staking: 'Staking',
   iService: 'iService',
