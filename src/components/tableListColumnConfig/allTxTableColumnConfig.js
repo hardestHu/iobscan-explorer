@@ -924,12 +924,12 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
+            displayValue: 'farmAmount',
             isRight: true
         },
         {
             label: '',
-            displayValue: 'denom',
+            displayValue: 'farmAmountDenom',
             isShowDenomTip: true,
         },
         {
@@ -951,12 +951,12 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
+            displayValue: 'farmAmount',
             isRight: true
         },
         {
             label: '',
-            displayValue: 'denom',
+            displayValue: 'farmAmountDenom',
             isShowDenomTip: true,
         },
         {
@@ -990,12 +990,23 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.totalReward1'),
             displayValue: 'totalReward1',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'totalReward1Denom',
+            isShowDenomTip: true,
         },
         {
             label: i18n.t('ExplorerLang.table.totalReward2'),
             displayValue: 'totalReward2',
+            isRight: true
         },
-        
+        {
+            label: ' ',
+            displayValue: 'totalReward2Denom',
+            isShowDenomTip: true,
+        },
         {
             label: i18n.t('ExplorerLang.table.creator'),
             displayValue: 'poolCreator',
