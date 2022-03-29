@@ -168,9 +168,12 @@ export const ExplorerLang = {
         chainName:'Chain Name',
         sequence:'Sequence',
         destinationChain:'Destination Chain',
+        //Farm
         poolId: 'Pool ID',
         totalReward1: 'Total Reward',
         totalReward2: 'Total Reward ',
+        creator: 'Creator',
+        proposer:'Proposer',
     },
     unit:{
         ellipsis:' ,...',

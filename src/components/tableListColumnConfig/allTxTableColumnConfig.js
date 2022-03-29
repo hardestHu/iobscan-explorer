@@ -924,12 +924,12 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
+            displayValue: 'farmAmount',
             isRight: true
         },
         {
             label: '',
-            displayValue: 'denom',
+            displayValue: 'farmAmountDenom',
             isShowDenomTip: true,
         },
         {
@@ -951,12 +951,12 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
-            displayValue: 'amount',
+            displayValue: 'farmAmount',
             isRight: true
         },
         {
             label: '',
-            displayValue: 'denom',
+            displayValue: 'farmAmountDenom',
             isShowDenomTip: true,
         },
         {
@@ -989,28 +989,28 @@ export const needAddColumn = {
     create_pool: [
         {
             label: i18n.t('ExplorerLang.table.totalReward1'),
-            displayValue: 'amount',
+            displayValue: 'totalReward1',
             isRight: true
         },
         {
             label: '',
-            displayValue: 'denom',
+            displayValue: 'totalReward1Denom',
             isShowDenomTip: true,
         },
         {
             label: i18n.t('ExplorerLang.table.totalReward2'),
-            displayValue: 'amount',
+            displayValue: 'totalReward2',
             isRight: true
         },
         {
-            label: '',
-            displayValue: 'denom',
+            label: ' ',
+            displayValue: 'totalReward2Denom',
             isShowDenomTip: true,
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),
-            displayValue: 'oracleCreator',
-            nativeValue: 'oracleCreator',
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
             isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
@@ -1020,8 +1020,8 @@ export const needAddColumn = {
     create_pool_with_community_pool: [
         {
             label: i18n.t('ExplorerLang.table.proposer'),
-            displayValue: 'from',
-            nativeValue: 'from',
+            displayValue: 'proposer',
+            nativeValue: 'proposer',
             isFormatAddress: true,
             isNeedFormat: true,
             isLink: true,
@@ -1033,13 +1033,11 @@ export const needAddColumn = {
             nativeValue: 'title',
             isNeedFormat: true,
             isFormatMoniker: true,
-            isFormatNftIdAndDenomId: true,
         },
         {
             label:i18n.t('ExplorerLang.table.initialDeposit'),
-            displayValue: 'amount',
-            nativeValue: 'amount',
-            isShowTokenSymbol:true,
+            displayValue: 'initialDeposit',
+            nativeValue: 'initialDeposit',
         },
     ],
     destroy_pool: [
@@ -1051,8 +1049,8 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),
-            displayValue: 'oracleCreator',
-            nativeValue: 'oracleCreator',
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
             isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
@@ -1068,8 +1066,8 @@ export const needAddColumn = {
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),
-            displayValue: 'oracleCreator',
-            nativeValue: 'oracleCreator',
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
             isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
