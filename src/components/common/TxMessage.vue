@@ -2451,7 +2451,187 @@
 			</p>
 
 		</div>
+		<!-- poolId: 'Pool ID',
+            amount: 'Amount',
+            sender: 'Sender',
+            totalReward1: 'Total Reward',
+            totalReward2: 'Total Reward ',
+            creator: 'Creator',
+            proposer: 'Proposer',
+            title: 'Title',
+            initialDeposit: 'Initial Deposit' -->
+		<!-- Farm stake/unstake -->
+		<div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.amount')}}</span>
+				<span>{{amount || '--'}}</span>
 
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.reward')}}</span>
+				<span>{{reward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.sender')}}</span>
+				<template>
+					<span v-if="sender === '--'">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
+			</p>
+
+		</div>
+		<div v-if="txType === TX_TYPE.harvest">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.reward')}}</span>
+				<span>{{reward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.sender')}}</span>
+				<template>
+					<span v-if="sender === '--'">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
+			</p>
+
+		</div>
+	
+		<div v-if="txType === TX_TYPE.create_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.lptDenom')}}</span>
+				<span>{{lptDenom}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.totalReward')}}</span>
+				<span>{{totalReward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.startHeight')}}</span>
+				<span>{{startHeight}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.editable')}}</span>
+				<span>{{editable === '--' ?'--': (editable ? 'Yes': 'No')}}</span>
+			</p>
+			
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--'">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.description')}}</span>
+				<span>{{description}}</span>
+			</p>
+			
+
+		</div>
+			
+		<div v-if="txType === TX_TYPE.create_pool_with_community_pool">    
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalId')}}</span>
+				<span>{{proposalID}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposer')}}</span>
+				<template>
+					<span v-if="proposer === '--'">{{proposer}}</span>
+					<router-link v-else :to="`/address/${proposer}`" class="address_link">{{proposer}}</router-link>
+				</template>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.initialDeposit')}}</span>
+				<span>{{initialDeposit}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalTitle')}}</span>
+				<span>{{proposalTitle}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalDescription')}}</span>
+				<span>{{proposalDescription}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.lptDenom')}}</span>
+				<span>{{lptDenom}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.fundApplied')}}</span>
+				<span>{{fundApplied}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.fundSelfBond')}}</span>
+				<span>{{fundSelfBond}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolDescription')}}</span>
+				<span>{{poolDescription}}</span>
+			</p>			
+
+		</div>
+		
+		<div v-if="txType === TX_TYPE.destroy_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.refund')}}</span>
+				<span>{{refund}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--'">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+		</div>
+		<!-- todo 
+		-->
+			<div v-if="txType === TX_TYPE.adjust_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.additionalReward')}}</span>
+				<span>{{additionalReward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--'">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+		</div>
 <!-- exclude UpdateClient -->
 		<p v-if="txType !== TX_TYPE.update_client" :style="{marginTop: '0.26rem'}">
 			<span>{{$t('ExplorerLang.transactionInformation.recvPacket.viewSource')}}：</span>
@@ -2706,8 +2886,21 @@
 				denomId:'',//nft新增
 				mintRestricted:'',
 				updateRestricted:'',
-
-
+				// farm 
+				poolId:'',
+				reward:'',
+				lptDenom:'',
+				totalReward:'',
+				rewardPerBlock:'',
+				startHeight:'',
+				editable:'',
+				proposalTitle:'',
+				proposalDescription:'',
+				fundApplied:'',
+				fundSelfBond:'',
+				poolDescription:'',
+				refund:'',
+				additionalReward:'',
 
 			}
 		},
@@ -3789,6 +3982,59 @@
 								this.sender= msg.sender|| '--'
 								this.receiver= msg.recipient|| '--'
 								break;
+
+							case TX_TYPE.stake:
+								this.poolId = msg.pool_id || '--';								
+								this.amount = await this.handleAmount(msg.amount);
+								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.unstake:
+								this.poolId = msg.pool_id || '--';	
+								this.amount = await this.handleAmount(msg.amount);
+								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.harvest:
+								this.poolId = msg.pool_id || '--';
+								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.create_pool:
+								this.poolId = msg.pool_id || '--';
+								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
+								this.totalReward = await this.handleTotalReward(msg.total_reward);
+								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
+							  this.startHeight = msg.start_height || '--';
+								this.editable = msg.editable || '--';
+								this.creator = msg.creator || '--';
+								this.description = msg.description || '--';		
+								break;	
+							case TX_TYPE.create_pool_with_community_pool:
+								this.proposalID = msg.proposal_id || '--';
+								this.proposer = msg.proposer || '--';
+								this.initialDeposit = msg.initial_deposit || '--';
+								this.proposalTitle = msg?.content?.title || '--';
+								this.proposalDescription = msg?.content?.description || '--';
+								this.lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
+								this.rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
+								this.fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
+								this.fundSelfBond = msg?.content?.fund_self_bond ? msg?.content?.fund_self_bond  : '--';
+								this.poolDescription = msg?.content?.pool_description || '--';
+								break;
+							case TX_TYPE.destroy_pool:
+								this.poolId = msg.pool_name || '--';
+								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
+								this.creator = msg.creator || '--';
+								break;
+							case TX_TYPE.adjust_pool:
+								console.log('mseeess',msg)
+								this.poolId = msg.pool_id || '--';
+								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
+								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
+								this.creator = msg.creator || '--';
+								break;
+
 						}
 					}
 				} catch (e) {
@@ -3840,6 +4086,56 @@
 			startStr(url){
 				return url.startsWith('www.')
 			},
+			async handleAmount(amountObj){
+				const amountItem = await converCoin(amountObj);
+				return `${amountItem.amount} ${amountItem.denom.toUpperCase()}`;
+			},
+			/**
+			 * 从events下匹配数据出来并处理
+			 * 入参：msgType=stake attrKey=reward
+			 * 返回： 0.12 IRIS 或者 0.12 IRIS、0.33 BSN
+			 */
+			async handleReward(msgType,attrKey){
+		    const eventItem = this.events ? this.events.find(item => item.type === msgType) : null;
+				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
+				const rewardValue = (attrItem && attrItem.value) ? attrItem.value : '--';
+				if(rewardValue !== '--'){
+					if(rewardValue.includes(',')){
+						const reward1 = this.getAmountByAmountStr(rewardValue.split(',')[0]);
+						const reward2 = this.getAmountByAmountStr(rewardValue.split(',')[1]);
+						const rewardItem1 = await converCoin(reward1);
+						const rewardItem2 = await converCoin(reward2);
+						return `${rewardItem1.amount} ${rewardItem1.denom.toUpperCase()}、 ${rewardItem2.amount} ${rewardItem2.denom.toUpperCase()}`
+					}else{
+						const reward1 = this.getAmountByAmountStr(rewardValue);
+						const rewardItem1 = await converCoin(reward1);
+					  return `${rewardItem1.amount} ${rewardItem1.denom.toUpperCase()}`; 
+					}
+				}else{
+					return rewardValue;
+				}
+			},
+			/**
+			 * 处理入参结构如下：
+			 * @params [array] totalReward
+			 * [{"denom": "ubusd","amount": "1"},{"denom": "uiris","amount": "10"}]
+			 */
+			async handleTotalReward(totalReward){
+				const rewardArr = [];
+				const len = totalReward ? totalReward.length : 0;
+				if(len !== 0){
+						const res = await converCoin(totalReward[0]);
+						rewardArr.push(`${res.amount} ${res.denom.toLocaleUpperCase()}`)
+					if(len === 2){
+						const res = await converCoin(totalReward[1]);
+						rewardArr.push(`${res.amount} ${res.denom.toLocaleUpperCase()}`)
+					}
+					return len === 2 ? rewardArr.join('、') : rewardArr[0];
+				}else{
+					return '--'
+				}
+			},
+			
 		}
 	}
 </script>
