@@ -946,15 +946,6 @@ export default {
 							if(msg?.type=== TX_TYPE.update_request_context && msg?.msg?.ex && msg?.msg?.ex?.service_name){
 								serviceName = msg.msg.ex.service_name
 							}
-							// Farm
-							// if(msg?.type === TX_TYPE.stake) {
-							// 		if(msg?.msg?.pool_id) {
-							// 				poolId = Tools.formatPoolId(msg.msg.pool_id);
-							// 		}
-							// 		if(msg?.msg?.sender) {
-							// 				sender = msg.msg.sender;
-							// 		}
-							// }
 						}
 
 						if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.id) {
@@ -1032,7 +1023,7 @@ export default {
 						}
 						// farm -> stake unstake
 						if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
-							poolId = msg.msg?.pool_id;
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 							const res = await converCoin(msg?.msg?.amount);
 							farmAmount = res?.amount;
 							farmAmountDenom = res?.denom ? res?.denom.toLocaleUpperCase() : '';
@@ -1040,7 +1031,7 @@ export default {
 						}
 						// farm -> harvest
 						if(msg?.type === TX_TYPE.harvest){
-							poolId = msg.msg?.pool_id;
+							poolId = Tools.formatPoolId(msg.msg?.pool_id);
 							sender = msg.msg?.sender;
 						}
 						// farm -> create pool
