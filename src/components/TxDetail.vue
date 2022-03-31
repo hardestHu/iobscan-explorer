@@ -199,7 +199,7 @@ export default {
 					} else {
 						this.timestamp = "--"
 					}
-					if(res.fee && res.fee.amount[0] && this.isShowFee) {
+					if(res.fee &&  res.fee.amount &&  res.fee.amount[0] && this.isShowFee) {
 						let fee = await converCoin(res.fee.amount[0])
 						this.fee = `${fee.amount} ${fee.denom.toUpperCase()}`
 					}

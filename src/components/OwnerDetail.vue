@@ -1593,7 +1593,7 @@ export default {
 							}
 							// farm => destroy_pool 
 							if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
-								poolId = msg.msg.pool_id;
+								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								poolCreator = msg.msg.creator;
 							}
 						}

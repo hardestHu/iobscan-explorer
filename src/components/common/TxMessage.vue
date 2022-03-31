@@ -2451,15 +2451,6 @@
 			</p>
 
 		</div>
-		<!-- poolId: 'Pool ID',
-            amount: 'Amount',
-            sender: 'Sender',
-            totalReward1: 'Total Reward',
-            totalReward2: 'Total Reward ',
-            creator: 'Creator',
-            proposer: 'Proposer',
-            title: 'Title',
-            initialDeposit: 'Initial Deposit' -->
 		<!-- Farm stake/unstake -->
 		<div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
 			<p>
@@ -2526,7 +2517,7 @@
 			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.editable')}}</span>
-				<span>{{editable === '--' ?'--': (editable ? 'Yes': 'No')}}</span>
+				<span>{{ editable ? 'Yes': 'No' }}</span>
 			</p>
 			
 			<p>
@@ -2609,9 +2600,7 @@
 				</template>
 			</p>
 		</div>
-		<!-- todo 
-		-->
-			<div v-if="txType === TX_TYPE.adjust_pool">
+		<div v-if="txType === TX_TYPE.adjust_pool">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -3984,52 +3973,51 @@
 								break;
 
 							case TX_TYPE.stake:
-								this.poolId = msg.pool_id || '--';								
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';								
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.unstake:
-								this.poolId = msg.pool_id || '--';	
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';	
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.harvest:
-								this.poolId = msg.pool_id || '--';
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.create_pool:
-								this.poolId = msg.pool_id || '--';
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
 								this.totalReward = await this.handleTotalReward(msg.total_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
 							  this.startHeight = msg.start_height || '--';
-								this.editable = msg.editable || '--';
+								this.editable = msg.editable;
 								this.creator = msg.creator || '--';
 								this.description = msg.description || '--';		
 								break;	
 							case TX_TYPE.create_pool_with_community_pool:
-								this.proposalID = msg.proposal_id || '--';
+								this.proposalID = this.getValueFromEvents(TX_TYPE.create_pool_with_community_pool, 'proposal_id');
 								this.proposer = msg.proposer || '--';
-								this.initialDeposit = msg.initial_deposit || '--';
+								this.initialDeposit = await this.handleTotalReward(msg?.initial_deposit);
 								this.proposalTitle = msg?.content?.title || '--';
 								this.proposalDescription = msg?.content?.description || '--';
 								this.lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
 								this.rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
 								this.fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
-								this.fundSelfBond = msg?.content?.fund_self_bond ? msg?.content?.fund_self_bond  : '--';
+								this.fundSelfBond = await this.handleTotalReward(msg?.content?.fund_self_bond);
 								this.poolDescription = msg?.content?.pool_description || '--';
 								break;
 							case TX_TYPE.destroy_pool:
-								this.poolId = msg.pool_name || '--';
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
 								this.creator = msg.creator || '--';
 								break;
 							case TX_TYPE.adjust_pool:
-								console.log('mseeess',msg)
-								this.poolId = msg.pool_id || '--';
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
 								this.creator = msg.creator || '--';
@@ -4090,15 +4078,19 @@
 				const amountItem = await converCoin(amountObj);
 				return `${amountItem.amount} ${amountItem.denom.toUpperCase()}`;
 			},
+			getValueFromEvents(msgType,attrKey){
+				const eventItem = this.events ? this.events.find(item => item.type === msgType) : null;
+				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
+				const rewardValue = (attrItem && attrItem.value) ? attrItem.value : '--';
+				return rewardValue;
+			},
 			/**
 			 * 从events下匹配数据出来并处理
 			 * 入参：msgType=stake attrKey=reward
 			 * 返回： 0.12 IRIS 或者 0.12 IRIS、0.33 BSN
 			 */
 			async handleReward(msgType,attrKey){
-		    const eventItem = this.events ? this.events.find(item => item.type === msgType) : null;
-				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
-				const rewardValue = (attrItem && attrItem.value) ? attrItem.value : '--';
+				const rewardValue = this.getValueFromEvents(msgType,attrKey);
 				if(rewardValue !== '--'){
 					if(rewardValue.includes(',')){
 						const reward1 = this.getAmountByAmountStr(rewardValue.split(',')[0]);
