@@ -1025,7 +1025,7 @@ export default {
 						if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
 							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 							const res = await converCoin(msg?.msg?.amount);
-							farmAmount = res?.amount;
+							farmAmount = Tools.toDecimal(res?.amount,2);
 							farmAmountDenom = res?.denom ? res?.denom.toLocaleUpperCase() : '';
 							sender = msg?.msg?.sender;
 						}
@@ -1039,13 +1039,13 @@ export default {
 							const len = msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward) ? msg?.msg?.total_reward.length  : 0;
 							if(len > 0){
 								const res = await converCoin(msg?.msg?.total_reward?.[0]);
-								totalReward1 = res.amount;
-								totalReward1Denom = res.denom.toLocaleUpperCase();
+								totalReward1 = Tools.toDecimal(res.amount, 2);
+								totalReward1Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
 							}
 							if(len === 2){
 								const res = await converCoin(msg?.msg?.total_reward?.[1]);
-								totalReward2 = res.amount;
-								totalReward2Denom = res.denom.toLocaleUpperCase();
+								totalReward2 = Tools.toDecimal(res.amount, 2);
+								totalReward2Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
 							}
 							poolCreator = msg.msg.creator;
 						}

@@ -3990,7 +3990,8 @@
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.create_pool:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
+								this.poolId = Tools.formatPoolId(createPoolId) || '--';
 								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
 								this.totalReward = await this.handleTotalReward(msg.total_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
@@ -4078,6 +4079,9 @@
 				const amountItem = await converCoin(amountObj);
 				return `${amountItem.amount} ${amountItem.denom.toUpperCase()}`;
 			},
+			/**
+			 * 从events下匹配数据出来
+			 */
 			getValueFromEvents(msgType,attrKey){
 				const eventItem = this.events ? this.events.find(item => item.type === msgType) : null;
 				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
