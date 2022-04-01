@@ -584,7 +584,8 @@ export default {
 							poolCreator = '--',
 							// farm => Create Pool With Community Pool
 							proposer = '--',
-							initialDeposit = '--';
+							initialDeposit = '--',
+							initialDepositDenom ='';
 							// farm => destory pool/ adjust pool : poolId poolCreator
 
 						if (tx.msgs.length > 0) {
@@ -1055,9 +1056,11 @@ export default {
 						if(msg?.type === TX_TYPE.create_pool_with_community_pool){
 							proposer = msg.msg.proposer;
 							title = msg.msg.content.title;
-							const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
-							initialDeposit = Tools.toDecimal(res?.amount, 2);
-							initialDepositDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+							if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
+								const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
+								initialDeposit = Tools.toDecimal(res?.amount, 2);
+								initialDepositDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+							}
 						}
 						// farm => destroy_pool 
 						if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
@@ -1175,6 +1178,7 @@ export default {
 							// farm create_pool_with_community_pool
 							proposer,
 							initialDeposit,
+							initialDepositDenom
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -1193,14 +1197,14 @@ export default {
 						let amount = await Promise.all(amounts)
 						this.denomMap = await getDenomMap()
 						this.transactionArray.forEach((item, index) => {
-							if(amount[index]?.length === 2 ){
+							if(Array.isArray(amount[index]) && amount[index]?.length === 2 ){
 								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
 								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
 								this.transactionArray[index].swapAmount1 =  this.getAmount(amount[index][0])
 								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(amount[index][0])
 								this.transactionArray[index].swapAmount2 =  this.getAmount(amount[index][1])
 								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(amount[index][1])
-							}else {
+							}else if(Array.isArray(amount[index]) && amount[index]?.length === 1) {
 								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
 								this.transactionArray[index].amount = this.getAmount(amount[index])
 								this.transactionArray[index].denom = this.getAmountUnit(amount[index])
@@ -1211,10 +1215,18 @@ export default {
                                     this.transactionArray[index].amount = ' '
                                     this.transactionArray[index].denom = ' '
                                 }
-								
+							}else{
+								// 借用样式变量
+								if(this.transactionArray[index]['farmAmountDenom']){
+									this.transactionArray[index].denomTheme = getDenomTheme(this.transactionArray[index]['farmAmountDenom'],this.denomMap)
+								}else if(this.transactionArray[index]['totalReward1Denom']){
+									this.transactionArray[index].swapDenomTheme1 = getDenomTheme(this.transactionArray[index]['totalReward1Denom'], this.denomMap)
+								  this.transactionArray[index].swapDenomTheme2 = getDenomTheme(this.transactionArray[index]['totalReward2Denom'], this.denomMap)
+								}
 							}
 						})
 					}
+					console.log('transactionArray',amounts, this.transactionArray)
 					}
 		}catch(error) {
 			console.log(error)

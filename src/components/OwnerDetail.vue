@@ -1239,7 +1239,9 @@ export default {
 							poolCreator = '--',
 							// farm => Create Pool With Community Pool
 							proposer = '--',
-							initialDeposit = '--'
+							initialDeposit = '--',
+							initialDepositDenom ='';
+							// farm => destory pool/ adjust pool : poolId poolCreator
 						;
 						if (tx.msgs.length > 0) {
 							tx.msgs.forEach(item => {
@@ -1556,17 +1558,18 @@ export default {
 								serviceName = msg.msg.ex.service_name
 							}
 
-							// farm -> stake unstake
+								// farm -> stake unstake
 							if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
-								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+								// 失败了不处理
+								poolId = tx.status === 0 ? msg?.msg?.pool_id : Tools.formatPoolId(msg?.msg?.pool_id);
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
-								farmAmountDenom = res?.denom ? res?.denom.toLocaleUpperCase() : '';
+								farmAmountDenom = res?.denom ?  this.getAmountUnit(res?.denom.toLocaleUpperCase()) : '';
 								sender = msg?.msg?.sender;
 							}
 							// farm -> harvest
 							if(msg?.type === TX_TYPE.harvest){
-								poolId = Tools.formatPoolId(msg.msg?.pool_id);
+								poolId = tx.status === 0 ? msg?.msg?.pool_id : Tools.formatPoolId(msg?.msg?.pool_id);
 								sender = msg.msg?.sender;
 							}
 							// farm -> create pool
@@ -1574,13 +1577,13 @@ export default {
 								const len = msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward) ? msg?.msg?.total_reward.length  : 0;
 								if(len > 0){
 									const res = await converCoin(msg?.msg?.total_reward?.[0]);
-									totalReward1 = res.amount;
-									totalReward1Denom = res.denom.toLocaleUpperCase();
+									totalReward1 = Tools.toDecimal(res.amount, 2);
+									totalReward1Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
 								}
 								if(len === 2){
 									const res = await converCoin(msg?.msg?.total_reward?.[1]);
-									totalReward2 = res.amount;
-									totalReward2Denom = res.denom.toLocaleUpperCase();
+									totalReward2 = Tools.toDecimal(res.amount, 2);
+									totalReward2Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
 								}
 								poolCreator = msg.msg.creator;
 							}
@@ -1589,11 +1592,15 @@ export default {
 							if(msg?.type === TX_TYPE.create_pool_with_community_pool){
 								proposer = msg.msg.proposer;
 								title = msg.msg.content.title;
-								initialDeposit = msg.msg.initial_deposit;
+								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
+									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
+									initialDeposit = Tools.toDecimal(res?.amount, 2);
+									initialDepositDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								}
 							}
 							// farm => destroy_pool 
 							if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
-								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+								poolId = tx.status === 0 ? msg?.msg?.pool_id :Tools.formatPoolId(msg?.msg?.pool_id);
 								poolCreator = msg.msg.creator;
 							}
 						}
@@ -1690,7 +1697,7 @@ export default {
 								denomColor: '',
 								tooltipContent: ''
 							},
-							 //farm stake/unstake/harvest
+						  //farm stake/unstake/harvest
 							poolId: poolId,
 							farmAmount: farmAmount,
 							farmAmountDenom,
@@ -1703,6 +1710,7 @@ export default {
 							// farm create_pool_with_community_pool
 							proposer,
 							initialDeposit,
+							initialDepositDenom
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -1721,12 +1729,12 @@ export default {
 						let amount = await Promise.all(amounts)
 						this.denomMap = await getDenomMap()
 						this.transactionArray.forEach((item, index) => {
-							if(amount[index]?.length === 2 ){
+							if(Array.isArray(amount[index]) && amount[index]?.length === 2 ){
 								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
 								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
 								this.transactionArray[index].swapAmount1 =  amount[index][0]
 								this.transactionArray[index].swapAmount2 =  amount[index][1]
-							}else {
+							}else if(Array.isArray(amount[index]) && amount[index]?.length === 1) {
 								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
 								// this.transactionArray[index].amount = amount[index]
 								this.transactionArray[index].amount = this.getAmount(amount[index])
@@ -1736,6 +1744,14 @@ export default {
 									this.transactionArray[index].amount = ''
 								}
 								
+							}else{
+								// 借用样式变量
+								if(this.transactionArray[index]['farmAmountDenom']){
+									this.transactionArray[index].denomTheme = getDenomTheme(this.transactionArray[index]['farmAmountDenom'],this.denomMap)
+								}else if(this.transactionArray[index]['totalReward1Denom']){
+									this.transactionArray[index].swapDenomTheme1 = getDenomTheme(this.transactionArray[index]['totalReward1Denom'], this.denomMap)
+									this.transactionArray[index].swapDenomTheme2 = getDenomTheme(this.transactionArray[index]['totalReward2Denom'], this.denomMap)
+								}
 							}
 						})
 					}
