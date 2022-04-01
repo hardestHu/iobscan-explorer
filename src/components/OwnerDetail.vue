@@ -1729,12 +1729,12 @@ export default {
 						let amount = await Promise.all(amounts)
 						this.denomMap = await getDenomMap()
 						this.transactionArray.forEach((item, index) => {
-							if(Array.isArray(amount[index]) && amount[index]?.length === 2 ){
+							if(amount[index]?.length === 2 ){
 								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
 								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
 								this.transactionArray[index].swapAmount1 =  amount[index][0]
 								this.transactionArray[index].swapAmount2 =  amount[index][1]
-							}else if(Array.isArray(amount[index]) && amount[index]?.length === 1) {
+							}else{
 								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
 								// this.transactionArray[index].amount = amount[index]
 								this.transactionArray[index].amount = this.getAmount(amount[index])
@@ -1744,14 +1744,6 @@ export default {
 									this.transactionArray[index].amount = ''
 								}
 								
-							}else{
-								// 借用样式变量
-								if(this.transactionArray[index]['farmAmountDenom']){
-									this.transactionArray[index].denomTheme = getDenomTheme(this.transactionArray[index]['farmAmountDenom'],this.denomMap)
-								}else if(this.transactionArray[index]['totalReward1Denom']){
-									this.transactionArray[index].swapDenomTheme1 = getDenomTheme(this.transactionArray[index]['totalReward1Denom'], this.denomMap)
-									this.transactionArray[index].swapDenomTheme2 = getDenomTheme(this.transactionArray[index]['totalReward2Denom'], this.denomMap)
-								}
 							}
 						})
 					}

@@ -925,6 +925,7 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.amount'),
             displayValue: 'farmAmount',
+            isShowDenomTip:true,
             isRight: true
         },
         {
@@ -952,6 +953,7 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.amount'),
             displayValue: 'farmAmount',
+            isShowDenomTip:true,
             isRight: true
         },
         {
@@ -990,6 +992,7 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.totalReward1'),
             displayValue: 'totalReward1',
+            isShowDenomTip: true,
             isRight: true
         },
         {
@@ -1000,6 +1003,7 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.totalReward2'),
             displayValue: 'totalReward2',
+            isShowDenomTip: true,
             isRight: true
         },
         {
@@ -1038,8 +1042,8 @@ export const needAddColumn = {
         {
             label:i18n.t('ExplorerLang.table.initialDeposit'),
             displayValue: 'initialDeposit',
-            nativeValue: 'initialDeposit',
             isRight: true,
+            isShowDenomTip: true,
         },
         {
             label: '',
@@ -1106,8 +1110,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'to',
             nativeValue: 'to',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
+            isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
         }
@@ -1165,8 +1170,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'from',
             nativeValue: 'from',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            isLink:true,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
             isNeedFormat: true,
             isFormatAddress: true,
         }
@@ -1709,8 +1715,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'receiver',
             nativeValue: 'receiver',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            isLink:true,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
             isNeedFormat: true,
             isFormatAddress: true,
         },
