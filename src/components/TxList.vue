@@ -1226,7 +1226,6 @@ export default {
 							}
 						})
 					}
-					console.log('transactionArray',amounts, this.transactionArray)
 					}
 		}catch(error) {
 			console.log(error)
