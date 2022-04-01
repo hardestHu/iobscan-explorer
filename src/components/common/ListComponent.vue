@@ -51,7 +51,10 @@
 									<router-link class="link_style"
 												 :class="item.isAdjustStyle ? 'index_style' : ''"
 												 :style="{color:isOwnerAddress(scope.row[item.nativeValue]) ? '#606266 !important' : '', cursor:isOwnerAddress(scope.row[item.nativeValue]) ? 'default !important' : ''}"
-												 v-if="item.isLink &&  scope.row[item.displayValue] && scope.row[item.displayValue] !== '--'"
+												 v-if="item.isLink && 
+												  scope.row[item.displayValue] && 
+													scope.row[item.displayValue] !== '--' && 
+													!(/^cosmos/.test(scope.row[item.nativeValue]))"
 												 :to="!item.isNft ? `${item.linkRoute}${scope.row[item.nativeValue]}` : `${item.linkRoute}${scope.row[item.nftRouterParamsValue]}${item.denomRouter}${scope.row[item.nativeValue]}`">
 										
 										<span v-if="item.isNeedFormatHash">{{formatTxHash(scope.row[item.displayValue]) }} </span>

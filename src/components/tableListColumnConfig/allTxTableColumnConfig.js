@@ -1039,6 +1039,12 @@ export const needAddColumn = {
             label:i18n.t('ExplorerLang.table.initialDeposit'),
             displayValue: 'initialDeposit',
             nativeValue: 'initialDeposit',
+            isRight: true,
+        },
+        {
+            label: '',
+            displayValue: 'initialDepositDenom',
+            isShowDenomTip: true,
         },
     ],
     destroy_pool: [
