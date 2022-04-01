@@ -2660,6 +2660,10 @@
 			monikers: {
 				type: Array,
 				required: true,
+			},
+			status:{
+				type: Boolean,
+				required:true,
 			}
 		},
 		data () {
@@ -3972,26 +3976,26 @@
 								this.receiver= msg.recipient|| '--'
 								break;
 
-							case TX_TYPE.stake:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';								
+							case TX_TYPE.stake:		    
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.unstake:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';	
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.harvest:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.create_pool:
 								const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
-								this.poolId = Tools.formatPoolId(createPoolId) || '--';
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
 								this.totalReward = await this.handleTotalReward(msg.total_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
@@ -4013,17 +4017,16 @@
 								this.poolDescription = msg?.content?.pool_description || '--';
 								break;
 							case TX_TYPE.destroy_pool:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
 								this.creator = msg.creator || '--';
 								break;
 							case TX_TYPE.adjust_pool:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
 								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
 								this.creator = msg.creator || '--';
 								break;
-
 						}
 					}
 				} catch (e) {

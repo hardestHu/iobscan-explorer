@@ -66,7 +66,7 @@
 							{{ $t('ExplorerLang.transactionInformation.transactionMessageTitle') }}
 						</div>
 						<div v-for="(item, index) in messages" :key="index">
-							<TxMessage :msg="item" :msgIndex="index" :eventsNew="eventsNew" :events="events" :monikers="monikers" />
+							<TxMessage :msg="item" :msgIndex="index" :eventsNew="eventsNew" :events="events" :monikers="monikers" :status="statusValue"/>
 							<div class="tx_information_tx_message_line" v-if="messages.length > 1 && index != messages.length - 1"></div>
 						</div>
 					</div>
@@ -189,7 +189,7 @@ export default {
 					this.blockHeight = res.height || '--'
 					//console.log(res.status === TX_STATUS.success ? this.$t("ExplorerLang.common.success"): this.$t("ExplorerLang.common.failed"),'展示的信息是什么')
 					
-					
+					this.statusValue = res.status === 1 ? true : false;
 					this.status = res.status === TX_STATUS.success ? this.$t('ExplorerLang.common.success'): this.$t('ExplorerLang.common.failed')
 					//this.status = res.status === TX_STATUS.success ?"Failed":"Failed"
 					this.log = res.log || '--'
