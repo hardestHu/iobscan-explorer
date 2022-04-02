@@ -650,14 +650,22 @@
                 <span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
             </p>
             <p>
+						<!-- hxj -->
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.from')}}：</span>
 <!--                <span @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
-				<router-link :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				<template>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
 			</p>
             <p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.to')}}：</span>
 <!--                <span @click="addressRoute(receiver)" class="address_link">{{ receiver }}</span>-->
-				<router-link :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
+				<!-- <router-link :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link> -->
+				<template>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
+					<router-link v-else :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
+				</template>
 			</p>
 
 			<!-- <p>
@@ -694,7 +702,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.sender')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<span v-else @click="addressRoute(sender)"
                           :class="(sender.startsWith(COSMOS_ADDRESS_PREFIX) || sender.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
                     >{{sender}}</span>
@@ -703,7 +711,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.receiver')}}：</span>
                 <template>
-                    <span v-if="sender === '--'">{{receiver}}</span>
+                    <span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
                     <span v-else @click="addressRoute(receiver)"
                           :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
                     >{{receiver}}</span>
@@ -2218,7 +2226,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 						  :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -2279,7 +2287,7 @@
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 					<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 			  		:class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -2351,7 +2359,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 					  	:class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 						>{{receiver}}</span>
@@ -2443,7 +2451,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.nft.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 						  :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -4136,7 +4144,7 @@
 				}
 			},
 			judgeCosmos(addr){
-				return addr.startsWith('cosmos')
+				return addr.startsWith(COSMOS_ADDRESS_PREFIX)
 			}
 			
 		}
