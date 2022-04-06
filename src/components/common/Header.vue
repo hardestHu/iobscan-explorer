@@ -106,7 +106,7 @@
 </template>
 <script>
 import Tools from '../../util/Tools'
-import constant,{ ModuleMap,product } from '../../constant'
+import constant,{ ModuleMap,product, COSMOS_ADDRESS_PREFIX} from '../../constant'
 import prodConfig from '../../productionConfig'
 import { getBlockWithHeight, getTxDetail, getAddressTxList } from '@/service/api'
 import { moduleSupport } from "@/helper/ModulesHelper"
@@ -226,7 +226,10 @@ export default {
         this.clearSearchContent()
         return
       } else {
-        if (/^[A-F0-9]{64}$/.test(this.searchInputValue)) {
+        if(/^`${COSMOS_ADDRESS_PREFIX}`/){
+          // cosmos 不让跳转了
+          this.toSearchResultPage()
+        }else if (/^[A-F0-9]{64}$/.test(this.searchInputValue)) {
           this.searchTx()
         } else if (Tools.isBech32(this.searchInputValue)) {
           this.searchDelegator()
