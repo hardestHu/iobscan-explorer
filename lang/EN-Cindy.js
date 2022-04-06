@@ -574,7 +574,7 @@ export const ExplorerLang = {
             proposer: 'Proposer',
             initialDeposit: 'Initial Deposit',
             proposalTitle: 'Proposal Title',
-            proposalDescription: 'proposalDescription',
+            proposalDescription: 'Proposal Description',
             fundApplied:'Fund Applied',
             fundSelfBond:'Fund Self Bond',
             poolDescription:'Pool Description',
