@@ -927,7 +927,6 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.amount'),
             displayValue: 'farmAmount',
-            isShowDenomTip:true,
             isRight: true
         },
         {
@@ -956,7 +955,6 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.amount'),
             displayValue: 'farmAmount',
-            isShowDenomTip:true,
             isRight: true
         },
         {
@@ -996,7 +994,6 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.totalReward1'),
             displayValue: 'totalReward1',
-            isShowDenomTip: true,
             isRight: true
         },
         {
@@ -1007,7 +1004,6 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.totalReward2'),
             displayValue: 'totalReward2',
-            isShowDenomTip: true,
             isRight: true
         },
         {
@@ -1047,7 +1043,6 @@ export const needAddColumn = {
             label:i18n.t('ExplorerLang.table.initialDeposit'),
             displayValue: 'initialDeposit',
             isRight: true,
-            isShowDenomTip: true,
         },
         {
             label: '',
