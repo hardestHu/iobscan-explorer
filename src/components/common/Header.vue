@@ -226,7 +226,7 @@ export default {
         this.clearSearchContent()
         return
       } else {
-        if(/^`${COSMOS_ADDRESS_PREFIX}`/){
+        if(this.searchInputValue.startsWith(COSMOS_ADDRESS_PREFIX)){
           // cosmos 不让跳转了
           this.toSearchResultPage()
         }else if (/^[A-F0-9]{64}$/.test(this.searchInputValue)) {
