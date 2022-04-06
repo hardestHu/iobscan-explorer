@@ -10,6 +10,7 @@ const i18n = new VueI18n({
     }
 })
 export const needAddColumn = {
+
     send: [
         {
             label:i18n.t('ExplorerLang.table.amount'),
@@ -900,6 +901,7 @@ export const needAddColumn = {
             label: '',
             displayValue: 'swapAmount1Denom',
             isShowDenomTip: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.swapAmount2'),
@@ -913,6 +915,178 @@ export const needAddColumn = {
             isShowDenomTip: true,
         },
     ],
+    // Farm 各二级标签列名
+    stake: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+            isNeedFormat: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.amount'),
+            displayValue: 'farmAmount',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'farmAmountDenom',
+            isShowDenomTip: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    unstake: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+            isNeedFormat: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.amount'),
+            displayValue: 'farmAmount',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'farmAmountDenom',
+            isShowDenomTip: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    harvest: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+            isNeedFormat: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.sender'),
+            displayValue:'sender',
+            nativeValue:'sender',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    create_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.totalReward1'),
+            displayValue: 'totalReward1',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'totalReward1Denom',
+            isShowDenomTip: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.totalReward2'),
+            displayValue: 'totalReward2',
+            isRight: true
+        },
+        {
+            label: ' ',
+            displayValue: 'totalReward2Denom',
+            isShowDenomTip: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    create_pool_with_community_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.proposer'),
+            displayValue: 'proposer',
+            nativeValue: 'proposer',
+            isFormatAddress: true,
+            isNeedFormat: true,
+            isLink: true,
+            linkRoute: '/address/',
+        },
+        {
+            label: i18n.t('ExplorerLang.table.title'),
+            displayValue: 'title',
+            nativeValue: 'title',
+            isNeedFormat: true,
+            isFormatMoniker: true,
+            isFormatNftIdAndDenomId: true,
+        },
+        {
+            label:i18n.t('ExplorerLang.table.initialDeposit'),
+            displayValue: 'initialDeposit',
+            isRight: true,
+        },
+        {
+            label: '',
+            displayValue: 'initialDepositDenom',
+            isShowDenomTip: true,
+        },
+    ],
+    destroy_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+            isNeedFormat: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    adjust_pool: [
+        {
+            label: i18n.t('ExplorerLang.table.poolId'),
+            displayValue: 'poolId',
+            nativeValue: 'poolId',
+            isFormatPoolId: true,
+            isNeedFormat: true,
+        },
+        {
+            label: i18n.t('ExplorerLang.table.creator'),
+            displayValue: 'poolCreator',
+            nativeValue: 'poolCreator',
+            isLink:true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+
     transfer: [
         {
             label: i18n.t('ExplorerLang.table.amount'),
@@ -937,8 +1111,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'to',
             nativeValue: 'to',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
+            isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
         }
@@ -958,8 +1133,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.sender'),
             displayValue: 'from',
             nativeValue: 'from',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
+            isLink:true,
             isNeedFormat: true,
             isFormatAddress: true,
         },
@@ -996,8 +1172,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'from',
             nativeValue: 'from',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            isLink:true,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
             isNeedFormat: true,
             isFormatAddress: true,
         }
@@ -1540,8 +1717,9 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.receiver'),
             displayValue: 'receiver',
             nativeValue: 'receiver',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
+            isLink:true,
+            // isHref: true,
+            // href: cfg.cosmosXpAddress,
             isNeedFormat: true,
             isFormatAddress: true,
         },
