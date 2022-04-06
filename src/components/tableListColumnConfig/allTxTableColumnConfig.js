@@ -901,6 +901,7 @@ export const needAddColumn = {
             label: '',
             displayValue: 'swapAmount1Denom',
             isShowDenomTip: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.swapAmount2'),
@@ -921,6 +922,7 @@ export const needAddColumn = {
             displayValue: 'poolId',
             nativeValue: 'poolId',
             isFormatPoolId: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
@@ -949,6 +951,7 @@ export const needAddColumn = {
             displayValue: 'poolId',
             nativeValue: 'poolId',
             isFormatPoolId: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.amount'),
@@ -977,6 +980,7 @@ export const needAddColumn = {
             displayValue: 'poolId',
             nativeValue: 'poolId',
             isFormatPoolId: true,
+            isNeedFormat: true,
         },
         {
             label:i18n.t('ExplorerLang.table.sender'),
@@ -1057,6 +1061,7 @@ export const needAddColumn = {
             displayValue: 'poolId',
             nativeValue: 'poolId',
             isFormatPoolId: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),
@@ -1074,6 +1079,7 @@ export const needAddColumn = {
             displayValue: 'poolId',
             nativeValue: 'poolId',
             isFormatPoolId: true,
+            isNeedFormat: true,
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),

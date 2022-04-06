@@ -105,7 +105,6 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<!-- todo -->
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
@@ -2670,10 +2669,6 @@
 				type: Array,
 				required: true,
 			},
-			status:{
-				type: Boolean,
-				required:true,
-			}
 		},
 		data () {
 			return {
@@ -3986,25 +3981,25 @@
 								break;
 
 							case TX_TYPE.stake:		    
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.unstake:
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.amount = await this.handleAmount(msg.amount);
 								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.harvest:
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
 								this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.create_pool:
 								const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(createPoolId) || '--';
 								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
 								this.totalReward = await this.handleTotalReward(msg.total_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
@@ -4026,12 +4021,12 @@
 								this.poolDescription = msg?.content?.pool_description || '--';
 								break;
 							case TX_TYPE.destroy_pool:
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
 								this.creator = msg.creator || '--';
 								break;
 							case TX_TYPE.adjust_pool:
-								this.poolId = this.status ?  (Tools.formatPoolId(msg.pool_id) || '--') : (msg.pool_id || '--');
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
 								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
 								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
 								this.creator = msg.creator || '--';

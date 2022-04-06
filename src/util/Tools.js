@@ -520,7 +520,9 @@ export default class Tools {
      */
     static formatPoolId(poolId) {
         if(poolId) {
-            if(poolId.indexOf('-') !== -1) {
+            if(poolId.startsWith('farm-')) {
+              // pool_id 标准模式 farm-***
+              // 考虑到create pool的pool_id可能不是标准模式,所以匹配 farm-
                 return poolId.split('-')[1];
             } else {
                 return poolId;

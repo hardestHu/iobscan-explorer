@@ -165,6 +165,9 @@
 <!--									-->
 									<span v-else-if="item.isFormatNftIdAndDenomId" >
 										{{ formatNftIdAndDenomId(scope.row[item.displayValue])}}</span>
+									<span v-else-if="item.isFormatPoolId">
+										{{ formatPoolId(scope.row[item.displayValue])}}
+									</span>
 									<span v-else :class="item.isWrap ? 'wrap_style' : item.isRight ? 'right_style' : '' " >
 										{{ scope.row[item.displayValue] === 0 || scope.row[item.displayValue] === '0' ? 0 : scope.row[item.displayValue] || '--' }}</span>
 										
@@ -509,6 +512,13 @@ export default {
 				return Tools.formatString(NftIdOrDenomId,nftAndDenomSplitNum.num,'...')
 			}
 			return '--'
+		},
+		formatPoolId(poolId){
+			if(poolId){
+				return Tools.formatString(poolId, 4,'...')
+			}else{
+				return '--'
+			}
 		},
 		formatStr(str,displayStr) {
 			if(displayStr){
