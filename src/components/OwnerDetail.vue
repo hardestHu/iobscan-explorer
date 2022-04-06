@@ -1560,8 +1560,7 @@ export default {
 
 								// farm -> stake unstake
 							if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
-								// 失败了不处理
-								poolId = tx.status === 0 ? msg?.msg?.pool_id : Tools.formatPoolId(msg?.msg?.pool_id);
+								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
 								farmAmountDenom = res?.denom ?  this.getAmountUnit(res?.denom.toLocaleUpperCase()) : '';
@@ -1569,7 +1568,7 @@ export default {
 							}
 							// farm -> harvest
 							if(msg?.type === TX_TYPE.harvest){
-								poolId = tx.status === 0 ? msg?.msg?.pool_id : Tools.formatPoolId(msg?.msg?.pool_id);
+								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								sender = msg.msg?.sender;
 							}
 							// farm -> create pool
@@ -1600,7 +1599,7 @@ export default {
 							}
 							// farm => destroy_pool 
 							if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
-								poolId = tx.status === 0 ? msg?.msg?.pool_id :Tools.formatPoolId(msg?.msg?.pool_id);
+								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								poolCreator = msg.msg.creator;
 							}
 						}
