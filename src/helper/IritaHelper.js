@@ -106,7 +106,9 @@ export async function converCoin (_coin) {
 
     tokenData.forEach((item)=>{
         if ( item.denom === coin.denom ) {
-            displayCoin.denom = item.symbol;
+            // 需要原始denom用来获取theme,通过symbol反推theme不准确
+            // displayCoin.denom = item.symbol;
+            displayCoin.denom = item.denom;
             displayCoin.amount = moveDecimal(String(coin.amount || 0),0-Number(item.scale));
         }
     })
