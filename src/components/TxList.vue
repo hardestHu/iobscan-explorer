@@ -410,7 +410,7 @@ export default {
 			}
 			let denomRule = /[A-Za-z\/]+/
 			let result = amount.match(denomRule)
-			return result ? amount.match(denomRule)[0] : ' ';
+			return result ? result[0] : ' ';
 		},
 		/*getParamsByUrlHash(){
 			let txType,
@@ -1052,7 +1052,7 @@ export default {
 								const res = await converCoin(msg?.msg?.total_reward?.[1]);
 								totalReward2 = Tools.toDecimal(res.amount, 2);
 								totalReward2Denom = res.denom.toLocaleUpperCase();
-								totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();;
+								totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
 							}
 							poolCreator = msg.msg.creator;
 						}

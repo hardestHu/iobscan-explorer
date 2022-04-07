@@ -1566,8 +1566,8 @@ export default {
 								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
-								farmAmountDenom = this.getFarmAmountDenom(res?.denom);
-								farmAmountNativeDenom = res?.denom.toLocaleUpperCase();
+								farmAmountDenom = res?.denom.toLocaleUpperCase();
+								farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
 								sender = msg?.msg?.sender;
 							}
 							// farm -> harvest
@@ -1581,14 +1581,14 @@ export default {
 								if(len > 0){
 									const res = await converCoin(msg?.msg?.total_reward?.[0]);
 									totalReward1 = Tools.toDecimal(res.amount, 2);
-									totalReward1Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
-									totalReward1NativeDenom = res?.denom.toLocaleUpperCase();
+									totalReward1Denom = res.denom.toLocaleUpperCase();
+									totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
 								}
 								if(len === 2){
 									const res = await converCoin(msg?.msg?.total_reward?.[1]);
 									totalReward2 = Tools.toDecimal(res.amount, 2);
-									totalReward2Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
-									totalReward2NativeDenom = res?.denom.toLocaleUpperCase();
+									totalReward2Denom = res.denom.toLocaleUpperCase();
+									totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
 								}
 								poolCreator = msg.msg.creator;
 							}
@@ -1600,8 +1600,8 @@ export default {
 								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
 									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
 									initialDeposit = Tools.toDecimal(res?.amount, 2);
-									farmAmountDenom = this.getFarmAmountDenom(res?.denom);
-								  farmAmountNativeDenom = res?.denom.toLocaleUpperCase();
+									farmAmountDenom = res?.denom.toLocaleUpperCase();
+								  farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
 								}
 							}
 							// farm => destroy_pool 
@@ -1804,28 +1804,9 @@ export default {
 				return  ' '
 			}
 			let denomRule = /[A-Za-z\/]+/
-			let result = amount.match(denomRule);
-			if(result && result[0]){
-				let res =''
-				this.tokenData.forEach(item => {
-					const denom = item.denom.toLocaleUpperCase();
-					if(denom === result[0]){
-						res = item.symbol.toLocaleUpperCase();
-					}
-				})
-				return res;
-			}else{
-				return ' '
-			}
-		},
-		getFarmAmountDenom(denom){
-			if(!denom){
-				return ''
-			}else if(denom.startsWith('lpt')){
-				return denom.toLocaleUpperCase()
-			}else{
-				return this.getAmountUnit(denom.toLocaleUpperCase())
-			}
+			let result = amount.match(denomRule)
+			return result ? result[0] : ' ';
+		
 		},
 		parseTime(txListKeys, key, parsedKey) {
 			if (!txListKeys) {
