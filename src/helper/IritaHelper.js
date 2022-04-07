@@ -141,6 +141,11 @@ export async function converCoin (_coin) {
           } else {
             return coin;
           }       
+        }else if(coin.denom.startsWith('lpt')){
+            return {
+                denom: coin.denom,
+                amount: coin.amount
+            }
         } else {
           console.error('Denom did not match', _coin);
           return coin;

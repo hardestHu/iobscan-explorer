@@ -1566,7 +1566,7 @@ export default {
 								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
-								farmAmountDenom = res?.denom ?  this.getAmountUnit(res?.denom.toLocaleUpperCase()) : '';
+								farmAmountDenom = this.getFarmAmountDenom(res?.denom);
 								farmAmountNativeDenom = res?.denom.toLocaleUpperCase();
 								sender = msg?.msg?.sender;
 							}
@@ -1600,7 +1600,7 @@ export default {
 								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
 									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
 									initialDeposit = Tools.toDecimal(res?.amount, 2);
-									farmAmountDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+									farmAmountDenom = this.getFarmAmountDenom(res?.denom);
 								  farmAmountNativeDenom = res.denom.toLocaleUppercase();
 								}
 							}
@@ -1816,6 +1816,15 @@ export default {
 				return res;
 			}else{
 				return ' '
+			}
+		},
+		getFarmAmountDenom(denom){
+			if(!denom){
+				return ''
+			}else if(denom.startsWith('lpt')){
+				return denom.toLocaleUpperCase()
+			}else{
+				return this.getAmountUnit(denom.toLocaleUpperCase())
 			}
 		},
 		parseTime(txListKeys, key, parsedKey) {
