@@ -1601,7 +1601,7 @@ export default {
 									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
 									initialDeposit = Tools.toDecimal(res?.amount, 2);
 									farmAmountDenom = this.getFarmAmountDenom(res?.denom);
-								  farmAmountNativeDenom = res.denom.toLocaleUppercase();
+								  farmAmountNativeDenom = res?.denom.toLocaleUpperCase();
 								}
 							}
 							// farm => destroy_pool 
