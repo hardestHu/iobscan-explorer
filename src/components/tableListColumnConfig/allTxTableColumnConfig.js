@@ -838,6 +838,8 @@ export const needAddColumn = {
             label: ' ',
             displayValue: 'swapAmount1Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true, // 用于上色判断双资产
+            isLeftAsset:true // 判断第一个资产 两者配合使用
         },
         {
             label: i18n.t('ExplorerLang.table.swapAmount2'),
@@ -848,6 +850,8 @@ export const needAddColumn = {
             label: '',
             displayValue: 'swapAmount2Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:false
         },
     ],
     add_liquidity: [
@@ -869,6 +873,8 @@ export const needAddColumn = {
             label: '',
             displayValue: 'swapAmount1Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:true
         },
         {
             label: i18n.t('ExplorerLang.table.swapAmount2'),
@@ -879,6 +885,8 @@ export const needAddColumn = {
             label: ' ',
             displayValue: 'swapAmount2Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:false
         },
     ],
     remove_liquidity: [
@@ -901,7 +909,8 @@ export const needAddColumn = {
             label: '',
             displayValue: 'swapAmount1Denom',
             isShowDenomTip: true,
-            isNeedFormat: true,
+            isDoubleAsset:true,
+            isLeftAsset:true,
         },
         {
             label: i18n.t('ExplorerLang.table.swapAmount2'),
@@ -913,6 +922,8 @@ export const needAddColumn = {
             label: ' ',
             displayValue: 'swapAmount2Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:false
         },
     ],
     // Farm 各二级标签列名
@@ -1000,6 +1011,8 @@ export const needAddColumn = {
             label: '',
             displayValue: 'totalReward1Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:true
         },
         {
             label: i18n.t('ExplorerLang.table.totalReward2'),
@@ -1010,6 +1023,8 @@ export const needAddColumn = {
             label: ' ',
             displayValue: 'totalReward2Denom',
             isShowDenomTip: true,
+            isDoubleAsset:true,
+            isLeftAsset:false
         },
         {
             label: i18n.t('ExplorerLang.table.creator'),
@@ -1046,7 +1061,7 @@ export const needAddColumn = {
         },
         {
             label: '',
-            displayValue: 'initialDepositDenom',
+            displayValue: 'farmAmountDenom',
             isShowDenomTip: true,
         },
     ],

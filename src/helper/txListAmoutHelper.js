@@ -374,7 +374,9 @@ export async function getDenomMap() {
   let { tokenData: tokenList } = await getConfig()
   tokenList?.forEach(token =>{
     if(protocolEnums[token.src_protocol]){
-      denomMap.set(token.symbol, token.src_protocol)
+			// 这里的symbol可能会有重复，所以换成denom
+      // denomMap.set(token.symbol, token.src_protocol)
+      denomMap.set(token.denom.toLocaleUpperCase(), token.src_protocol)
     }          
   })
   return denomMap
@@ -397,7 +399,8 @@ export function getDenomTheme(denom, denomMap) {
     denomColor: '',
     tooltipContent: ''
   }
-  let checkDenom = String(denom).match(denomRule)?.[0].toLowerCase()
+  // let checkDenom = String(denom).match(denomRule)?.[0].toLowerCase()
+	let checkDenom = String(denom).match(denomRule)?.[0];
   if(denomMap.has(checkDenom)){
     denomTheme.tooltipContent = protocolNameEnums[denomMap.get(checkDenom)]
     denomTheme.denomColor = protocolColorEnums[denomMap.get(checkDenom)]

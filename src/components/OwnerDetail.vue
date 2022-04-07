@@ -725,7 +725,7 @@ import Constant, {
 } from '../constant'
 import AddressInformationComponent from './AddressInformationComponent'
 import LargeString from './common/LargeString'
-import {addressRoute, formatMoniker} from '@/helper/IritaHelper'
+import {addressRoute, formatMoniker, getConfig} from '@/helper/IritaHelper'
 import {
 	getNfts,
 	getAddressTxList,
@@ -942,6 +942,7 @@ export default {
 	},
 	async created() {
 		this.mainToken = await getMainToken()
+		await this.getConfigTokenData()
 	},
 	async mounted() {
 		this.txColumnList = txCommonTable.concat(SignerColunmn,txCommonLatestTable)
@@ -1230,17 +1231,19 @@ export default {
 							poolIdArr = [],
 							farmAmount = '--',
 							farmAmountDenom='',
+							farmAmountNativeDenom='',
 							farmAmountArr = [],
 							// farm => create pool
 							totalReward1 = '--',
 							totalReward1Denom = '',
+							totalReward1NativeDenom = '',
 							totalReward2 = '--',
 							totalReward2Denom = '',
+							totalReward2NativeDenom = '',
 							poolCreator = '--',
 							// farm => Create Pool With Community Pool
 							proposer = '--',
-							initialDeposit = '--',
-							initialDepositDenom ='';
+							initialDeposit = '--';
 							// farm => destory pool/ adjust pool : poolId poolCreator
 						;
 						if (tx.msgs.length > 0) {
@@ -1564,6 +1567,7 @@ export default {
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
 								farmAmountDenom = res?.denom ?  this.getAmountUnit(res?.denom.toLocaleUpperCase()) : '';
+								farmAmountNativeDenom = res?.denom.toLocaleUpperCase();
 								sender = msg?.msg?.sender;
 							}
 							// farm -> harvest
@@ -1578,11 +1582,13 @@ export default {
 									const res = await converCoin(msg?.msg?.total_reward?.[0]);
 									totalReward1 = Tools.toDecimal(res.amount, 2);
 									totalReward1Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
+									totalReward1NativeDenom = res?.denom.toLocaleUpperCase();
 								}
 								if(len === 2){
 									const res = await converCoin(msg?.msg?.total_reward?.[1]);
 									totalReward2 = Tools.toDecimal(res.amount, 2);
 									totalReward2Denom = this.getAmountUnit(res.denom.toLocaleUpperCase());
+									totalReward2NativeDenom = res?.denom.toLocaleUpperCase();
 								}
 								poolCreator = msg.msg.creator;
 							}
@@ -1594,7 +1600,8 @@ export default {
 								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
 									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
 									initialDeposit = Tools.toDecimal(res?.amount, 2);
-									initialDepositDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+									farmAmountDenom = this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								  farmAmountNativeDenom = res.denom.toLocaleUppercase();
 								}
 							}
 							// farm => destroy_pool 
@@ -1700,16 +1707,18 @@ export default {
 							poolId: poolId,
 							farmAmount: farmAmount,
 							farmAmountDenom,
+							farmAmountNativeDenom,
 							// farm create_pool
 							totalReward1: totalReward1,
 							totalReward1Denom,
+							totalReward1NativeDenom,
 							totalReward2: totalReward2,
 							totalReward2Denom,
+							totalReward2NativeDenom,
 							poolCreator: poolCreator,
 							// farm create_pool_with_community_pool
 							proposer,
 							initialDeposit,
-							initialDepositDenom
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -1731,8 +1740,11 @@ export default {
 							if(amount[index]?.length === 2 ){
 								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
 								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
-								this.transactionArray[index].swapAmount1 =  amount[index][0]
-								this.transactionArray[index].swapAmount2 =  amount[index][1]
+								this.transactionArray[index].swapAmount1 =  this.getAmount(amount[index][0])
+								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(amount[index][0])
+								this.transactionArray[index].swapAmount2 =  this.getAmount(amount[index][1])
+								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(amount[index][1])
+
 							}else{
 								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
 								// this.transactionArray[index].amount = amount[index]
@@ -1743,6 +1755,17 @@ export default {
 									this.transactionArray[index].amount = ''
 								}
 								
+							}
+							/**
+							 * 目标：给farm下的farmAmount totalReward1 totalReward2 initialDeposit上色
+							 * 方法：借助了farmAmountNativeDenom 用于保存原始denom,不使用转换后的symbol, totalReward同理
+							 * farmAmount initalDeposit 都是用dnomeTheme
+							 */
+							if(this.transactionArray[index]['farmAmountDenom']){
+								this.transactionArray[index].denomTheme = getDenomTheme(this.transactionArray[index]['farmAmountNativeDenom'],this.denomMap)
+							}else if(this.transactionArray[index]['totalReward1Denom']){
+								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(this.transactionArray[index]['totalReward1NativeDenom'], this.denomMap)
+								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(this.transactionArray[index]['totalReward2NativeDenom'], this.denomMap)
 							}
 						})
 					}
@@ -1765,14 +1788,35 @@ export default {
 				return "";
 			}
 			let denomRule = /[0-9.]+/
-			return amount.match(denomRule)[0];
+			const amountRule = /^[0-9]+.?[0-9]*$/
+			if(amountRule.test(amount)){
+				return  amount
+			}
+			let result = amount.match(denomRule)
+			return result ? amount.match(denomRule)[0] : ' ';
 		},
 		getAmountUnit(amount) {
 			if (!amount) {
 				return "";
 			}
+			const amountRule = /^[0-9]+.?[0-9]*$/
+			if(amountRule.test(amount)){
+				return  ' '
+			}
 			let denomRule = /[A-Za-z\/]+/
-			return amount.match(denomRule)[0];
+			let result = amount.match(denomRule);
+			if(result && result[0]){
+				let res =''
+				this.tokenData.forEach(item => {
+					const denom = item.denom.toLocaleUpperCase();
+					if(denom === result[0]){
+						res = item.symbol.toLocaleUpperCase();
+					}
+				})
+				return res;
+			}else{
+				return ' '
+			}
 		},
 		parseTime(txListKeys, key, parsedKey) {
 			if (!txListKeys) {
@@ -2581,6 +2625,10 @@ export default {
 		},
 		handleChange(value) {
 			value ? (this.type_temp = value[1] ? value[1] : '') : ''
+		},
+		async getConfigTokenData(){
+		 const res = await getConfig();
+		 this.tokenData = res.tokenData;
 		},
 	}
 	,
