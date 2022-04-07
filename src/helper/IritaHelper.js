@@ -106,9 +106,7 @@ export async function converCoin (_coin) {
 
     tokenData.forEach((item)=>{
         if ( item.denom === coin.denom ) {
-            // 需要原始denom用来获取theme,通过symbol反推theme不准确
-            // displayCoin.denom = item.symbol;
-            displayCoin.denom = item.denom;
+            displayCoin.denom = item.symbol;
             displayCoin.amount = moveDecimal(String(coin.amount || 0),0-Number(item.scale));
         }
     })
@@ -141,12 +139,7 @@ export async function converCoin (_coin) {
           } else {
             return coin;
           }       
-        }else if(coin.denom.startsWith('lpt')){
-            return {
-                denom: coin.denom,
-                amount: coin.amount
-            }
-        } else {
+        }else {
           console.error('Denom did not match', _coin);
           return coin;
         }   
