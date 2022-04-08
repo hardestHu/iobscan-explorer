@@ -400,10 +400,9 @@ export function getDenomTheme(denom, denomMap) {
     tooltipContent: ''
   }
   // let checkDenom = String(denom).match(denomRule)?.[0].toLowerCase()
-	let checkDenom = String(denom).match(denomRule)?.[0];
-  if(denomMap.has(checkDenom)){
-    denomTheme.tooltipContent = protocolNameEnums[denomMap.get(checkDenom)]
-    denomTheme.denomColor = protocolColorEnums[denomMap.get(checkDenom)]
+  if(denomMap.has(denom)){
+    denomTheme.tooltipContent = protocolNameEnums[denomMap.get(denom)]
+    denomTheme.denomColor = protocolColorEnums[denomMap.get(denom)]
   }
   return denomTheme
 }

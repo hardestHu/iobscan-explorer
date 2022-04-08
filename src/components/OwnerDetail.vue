@@ -1566,7 +1566,7 @@ export default {
 								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
 								const res = await converCoin(msg?.msg?.amount);
 								farmAmount = res?.amount;
-								farmAmountDenom = res?.denom.toLocaleUpperCase();
+								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
 								farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
 								sender = msg?.msg?.sender;
 							}
@@ -1600,7 +1600,7 @@ export default {
 								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
 									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
 									initialDeposit = Tools.toDecimal(res?.amount, 2);
-									farmAmountDenom = res?.denom.toLocaleUpperCase();
+  								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
 								  farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
 								}
 							}
