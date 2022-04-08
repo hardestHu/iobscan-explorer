@@ -1581,13 +1581,13 @@ export default {
 								if(len > 0){
 									const res = await converCoin(msg?.msg?.total_reward?.[0]);
 									totalReward1 = Tools.toDecimal(res.amount, 2);
-									totalReward1Denom = res.denom.toLocaleUpperCase();
+  								totalReward1Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
 									totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
 								}
 								if(len === 2){
 									const res = await converCoin(msg?.msg?.total_reward?.[1]);
 									totalReward2 = Tools.toDecimal(res.amount, 2);
-									totalReward2Denom = res.denom.toLocaleUpperCase();
+  								totalReward2Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
 									totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
 								}
 								poolCreator = msg.msg.creator;
