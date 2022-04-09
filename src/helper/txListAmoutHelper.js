@@ -492,6 +492,6 @@ function concatNativeDenom(str,nativeDenom){
 	if(!str || !nativeDenom || str === '--'){
 		return str
 	}else{
-		return str + '%' + nativeDenom; 
+		return str + '%' + nativeDenom?.toLocaleUpperCase(); 
 	}
 }
