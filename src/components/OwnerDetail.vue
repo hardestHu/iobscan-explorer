@@ -1569,10 +1569,17 @@ export default {
 								// farm -> stake unstake
 							if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
 								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
-								const res = await converCoin(msg?.msg?.amount);
-								farmAmount = res?.amount;
-								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
-								farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
+								if(sameMsg?.length > 1){
+								// 判断是多msg, amount显示为空
+									farmAmount = ' '
+								}else{
+									const res = await converCoin(msg?.msg?.amount);
+									farmAmount = res?.amount;
+									farmAmountDenom = res?.denom.startsWith('lpt') ?
+										res?.denom.toLocaleUpperCase() :
+										this.getAmountUnit(res?.denom.toLocaleUpperCase());
+									farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
+								}
 								sender = msg?.msg?.sender;
 							}
 							// farm -> harvest
