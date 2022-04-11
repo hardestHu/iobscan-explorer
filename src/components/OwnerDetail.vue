@@ -1566,63 +1566,63 @@ export default {
 								serviceName = msg.msg.ex.service_name
 							}
 
-								// farm -> stake unstake
-							if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
-								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
-								if(sameMsg?.length > 1){
-								// 判断是多msg, amount显示为空
-									farmAmount = ' '
-								}else{
-									const res = await converCoin(msg?.msg?.amount);
-									farmAmount = res?.amount;
-									farmAmountDenom = res?.denom.startsWith('lpt') ?
-										res?.denom.toLocaleUpperCase() :
-										this.getAmountUnit(res?.denom.toLocaleUpperCase());
-									farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
-								}
-								sender = msg?.msg?.sender;
+						}
+						// farm -> stake unstake
+						if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							if(sameMsg?.length > 1){
+							// 判断是多msg, amount显示为空
+								farmAmount = ' '
+							}else{
+								const res = await converCoin(msg?.msg?.amount);
+								farmAmount = res?.amount;
+								farmAmountDenom = res?.denom.startsWith('lpt') ?
+									res?.denom.toLocaleUpperCase() :
+									this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
 							}
-							// farm -> harvest
-							if(msg?.type === TX_TYPE.harvest){
-								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
-								sender = msg.msg?.sender;
+							sender = msg?.msg?.sender;
+						}
+						// farm -> harvest
+						if(msg?.type === TX_TYPE.harvest){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							sender = msg.msg?.sender;
+						}
+						// farm -> create pool
+						if(msg?.type === TX_TYPE.create_pool){
+							const len = msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward) ? msg?.msg?.total_reward.length  : 0;
+							if(len > 0){
+								const res = await converCoin(msg?.msg?.total_reward?.[0]);
+								totalReward1 = Tools.toDecimal(res.amount, 2);
+								totalReward1Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
 							}
-							// farm -> create pool
-							if(msg?.type === TX_TYPE.create_pool){
-								const len = msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward) ? msg?.msg?.total_reward.length  : 0;
-								if(len > 0){
-									const res = await converCoin(msg?.msg?.total_reward?.[0]);
-									totalReward1 = Tools.toDecimal(res.amount, 2);
-  								totalReward1Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
-									totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
-								}
-								if(len === 2){
-									const res = await converCoin(msg?.msg?.total_reward?.[1]);
-									totalReward2 = Tools.toDecimal(res.amount, 2);
-  								totalReward2Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
-									totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
-								}
-								poolCreator = msg.msg.creator;
+							if(len === 2){
+								const res = await converCoin(msg?.msg?.total_reward?.[1]);
+								totalReward2 = Tools.toDecimal(res.amount, 2);
+								totalReward2Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
 							}
+							poolCreator = msg.msg.creator;
+						}
 
-							// farm -> create_pool_with_community_pool
-							if(msg?.type === TX_TYPE.create_pool_with_community_pool){
-								proposer = msg.msg.proposer;
-								title = msg.msg.content.title;
-								if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
-									const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
-									initialDeposit = Tools.toDecimal(res?.amount, 2);
-  								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
-								  farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
-								}
-							}
-							// farm => destroy_pool 
-							if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
-								poolId = Tools.formatPoolId(msg?.msg?.pool_id);
-								poolCreator = msg.msg.creator;
+						// farm -> create_pool_with_community_pool
+						if(msg?.type === TX_TYPE.create_pool_with_community_pool){
+							proposer = msg.msg.proposer;
+							title = msg.msg.content.title;
+							if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
+								const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
+								initialDeposit = Tools.toDecimal(res?.amount, 2);
+								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
 							}
 						}
-						
+						// farm => destroy_pool 
+						if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							poolCreator = msg.msg.creator;
+						}
+
 						let addrObj = TxHelper.getFromAndToAddressFromMsg(msg);
 						amounts.push(msg ? sameMsg?.length > 1 ? ' ' : await getAmountByTx(msg, tx.events, true) : '--');
 						let from = sameMsg?.length > 1 ? sameMsgFromAddrArr?.length > 1 ? ' ' : sameMsgFromAddrArr?.length === 1 ? sameMsgFromAddrArr[0] : '--' : addrObj.from || '--',
@@ -1716,7 +1716,7 @@ export default {
 								tooltipContent: ''
 							},
 						  //farm stake/unstake/harvest
-							poolId: poolIdArr?.length > 1 ? ' ' : poolIdArr?.length === 1 ? poolIdArr[0] : poolId,
+							poolId: poolIdArr?.length > 1 ? ' ' : poolIdArr?.length === 1 ?  Tools.formatPoolId(poolIdArr[0]) : poolId,
 							farmAmount: farmAmount,
 							farmAmountDenom,
 							farmAmountNativeDenom,
