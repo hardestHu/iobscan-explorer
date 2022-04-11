@@ -1395,6 +1395,12 @@ export default {
 								if(item?.type=== TX_TYPE.update_request_context && item?.msg?.ex && item?.msg?.ex?.service_name){
 									serviceNameArr.push( item.msg.service_name)
 								}
+								// farm -> stake
+								if(item?.type === TX_TYPE.stake && item?.msg?.pool_id){
+									poolIdArr.push(item.msg.pool_id)
+								}
+
+
 							})
 							/*
 							* 同一类型多msg 去重
@@ -1430,8 +1436,7 @@ export default {
 							providerArr = Array.from(new Set(providerArr))
 							requestContextIdArr = Array.from(new Set(requestContextIdArr))
 							serviceNameArr = Array.from(new Set(serviceNameArr))
-							
-							
+							poolIdArr = Array.from(new Set(poolIdArr))
 							
 							
 							
@@ -1704,7 +1709,7 @@ export default {
 								tooltipContent: ''
 							},
 						  //farm stake/unstake/harvest
-							poolId: poolId,
+							poolId: poolIdArr?.length > 1 ? ' ' : poolIdArr?.length === 1 ? poolIdArr[0] : poolId,
 							farmAmount: farmAmount,
 							farmAmountDenom,
 							farmAmountNativeDenom,
@@ -1738,18 +1743,26 @@ export default {
 						this.denomMap = await getDenomMap()
 						this.transactionArray.forEach((item, index) => {
 							if(amount[index]?.length === 2 ){
-								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
-								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
-								this.transactionArray[index].swapAmount1 =  this.getAmount(amount[index][0])
-								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(amount[index][0])
-								this.transactionArray[index].swapAmount2 =  this.getAmount(amount[index][1])
-								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(amount[index][1])
+								/**
+								 * 取 % 后面拼接的原始denom, 用来匹配theme
+								 */
+								const result1  = amount[index][0].split('%');
+								const result2  = amount[index][1].split('%');
+								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(result1[1], this.denomMap)
+								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(result2[1], this.denomMap)
+								this.transactionArray[index].swapAmount1 =  this.getAmount(result1[0])
+								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(result1[0])
+								this.transactionArray[index].swapAmount2 =  this.getAmount(result2[0])
+								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(result2[0])
 
 							}else{
-								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
-								// this.transactionArray[index].amount = amount[index]
-								this.transactionArray[index].amount = this.getAmount(amount[index])
-								this.transactionArray[index].denom = this.getAmountUnit(amount[index])
+								/**
+								 * 取 % 后面拼接的原始denom, 用来匹配theme
+								 */
+								const result  = amount[index].split('%');
+								this.transactionArray[index].denomTheme = getDenomTheme(result[1], this.denomMap)
+								this.transactionArray[index].amount = this.getAmount(result[0])
+								this.transactionArray[index].denom = this.getAmountUnit(result[0])
 								let denom = /[A-Za-z\-]{2,15}/.exec(amount[index])?.length ? /[A-Za-z\-]{2,15}/.exec(amount[index])[0] : ' '
 								if (denom !== undefined && /(lpt|LPT|lpt-|LPT-)/g.test(denom)) {
 									this.transactionArray[index].amount = ''
