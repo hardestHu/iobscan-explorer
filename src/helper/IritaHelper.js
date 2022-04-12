@@ -139,7 +139,7 @@ export async function converCoin (_coin) {
           } else {
             return coin;
           }       
-        } else {
+        }else {
           console.error('Denom did not match', _coin);
           return coin;
         }   
