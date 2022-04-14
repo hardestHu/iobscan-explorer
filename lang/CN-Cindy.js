@@ -161,8 +161,9 @@ export const ExplorerLang = {
         sourceChain:'发起链',
         chainName:'链名称',
         sequence:'序列号',
-        destinationChain:'目标链'
-
+        destinationChain:'目标链',
+        //能量值
+        energy:'能量值'
     },
     unit:{
         ellipsis:' ,...',

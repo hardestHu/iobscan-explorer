@@ -174,6 +174,9 @@ export const ExplorerLang = {
         totalReward2: 'Total Reward ',
         creator: 'Creator',
         proposer:'Proposer',
+        
+        //能量值
+        energy:'Energy'
     },
     unit:{
         ellipsis:' ,...',

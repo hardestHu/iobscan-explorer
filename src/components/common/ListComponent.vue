@@ -248,6 +248,7 @@ import {
 	IRIS_ADDRESS_PREFIX,
 	COSMOS_ADDRESS_PREFIX,
 	nftAndDenomSplitNum,
+	PRODUCT_WENCHANG,
 } from '../../constant';
 import {fetchAllTokens} from "../../service/api";
 import ProposalStatusComponent from "../Gov/ProposalStatusComponent";
@@ -263,6 +264,7 @@ export default {
 			isSetLoadingStatus: false,
 			isShowFee: prodConfig.fee.isShowFee || false,
 			isShowProposer: prodConfig.blockList.proposer || false,
+			productName: prodConfig.product || '',
 			tableList: [],
 			columns: [],
 			TX_STATUS,
@@ -346,6 +348,8 @@ export default {
 				this.columns = newValue
 				if (!this.isShowFee) {
 					this.deleteColumnFee()
+				}else if(this.productName === PRODUCT_WENCHANG){
+					this.changeFeeColumnLabel()
 				}
 				if (!this.isShowProposer) {
 					this.deleteProposer()
@@ -629,7 +633,25 @@ export default {
 				console.log(error)
 			}
 		},
+		/**
+		 * 修改fee列的展示名字  
+		 * src\components\tableListColumnConfig\txCommonLatestTable.js  
+		 *  修改 label:i18n.t('ExplorerLang.table.fee') => label:i18n.t('ExplorerLang.table.energy')
+		 */
+		changeFeeColumnLabel(){
+			const index = this.columns.findIndex(item => {
+				return item?.label === this.$t('ExplorerLang.table.fee')
+			})
+			if(index !== -1){
+				this.columns[index] = {
+					label: this.$t('ExplorerLang.table.energy'),
+					displayValue: this.columns[index]['displayValue'],
+					nativeValue: this.columns[index]['nativeValue'],
+				}
+			}
+		},
 		deleteColumnFee() {
+			console.log('this.columns',this.columns)
 			this.columns = this.columns.filter(item => {
 				return item?.label !== this.$t('ExplorerLang.transactionInformation.fee')
 			})
@@ -725,7 +747,10 @@ export default {
 		this.getTableWidth()
 		if (!this.isShowFee) {
 			this.deleteColumnFee()
+		}else if(this.productName === PRODUCT_WENCHANG){
+			this.changeFeeColumnLabel()
 		}
+
 		if (!this.isShowProposer) {
 			this.deleteProposer()
 		}
