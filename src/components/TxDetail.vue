@@ -38,7 +38,8 @@
 					</p>
 					
 					<p class="tx_information_list_item" v-if="isShowFee">
-						<span>{{ $t('ExplorerLang.transactionInformation.fee') }}：</span>
+						<span>							
+							{{ productNameWC === productName ? $t('ExplorerLang.table.energy') : $t('ExplorerLang.transactionInformation.fee') }}：</span>
 						<span>{{ fee }}</span>
 					</p>
 					<!-- <p class="tx_information_list_item" v-if="isShowFee">
@@ -82,7 +83,7 @@ import MPagination from './common/MPagination'
 import MClip from './common/MClip.vue'
 import TxMessage from './common/TxMessage.vue'
 import { getTxDetail, getRelevanceTxList } from '../service/api'
-import { TX_TYPE, TX_STATUS, ColumnMinWidth } from '../constant'
+import { TX_TYPE, TX_STATUS, ColumnMinWidth, PRODUCT_WENCHANG } from '../constant'
 import { moduleSupport } from '../helper/ModulesHelper'
 import slef_axios from "../axios"
 import { converCoin,addressRoute } from '@/helper/IritaHelper';
@@ -93,6 +94,9 @@ export default {
 	data() {
 		return {
 			isShowFee: prodConfig.fee.isShowFee,
+			isShowDenom: prodConfig.fee.isShowDenom,
+			productName: prodConfig.product,
+			productNameWC: PRODUCT_WENCHANG,
 			Tools,
 			moduleSupport,
 			addressRoute,
@@ -199,7 +203,7 @@ export default {
 					}
 					if(res.fee &&  res.fee.amount &&  res.fee.amount[0] && this.isShowFee) {
 						let fee = await converCoin(res.fee.amount[0])
-						this.fee = `${fee.amount} ${fee.denom.toUpperCase()}`
+						this.fee = this.isShowDenom ? `${fee.amount} ${fee.denom.toUpperCase()}` : fee.amount;
 					}
 					this.fee = this.fee || '--'
 					// this.gasUsed=res.fee.gas || '--'

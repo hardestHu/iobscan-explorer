@@ -605,4 +605,4 @@ export const DISTRIBUTION = {
 export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
 
-export const PRODUCT_WENCHANG = 'bsn opb';
+export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目

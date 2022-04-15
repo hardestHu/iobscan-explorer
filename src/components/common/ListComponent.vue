@@ -634,7 +634,7 @@ export default {
 			}
 		},
 		/**
-		 * 修改fee列的展示名字  
+		 * 修改fee列的展示名字为 能量值  
 		 * src\components\tableListColumnConfig\txCommonLatestTable.js  
 		 *  修改 label:i18n.t('ExplorerLang.table.fee') => label:i18n.t('ExplorerLang.table.energy')
 		 */
