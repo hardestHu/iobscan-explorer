@@ -32,7 +32,7 @@
 							:sortable="item.isNeedSort">
 							<template slot="header" slot-scope="scope">
 								<span :class="item.isRight ? 'center_style' : ''">{{ item.label }}</span>
-								<el-tooltip v-show="item.isShowTokenSymbol"
+								<el-tooltip v-show="item.isShowTokenSymbol && tokenSymbol"
 											:content="tokenSymbol"
 											placement="top">
 									<i class="iconfont iconyiwen yiwen_icon"/>
@@ -644,7 +644,7 @@ export default {
 			})
 			if(index !== -1){
 				this.columns[index]['label'] = this.$t('ExplorerLang.table.energy')
-				this.columns[index]['isShowTokenSymbol'] = false
+				// this.columns[index]['isShowTokenSymbol'] = false
 			}
 		},
 		deleteColumnFee() {
