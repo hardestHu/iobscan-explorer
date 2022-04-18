@@ -643,11 +643,8 @@ export default {
 				return item?.label === this.$t('ExplorerLang.table.fee')
 			})
 			if(index !== -1){
-				this.columns[index] = {
-					label: this.$t('ExplorerLang.table.energy'),
-					displayValue: this.columns[index]['displayValue'],
-					nativeValue: this.columns[index]['nativeValue'],
-				}
+				this.columns[index]['label'] = this.$t('ExplorerLang.table.energy')
+				this.columns[index]['isShowTokenSymbol'] = false
 			}
 		},
 		deleteColumnFee() {
