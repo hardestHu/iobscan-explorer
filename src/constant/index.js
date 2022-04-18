@@ -519,7 +519,7 @@ export const validator_Status = {
 
 export const decimals = {
   amount: 2,
-  fee: prodConfig.fee && prodConfig.fee.decimals || 2,
+  fee: prodConfig.fee && (prodConfig.fee.decimals  || prodConfig.fee.decimals === 0) ? prodConfig.fee.decimals : 2,
   shares: 4,
 }
 
@@ -604,3 +604,5 @@ export const DISTRIBUTION = {
 
 export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
+
+export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目

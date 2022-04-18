@@ -25,7 +25,7 @@ export default [
         isLink:false,
         linkRoute:'',
         isShowMoniker:false,
-        isShowTokenSymbol:true,
+        isShowTokenSymbol:true, // fee右上显示单位
     },
     {
         label:i18n.t('ExplorerLang.table.time'),
