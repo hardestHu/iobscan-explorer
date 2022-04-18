@@ -648,7 +648,6 @@ export default {
 			}
 		},
 		deleteColumnFee() {
-			console.log('this.columns',this.columns)
 			this.columns = this.columns.filter(item => {
 				return item?.label !== this.$t('ExplorerLang.transactionInformation.fee')
 			})
