@@ -364,7 +364,7 @@ export const ColumnMinWidth = {
   delegationTxsAmount: '155',
   delegationTxsFrom: '146',
   shares: '251',
-  fee: '85',
+  fee: '160',
   // feeAndDenom: "110",
   consensus: '340',
   proposerPriority: '200',
