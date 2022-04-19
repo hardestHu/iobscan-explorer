@@ -32,7 +32,7 @@
                 </template>
             </el-table-column>
             <!-- <el-table-column align="right" class-name="amount" prop="amount" :label="$t('ExplorerLang.table.amount')" :min-width="ColumnMinWidth.amountAndDenom"> -->
-            <el-table-column align="right" class-name="amount" prop="amount" :label="$t('ExplorerLang.table.amount')" :width="colWidthList[2]">
+            <el-table-column align="center" class-name="amount" prop="amount" :label="$t('ExplorerLang.table.amount')" :width="colWidthList[2]">
                 <!-- <template slot="header" slot-scope="scope">
                   <span>{{ $t('ExplorerLang.table.amount')}}</span>
                   <el-tooltip :content="mainTokenSymbol"
@@ -112,7 +112,7 @@
                 </template>
             </el-table-column>
             <!-- <el-table-column :min-width="ColumnMinWidth.blockHeight" class-name="block" :label="$t('ExplorerLang.table.block')"> -->
-            <el-table-column :min-width="colWidthList[5]" class-name="block" :label="$t('ExplorerLang.table.block')">
+            <el-table-column :min-width="colWidthList[5]" class-name="block" :label="$t('ExplorerLang.table.block')" align="center">
                 <template slot-scope="scope">
                     <router-link :to="`/block/${scope.row.blockHeight}`">{{scope.row.blockHeight}}</router-link>
                 </template>
