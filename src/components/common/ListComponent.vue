@@ -711,12 +711,21 @@ export default {
 								if(secondPracticalWidthCount?.length){
 									secondPracticalWidth = (compensationWidth * secondPracticalWidthCount.length) / (this.columns.length - secondPracticalWidthCount.length )
 								}
-								this.tableListWidth = this.tableListWidth.map( item => {
+								this.tableListWidth = this.tableListWidth.map( (item, index) => {
 									if(item <= 40){
 										item = 40
 										return item
 									}else {
-										return parseInt((item + compensationWidth + secondPracticalWidth))
+										const label = this.columns[index]['label']
+										if(label === this.$t('ExplorerLang.table.energy') || label === this.$t('ExplorerLang.table.fee')){
+											// 对fee/能量值 这一列要给足宽度160
+											return ColumnMinWidth.fee;
+										}else if(!label.trim()){
+											// 同时减少下 denom 列的宽度
+											return ColumnMinWidth.listDenom
+										}else{
+											return parseInt((item + compensationWidth + secondPracticalWidth))
+										}
 									}
 								})
 							}
