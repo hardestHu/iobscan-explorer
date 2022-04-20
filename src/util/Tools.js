@@ -377,7 +377,8 @@ export default class Tools {
     } else {
       num = num.substring(0)
     }
-    return parseFloat(num).toFixed(decimal)
+    // js 最大安全整数是Number.MAX_SAFE_INTEGER 9007199254740991 最好不要超过16位
+    return num.length > 15 ?  num : parseFloat(num).toFixed(decimal)
   }
 
   static formatPerNumber (num,model="decimal") {
