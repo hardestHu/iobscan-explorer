@@ -170,6 +170,7 @@
 						
 						<template v-slot:datePicket>
 							<tx-status-tabs-components
+                                :isShowDatePicker="false"
 								@onChangTxStatus="changeTxStatus"
 								@onChangeDate="changeTime"
 								@resetParams="resetFilterCondition"></tx-status-tabs-components>
@@ -572,7 +573,7 @@
 				if(param?.index){
 					sessionStorage.setItem('lastChoiceMsgModelIndex',param.index)
 				}
-                this.txStatus = this.status;
+                // this.txStatus = this.status;
                 // this.txType = this.type;
                 this.txPageNum = 1;
                 this.getServiceTransactionCount();
