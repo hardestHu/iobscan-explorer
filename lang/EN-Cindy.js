@@ -167,7 +167,13 @@ export const ExplorerLang = {
         sourceChain:'Source Chain',
         chainName:'Chain Name',
         sequence:'Sequence',
-        destinationChain:'Destination Chain'
+        destinationChain:'Destination Chain',
+        //Farm
+        poolId: 'Pool ID',
+        totalReward1: 'Total Reward',
+        totalReward2: 'Total Reward ',
+        creator: 'Creator',
+        proposer:'Proposer',
     },
     unit:{
         ellipsis:' ,...',
@@ -552,6 +558,33 @@ export const ExplorerLang = {
             id: 'ID',
             secret: 'Secret',
             recipient: 'Recipient'
+        },
+        farm: {
+            poolId: 'Pool ID',
+            amount: 'Amount',
+            sender: 'Sender',
+            reward: 'Reward',
+            lptDenom: 'Lpt Denom',
+            totalReward: 'Total Reward',
+            rewardPerBlock:'Reward Per Block',
+            startHeight:'Start Height',
+            editable: 'Editable',
+            description: 'Description',
+            proposalId:'Proposal ID',
+            proposer: 'Proposer',
+            initialDeposit: 'Initial Deposit',
+            proposalTitle: 'Proposal Title',
+            proposalDescription: 'Proposal Description',
+            fundApplied:'Fund Applied',
+            fundSelfBond:'Fund Self Bond',
+            poolDescription:'Pool Description',
+            refund:'Refund',
+            additionalReward:'Additional Reward',
+            totalReward1: 'Total Reward',
+            totalReward2: 'Total Reward ',
+            creator: 'Creator',
+            title: 'Title',
+            
         }
     },
     addressDetail: {

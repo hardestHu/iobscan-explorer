@@ -51,7 +51,10 @@
 									<router-link class="link_style"
 												 :class="item.isAdjustStyle ? 'index_style' : ''"
 												 :style="{color:isOwnerAddress(scope.row[item.nativeValue]) ? '#606266 !important' : '', cursor:isOwnerAddress(scope.row[item.nativeValue]) ? 'default !important' : ''}"
-												 v-if="item.isLink &&  scope.row[item.displayValue] && scope.row[item.displayValue] !== '--'"
+												 v-if="item.isLink && 
+												  scope.row[item.displayValue] && 
+													scope.row[item.displayValue] !== '--' && 
+													!(/^cosmos/.test(scope.row[item.nativeValue]))"
 												 :to="!item.isNft ? `${item.linkRoute}${scope.row[item.nativeValue]}` : `${item.linkRoute}${scope.row[item.nftRouterParamsValue]}${item.denomRouter}${scope.row[item.nativeValue]}`">
 										
 										<span v-if="item.isNeedFormatHash">{{formatTxHash(scope.row[item.displayValue]) }} </span>
@@ -104,9 +107,42 @@
 <!--									-->
 									<span v-else-if="item.isShowDenomTip" :class="item.isRight ? 'right_style' : ''">
 <!--										<span>{{ getAmount(scope.row[item.displayValue]) }}</span>-->
-										<el-tooltip :manual="isShowDenomTip( scope.row && scope.row.denomTheme && scope.row.denomTheme.tooltipContent ? scope.row.denomTheme.tooltipContent  :'')"
-													:content="scope.row && scope.row.denomTheme && scope.row.denomTheme.tooltipContent ? scope.row.denomTheme.tooltipContent  :''" placement="top">
-											<span class="denom_style" :style="{ color: scope.row && scope.row.denomTheme && scope.row.denomTheme.denomColor ? scope.row.denomTheme.denomColor : '' }"> {{getAmountUnit(scope.row[item.displayValue]) }}</span>
+										<template v-if="item.isDoubleAsset">
+											<template v-if="item.isLeftAsset">
+												<el-tooltip 
+													:manual="isShowDenomTip( scope.row && scope.row.swapDenomTheme1 && scope.row.swapDenomTheme1.tooltipContent ? scope.row.swapDenomTheme1.tooltipContent  :'')"
+													:content="scope.row && scope.row.swapDenomTheme1 && scope.row.swapDenomTheme1.tooltipContent ? scope.row.swapDenomTheme1.tooltipContent  :''" 
+													placement="top">
+													<span class="denom_style" :style="{ color: scope.row && scope.row.swapDenomTheme1 && scope.row.swapDenomTheme1.denomColor ? scope.row.swapDenomTheme1.denomColor : '' }">
+														{{getAmountUnit(scope.row[item.displayValue]) }}
+													</span>
+												</el-tooltip>
+											</template>
+								      <template v-else>
+												<el-tooltip 
+													:manual="isShowDenomTip( scope.row && scope.row.swapDenomTheme2 && scope.row.swapDenomTheme2.tooltipContent ? scope.row.swapDenomTheme2.tooltipContent  :'')"
+													:content="scope.row && scope.row.swapDenomTheme2 && scope.row.swapDenomTheme2.tooltipContent ? scope.row.swapDenomTheme2.tooltipContent  :''" 
+													placement="top">
+													<span class="denom_style" :style="{ color: scope.row && scope.row.swapDenomTheme2 && scope.row.swapDenomTheme2.denomColor ? scope.row.swapDenomTheme2.denomColor : '' }">
+														{{getAmountUnit(scope.row[item.displayValue]) }}
+													</span>
+												</el-tooltip>
+											</template>
+											
+										</template>
+										<template v-else>
+											<el-tooltip 
+												:manual="isShowDenomTip( scope.row && scope.row.denomTheme && scope.row.denomTheme.tooltipContent ? scope.row.denomTheme.tooltipContent  :'')"
+												:content="scope.row && scope.row.denomTheme && scope.row.denomTheme.tooltipContent ? scope.row.denomTheme.tooltipContent  :''" 
+												placement="top">
+												<span class="denom_style" :style="{ color: scope.row && scope.row.denomTheme && scope.row.denomTheme.denomColor ? scope.row.denomTheme.denomColor : '' }">
+													{{getAmountUnit(scope.row[item.displayValue]) }}
+												</span>
+											</el-tooltip>
+										</template>
+										
+										<el-tooltip>
+
 										</el-tooltip>
 										
 									</span>
@@ -162,6 +198,9 @@
 <!--									-->
 									<span v-else-if="item.isFormatNftIdAndDenomId" >
 										{{ formatNftIdAndDenomId(scope.row[item.displayValue])}}</span>
+									<span v-else-if="item.isFormatPoolId">
+										{{ formatPoolId(scope.row[item.displayValue])}}
+									</span>
 									<span v-else :class="item.isWrap ? 'wrap_style' : item.isRight ? 'right_style' : '' " >
 										{{ scope.row[item.displayValue] === 0 || scope.row[item.displayValue] === '0' ? 0 : scope.row[item.displayValue] || '--' }}</span>
 										
@@ -506,6 +545,13 @@ export default {
 				return Tools.formatString(NftIdOrDenomId,nftAndDenomSplitNum.num,'...')
 			}
 			return '--'
+		},
+		formatPoolId(poolId){
+			if(poolId){
+				return Tools.formatString(poolId, 4,'...')
+			}else{
+				return '--'
+			}
 		},
 		formatStr(str,displayStr) {
 			if(displayStr){

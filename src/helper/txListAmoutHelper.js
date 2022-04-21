@@ -69,7 +69,13 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				if (msg && msg.amount && msg.amount.length === 1) {
 					const sendAmount = msg && msg.amount.length > 0 ? await converCoin(msg.amount[0]) : null
 					// formatPriceToFixed 四舍五入 toDecimal 截取
-					amount = sendAmount && sendAmount.amount && sendAmount.denom ?  isShowDenom ? `${Tools.toDecimal(sendAmount.amount,amountDecimals) } ${sendAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(sendAmount.amount,amountDecimals) }` : '--';
+					amount = sendAmount && sendAmount.amount && sendAmount.denom ?  
+										isShowDenom ? 
+											`${Tools.toDecimal(sendAmount.amount,amountDecimals) } ${sendAmount.denom.toLocaleUpperCase()}` 
+											: `${Tools.toDecimal(sendAmount.amount,amountDecimals) }`
+										: '--';
+					//以 %+原始denom拼接到返回结果里面，用于颜色匹配 
+					amount = concatNativeDenom(amount,msg?.amount?.[0]['denom'].toLocaleUpperCase())
 					if(sendAmount?.denom &&  sendAmount.denom.startsWith('LPT')  || sendAmount.denom.startsWith('lpt')){
 						amount = ''
 					}
@@ -81,7 +87,9 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				if(msg && msg.inputs && msg.inputs.length && msg.inputs.length  === 1){
 					const nativeAmount = msg?.inputs[0]?.coins[0] ?  await converCoin(msg.inputs[0].coins[0]) : ''
 					if(nativeAmount){
+						// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
 						amount = nativeAmount?.amount && nativeAmount?.denom ? `${Tools.toDecimal(nativeAmount.amount,amountDecimals) } ${nativeAmount.denom.toLocaleUpperCase()}` :'--'
+						amount = concatNativeDenom(amount,msg.inputs[0].coins[0]['denom'].toLocaleUpperCase())
 					}
 				}else if(msg && msg.inputs && msg.inputs.length && msg.inputs.length  > 1) {
 					amount = ''
@@ -95,7 +103,9 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				break;
 			case TX_TYPE.begin_unbonding:
 				let beginUnbondingAmount = msg &&  msg.amount ? await converCoin(msg.amount) : null
+				// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
 				amount = beginUnbondingAmount && beginUnbondingAmount.amount && beginUnbondingAmount.denom ? isShowDenom ? `${Tools.toDecimal(beginUnbondingAmount.amount,amountDecimals)} ${beginUnbondingAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(beginUnbondingAmount.amount,amountDecimals)}` : '--';
+				amount = concatNativeDenom(amount,msg.amount.denom.toLocaleUpperCase())
 				break;
 			case TX_TYPE.edit_validator:
 				break;
@@ -103,15 +113,21 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				if(msg && msg?.value){
 					let selfBond = await converCoin(msg.value)
 					amount = msg?.value ? `${Tools.toDecimal(selfBond.amount,amountDecimals) } ${selfBond.denom.toLocaleUpperCase()}` :'--'
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, msg.value.denom)
 				}
 				break;
 			case TX_TYPE.delegate:
 				let delegateAmount = msg &&  msg.amount ? await converCoin(msg.amount) : null
 				amount = delegateAmount && delegateAmount.amount  && delegateAmount.denom ? isShowDenom ? `${Tools.toDecimal(delegateAmount.amount,amountDecimals)} ${delegateAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(delegateAmount.amount,amountDecimals)}` : '--'
+				// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+				amount = concatNativeDenom(amount, msg.amount.denom)
 				break;
 			case TX_TYPE.begin_redelegate:
 				const beginRedelegateAmount = msg && msg.amount ?  await converCoin(msg.amount) :null
 				amount = beginRedelegateAmount && beginRedelegateAmount.amount && beginRedelegateAmount.denom ? isShowDenom ? `${Tools.toDecimal(beginRedelegateAmount.amount,amountDecimals)} ${beginRedelegateAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(beginRedelegateAmount.amount,amountDecimals)}` : '--';
+				// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+				amount = concatNativeDenom(amount, msg.amount.denom)
 				break;
 			case TX_TYPE.unjail:
 				break;
@@ -120,17 +136,23 @@ export async function getAmountByTx (message, events, isShowDenom) {
 			case TX_TYPE.withdraw_delegator_reward:
 				let rewardAmount = msg &&  msg.amount ? await converCoin(msg.amount) : null
 				amount = rewardAmount && rewardAmount.amount  && rewardAmount.denom ? isShowDenom ? `${Tools.toDecimal(rewardAmount.amount,amountDecimals)} ${rewardAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(rewardAmount.amount,amountDecimals)}` : '--'
+				// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+				amount = concatNativeDenom(amount, msg.amount.denom)
 				break;
 			case TX_TYPE.withdraw_validator_commission:
 				break;
 			case TX_TYPE.fund_community_pool:
 				let poolAmount = msg && msg.amount && msg.amount.length > 0 ? await converCoin(msg.amount[0]) : null
 				amount = poolAmount && poolAmount.amount  && poolAmount.denom?  isShowDenom ? `${Tools.toDecimal(poolAmount.amount,amountDecimals)} ${poolAmount.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(poolAmount.amount,amountDecimals)}` : '--'
+				// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+				amount = concatNativeDenom(amount, msg.amount.denom)
 				break;
 			case TX_TYPE.deposit:
 				if(msg?.amount?.length  === 1) {
 					let amountMaxUnit = await converCoin(msg.amount[0]);
 					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, msg.amount[0].denom)
 				}
 				break;
 			case TX_TYPE.vote:
@@ -141,6 +163,8 @@ export async function getAmountByTx (message, events, isShowDenom) {
 					content = await converCoin(content)
 					if(content.amount !== '0') {
 						amount = isShowDenom ? `${Tools.toDecimal(content.amount,amountDecimals)} ${content.denom.toUpperCase()}` : `${Tools.toDecimal(content.amount,amountDecimals)}`
+						// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					  amount = concatNativeDenom(amount, content.denom)
 					} else {
 						amount = '--'
 					}
@@ -150,6 +174,9 @@ export async function getAmountByTx (message, events, isShowDenom) {
 					if (initialDeposit) {
 						initialDeposit = await converCoin(initialDeposit)
 						amount = isShowDenom ? `${Tools.toDecimal(initialDeposit.amount,amountDecimals)} ${initialDeposit.denom.toUpperCase()}` : `${Tools.toDecimal(initialDeposit.amount,amountDecimals)}`
+					  	// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+						amount = concatNativeDenom(amount, initialDeposit.denom)
+					} else {
 					}
 				}
 				break;
@@ -158,11 +185,18 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				if(msg?.swap_amount?.length === 2){
 					const addliquidityAmount = msg.swap_amount[0]
 					if(addliquidityAmount.includes(',')){
-						const tokenAmount1 =  await converCoin(formatAccountCoinsAmount(addliquidityAmount.split(',')[0]))
-						const tokenAmount2 =  await converCoin(formatAccountCoinsAmount(addliquidityAmount.split(',')[1]))
+						/**
+						 * 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+						 */
+						const amountItem = addliquidityAmount.split(',')
+						const nativeDenom1 = getNativeDenom(amountItem[0])
+						const nativeDenom2 = getNativeDenom(amountItem[1])
+						const tokenAmount1 =  await converCoin(formatAccountCoinsAmount(amountItem[0]))
+						const tokenAmount2 =  await converCoin(formatAccountCoinsAmount(amountItem[1]))
+
 						const addLiquidityAmount1 = `${Tools.toDecimal(tokenAmount1.amount,amountDecimals)} ${tokenAmount1.denom.toUpperCase()}`
 						const addLiquidityAmount2 = `${Tools.toDecimal(tokenAmount2.amount,amountDecimals)} ${tokenAmount2.denom.toUpperCase()}`
-						amountArray.push(addLiquidityAmount1, addLiquidityAmount2)
+						amountArray.push(concatNativeDenom(addLiquidityAmount1,nativeDenom1), concatNativeDenom(addLiquidityAmount2,nativeDenom2))
 						amount = amountArray
 					}
 				}
@@ -182,20 +216,27 @@ export async function getAmountByTx (message, events, isShowDenom) {
 			case TX_TYPE.remove_liquidity:
 				let removeAmountArray = []
 				if(msg?.swap_amount?.length === 2){
+					/**
+					 * 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					 */
 					let removeLiquidityAmount = msg.swap_amount[1]
 					let tokenAmount1,tokenAmount2;
 					if(removeLiquidityAmount.includes(',')){
-						tokenAmount1 =  await converCoin(formatAccountCoinsAmount(removeLiquidityAmount.split(',')[0]))
-						tokenAmount2 =  await converCoin(formatAccountCoinsAmount(removeLiquidityAmount.split(',')[1]))
+						const amountItem = removeLiquidityAmount.split(',')
+						const nativeDenom1 = getNativeDenom(amountItem[0])
+						const nativeDenom2 = getNativeDenom(amountItem[1])
+						tokenAmount1 =  await converCoin(formatAccountCoinsAmount(amountItem[0]))
+						tokenAmount2 =  await converCoin(formatAccountCoinsAmount(amountItem[0]))
 						const removeLiquidityAmount1 = `${Tools.toDecimal(tokenAmount1.amount,amountDecimals)} ${tokenAmount1.denom.toUpperCase()}`
 						const removeLiquidityAmount2 = `${Tools.toDecimal(tokenAmount2.amount,amountDecimals)} ${tokenAmount2.denom.toUpperCase()}`
-						removeAmountArray.push(removeLiquidityAmount1, removeLiquidityAmount2)
+						removeAmountArray.push(concatNativeDenom(removeLiquidityAmount1,nativeDenom1), concatNativeDenom(removeLiquidityAmount2,nativeDenom2))
 						amount = removeAmountArray
 					}else{
+						const nativeDenom = getNativeDenom(removeLiquidityAmount)
 						tokenAmount1 =  await converCoin(formatAccountCoinsAmount(removeLiquidityAmount))
 						const removeLiquidityAmount1 = `${Tools.toDecimal(tokenAmount1.amount,amountDecimals)} ${tokenAmount1.denom.toUpperCase()}`
 						const removeLiquidityAmount2 = '--'
-						removeAmountArray.push(removeLiquidityAmount1, removeLiquidityAmount2)
+						removeAmountArray.push(concatNativeDenom(removeLiquidityAmount1,nativeDenom), removeLiquidityAmount2)
 						amount = removeAmountArray
 					}
 				}
@@ -228,13 +269,16 @@ export async function getAmountByTx (message, events, isShowDenom) {
 			case TX_TYPE.swap_order:
 				let swapOrderAmount = []
 				if(msg?.input?.coin && JSON.stringify(msg.input.coin) !== '{}'){
+					/**
+					 * 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					 */
 					const swapOrderAmount1 = await converCoin(msg.input.coin)
-					const swapOrderAmountStr1 = `${swapOrderAmount1.amount} ${swapOrderAmount1.denom.toUpperCase()}`
+					const swapOrderAmountStr1 = `${swapOrderAmount1.amount} ${swapOrderAmount1.denom.toUpperCase()}%${msg.input.coin.denom.toUpperCase()}`
 					swapOrderAmount.push(swapOrderAmountStr1)
 				}
 				if(msg?.output?.coin && JSON.stringify(msg.output.coin) !== '{}'){
 					const swapOrderAmount2 = await converCoin(msg.output.coin)
-					const swapOrderAmountStr2 = `${swapOrderAmount2.amount} ${swapOrderAmount2.denom.toUpperCase()}`
+					const swapOrderAmountStr2 = `${swapOrderAmount2.amount} ${swapOrderAmount2.denom.toUpperCase()}%${msg.output.coin.denom.toUpperCase()}`
 					swapOrderAmount.push(swapOrderAmountStr2)
 				}
 				amount = swapOrderAmount
@@ -243,12 +287,16 @@ export async function getAmountByTx (message, events, isShowDenom) {
 				if(msg.amount && msg.amount[0]) {
 					let amountMaxUnit = await converCoin(msg.amount[0]);
 					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, msg.amount[0]['denom'])
 				}
 				break;
 			case TX_TYPE.claim_htlc:
 				if(msg.amount) {
 					let amountMaxUnit = await converCoin(msg.amount);
 					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, msg.amount['denom'])
 				}
 				break;
 			case TX_TYPE.refund_htlc:
@@ -272,12 +320,18 @@ export async function getAmountByTx (message, events, isShowDenom) {
 			// 联盟链和公有链 ibc交易类型名称一致
 			case TX_TYPE.recv_packet:
 				if(msg.packet && msg.packet.data) {
+					//以 %+原始denom拼接到返回结果里面，用于颜色匹配
 					let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,txType);
 					let amountMaxUnit = await converCoin({
 						denom:originalDenom || msg.packet.data.denom,
 						amount:msg.packet.data.amount,
 					});
-					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;  
+					/**
+					 * 拼接上原denom (originalDenom),用于匹配颜色
+					 */
+					amount = isShowDenom ? 
+					        `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}%${originalDenom.toUpperCase()}`
+									: `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;  
 				}
 				break;
 			// 联盟链和公有链 ibc交易类型名称一致
@@ -291,21 +345,25 @@ export async function getAmountByTx (message, events, isShowDenom) {
 			case TX_TYPE.update_identity:
 				break;
 			case TX_TYPE.transfer:
-                if(msg?.token) {
-                    let amountMaxUnit = await converCoin(msg.token);
-                    amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
-                }
+				if(msg?.token) {
+						let amountMaxUnit = await converCoin(msg.token);
+						amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+						// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+						amount = concatNativeDenom(amount, msg?.token?.denom)
+				}
 				break;
 			case TX_TYPE.timeout_packet:
-                if(msg?.packet && msg?.packet?.data) {
-					let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,txType);
-                    let amountMaxUnit = await converCoin({
-                        amount:msg.packet.data.amount,
-                        denom:originalDenom || msg.packet.data.denom,
-                    });
-                    amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
-                }
-                break;
+        if(msg?.packet && msg?.packet?.data) {
+				let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,txType);
+        let amountMaxUnit = await converCoin({
+						amount:msg.packet.data.amount,
+						denom:originalDenom || msg.packet.data.denom,
+				});
+          amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+				  // 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, originalDenom)
+				}
+        break;
 			case TX_TYPE.upgrade_client:
 				break;
 			case TX_TYPE.submit_misbehaviour:
@@ -340,12 +398,16 @@ export async function getAmountByTx (message, events, isShowDenom) {
 						denom: originalDenom || msg.packet.data.denom,
 					});
 					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, originalDenom)
 				}
 				break;
 			case TX_TYPE.request_rand:
 				if(msg?.service_fee_cap?.length  === 1) {
 					let amountMaxUnit = await converCoin(msg.service_fee_cap[0]);
 					amount = isShowDenom ? `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)} ${amountMaxUnit.denom.toUpperCase()}` : `${Tools.toDecimal(amountMaxUnit.amount,amountDecimals)}`;
+					// 以 %+原始denom拼接到返回结果里面，用于颜色匹配
+					amount = concatNativeDenom(amount, msg.service_fee_cap[0]['denom'])
 				}
 				break;
 		}
@@ -374,7 +436,9 @@ export async function getDenomMap() {
   let { tokenData: tokenList } = await getConfig()
   tokenList?.forEach(token =>{
     if(protocolEnums[token.src_protocol]){
-      denomMap.set(token.symbol, token.src_protocol)
+			// 这里的symbol可能会有重复，所以换成denom
+      // denomMap.set(token.symbol, token.src_protocol)
+      denomMap.set(token.denom.toLocaleUpperCase(), token.src_protocol)
     }          
   })
   return denomMap
@@ -397,11 +461,37 @@ export function getDenomTheme(denom, denomMap) {
     denomColor: '',
     tooltipContent: ''
   }
-  let checkDenom = String(denom).match(denomRule)?.[0].toLowerCase()
-  if(denomMap.has(checkDenom)){
-    denomTheme.tooltipContent = protocolNameEnums[denomMap.get(checkDenom)]
-    denomTheme.denomColor = protocolColorEnums[denomMap.get(checkDenom)]
+  // let checkDenom = String(denom).match(denomRule)?.[0].toLowerCase()
+  if(denomMap.has(denom)){
+    denomTheme.tooltipContent = protocolNameEnums[denomMap.get(denom)]
+    denomTheme.denomColor = protocolColorEnums[denomMap.get(denom)]
   }
   return denomTheme
 }
+/**
+ * 处理数字和denom拼接一起的数据，返回denom
+ * @param {string} str  例如:415669ubnb =>  ubnb
+ * @returns                  
+ */
+export function getNativeDenom(str){
+	if(!str){
+		return str;
+	}else{
+		
+		return str.replace(/\d/g,'').toUpperCase() 
+	}
+}
 
+/**
+ * 
+ * @param {string} str 
+ * @param {string} nativeDenom
+ * @return str + % + nativedenom 
+ */
+function concatNativeDenom(str,nativeDenom){
+	if(!str || !nativeDenom || str === '--'){
+		return str
+	}else{
+		return str + '%' + nativeDenom?.toLocaleUpperCase(); 
+	}
+}

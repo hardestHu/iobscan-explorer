@@ -23,7 +23,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.defineService.author')}}：</span>
 				<template>
-					<span v-if="author == '--'">{{author}}</span>
+					<span v-if="author == '--' || this.judgeCosmos(author)">{{author}}</span>
 <!--					<span v-else class="address_link" @click="addressRoute(author)">{{author}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${author}`">{{author}}</router-link>
 				</template>
@@ -74,7 +74,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${owner}`">{{owner}}</router-link>
 				</template>
@@ -105,7 +105,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
@@ -147,7 +147,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
@@ -155,7 +155,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
-					<span v-if="recipient === '--'">{{recipient}}</span>
+					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
 <!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${recipient}`">{{recipient}}</router-link>
 				</template>
@@ -201,7 +201,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
@@ -209,7 +209,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
-					<span v-if="recipient === '--'">{{recipient}}</span>
+					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
 <!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${recipient}`">{{recipient}}</router-link>
 				</template>
@@ -253,7 +253,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
@@ -305,7 +305,7 @@
 		<p>
 			<span>{{$t('ExplorerLang.transactionInformation.issueDenom.sender')}}：</span>
 			<template>
-				<span v-if="sender === '--'">{{sender}}</span>
+				<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 				<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 				<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 			</template>
@@ -321,7 +321,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
-					<span v-if="from === '--'">{{from}}</span>
+					<span v-if="from === '--' || this.judgeCosmos(from)">{{from}}</span>
 <!--					<span v-else @click="addressRoute(from)" class="address_link">{{from}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${from}`">{{from}}</router-link>
 				</template>
@@ -329,7 +329,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
-					<span v-if="to === '--'">{{to}}</span>
+					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
 <!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${to}`">{{to}}</router-link>
 				</template>
@@ -354,7 +354,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
-					<span v-if="provider === '--'">{{provider}}</span>
+					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
 <!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${provider}`">{{provider}}</router-link>
 				</template>
@@ -383,7 +383,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
-					<span v-if="consumer === '--'">{{consumer}}</span>
+					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
 <!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${consumer}`">{{consumer}}</router-link>
 				</template>
@@ -446,7 +446,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
-					<span v-if="consumer === '--'">{{consumer}}</span>
+					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
 <!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link v-else  class="address_link" :to="`/address/${consumer}`">{{consumer}}</router-link>
 				</template>
@@ -471,7 +471,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
-					<span v-if="consumer === '--'">{{consumer}}</span>
+					<span v-if="consumer === '--'  || this.judgeCosmos(consumer)">{{consumer}}</span>
 <!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link  v-else :to="`/address/${consumer}`" class="address_link">{{consumer}}</router-link>
 				</template>
@@ -531,7 +531,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
-					<span v-if="provider === '--'">{{provider}}</span>
+					<span v-if="provider === '--'  || this.judgeCosmos(provider)">{{provider}}</span>
 <!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
@@ -539,7 +539,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -556,7 +556,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
-					<span v-if="provider === '--'">{{provider}}</span>
+					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
 <!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
@@ -564,7 +564,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -593,7 +593,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -631,7 +631,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -649,14 +649,22 @@
                 <span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
             </p>
             <p>
+						<!-- hxj -->
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.from')}}：</span>
 <!--                <span @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
-				<router-link :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				<template>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
 			</p>
             <p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.to')}}：</span>
 <!--                <span @click="addressRoute(receiver)" class="address_link">{{ receiver }}</span>-->
-				<router-link :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
+				<!-- <router-link :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link> -->
+				<template>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
+					<router-link v-else :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
+				</template>
 			</p>
 
 			<!-- <p>
@@ -670,7 +678,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -693,7 +701,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.sender')}}：</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<span v-else @click="addressRoute(sender)"
                           :class="(sender.startsWith(COSMOS_ADDRESS_PREFIX) || sender.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
                     >{{sender}}</span>
@@ -702,7 +710,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.receiver')}}：</span>
                 <template>
-                    <span v-if="sender === '--'">{{receiver}}</span>
+                    <span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
                     <span v-else @click="addressRoute(receiver)"
                           :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
                     >{{receiver}}</span>
@@ -745,7 +753,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -763,7 +771,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -781,7 +789,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -799,7 +807,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -829,7 +837,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -847,7 +855,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -873,7 +881,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -927,7 +935,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -973,7 +981,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -995,7 +1003,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1013,7 +1021,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1047,7 +1055,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1085,7 +1093,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1111,7 +1119,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1129,7 +1137,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1155,7 +1163,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1195,7 +1203,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1225,7 +1233,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1256,7 +1264,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
 <!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
@@ -1299,7 +1307,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.operatorAddress')}}</span>
 				<template>
-					<span v-if="operatorAddress === '--'">{{operatorAddress}}</span>
+					<span v-if="operatorAddress === '--'  || this.judgeCosmos(operatorAddress)">{{operatorAddress}}</span>
 <!--					<span v-else @click="addressRoute(operatorAddress)" class="address_link">{{operatorAddress}}</span>-->
 					<router-link v-else  :to="`/address/${operatorAddress}`" class="address_link">{{operatorAddress}}</router-link>
 				</template>
@@ -1324,7 +1332,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.ownerAddress')}}</span>
 				<template>
-					<span v-if="ownerAddress === '--'">{{ownerAddress}}</span>
+					<span v-if="ownerAddress === '--' || this.judgeCosmos(ownerAddress)">{{ownerAddress}}</span>
 <!--					<span v-else @click="addressRoute(ownerAddress)" class="address_link">{{ownerAddress}}</span>-->
 					<router-link v-else  :to="`/address/${ownerAddress}`" class="address_link">{{ownerAddress}}</router-link>
 				</template>
@@ -1394,7 +1402,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.delegatorAddress')}}</span>
 				<template>
-					<span v-if="delegatorAddress === '--'">{{delegatorAddress}}</span>
+					<span v-if="delegatorAddress === '--' || this.judgeCosmos(delegatorAddress)">{{delegatorAddress}}</span>
 <!--					<span v-else @click="addressRoute(delegatorAddress)" class="address_link">{{delegatorAddress}}</span>-->
 					<router-link v-else  :to="`/address/${delegatorAddress}`" class="address_link">{{delegatorAddress}}</router-link>
 					
@@ -1403,7 +1411,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.withdrawAddress')}}</span>
 				<template>
-					<span v-if="withdrawAddress === '--'">{{withdrawAddress}}</span>
+					<span v-if="withdrawAddress === '--' || this.judgeCosmos(withdrawAddress)">{{withdrawAddress}}</span>
 <!--					<span v-else @click="addressRoute(withdrawAddress)" class="address_link">{{withdrawAddress}}</span>-->
 					<router-link v-else  :to="`/address/${withdrawAddress}`" class="address_link">{{withdrawAddress}}</router-link>
 				</template>
@@ -1433,7 +1441,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.operatorAddress')}}</span>
 				<template>
-					<span v-if="operatorAddress === '--'">{{operatorAddress}}</span>
+					<span v-if="operatorAddress === '--' || this.judgeCosmos(operatorAddress)">{{operatorAddress}}</span>
 <!--					<span v-else @click="addressRoute(operatorAddress)" class="address_link">{{operatorAddress}}</span>-->
 					<router-link v-else  :to="`/address/${operatorAddress}`" class="address_link">{{operatorAddress}}</router-link>
 				</template>
@@ -1504,7 +1512,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.depositor')}}</span>
 				<template>
-					<span v-if="depositor === '--'">{{depositor}}</span>
+					<span v-if="depositor === '--' || this.judgeCosmos(depositor)">{{depositor}}</span>
 					<!-- <span @click="addressRoute(depositor)" class="address_link">{{depositor}}</span> -->
 					<router-link :to="`/address/${depositor}`" class="address_link">{{depositor}}</router-link>
 				</template>
@@ -1518,7 +1526,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.inputAddress')}}</span>
 				<template>
-					<span v-if="inputAddress === '--'">{{inputAddress}}</span>
+					<span v-if="inputAddress === '--' || this.judgeCosmos(inputAddress)">{{inputAddress}}</span>
 <!--					<span v-else @click="addressRoute(inputAddress)" class="address_link">{{ inputAddress }}</span>-->
 					<router-link v-else :to="`/address/${inputAddress}`" class="address_link">{{inputAddress}}</router-link>
 				</template>
@@ -1530,7 +1538,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.outputAddress')}}</span>
 				<template>
-					<span v-if="outputAddress === '--'">{{outputAddress}}</span>
+					<span v-if="outputAddress === '--' || this.judgeCosmos(outputAddress)">{{outputAddress}}</span>
 <!--					<span v-else @click="addressRoute(outputAddress)" class="address_link">{{ outputAddress }}</span>-->
 					<router-link v-else :to="`/address/${outputAddress}`" class="address_link">{{outputAddress}}</router-link>
 				</template>
@@ -1552,7 +1560,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.sender')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
@@ -1586,7 +1594,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.sender')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
@@ -1620,7 +1628,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.operatorAddress')}}</span>
 				<template>
-					<span v-if="operatorAddress === '--'">{{operatorAddress}}</span>
+					<span v-if="operatorAddress === '--' || this.judgeCosmos(operatorAddress)">{{operatorAddress}}</span>
 <!--					<span v-else @click="addressRoute(operatorAddress)" class="address_link">{{operatorAddress}}</span>-->
 					<router-link v-else :to="`/address/${operatorAddress}`" class="address_link">{{operatorAddress}}</router-link>
 				</template>
@@ -1651,7 +1659,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.creator')}}: </span>
 				<template>
-					<span v-if="creator === '--'">{{ creator }}</span>
+					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{ creator }}</span>
 <!--					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>-->
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
@@ -1707,7 +1715,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.creator')}}: </span>
 				<template>
-					<span v-if="creator === '--'">{{ creator }}</span>
+					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{ creator }}</span>
 					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>
 					<!-- <router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link> -->
 				</template>
@@ -1729,7 +1737,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.creator')}}: </span>
 				<template>
-					<span v-if="creator === '--'">{{ creator }}</span>
+					<span v-if="creator === '--'  || this.judgeCosmos(creator)">{{ creator }}</span>
 <!--					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>-->
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
@@ -1773,7 +1781,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}: </span>
 				<template>
-					<span v-if="consumer === '--'">{{consumer}}</span>
+					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
 <!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link  v-else :to="`/address/${consumer}`" class="address_link">{{consumer}}</router-link>
 				</template>
@@ -1791,7 +1799,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -1799,7 +1807,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.withdrawAddress')}}</span>
 				<template>
-					<span v-if="withdrawAddress === '--'">{{withdrawAddress}}</span>
+					<span v-if="withdrawAddress === '--' || this.judgeCosmos(withdrawAddress)">{{withdrawAddress}}</span>
 <!--					<span @click="addressRoute(withdrawAddress)" class="address_link">{{withdrawAddress}}</span>-->
 					<router-link  v-else :to="`/address/${withdrawAddress}`" class="address_link">{{withdrawAddress}}</router-link>
 				</template>
@@ -1809,7 +1817,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}: </span>
 				<template>
-					<span v-if="provider === '--'">{{provider}}</span>
+					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
 <!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link  v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
@@ -1817,7 +1825,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -1859,7 +1867,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -1888,7 +1896,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -1905,7 +1913,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
-					<span v-if="owner === '--'">{{owner}}</span>
+					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
 <!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
@@ -1917,7 +1925,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.to')}}: </span>
 				<template>
-					<span v-if="to === '--'">{{to}}</span>
+					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
 <!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link  v-else :to="`/address/${to}`" class="address_link">{{to}}</router-link>
 				</template>
@@ -1934,7 +1942,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.originalOwner')}}: </span>
 				<template>
-					<span v-if="originalOwner === '--'">{{originalOwner}}</span>
+					<span v-if="originalOwner === '--' || this.judgeCosmos(originalOwner)">{{originalOwner}}</span>
 <!--					<span v-else @click="addressRoute(originalOwner)" class="address_link">{{originalOwner}}</span>-->
 					<router-link  v-else :to="`/address/${originalOwner}`" class="address_link">{{originalOwner}}</router-link>
 				</template>
@@ -1942,7 +1950,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.newOwner')}}: </span>
 				<template>
-					<span v-if="newOwner === '--'">{{newOwner}}</span>
+					<span v-if="newOwner === '--' || this.judgeCosmos(newOwner)">{{newOwner}}</span>
 <!--					<span v-else @click="addressRoute(newOwner)" class="address_link">{{newOwner}}</span>-->
 					<router-link  v-else :to="`/address/${newOwner}`" class="address_link">{{newOwner}}</router-link>
 				</template>
@@ -1959,7 +1967,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.sender')}}: </span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--'  || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link  v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
@@ -1973,7 +1981,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.depositor')}}: </span>
 				<template>
-					<span v-if="depositor === '--'">{{depositor}}</span>
+					<span v-if="depositor === '--' || this.judgeCosmos(depositor)">{{depositor}}</span>
 <!--					<span v-else @click="addressRoute(depositor)" class="address_link">{{depositor}}</span>-->
 					<router-link  v-else :to="`/address/${depositor}`" class="address_link">{{depositor}}</router-link>
 				</template>
@@ -1994,7 +2002,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.voter')}}: </span>
 				<template>
-					<span v-if="voter === '--'">{{voter}}</span>
+					<span v-if="voter === '--' || this.judgeCosmos(voter)">{{voter}}</span>
 <!--					<span v-else @click="addressRoute(voter)" class="address_link">{{voter}}</span>-->
 					<router-link  v-else :to="`/address/${voter}`" class="address_link">{{voter}}</router-link>
 				</template>
@@ -2015,7 +2023,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.proposer')}} : </span>
 				<template>
-					<span v-if="proposer === '--'">{{proposer}}</span>
+					<span v-if="proposer === '--' || this.judgeCosmos(proposer)">{{proposer}}</span>
 <!--					<span v-else @click="addressRoute(proposer)" class="address_link">{{proposer}}</span>-->
 					<router-link  v-else :to="`/address/${proposer}`" class="address_link">{{proposer}}</router-link>
 				</template>
@@ -2099,7 +2107,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
@@ -2107,7 +2115,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.to')}} : </span>
 				<template>
-					<span v-if="to === '--'">{{to}}</span>
+					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
 <!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link v-else :to="`/address/${to}`" class="address_link">{{to}}</router-link>
 				</template>
@@ -2153,7 +2161,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
@@ -2161,7 +2169,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.recipient')}} : </span>
 				<template>
-					<span v-if="recipient === '--'">{{recipient}}</span>
+					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
 <!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else :to="`/address/${recipient}`" class="address_link">{{recipient}}</router-link>
 				</template>
@@ -2179,7 +2187,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 <!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link class="address_link" :to="`/address/${sender}`"></router-link>
 				</template>
@@ -2210,14 +2218,14 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.sender')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 						  :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -2270,7 +2278,7 @@
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.sender')}}</span>
 					<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 					</template>
 				</p>
@@ -2278,7 +2286,7 @@
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 					<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 			  		:class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -2292,7 +2300,7 @@
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 					<template>
-						<span v-if="signer === '--'">{{signer}}</span>
+						<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 						<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 					</template>
 				</p>
@@ -2342,7 +2350,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.sender')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -2350,7 +2358,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 					  	:class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 						>{{receiver}}</span>
@@ -2364,7 +2372,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
@@ -2392,7 +2400,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
@@ -2406,7 +2414,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
@@ -2420,7 +2428,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 				<template>
-					<span v-if="signer === '--'">{{signer}}</span>
+					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
@@ -2434,7 +2442,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.nft.sender')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{sender}}</span>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 
@@ -2442,7 +2450,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.nft.receiver')}}</span>
 				<template>
-					<span v-if="sender === '--'">{{receiver}}</span>
+					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<span v-else @click="addressRoute(receiver)"
 						  :class="(receiver.startsWith(COSMOS_ADDRESS_PREFIX) || receiver.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
 					>{{receiver}}</span>
@@ -2451,7 +2459,176 @@
 			</p>
 
 		</div>
+		<!-- Farm stake/unstake -->
+		<div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.amount')}}</span>
+				<span>{{amount || '--'}}</span>
 
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.reward')}}</span>
+				<span>{{reward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.sender')}}</span>
+				<template>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
+			</p>
+
+		</div>
+		<div v-if="txType === TX_TYPE.harvest">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.reward')}}</span>
+				<span>{{reward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.sender')}}</span>
+				<template>
+					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
+					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+				</template>
+			</p>
+
+		</div>
+	
+		<div v-if="txType === TX_TYPE.create_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.lptDenom')}}</span>
+				<span>{{lptDenom}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.totalReward')}}</span>
+				<span>{{totalReward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.startHeight')}}</span>
+				<span>{{startHeight}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.editable')}}</span>
+				<span>{{ editable ? 'Yes': 'No' }}</span>
+			</p>
+			
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.description')}}</span>
+				<span>{{description}}</span>
+			</p>
+			
+
+		</div>
+			
+		<div v-if="txType === TX_TYPE.create_pool_with_community_pool">    
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalId')}}</span>
+				<span>{{proposalID}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposer')}}</span>
+				<template>
+					<span v-if="proposer === '--' || this.judgeCosmos(proposer)">{{proposer}}</span>
+					<router-link v-else :to="`/address/${proposer}`" class="address_link">{{proposer}}</router-link>
+				</template>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.initialDeposit')}}</span>
+				<span>{{initialDeposit}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalTitle')}}</span>
+				<span>{{proposalTitle}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalDescription')}}</span>
+				<span>{{proposalDescription}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.lptDenom')}}</span>
+				<span>{{lptDenom}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.fundApplied')}}</span>
+				<span>{{fundApplied}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.fundSelfBond')}}</span>
+				<span>{{fundSelfBond}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolDescription')}}</span>
+				<span>{{poolDescription}}</span>
+			</p>			
+
+		</div>
+		
+		<div v-if="txType === TX_TYPE.destroy_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.refund')}}</span>
+				<span>{{refund}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+		</div>
+		<div v-if="txType === TX_TYPE.adjust_pool">
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
+				<span>{{poolId}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.additionalReward')}}</span>
+				<span>{{additionalReward}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.rewardPerBlock')}}</span>
+				<span>{{rewardPerBlock}}</span>
+			</p>
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.farm.creator')}}</span>
+				<template>
+					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{creator}}</span>
+					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
+				</template>
+			</p>
+		</div>
 <!-- exclude UpdateClient -->
 		<p v-if="txType !== TX_TYPE.update_client" :style="{marginTop: '0.26rem'}">
 			<span>{{$t('ExplorerLang.transactionInformation.recvPacket.viewSource')}}：</span>
@@ -2491,7 +2668,7 @@
 			monikers: {
 				type: Array,
 				required: true,
-			}
+			},
 		},
 		data () {
 			return {
@@ -2706,8 +2883,21 @@
 				denomId:'',//nft新增
 				mintRestricted:'',
 				updateRestricted:'',
-
-
+				// farm 
+				poolId:'',
+				reward:'',
+				lptDenom:'',
+				totalReward:'',
+				rewardPerBlock:'',
+				startHeight:'',
+				editable:'',
+				proposalTitle:'',
+				proposalDescription:'',
+				fundApplied:'',
+				fundSelfBond:'',
+				poolDescription:'',
+				refund:'',
+				additionalReward:'',
 
 			}
 		},
@@ -3789,6 +3979,58 @@
 								this.sender= msg.sender|| '--'
 								this.receiver= msg.recipient|| '--'
 								break;
+
+							case TX_TYPE.stake:		    
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.amount = await this.handleAmount(msg.amount);
+								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.unstake:
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.amount = await this.handleAmount(msg.amount);
+								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.harvest:
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
+								this.sender = msg.sender || '--';
+								break;
+							case TX_TYPE.create_pool:
+								const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
+								this.poolId = Tools.formatPoolId(createPoolId) || '--';
+								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
+								this.totalReward = await this.handleTotalReward(msg.total_reward);
+								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
+							  this.startHeight = msg.start_height || '--';
+								this.editable = msg.editable;
+								this.creator = msg.creator || '--';
+								this.description = msg.description || '--';		
+								break;	
+							case TX_TYPE.create_pool_with_community_pool:
+								this.proposalID = this.getValueFromEvents(TX_TYPE.create_pool_with_community_pool, 'proposal_id');
+								this.proposer = msg.proposer || '--';
+								this.initialDeposit = await this.handleTotalReward(msg?.initial_deposit);
+								this.proposalTitle = msg?.content?.title || '--';
+								this.proposalDescription = msg?.content?.description || '--';
+								this.lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
+								this.rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
+								this.fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
+								this.fundSelfBond = await this.handleTotalReward(msg?.content?.fund_self_bond);
+								this.poolDescription = msg?.content?.pool_description || '--';
+								break;
+							case TX_TYPE.destroy_pool:
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
+								this.creator = msg.creator || '--';
+								break;
+							case TX_TYPE.adjust_pool:
+								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
+								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
+								this.creator = msg.creator || '--';
+								break;
 						}
 					}
 				} catch (e) {
@@ -3840,6 +4082,66 @@
 			startStr(url){
 				return url.startsWith('www.')
 			},
+			async handleAmount(amountObj){
+				const amountItem = await converCoin(amountObj);
+				return `${amountItem.amount} ${amountItem.denom.toUpperCase()}`;
+			},
+			/**
+			 * 从events下匹配数据出来
+			 */
+			getValueFromEvents(msgType,attrKey){
+				const eventItem = this.events ? this.events.find(item => item.type === msgType) : null;
+				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
+				const rewardValue = (attrItem && attrItem.value) ? attrItem.value : '--';
+				return rewardValue;
+			},
+			/**
+			 * 从events下匹配数据出来并处理
+			 * 入参：msgType=stake attrKey=reward
+			 * 返回： 0.12 IRIS 或者 0.12 IRIS、0.33 BSN
+			 */
+			async handleReward(msgType,attrKey){
+				const rewardValue = this.getValueFromEvents(msgType,attrKey);
+				if(rewardValue !== '--'){
+					if(rewardValue.includes(',')){
+						const reward1 = this.getAmountByAmountStr(rewardValue.split(',')[0]);
+						const reward2 = this.getAmountByAmountStr(rewardValue.split(',')[1]);
+						const rewardItem1 = await converCoin(reward1);
+						const rewardItem2 = await converCoin(reward2);
+						return `${rewardItem1.amount} ${rewardItem1.denom.toUpperCase()}、 ${rewardItem2.amount} ${rewardItem2.denom.toUpperCase()}`
+					}else{
+						const reward1 = this.getAmountByAmountStr(rewardValue);
+						const rewardItem1 = await converCoin(reward1);
+					  return `${rewardItem1.amount} ${rewardItem1.denom.toUpperCase()}`; 
+					}
+				}else{
+					return rewardValue;
+				}
+			},
+			/**
+			 * 处理入参结构如下：
+			 * @params [array] totalReward
+			 * [{"denom": "ubusd","amount": "1"},{"denom": "uiris","amount": "10"}]
+			 */
+			async handleTotalReward(totalReward){
+				const rewardArr = [];
+				const len = totalReward ? totalReward.length : 0;
+				if(len !== 0){
+						const res = await converCoin(totalReward[0]);
+						rewardArr.push(`${res.amount} ${res.denom.toLocaleUpperCase()}`)
+					if(len === 2){
+						const res = await converCoin(totalReward[1]);
+						rewardArr.push(`${res.amount} ${res.denom.toLocaleUpperCase()}`)
+					}
+					return len === 2 ? rewardArr.join('、') : rewardArr[0];
+				}else{
+					return '--'
+				}
+			},
+			judgeCosmos(addr){
+				return addr.startsWith(COSMOS_ADDRESS_PREFIX)
+			}
+			
 		}
 	}
 </script>

@@ -13,6 +13,7 @@ module.exports = {
       },
       '/lcd': {
         target: productionConfig?.lcdUrl ? productionConfig.lcdUrl:'http://192.168.150.40:1317',
+        
         secure: false,
         pathRewrite: { '^/lcd': '' },
       }

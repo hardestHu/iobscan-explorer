@@ -515,6 +515,21 @@ export default class Tools {
       return false;
     }
 
+    /**
+     * Format PoolID
+     */
+    static formatPoolId(poolId) {
+        if(poolId) {
+            if(poolId.startsWith('farm-')) {
+              // pool_id 标准模式 farm-***
+              // 考虑到create pool的pool_id可能不是标准模式,所以匹配 farm-
+                return poolId.split('-')[1];
+            } else {
+                return poolId;
+            }
+        }
+        return '';
+    }
     static MultKeyValueObjToOneMap (objArr) {
       var map = new Map();
       objArr.forEach(obj => {

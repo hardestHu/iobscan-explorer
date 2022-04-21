@@ -66,7 +66,7 @@
 							{{ $t('ExplorerLang.transactionInformation.transactionMessageTitle') }}
 						</div>
 						<div v-for="(item, index) in messages" :key="index">
-							<TxMessage :msg="item" :msgIndex="index" :eventsNew="eventsNew" :events="events" :monikers="monikers" />
+							<TxMessage :msg="item" :msgIndex="index" :eventsNew="eventsNew" :events="events" :monikers="monikers"/>
 							<div class="tx_information_tx_message_line" v-if="messages.length > 1 && index != messages.length - 1"></div>
 						</div>
 					</div>
@@ -116,7 +116,6 @@ export default {
 			eventsNew: [],
 			txHashValue: '',
 			blockValue: '',
-			statusValue: '',
 			timestampValue: '',
 			feeValue: '',
 			gasUsedValue: '',
@@ -183,12 +182,11 @@ export default {
 				if (res) {
 					this.monikers = res.monikers
 					this.messages = res.msgs || []
-					this.events = res.events
+					this.events = res.events || []
 					this.eventsNew = res.events_new
 					this.txHash = res.tx_hash || '--'
 					this.blockHeight = res.height || '--'
 					//console.log(res.status === TX_STATUS.success ? this.$t("ExplorerLang.common.success"): this.$t("ExplorerLang.common.failed"),'展示的信息是什么')
-					
 					
 					this.status = res.status === TX_STATUS.success ? this.$t('ExplorerLang.common.success'): this.$t('ExplorerLang.common.failed')
 					//this.status = res.status === TX_STATUS.success ?"Failed":"Failed"
@@ -199,7 +197,7 @@ export default {
 					} else {
 						this.timestamp = "--"
 					}
-					if(res.fee && res.fee.amount[0] && this.isShowFee) {
+					if(res.fee &&  res.fee.amount &&  res.fee.amount[0] && this.isShowFee) {
 						let fee = await converCoin(res.fee.amount[0])
 						this.fee = `${fee.amount} ${fee.denom.toUpperCase()}`
 					}

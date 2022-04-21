@@ -54,7 +54,7 @@ import ListComponent from "./common/ListComponent";
 import txCommonTable from "./tableListColumnConfig/txCommonTable";
 import txCommonLatestTable from "./tableListColumnConfig/txCommonLatestTable";
 import {getAmountByTx, getDenomMap, getDenomTheme} from "../helper/txListAmoutHelper";
-import {addressRoute, formatMoniker, converCoin, getMainToken, getTxType} from '@/helper/IritaHelper';
+import {addressRoute, formatMoniker, converCoin, getMainToken, getTxType, getConfig} from '@/helper/IritaHelper';
 import parseTimeMixin from '../mixins/parseTime'
 import prodConfig from "../productionConfig";
 import TabsComponent from "./common/TabsComponent";
@@ -68,7 +68,11 @@ export default {
 	components: {
 		TxResetButtonComponent,
 		TxCountComponent,
-		TxStatusTabsComponents, TabsComponent, ListComponent, MPagination, TxListComponent
+		TxStatusTabsComponents, 
+    TabsComponent, 
+    ListComponent, 
+    MPagination, 
+    TxListComponent
 	},
 	mixins: [parseTimeMixin],
 	data() {
@@ -140,6 +144,7 @@ export default {
 		await this.getTxTypeData()
 		const {txType, status, beginTime, endTime} = Tools.urlParser();
 		this.formatTxData(txType)
+		await this.getConfigTokenData()
 	},
 	mounted() {
 		this.getFilterTxs('init');
@@ -153,6 +158,7 @@ export default {
 		this.setMainToken();
     this.setIsShowIbc();
     this.setIsShowHashLock();
+
 	},
 	methods: {
     async setIsShowIbc() {
@@ -404,7 +410,7 @@ export default {
 			}
 			let denomRule = /[A-Za-z\/]+/
 			let result = amount.match(denomRule)
-			return result ? amount.match(denomRule)[0] : ' ';
+			return result ? result[0] : ' ';
 		},
 		/*getParamsByUrlHash(){
 			let txType,
@@ -564,8 +570,26 @@ export default {
 							chain_nameArr = [],
 							signer='--',
 							signers=[],
-							msg;
-
+							msg ,
+							// farm => stake unstake
+							poolId = '--',
+							poolIdArr = [],
+							farmAmount = '--',
+							farmAmountDenom='',
+							farmAmountNativeDenom='',
+							farmAmountArr = [],
+							// farm => create pool
+							totalReward1 = '--',
+							totalReward1Denom = '',
+							totalReward1NativeDenom = '',
+							totalReward2 = '--',
+							totalReward2Denom = '',
+							totalReward2NativeDenom = '',
+							poolCreator = '--',
+							// farm => Create Pool With Community Pool
+							proposer = '--',
+							initialDeposit = '--';
+							// farm => destory pool/ adjust pool : poolId poolCreator
 
 						if (tx.msgs.length > 0) {
 								tx.msgs.forEach(item => {
@@ -574,7 +598,6 @@ export default {
 										msg=item
 									}
 								})
-								
 							}
 
 						/*
@@ -928,6 +951,7 @@ export default {
 								serviceName = msg.msg.ex.service_name
 							}
 						}
+
 						if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.id) {
 							nftId = msg.msg.id
 
@@ -1001,6 +1025,62 @@ export default {
 							denomId = msg.msg.denomId
 							sender  = msg.msg.sender
 						}
+						// farm -> stake unstake
+						if(msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							if(sameMsg?.length > 1){
+								// 判断是多msg, amount显示为空
+								farmAmount = ' '
+							}else{
+								const res = await converCoin(msg?.msg?.amount);
+								farmAmount = res?.amount;
+								farmAmountDenom = res?.denom.startsWith('lpt') ?
+									res?.denom.toLocaleUpperCase() :
+									this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
+							}
+							sender = msg?.msg?.sender;
+						}
+						// farm -> harvest
+						if(msg?.type === TX_TYPE.harvest){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							sender = msg.msg?.sender;
+						}
+						// farm -> create pool
+						if(msg?.type === TX_TYPE.create_pool){
+							const len = msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward) ? msg?.msg?.total_reward.length  : 0;
+							if(len > 0){
+								const res = await converCoin(msg?.msg?.total_reward?.[0]);
+								totalReward1 = Tools.toDecimal(res.amount, 2);
+								totalReward1Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
+							}
+							if(len === 2){
+								const res = await converCoin(msg?.msg?.total_reward?.[1]);
+								totalReward2 = Tools.toDecimal(res.amount, 2);
+								totalReward2Denom = res?.denom.startsWith('lpt') ? res?.denom.toLocaleUpperCase() : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
+							}
+							poolCreator = msg.msg.creator;
+						}
+
+						// farm -> create_pool_with_community_pool
+						if(msg?.type === TX_TYPE.create_pool_with_community_pool){
+							proposer = msg.msg.proposer;
+							title = msg.msg.content.title;
+							if(msg?.msg?.initial_deposit && msg?.msg?.initial_deposit.length > 0){
+								const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
+								initialDeposit = Tools.toDecimal(res?.amount, 2);
+								farmAmountDenom = res?.denom.startsWith('lpt') ?  res?.denom.toLocaleUpperCase() :this.getAmountUnit(res?.denom.toLocaleUpperCase());
+								farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
+							}
+						}
+						// farm => destroy_pool 
+						if(msg?.type === TX_TYPE.destroy_pool || msg?.type === TX_TYPE.adjust_pool){
+							poolId = Tools.formatPoolId(msg?.msg?.pool_id);
+							poolCreator = msg.msg.creator;
+						}
+
 
 						let addrObj = TxHelper.getFromAndToAddressFromMsg(msg);
 						amounts.push(msg ? sameMsg?.length > 1 ? ' ' : await getAmountByTx(msg, tx.events, true) : '--');
@@ -1098,6 +1178,22 @@ export default {
 							source_chain: source_chainArr?.length > 1 ? ' ' : source_chainArr?.length === 1 ? source_chainArr[0] : source_chain,
 							sequence: sequenceArr?.length > 1 ? ' ' : sequenceArr?.length === 1 ? sequenceArr[0] : sequence,
 							chain_name: chain_nameArr?.length > 1 ? ' ' : chain_nameArr?.length === 1 ? chain_nameArr[0] : chain_name,
+						  //farm stake/unstake/harvest
+							poolId: poolId,
+							farmAmount: farmAmount,
+							farmAmountDenom,
+							farmAmountNativeDenom,
+							// farm create_pool
+							totalReward1: totalReward1,
+							totalReward1Denom,
+							totalReward1NativeDenom,
+							totalReward2: totalReward2,
+							totalReward2Denom,
+							totalReward2NativeDenom,
+							poolCreator: poolCreator,
+							// farm create_pool_with_community_pool
+							proposer,
+							initialDeposit,
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -1116,25 +1212,41 @@ export default {
 						let amount = await Promise.all(amounts)
 						this.denomMap = await getDenomMap()
 						this.transactionArray.forEach((item, index) => {
-							if(amount[index]?.length === 2 ){
-								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(amount[index][0], this.denomMap)
-								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(amount[index][1], this.denomMap)
-								this.transactionArray[index].swapAmount1 =  this.getAmount(amount[index][0])
-								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(amount[index][0])
-								this.transactionArray[index].swapAmount2 =  this.getAmount(amount[index][1])
-								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(amount[index][1])
-							}else {
-								this.transactionArray[index].denomTheme = getDenomTheme(amount[index], this.denomMap)
-								this.transactionArray[index].amount = this.getAmount(amount[index])
-								this.transactionArray[index].denom = this.getAmountUnit(amount[index])
+							if(amount[index]?.length === 2){
+								/**
+								 * 取 % 后面拼接的原始denom, 用来匹配theme
+								 */
+								const result1  = amount[index][0].split('%');
+								const result2  = amount[index][1].split('%');
+								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(result1[1], this.denomMap)
+								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(result2[1], this.denomMap)
+								this.transactionArray[index].swapAmount1 =  this.getAmount(result1[0])
+								this.transactionArray[index].swapAmount1Denom =  this.getAmountUnit(result1[0])
+								this.transactionArray[index].swapAmount2 =  this.getAmount(result2[0])
+								this.transactionArray[index].swapAmount2Denom  =  this.getAmountUnit(result2[0])
+							}else{
+								const result  = amount[index].split('%');
+								this.transactionArray[index].denomTheme = getDenomTheme(result[1], this.denomMap)
+								this.transactionArray[index].amount = this.getAmount(result[0])
+								this.transactionArray[index].denom = this.getAmountUnit(result[0])
 								let denom = /[A-Za-z\-]{2,15}/.exec(amount[index])?.length ? /[A-Za-z\-]{2,15}/.exec(amount[index])[0] : ' '
 								if (denom !== undefined && /(lpt|LPT|lpt-|LPT-)/g.test(denom)) {
 									this.transactionArray[index].amount = ''
 								} else if(/(IBC | ibc)/g.test(denom)) {
                                     this.transactionArray[index].amount = ' '
                                     this.transactionArray[index].denom = ' '
-                                }
-								
+                              }
+							}
+							/**
+							 * 目标：给farm下的farmAmount totalReward1 totalReward2 initialDeposit上色
+							 * 方法：借助了farmAmountNativeDenom 用于保存原始denom,不使用转换后的symbol, totalReward同理
+							 * farmAmount initalDeposit 都是用dnomeTheme
+							 */
+							if(this.transactionArray[index]['farmAmountDenom']){
+								this.transactionArray[index].denomTheme = getDenomTheme(this.transactionArray[index]['farmAmountNativeDenom'],this.denomMap)
+							}else if(this.transactionArray[index]['totalReward1Denom']){
+								this.transactionArray[index].swapDenomTheme1 = getDenomTheme(this.transactionArray[index]['totalReward1NativeDenom'], this.denomMap)
+								this.transactionArray[index].swapDenomTheme2 = getDenomTheme(this.transactionArray[index]['totalReward2NativeDenom'], this.denomMap)
 							}
 						})
 					}
@@ -1144,7 +1256,10 @@ export default {
 		}
 
 	},
-
+	async getConfigTokenData(){
+		 const res = await getConfig();
+		 this.tokenData = res.tokenData;
+	},
 	beforeDestroy(){
 		this.$store.commit('currentTxModelIndex',0)
 	},
