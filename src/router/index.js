@@ -4,10 +4,11 @@ Vue.use(Router);
 
 const router = new Router({
 	routes:[
-		{ 
-		  path: "/",
-		  redirect: '/tx'
-		},
+
+		// { 
+		//   path: "/",
+		//   redirect: '/tx'
+		// },
 		{ 
 		  path: "/tx",
 		  beforeEnter: (to, from) => {
@@ -15,6 +16,13 @@ const router = new Router({
 			window.location.href = url;
 		  },
 		},
+		{
+			path:'*',
+			beforeEnter:(to,from) => {
+				let url = 'https://www.mintscan.io/cosmos'
+				window.location.href = url;
+			}
+		}
 	]
 })
 export default router
