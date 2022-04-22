@@ -98,7 +98,8 @@ export default {
 				const endTime = this.value[1].toString();
 				const startTimeStamp = moment(startTime).format('YYYY-MM-DD')
 				const engTimeStamp = moment(endTime).format('YYYY-MM-DD')
-				sessionStorage.setItem('txTimeRange',JSON.stringify([startTimeStamp,engTimeStamp]))
+				// 存时间的动作放到具体页面 比如 TxList.vue
+				// sessionStorage.setItem('txTimeRange',JSON.stringify([startTimeStamp,engTimeStamp]))
 				this.$emit('onChangeDate',[startTimeStamp,engTimeStamp])
 			}else {
 				this.$emit('onChangeDate',[])

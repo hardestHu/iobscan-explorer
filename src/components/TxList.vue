@@ -216,6 +216,7 @@ export default {
 			if (selectTime?.length === 2) {
 				this.beginTime = selectTime[0]
 				this.endTime = selectTime[1]
+				sessionStorage.setItem('txTimeRange',JSON.stringify(selectTime))
 			}
 			
 			this.getFilterTxs()

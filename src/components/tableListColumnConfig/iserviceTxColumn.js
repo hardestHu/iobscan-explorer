@@ -56,11 +56,6 @@ export default [
         linkRoute: '/address/',
     },
     {
-        label: i18n.t('ExplorerLang.table.fee'),
-        displayValue: 'fee',
-        isShowTokenSymbol:true
-    },
-    {
         label: i18n.t('ExplorerLang.table.block'),
         displayValue:'height',
         nativeValue:'height',
@@ -68,6 +63,11 @@ export default [
         isNeedFormatHash:false,
         linkRoute:'/block/',
         isShowMoniker:false
+    },
+    {
+        label: i18n.t('ExplorerLang.table.fee'),
+        displayValue: 'fee',
+        isShowTokenSymbol:true
     },
     {
         label: i18n.t('ExplorerLang.table.time'),
