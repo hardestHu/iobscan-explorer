@@ -2,7 +2,7 @@
 	<div class="validator_list_container">
 		<div class="validator_list_content_wrap">
 			<div class="validator_tab_content">
-				<m-tabs :data="validatorStatusTitleList" :chose="selectValidatorStatus"></m-tabs>
+				<!-- <m-tabs :data="validatorStatusTitleList" :chose="selectValidatorStatus"></m-tabs> -->
 			</div>
 			<div class="validator_table_list_content">
 				<el-table class="table" :data="validatorList" :empty-text="$t('ExplorerLang.table.emptyDescription')">
