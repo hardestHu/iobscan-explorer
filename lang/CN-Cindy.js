@@ -196,8 +196,8 @@ export const ExplorerLang = {
         last100Blocs: '最近100块',
         validators: '共识节点数',
         services: '服务数量',
-        denoms:'数据类别数量',
-        assets: '数据对象数量',
+        denoms:'NFT 类别数量',
+        assets: 'NFT 数量',
         identities: '身份 ID 数量',
         blocks: '最近区块',
         viewAll: '查看全部',
@@ -669,7 +669,7 @@ export const ExplorerLang = {
     addressInformation: {
         tab:{
           assetInfo:'资产组成',
-          nftCount:'数据对象',
+          nftCount:'NFT',
           identity:'身份',
           iService:'服务',
           tx:'交易记录',

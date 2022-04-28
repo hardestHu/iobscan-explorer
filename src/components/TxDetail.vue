@@ -39,7 +39,7 @@
 					
 					<p class="tx_information_list_item" v-if="isShowFee">
 						<span>							
-							{{ productNameWC === productName ? $t('ExplorerLang.table.energy') : $t('ExplorerLang.transactionInformation.fee') }}：</span>
+							{{ productNameWC.includes(productName) ? $t('ExplorerLang.table.energy') : $t('ExplorerLang.transactionInformation.fee') }}：</span>
 						<span>{{ fee }}</span>
 					</p>
 					<!-- <p class="tx_information_list_item" v-if="isShowFee">
@@ -83,7 +83,7 @@ import MPagination from './common/MPagination'
 import MClip from './common/MClip.vue'
 import TxMessage from './common/TxMessage.vue'
 import { getTxDetail, getRelevanceTxList } from '../service/api'
-import { TX_TYPE, TX_STATUS, ColumnMinWidth, PRODUCT_WENCHANG } from '../constant'
+import { TX_TYPE, TX_STATUS, ColumnMinWidth, PRODUCT_ALLOW_ENERGY } from '../constant'
 import { moduleSupport } from '../helper/ModulesHelper'
 import slef_axios from "../axios"
 import { converCoin,addressRoute } from '@/helper/IritaHelper';
@@ -96,7 +96,7 @@ export default {
 			isShowFee: prodConfig.fee.isShowFee,
 			isShowDenom: prodConfig.fee.isShowDenom,
 			productName: prodConfig.product,
-			productNameWC: PRODUCT_WENCHANG,
+			productNameWC: PRODUCT_ALLOW_ENERGY,
 			Tools,
 			moduleSupport,
 			addressRoute,
