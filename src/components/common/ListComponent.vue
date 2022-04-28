@@ -248,7 +248,7 @@ import {
 	IRIS_ADDRESS_PREFIX,
 	COSMOS_ADDRESS_PREFIX,
 	nftAndDenomSplitNum,
-	PRODUCT_WENCHANG,
+	PRODUCT_ALLOW_ENERGY,
 } from '../../constant';
 import {fetchAllTokens} from "../../service/api";
 import ProposalStatusComponent from "../Gov/ProposalStatusComponent";
@@ -348,7 +348,7 @@ export default {
 				this.columns = newValue
 				if (!this.isShowFee) {
 					this.deleteColumnFee()
-				}else if(this.productName === PRODUCT_WENCHANG){
+				}else if(PRODUCT_ALLOW_ENERGY.includes(this.productName)){
 					this.changeFeeColumnLabel()
 				}
 				if (!this.isShowProposer) {
@@ -752,7 +752,7 @@ export default {
 		this.getTableWidth()
 		if (!this.isShowFee) {
 			this.deleteColumnFee()
-		}else if(this.productName === PRODUCT_WENCHANG){
+		}else if(PRODUCT_ALLOW_ENERGY.includes(this.productName)){
 			this.changeFeeColumnLabel()
 		}
 
