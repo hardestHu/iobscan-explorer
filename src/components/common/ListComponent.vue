@@ -48,13 +48,14 @@
 								<el-tooltip :manual="setManual(!item.isNeedFormat,scope.row[item.displayValue])"
 											:content="formatStr(scope.row[item.nativeValue],item.isNft ? scope.row[item.displayValue] : null)">
 <!--									-->
+                  <div>
 									<router-link class="link_style"
 												 :class="item.isAdjustStyle ? 'index_style' : ''"
 												 :style="{color:isOwnerAddress(scope.row[item.nativeValue]) ? '#606266 !important' : '', cursor:isOwnerAddress(scope.row[item.nativeValue]) ? 'default !important' : ''}"
 												 v-if="item.isLink && 
 												  scope.row[item.displayValue] && 
 													scope.row[item.displayValue] !== '--' && 
-													!(/^cosmos/.test(scope.row[item.nativeValue]))"
+													!(judgeCosmos(scope.row[item.nativeValue]))"
 												 :to="!item.isNft ? `${item.linkRoute}${scope.row[item.nativeValue]}` : `${item.linkRoute}${scope.row[item.nftRouterParamsValue]}${item.denomRouter}${scope.row[item.nativeValue]}`">
 										
 										<span v-if="item.isNeedFormatHash">{{formatTxHash(scope.row[item.displayValue]) }} </span>
@@ -80,15 +81,16 @@
 									<span v-else-if="item.isFormatAddress && !item.isHref">{{formatAddress(scope.row[item.displayValue]) }}</span>
 <!--									-->
 									<span v-else-if="item.isHref">
-										
-										<a v-if="isShowHref(scope.row[item.displayValue])"
+										<span v-if="judgeCosmos(scope.row[item.nativeValue])">
+											{{ formatAddress(scope.row[item.displayValue]) }}
+										</span>
+										<a v-else-if="isShowHref(scope.row[item.displayValue])"
 										   class="route_link_style"
 										   :style="{color:isOwnerAddress(scope.row[item.nativeValue]) ? '#606266 !important' : ''}"
 										   :href="`${item.href}/#/address/${scope.row[item.nativeValue]}`"
 										   target="_blank"
 										   rel="noreferrer noopener">{{ formatAddress(scope.row[item.displayValue]) }}</a>
-										
-										<span v-if="!isShowHref(scope.row[item.displayValue])">{{ formatAddress(scope.row[item.displayValue]) }}</span>
+										<span v-else>{{ formatAddress(scope.row[item.displayValue]) }}</span>
 										
 									</span>
 <!--									-->
@@ -202,8 +204,10 @@
 										{{ formatPoolId(scope.row[item.displayValue])}}
 									</span>
 									<span v-else :class="item.isWrap ? 'wrap_style' : item.isRight ? 'right_style' : '' " >
-										{{ scope.row[item.displayValue] === 0 || scope.row[item.displayValue] === '0' ? 0 : scope.row[item.displayValue] || '--' }}</span>
-										
+										{{ scope.row[item.displayValue] === 0 || scope.row[item.displayValue] === '0' ? 0 : scope.row[item.displayValue] || '--' }}
+									</span>
+
+									</div>	
 								</el-tooltip>
 							</template>
 						</el-table-column>
@@ -737,6 +741,12 @@ export default {
 					}
 				},50);
 			});
+		},
+		judgeCosmos(address){
+			if(!address){
+				return address
+			}
+			return (address + '').startsWith(COSMOS_ADDRESS_PREFIX)
 		}
 	},
 	mounted() {
