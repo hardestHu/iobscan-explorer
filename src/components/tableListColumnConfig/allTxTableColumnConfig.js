@@ -1856,6 +1856,13 @@ export const needAddColumn = {
             linkRoute:'/address/',
         },
     ],
-
+    //EVM 智能合约 二级标签
+    bsn_ddc:[
+        {
+            label:i18n.t('ExplorerLang.table.contractAddress'),
+            displayValue:'contractAddress',
+            isFormatAddress: true,
+        },
+    ]
 
 }

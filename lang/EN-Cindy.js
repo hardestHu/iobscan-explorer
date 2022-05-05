@@ -176,7 +176,12 @@ export const ExplorerLang = {
         proposer:'Proposer',
         
         //能量值
-        energy:'Energy'
+        energy:'Energy',
+        // ddc
+        ddcId: 'DDC ID',
+        ddcName: 'DDC Name',
+        contractAddress:'ContractAddress'
+       
     },
     unit:{
         ellipsis:' ,...',
@@ -267,6 +272,13 @@ export const ExplorerLang = {
         subTitles:'Denoms',
         search: 'Search',
         placeHolder: 'Search by Denom Name or Denom ID',
+    },
+    ddc:{
+        mainTitle: 'BSN-DDC List',
+        subTitle:'BSN-DDC',
+        subTitles:'BSN-DDC',
+        search: 'Search',
+        placeHolder: 'Search by DDC ID or DDC Name',
     },
     identityList:{
         title: 'Identity',
@@ -639,6 +651,13 @@ export const ExplorerLang = {
         provider:'Provider',
         txRecord:'Respond Record',
     },
+    ddcDetail: {
+        ddcInformation: 'BSN-DDC 详情',
+        owner: '拥有者',
+        type:'DDC Type',
+        amount:'DDC Amount',
+        schema: 'Schema',
+    },
     searchResult:{
         title: 'Search Results',
         backHome: 'Back Home',
@@ -716,6 +735,7 @@ export const ExplorerLang = {
             identity:'Identity',
             iService:'iService',
             tx:'Txs',
+            ddc:'BSN-DDC'
         },
         content: {
             address: 'Address',

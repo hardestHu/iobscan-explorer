@@ -163,7 +163,11 @@ export const ExplorerLang = {
         sequence:'序列号',
         destinationChain:'目标链',
         //能量值
-        energy:'能量值'
+        energy:'能量值',
+        // ddc 相关
+        ddcId: 'DDC ID',
+        ddcName: 'DDC 名称',
+        contractAddress:'合约地址',
     },
     unit:{
         ellipsis:' ,...',
@@ -254,6 +258,13 @@ export const ExplorerLang = {
         subTitles:'数据类别',
         search: '搜索',
         placeHolder: '搜索数据类别或数据类别标识',
+    },
+    ddc:{
+        mainTitle: 'BSN-DDC',
+        subTitle:'BSN-DDC',
+        subTitles:'BSN-DDC',
+        search: '搜索',
+        placeHolder: '搜索 DDC ID 或 DDC 名称',
     },
     identityList:{
         title: '身份',
@@ -596,6 +607,13 @@ export const ExplorerLang = {
         provider:'提供者',
         txRecord:'响应记录',
     },
+    ddcDetail: {
+        ddcInformation: 'BSN-DDC 详情',
+        owner: '拥有者',
+        type:'DDC 类型',
+        amount:'DDC 的发行数量',
+        schema: '上链结构',
+    },
     searchResult:{
         title: '搜索结果',
         backHome: '返回首页',
@@ -673,6 +691,7 @@ export const ExplorerLang = {
           identity:'身份',
           iService:'服务',
           tx:'交易记录',
+          ddc:'BSN-DDC'
         },
         content: {
             address: 'Address',

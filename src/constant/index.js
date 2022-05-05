@@ -142,12 +142,15 @@ export const TX_TYPE = {
   create_pool_with_community_pool:'create_pool_with_community_pool',
   destroy_pool:'destroy_pool',
   adjust_pool:'adjust_pool',
-
-
+  
+  // Smart contract
+  bsn_ddc:'bsn_ddc'
 }
 
 // 展示 abandon
 export const TX_TYPE_DISPLAY = {
+  // Smart contract
+  bsn_ddc:'BSN-DDC',
   //farm
   stake:'Stake',
   unstake:'Unstake',
@@ -276,6 +279,7 @@ export const TX_TYPE_DISPLAY = {
 }
 
 export const LEVEL_TX_TYPE = {
+  SmartContract:'Smart Contract',
   Farm: 'Farm',
   Transfer: 'Transfer',
   Staking: 'Staking',
@@ -365,6 +369,7 @@ export const ColumnMinWidth = {
   delegationTxsFrom: '146',
   shares: '251',
   fee: '160',
+  // fee: '100',
   // feeAndDenom: "110",
   consensus: '340',
   proposerPriority: '200',
@@ -461,6 +466,10 @@ export const ModuleMap = {
     title: '${mainToken} Stats',
     link: '/stats/stats',
   },
+  '117': {
+    title:'BSN-DDC',
+    link:'/ddc'
+  }
 
 }
 
