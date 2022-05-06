@@ -630,3 +630,8 @@ export function fetchAllTokens() {
 }
 
 
+export function getEnergyAssetApi(valAddress){
+  let url = `/bank/balances/${valAddress}`
+  return  getFromLcd(url);
+}
+
