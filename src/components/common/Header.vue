@@ -314,6 +314,8 @@ export default {
               item.icon = 'iconfont iconStargate'
           } else if (item.network_id === constant.CHAINID.COSMOSHUB) {
               item.icon = 'iconfont iconCosmosHub'
+          }else if(item.network_id === constant.CHAINID.DATANG){
+            item.icon = 'iconfont iconhuaban'
           }
           if (item.is_main) {
               this.mainnet = {...item};

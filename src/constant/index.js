@@ -472,6 +472,7 @@ CHAINID.GOZTESTNET = 'Testnet GOZ'
 CHAINID.BIFROST = 'Testnet BIFROST'
 CHAINID.STARGATE = 'Testnet STARGATE'
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub'
+CHAINID.DATANG = '大唐链主网'
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
@@ -607,4 +608,4 @@ export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
 
 export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目
-export const PRODUCT_ALLOW_ENERGY = ['bsn opb','datangchain'] //  需要展示能量值的链项目： 文昌链项目 大唐链项
+export const PRODUCT_ALLOW_ENERGY = ['bsn opb'] //  需要展示能量值的链项目： 文昌链项目 大唐链项
