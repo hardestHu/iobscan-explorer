@@ -731,7 +731,9 @@ import Constant, {
 	TX_STATUS,
 	ColumnMinWidth,
 	monikerNum,
-	ibcDenomPrefix, decimals
+	ibcDenomPrefix, 
+	decimals,
+	UGAS
 } from '../constant'
 import AddressInformationComponent from './AddressInformationComponent'
 import LargeString from './common/LargeString'
@@ -2672,11 +2674,17 @@ export default {
 			this.isLoading = true
 			const res = await getEnergyAssetApi(this.address)
 			this.isLoading = false
-			if(res){
-				this.energyAssetData.push({
+			if(res && res.result && res.result.length > 0){
+				const energyItem = res.result.find(item => item.denom === UGAS)
+				this.energyAssetData = [{
 					title: this.$t('ExplorerLang.table.energy'),
-					amount: res.height
-				})
+					amount: energyItem?.amount || '--'
+				}]
+			}else{
+				this.energyAssetData = [{
+					title: this.$t('ExplorerLang.table.energy'),
+					amount: '--'
+				}]
 			}
 			
 		}
