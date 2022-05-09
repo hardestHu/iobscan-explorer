@@ -45,7 +45,7 @@
 										 :src="require(`../../assets/${scope.row.status==TX_STATUS.success?'success.png':'failed.png'}`)"/>
 								</div>
 								
-								<el-tooltip :manual="setManual(!item.isNeedFormat,scope.row[item.displayValue])"
+								<el-tooltip :manual="setManual(item.isNeedFormat,scope.row[item.displayValue])"
 											:content="formatStr(scope.row[item.nativeValue],item.isNft ? scope.row[item.displayValue] : null)">
 <!--									-->
                   <div>
@@ -251,7 +251,7 @@ import {
 	decimals,
 	IRIS_ADDRESS_PREFIX,
 	COSMOS_ADDRESS_PREFIX,
-	nftAndDenomSplitNum,
+	NFT_AND_DENOM_SPLIT_NUM,
 	PRODUCT_WENCHANG,
 } from '../../constant';
 import {fetchAllTokens} from "../../service/api";
@@ -448,8 +448,12 @@ export default {
 				return 'statistics-white-row';
 			}
 		},
-		setManual(value, data) {
-			if (!value || Array.isArray(data)) {
+		setManual(isNeed, data) {
+			if (isNeed || Array.isArray(data)) {
+				// 如果不满足超长省略 ...，则不需要鼠标划上再完整显示
+				if(typeof data  === 'string' && data?.length <= NFT_AND_DENOM_SPLIT_NUM.num){
+					return true
+				}
 				if (data?.length <= 1) {
 					return true
 				}
@@ -550,7 +554,7 @@ export default {
 		formatNftIdAndDenomId(NftIdOrDenomId){
 
 			if(NftIdOrDenomId){
-				return Tools.formatString(NftIdOrDenomId,nftAndDenomSplitNum.num,'...')
+				return Tools.formatString(NftIdOrDenomId,NFT_AND_DENOM_SPLIT_NUM.num,'...')
 			}
 			return '--'
 		},

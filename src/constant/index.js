@@ -543,7 +543,7 @@ export const monikerNum = {
   otherTable: 11,
 }
 
-export  const nftAndDenomSplitNum = {
+export  const NFT_AND_DENOM_SPLIT_NUM = {
   num:8
 }
 
