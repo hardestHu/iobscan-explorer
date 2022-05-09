@@ -11,19 +11,19 @@
 				</div>
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.ddcDetail.type') }}：</span>
-					<span>{{ denomName || denomId }}</span>
+					<span>{{ ddcType }}</span>
 				</div>
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.table.ddcName') }}：</span>
-					<span>{{ nftName }}</span>
+					<span>{{ ddcName }}</span>
 				</div>
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.table.ddcId') }}：</span>
-					<span>{{ tokenID }}</span>
+					<span>{{ ddcId }}</span>
 				</div>
         <div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.ddcDetail.amount') }}：</span>
-					<span>{{ tokenID }}</span>
+					<span>{{ amount }}</span>
 				</div>
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.ddcDetail.schema') }}：</span>
@@ -38,24 +38,19 @@
 				</div>
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.nftDetail.uri') }}：</span>
-					<!-- <span v-if="tokenUri && tokenUri !== '--'">
-								  <a :href="tokenUri" target="_blank">{{tokenUri}}</a>
-							  </span>
-							  <span v-else>--</span> -->
-					
-					<div class="wrap" v-if="tokenUri && tokenUri !== '[do-not-modify]'">
-						<a class="text" v-if="Tools.testUrl(tokenUri)" :href="tokenUri"
-						   target="_blank">{{ tokenUri }}</a>
-						<a class="text" v-else-if="startStr(tokenUri)" :href="'http://' + tokenUri"
-						   target="_blank">{{ tokenUri }}</a>
-						<span class="text" v-else>{{ tokenUri }}</span>
+					<div class="wrap" v-if="ddcUri && ddcUri !== '[do-not-modify]'">
+						<a class="text" v-if="Tools.testUrl(ddcUri)" :href="ddcUri"
+						   target="_blank">{{ ddcUri }}</a>
+						<a class="text" v-else-if="startStr(ddcUri)" :href="'http://' + ddcUri"
+						   target="_blank">{{ ddcUri }}</a>
+						<span class="text" v-else>{{ ddcUri }}</span>
 					</div>
-					<span v-else-if=" tokenUri === '[do-not-modify]'">{{ tokenUri }}</span>
+					<span v-else-if=" ddcUri === '[do-not-modify]'">{{ ddcUri }}</span>
 					<span v-else>--</span>
 				</div>
 			</div>
 			<div class="nft_token_list_content">
-				<div class="nft_token_list_title"> {{ $t('ExplorerLang.ddcDetail.nftTxs') }}</div>
+				<div class="nft_token_list_title"> {{ $t('ExplorerLang.nftDetail.nftTxs') }}</div>
 				<!--				<TxListComponent :txData="txListByToken"></TxListComponent>-->
 				<list-component
 					:token-symbol="mainTokenSymbol"
@@ -76,7 +71,7 @@
 
 <script>
 import TxListComponent from '../common/TxListComponent'
-import {getNftDetail, getTokenTxList} from '@/service/api'
+import {getNftDetail, getTokenTxList, getDdcDetail} from '@/service/api'
 import Tools from '@/util/Tools'
 import MPagination from '../common/MPagination'
 import {TX_TYPE, TX_STATUS, decimals} from '@/constant'
@@ -106,13 +101,11 @@ export default {
 			txListByToken: [],
 			creator: '',
 			schema: '',
-			name: '',
-			tokenID: '',
-			primaryKey: '',
-			tokenData: '',
-			tokenUri: '',
-			denomName: '',
-			nftName: '',
+			amount: '',
+			ddcUri: '',
+			ddcType: '',
+			ddcName: '',
+			ddcId:'',
 			denomId: '',
 			LargeStringMinHeight: 95,
 			LargeStringLineHeight: 19,
@@ -135,23 +128,33 @@ export default {
 		},
 		async getTokenInformation() {
 			try {
-				let ddcDetail = await getNftDetail(
-					this.$route.query.denom,
-					this.$route.query.tokenId
+				let ddcDetail = await getDdcDetail({
+						ddc_id:this.$route.query.ddc_id,
+						contract_address:this.$route.query.contract_address
+					}
 				)
-				
+				console.log('ddcDetail',ddcDetail)
+				ddcDetail = ddcDetail.data.data
 				if (ddcDetail) {
-					this.creator = (ddcDetail.denomDetail || {}).creator
-					this.schema = (ddcDetail.denomDetail || {}).json_schema || '--'
-					this.name = ddcDetail.denom
-					this.tokenID = ddcDetail.nft_id || '--'
-					this.denomName = ddcDetail.denom_name
+					// amount: 2000
+					// contract_address: "0x354c6aF2cB870BEFEA8Ea0284C76e4A46B8F2870"
+					// ddc_data: "{\\\"amount\\\":2000,\\\"unique\\\":\\\"sc3dutc0f2ogwj6\\\",\\\"name\\\":\\\"CHIZHANG“天使与魔鬼”首发限量版\\\",\\\"issuer\\\":\\\"数藏中国\\\",\\\"seq\\\":903,\\\"url\\\":\\\"https://oss.shucang.cn/upload/file/%E5%A4%A9%E4%BD%BF%E4%B8%8E%E9%AD%94%E9%AC%BC-20220209140448.jpg\\\"}"
+					// ddc_id: "518"
+					// ddc_name: "CHIZHANG“天使与魔鬼”首发限量版"
+					// ddc_type: "DDC721"
+					// ddc_uri: "https://oss.shucang.cn/upload/file/%E5%A4%A9%E4%BD%BF%E4%B8%8E%E9%AD%94%E9%AC%BC-20220209140448.jpg"
+					// owner: "iaa18ngk2m2ejw6utj645fja7txwm6ujtchyl8484u"
+					
+					this.owner = ddcDetail.owner || '--'
+					this.ddcType = ddcDetail.ddc_type || '--'
+					this.ddcName = ddcDetail.ddc_name || '--'
+					this.ddcId = ddcDetail.ddc_id || '--'
+					this.amount = ddcDetail.amount || '--'
+					this.schema = ddcDetail.ddc_data || '--'
+					this.creator = ddcDetail.creator || '--'
+					this.ddcUri = ddcDetail.ddc_uri || '--'
+
 					this.denomId = ddcDetail.denom_id
-					this.nftName = ddcDetail.nft_name || '--'
-					// this.primaryKey = ddcDetail.primary_key;
-					this.owner = ddcDetail.owner
-					this.tokenData = ddcDetail.tokenData || '--'
-					this.tokenUri = ddcDetail.tokenUri || '--'
 					this.getTokenTxCount()
 					this.getTokenTx()
 				}
@@ -174,7 +177,7 @@ export default {
 		async getTokenTx() {
 			try {
 				const res = await getTokenTxList(
-					this.tokenID,
+
 					this.$route.query.denom,
 					this.pageNum,
 					this.pageSize,
@@ -272,7 +275,7 @@ export default {
 		async getTokenTxCount() {
 			try {
 				const res = await getTokenTxList(
-					this.tokenID,
+					this.amount,
 					this.$route.query.denom,
 					null,
 					null,

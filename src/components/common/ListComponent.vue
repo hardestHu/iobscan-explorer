@@ -94,12 +94,11 @@
 										
 									</span>
 <!--									-->
-									<span v-else-if="item.isNftHref" :class="item.isWrap ? 'wrap_style' : ''">
-										
+									<span v-else-if="item.isNftHref" class="custom_uri">
 										<a v-if="testUrl(scope.row[item.displayValue])" :href="scope.row[item.displayValue]"
-										   target="_blank" rel="noreferrer noopener" class="href_route_link_style">{{ scope.row[item.displayValue] }}</a>
+										   target="_blank" rel="noreferrer noopener">{{ scope.row[item.displayValue] }}</a>
 										
-										<a class="href_route_link_style" v-else-if="startStr(scope.row[item.displayValue])"
+										<a v-else-if="startStr(scope.row[item.displayValue])"
 										   :href="'http://' + scope.row[item.displayValue]"
 										   target="_blank">{{ scope.row[item.displayValue] }}</a>
 										
@@ -932,6 +931,13 @@ export default {
 		.href_route_link_style{
 			color: $theme_c !important;
 			white-space: normal !important;
+			
+		}
+		.custom_uri{
+			width: 2rem;
+			display: inline-block;
+			text-overflow:ellipsis;
+			overflow: hidden;
 		}
 		.tag_num {
 			color: $theme_c !important;
