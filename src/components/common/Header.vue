@@ -585,6 +585,10 @@ export default {
     }
   }
 }
+.el-menu--horizontal .el-menu .el-menu-item a{
+  display: inline-block;
+  width: 100%;
+}
 
 @media screen and (max-width: 1000px) {
   .header_container {
