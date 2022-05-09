@@ -246,7 +246,7 @@ export const ExplorerLang = {
         subTitle:'NFTs',
         subTitles:'NFT',
         search: '搜索',
-        placeHolder: '搜索 NTF 标识或 NFT 名称',
+        placeHolder: '搜索 NFT 标识或 NFT 名称',
     },
     denom:{
         mainTitle:'NFT 类别',
