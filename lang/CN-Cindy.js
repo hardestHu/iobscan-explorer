@@ -342,14 +342,14 @@ export const ExplorerLang = {
             chainName:'链名称:',
         },
         nft:{
-            denomId:'标识:',//nft新增
-            sender:'发送者:',
-            receiver:'接收者:',
-            denomName:'数据类别:',
-            symbol:'数据类别名称:',
-            schema:'概要:',
-            mintRestricted:'发行限制:',
-            updateRestricted:'更新限制:',
+            denomId:'标识',//nft新增
+            sender:'发送者',
+            receiver:'接收者',
+            denomName:'数据类别',
+            symbol:'数据类别名称',
+            schema:'概要',
+            mintRestricted:'发行限制',
+            updateRestricted:'更新限制',
             signer:'签名者',
         },
         issueDenom:{

@@ -4,7 +4,10 @@
 			<span>{{$t('ExplorerLang.transactionInformation.txType')}}：</span>
 			<span>{{TX_TYPE_DISPLAY[txType] || txType}}</span>
 		</p>
-		<div v-if="txType === TX_TYPE.define_service">
+
+
+		<TxDetailComponent :detailInfo="detailInfo" />
+		<!-- <div v-if="txType === TX_TYPE.define_service">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -16,15 +19,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.defineService.description')}}：</span>
 				<span>{{description}}</span>
 			</p>
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.defineService.schemas')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(schemas)" v-if="schemas" :text="schemas" :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.defineService.author')}}：</span>
 				<template>
 					<span v-if="author == '--' || this.judgeCosmos(author)">{{author}}</span>
-<!--					<span v-else class="address_link" @click="addressRoute(author)">{{author}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${author}`">{{author}}</router-link>
 				</template>
 			</p>
@@ -36,8 +34,9 @@
 				<span>{{$t('ExplorerLang.transactionInformation.defineService.tags')}}：</span>
 				<span>{{tags}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.bind_service">
+		</div> -->
+	
+		<!-- <div v-if="txType === TX_TYPE.bind_service">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="defineName != '--'" :to="`/service?serviceName=${defineName}`">
@@ -60,10 +59,6 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<span>
-					<!-- <span v-for="(item,index) in provider" :key="index"
-				                   @click="addressRoute(item)" class="address_link">{{item}}
-					</span> -->
-<!--					<span @click="addressRoute(provider)" class="address_link">{{provider}} </span>-->
 					<router-link class="address_link" :to="`/address/${provider}`">{{provider}}</router-link>
 				</span>
 			</p>
@@ -75,11 +70,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${owner}`">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.create_record" class="record_container">
 			<div class="record_content">
 				<p class="record_name">{{$t('ExplorerLang.transactionInformation.createRecord.contents')}}：</p>
@@ -101,12 +95,11 @@
 				</div>
 			</div>
 		</div>
-		<div v-if="txType === TX_TYPE.burn_nft">
+		<!-- <div v-if="txType === TX_TYPE.burn_nft">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
 			</p>
@@ -126,8 +119,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.nftName')}}：</span>
 				<span>{{nftName}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.mint_nft">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.mint_nft">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.denomId')}}：</span>
 				<span>{{denom}}</span>
@@ -148,7 +141,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-					<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
 			</p>
@@ -156,20 +148,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
 					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
-<!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${recipient}`">{{recipient}}</router-link>
 				</template>
 			</p>
-			
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.data')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(tokenData)" v-if="tokenData" :text="tokenData" :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.uri')}}：</span>
 				<template>
-					<!-- <a v-if="tokenUri !== '--' && tokenUri !== '[do-not-modify]'" :href="tokenUri" target="_blank">{{tokenUri}}</a>
-					<span v-else>{{tokenUri}}</span> -->
 					<div class="wrap" v-if="tokenUri && tokenUri !== '[do-not-modify]'">
 								<a class="text" v-if="Tools.testUrl(tokenUri)" :href="tokenUri" target="_blank">{{tokenUri}}</a>
 								<a class="text" v-else-if="startStr(tokenUri)" :href="'http://' + tokenUri" target="_blank">{{tokenUri}}</a>
@@ -180,8 +164,8 @@
 				</template>
 			</p>
 
-		</div>
-		<div v-if="txType === TX_TYPE.transfer_nft">
+		</div>  -->
+		<!-- <div v-if="txType === TX_TYPE.transfer_nft">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.denomId')}}：</span>
 				<span>{{denom}}</span>
@@ -202,7 +186,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-					<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
 			</p>
@@ -210,7 +193,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
 					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
-<!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${recipient}`">{{recipient}}</router-link>
 				</template>
 			</p>
@@ -221,8 +203,6 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.uri')}}：</span>
 				<template>
-					<!-- <a v-if="tokenUri !== '--' && tokenUri !== '[do-not-modify]'" :href="tokenUri" target="_blank">{{tokenUri}}</a>
-					<span v-else>{{tokenUri}}</span> -->
 					<div class="wrap" v-if="tokenUri && tokenUri !== '[do-not-modify]'">
 								<a class="text" v-if="Tools.testUrl(tokenUri)" :href="tokenUri" target="_blank">{{tokenUri}}</a>
 								<a class="text" v-else-if="startStr(tokenUri)" :href="'http://' + tokenUri" target="_blank">{{tokenUri}}</a>
@@ -232,8 +212,8 @@
 					<span v-else>--</span>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.edit_nft">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.edit_nft">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.denomId')}}：</span>
 				<span>{{denom}}</span>
@@ -254,7 +234,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 				</template>
 			</p>
@@ -265,8 +244,7 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.uri')}}：</span>
 				<template>
-					<!-- <a v-if="tokenUri !== '--' && tokenUri !== '[do-not-modify]'" :href="tokenUri" target="_blank">{{tokenUri}}</a>
-					<span v-else>{{tokenUri}}</span> -->
+					
 					<div class="wrap" v-if="tokenUri && tokenUri !== '[do-not-modify]'">
 								<a class="text" v-if="Tools.testUrl(tokenUri)" :href="tokenUri" target="_blank">{{tokenUri}}</a>
 								<a class="text" v-else-if="startStr(tokenUri)" :href="'http://' + tokenUri" target="_blank">{{tokenUri}}</a>
@@ -276,8 +254,8 @@
 					<span v-else>--</span>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.issue_denom">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.issue_denom">
 		<p>
 			<span>{{$t('ExplorerLang.transactionInformation.nft.denomId')}}</span>
 			<span>{{denomId}}</span>
@@ -306,11 +284,10 @@
 			<span>{{$t('ExplorerLang.transactionInformation.issueDenom.sender')}}：</span>
 			<template>
 				<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-				<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 				<router-link v-else class="address_link" :to="`/address/${sender}`">{{sender}}</router-link>
 			</template>
 		</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.send">
 			    <p>
                     <span>{{$t('ExplorerLang.transactionInformation.send.amount')}}：</span>
@@ -335,7 +312,7 @@
 				</template>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.respond_service">
+		<!-- <div v-if="txType === TX_TYPE.respond_service">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -347,15 +324,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.respondService.requestId')}}：</span>
 				<span>{{(requestId || '').toUpperCase()}}</span>
 			</p>
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.requestContextId')}}：</span>
-				<span>{{(requestContextId || '').toUpperCase()}}</span>
-			</p> -->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
 					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
-<!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${provider}`">{{provider}}</router-link>
 				</template>
 			</p>
@@ -367,8 +339,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.respondService.output')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(output)" v-if="output" :text="output"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight" />
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.call_service">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.call_service">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -384,7 +356,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
 					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
-<!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${consumer}`">{{consumer}}</router-link>
 				</template>
 			</p>
@@ -395,9 +366,6 @@
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<span style="display: flex;flex-direction: column">
-<!--					<span
-						v-for="(item,index) in provider" :key="index"
-						@click="addressRoute(item)" class="address_link">{{item}}</span>-->
 				<router-link v-for="(item,index) in provider"
 							 :key="index"
 							 class="address_link" :to="`/address/${item}`">{{item}}</router-link>
@@ -428,7 +396,7 @@
 				<span>{{$t('ExplorerLang.transactionInformation.timeOut')}}：</span>
 				<span>{{timeout}}</span>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.pause_request_context ||
                    txType === TX_TYPE.start_request_context ||
                    txType === TX_TYPE.kill_request_context">
@@ -508,7 +476,7 @@
 				<span>{{timeout}}</span>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.update_service_binding">
+		<!-- <div v-if="txType === TX_TYPE.update_service_binding">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -532,7 +500,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
 					<span v-if="provider === '--'  || this.judgeCosmos(provider)">{{provider}}</span>
-<!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
 			</p>
@@ -540,12 +507,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.disable_service_binding || txType === TX_TYPE.refund_service_deposit">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.disable_service_binding || txType === TX_TYPE.refund_service_deposit">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -557,7 +523,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
 					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
-<!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
 			</p>
@@ -565,12 +530,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.enable_service_binding">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.enable_service_binding">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -586,7 +550,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<template>
 					<span v-if="provider === '--'">{{provider}}</span>
-<!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
 			</p>
@@ -594,11 +557,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.recv_packet && prodConfig.txDetail && prodConfig.txDetail.ibc">
 			<!-- <p>
 				<span>{{$t('ExplorerLang.transactionInformation.recvPacket.packet')}}：</span>
@@ -2434,7 +2396,7 @@
 			</p>
 		</div>
         <!--新增Transfer Denom (Denom Transfer)-->
-		<div v-if="txType === TX_TYPE.transfer_denom">
+		<!-- <div v-if="txType === TX_TYPE.transfer_denom">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.nft.denomId')}}</span>
 				<span>{{denomId}}</span>
@@ -2458,7 +2420,7 @@
 
 			</p>
 
-		</div>
+		</div> -->
 		<!-- Farm stake/unstake -->
 		<div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
 			<p>
@@ -2646,9 +2608,10 @@
 	import prodConfig from "../../productionConfig";
 	import axios from '@/axios';
 	import {ExplorerLang} from "../../../lang/EN-Cindy";
+	import TxDetailComponent from './TxDetailComponent.vue'
 	export default {
 		name: "txMessage",
-		components: {LargeString},
+		components: {LargeString, TxDetailComponent},
 		props: {
 			msg: {
 				type: Object,
@@ -2898,7 +2861,7 @@
 				poolDescription:'',
 				refund:'',
 				additionalReward:'',
-
+				detailInfo:[]
 			}
 		},
 		computed: {
@@ -2945,21 +2908,24 @@
 						}(this))
 						switch (this.txType) {
 							case TX_TYPE.mint_nft:
-								this.denom = msg.denom || '--';
-								this.tokenId = msg.id || '--';
-								this.denomName = msg.denom_name || '--';
-								this.nftName = msg.name || '--';
-								this.recipient = msg.recipient || '--';
-								this.sender = msg.sender || '--';
-								this.tokenData = msg.data || '--';
-								this.tokenUri = msg.uri || '--';
+								this.buildMintNft(msg)
+								// this.denom = msg.denom || '--';
+								// this.tokenId = msg.id || '--';
+								// this.denomName = msg.denom_name || '--';
+								// this.nftName = msg.name || '--';
+								// this.recipient = msg.recipient || '--';
+								// this.sender = msg.sender || '--';
+								// this.tokenData = msg.data || '--';
+								// this.tokenUri = msg.uri || '--';
 								break;
 							case TX_TYPE.burn_nft:
-								this.sender = msg.sender || '--';
-								this.denom = msg.denom || '--';
-								this.tokenId = msg.id || '--';
-								this.denomName = msg.denom_name || '--';
-								this.nftName = msg.nft_name || '--';
+								this.buildBurnNft(msg)
+
+								// this.sender = msg.sender || '--';
+								// this.denom = msg.denom || '--';
+								// this.tokenId = msg.id || '--';
+								// this.denomName = msg.denom_name || '--';
+								// this.nftName = msg.nft_name || '--';
 								break;
 							case TX_TYPE.create_record:
 								this.recordArray = msg.contents.map(item => {
@@ -2972,25 +2938,29 @@
 								})
 								break;
 							case TX_TYPE.define_service:
-								this.serviceName = msg.name || '--';
-								this.description = msg.description || '--';
-								this.author = msg.author || '--';
-								this.authorDescription = msg.author_description || '--';
-								this.tags = msg.tags.length && msg.tags || '--';
-								this.schemas = msg.schemas || '--';
+								this.buildDefineService(msg)
+								// this.serviceName = msg.name || '--';
+								// this.description = msg.description || '--';
+								// this.author = msg.author || '--';
+								// this.authorDescription = msg.author_description || '--';
+								// this.tags = msg.tags.length && msg.tags || '--';
+								// this.schemas = msg.schemas || '--';
+								// console.log(this.tags, this.detailInfo[4]['value'])
 								break;
 							case TX_TYPE.bind_service:
-								this.defineName = msg.service_name || '--';
-								this.provider = msg.provider || '--';
-								if (msg.deposit && msg.deposit.length) {
-									let amount = await converCoin(msg.deposit[0]);
-									this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}` || '--';
-								}
-								this.deposit = this.deposit || '--'
-								this.owner = msg.owner || '--';
-								this.pricing = msg.pricing || '--';
-								this.qos = msg.qos || '--';
-								this.options = msg.options || '--';
+								this.buildBindService(msg)
+							
+								// this.defineName = msg.service_name || '--';
+								// this.provider = msg.provider || '--';
+								// if (msg.deposit && msg.deposit.length) {
+								// 	let amount = await converCoin(msg.deposit[0]);
+								// 	this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}` || '--';
+								// }
+								// this.deposit = this.deposit || '--'
+								// this.owner = msg.owner || '--';
+								// this.pricing = msg.pricing || '--';
+								// this.qos = msg.qos || '--';
+								// this.options = msg.options || '--';
 								break;
 							case TX_TYPE.send:
 								// this.from = msg.fromaddress || '--';
@@ -3007,98 +2977,109 @@
 								this.amountArray && this.amountArray.length > 0 ? '' : this.amountArray = ['--']
 								break;
 							case TX_TYPE.call_service:
-								this.consumer = msg.consumer || '--';
-								this.input = msg.input || '--';
-								this.provider = msg.providers || '--';
-								this.repeated = msg.repeated || '--';
-								this.repeatedFrequency = msg.repeated_frequency || '--';
-								this.repeatedTotal = msg.repeated_total || '--';
-								if (msg.service_fee_cap && msg.service_fee_cap.length) {
-									let serviceFeeCap = await converCoin(msg.service_fee_cap[0]);
-									this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
-								}
-								this.serviceFeeCap = this.serviceFeeCap || '--'
-								this.serviceName = msg.service_name || '--';
-								this.superMode = msg.super_mode || '--';
-								this.timeout = msg.timeout || '--';
-								if(this.eventsNew && this.eventsNew.length > 0) {
-									(this.eventsNew || []).forEach((item) => {
-										if(item.msg_index === this.msgIndex) {
-											(item.events || []).forEach((events) => {
-												(events.attributes || []).forEach((attr) => {
-													if (attr.key == 'request_context_id') {
-														this.requestContextId = attr.value || '--';
-													}
-												});
-											})
-										}
-									});
-								} else {
-									(this.events || []).forEach((item) => {
-										(item.attributes || []).forEach((attr) => {
-											if (attr.key == 'request_context_id') {
-												this.requestContextId = attr.value || '--';
-											}
-										});
-									})
-								}
+								this.buildCallService(msg)
+								// this.consumer = msg.consumer || '--';
+								// this.input = msg.input || '--';
+								// this.provider = msg.providers || '--';
+								// this.repeated = msg.repeated || '--';
+								// this.repeatedFrequency = msg.repeated_frequency || '--';
+								// this.repeatedTotal = msg.repeated_total || '--';
+								// if (msg.service_fee_cap && msg.service_fee_cap.length) {
+								// 	let serviceFeeCap = await converCoin(msg.service_fee_cap[0]);
+								// 	this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
+								// }
+								// this.serviceFeeCap = this.serviceFeeCap || '--'
+								// this.serviceName = msg.service_name || '--';
+								// this.superMode = msg.super_mode || '--';
+								// this.timeout = msg.timeout || '--';
+								// if(this.eventsNew && this.eventsNew.length > 0) {
+								// 	(this.eventsNew || []).forEach((item) => {
+								// 		if(item.msg_index === this.msgIndex) {
+								// 			(item.events || []).forEach((events) => {
+								// 				(events.attributes || []).forEach((attr) => {
+								// 					if (attr.key == 'request_context_id') {
+								// 						this.requestContextId = attr.value || '--';
+								// 					}
+								// 				});
+								// 			})
+								// 		}
+								// 	});
+								// } else {
+								// 	(this.events || []).forEach((item) => {
+								// 		(item.attributes || []).forEach((attr) => {
+								// 			if (attr.key == 'request_context_id') {
+								// 				this.requestContextId = attr.value || '--';
+								// 			}
+								// 		});
+								// 	})
+								// }
 								break;
 							case TX_TYPE.transfer_nft:
-								this.denom = msg.denom || '--';
-								this.tokenId = msg.id || '--';
-								this.denomName = msg.denom_name || '--';
-								this.nftName = msg.name || '--';
-								this.recipient = msg.recipient || '--';
-								this.sender = msg.sender || '--';
-								this.tokenData = msg.data || '--';
-								this.tokenUri = msg.uri || '--';
+								this.buildTransferNft(msg)
+
+								// this.denom = msg.denom || '--';
+								// this.tokenId = msg.id || '--';
+								// this.denomName = msg.denom_name || '--';
+								// this.nftName = msg.name || '--';
+								// this.recipient = msg.recipient || '--';
+								// this.sender = msg.sender || '--';
+								// this.tokenData = msg.data || '--';
+								// this.tokenUri = msg.uri || '--';
 								break;
 							case TX_TYPE.edit_nft:
-								this.denom = msg.denom || '--';
-								this.tokenId = msg.id || '--';
-								this.denomName = msg.denom_name || '--';
-								this.nftName = msg.name || '--';
-								this.sender = msg.sender || '--';
-								this.tokenData = msg.data || '--';
-								this.tokenUri = msg.uri || '--';
+								this.buildEditNft(msg)
+
+								// this.denom = msg.denom || '--';
+								// this.tokenId = msg.id || '--';
+								// this.denomName = msg.denom_name || '--';
+								// this.nftName = msg.name || '--';
+								// this.sender = msg.sender || '--';
+								// this.tokenData = msg.data || '--';
+								// this.tokenUri = msg.uri || '--';
 								break;
 							case TX_TYPE.issue_denom:
-								this.denomId=msg.id || '--';
-								this.denomName=msg.name || '--';
-								this.symbol=msg.symbol || '--';
-								this.schema=msg.schema || '--';
-								this.mintRestricted=msg.mint_restricted ;
-								this.updateRestricted=msg.update_restricted ;
-								this.sender= msg.sender;
+								this.buildIssueDenom(msg)
+								// this.denomId=msg.id || '--';
+								// this.denomName=msg.name || '--';
+								// this.symbol=msg.symbol || '--';
+								// this.schema=msg.schema || '--';
+								// this.mintRestricted=msg.mint_restricted ;
+								// this.updateRestricted=msg.update_restricted ;
+								// this.sender= msg.sender;
 								break;
 							case TX_TYPE.respond_service:
-								this.output = msg.output || '--';
-								this.provider = msg.provider || '--';
-								this.requestId = msg.request_id || '--';
-								this.requestContextId = (msg.ex || {}).request_context_id || '--';
-								this.result = msg.result || '--';
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								this.buildRespondService(msg)
+								// this.output = msg.output || '--';
+								// this.provider = msg.provider || '--';
+								// this.requestId = msg.request_id || '--';
+								// this.requestContextId = (msg.ex || {}).request_context_id || '--';
+								// this.result = msg.result || '--';
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
 								break;
 							case TX_TYPE.pause_request_context:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.requestContextId = msg.request_context_id || '--';
-								this.consumer = msg.consumer || '--';
+								this.buildPauseRequestContext(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.requestContextId = msg.request_context_id || '--';
+								// this.consumer = msg.consumer || '--';
 								break;
 							case TX_TYPE.start_request_context:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name || (msg.ex || {}).service_name  || '--';
-								this.requestContextId = msg.request_context_id || '--';
-								this.consumer = msg.consumer || '--';
+								this.buildPauseRequestContext(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name || (msg.ex || {}).service_name  || '--';
+								// this.requestContextId = msg.request_context_id || '--';
+								// this.consumer = msg.consumer || '--';
 								break;
 							case TX_TYPE.kill_request_context:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.requestContextId = msg.request_context_id || '--';
-								this.consumer = msg.consumer || '--';
+								this.buildPauseRequestContext(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.requestContextId = msg.request_context_id || '--';
+								// this.consumer = msg.consumer || '--';
 								break;
 							case TX_TYPE.update_request_context:
+								this.buildUpdateRequestContext(msg)
 								// this.serviceName = (msg.ex || {}).service_name || '--';
 								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
 								this.requestContextId = msg.request_context_id || '--';
@@ -3115,42 +3096,46 @@
 								this.timeout = (msg.timeout) ? msg.timeout : '--';
 								break;
 							case TX_TYPE.update_service_binding:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.provider = msg.provider || '--';
-								if (msg.deposit && msg.deposit.length) {
-									let amount = await converCoin(msg.deposit[0]);
-									this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
-									// this.deposit = `${msg.deposit[0].amount} ${msg.deposit[0].denom}` || '--';
-								}
-								this.deposit = this.deposit || '--'
-								this.owner = msg.owner || '--';
-								this.pricing = msg.pricing || '--';
-								this.qos = msg.qos || '--';
+								this.buildUpdateServiceBinding(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.provider = msg.provider || '--';
+								// if (msg.deposit && msg.deposit.length) {
+								// 	let amount = await converCoin(msg.deposit[0]);
+								// 	this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
+								// 	// this.deposit = `${msg.deposit[0].amount} ${msg.deposit[0].denom}` || '--';
+								// }
+								// this.deposit = this.deposit || '--'
+								// this.owner = msg.owner || '--';
+								// this.pricing = msg.pricing || '--';
+								// this.qos = msg.qos || '--';
 								break;
 							case TX_TYPE.disable_service_binding:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.provider = msg.provider || '--';
-								this.owner = msg.owner || '--';
+								this.buildDisableServiceBinding(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.provider = msg.provider || '--';
+								// this.owner = msg.owner || '--';
 								break;
 							case TX_TYPE.enable_service_binding:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.provider = msg.provider || '--';
-								if (msg.deposit && msg.deposit.length) {
-									let amount = await converCoin(msg.deposit[0]);
-									this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
-									// this.deposit = `${msg.deposit[0].amount} ${msg.deposit[0].denom}` || '--';
-								}
-								this.deposit = this.deposit || '--'
-								this.owner = msg.owner || '--';
+								this.buildEnableServiceBinding(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.provider = msg.provider || '--';
+								// if (msg.deposit && msg.deposit.length) {
+								// 	let amount = await converCoin(msg.deposit[0]);
+								// 	this.deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
+								// 	// this.deposit = `${msg.deposit[0].amount} ${msg.deposit[0].denom}` || '--';
+								// }
+								// this.deposit = this.deposit || '--'
+								// this.owner = msg.owner || '--';
 								break;
 							case TX_TYPE.refund_service_deposit:
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.provider = msg.provider || '--';
-								this.owner = msg.owner || '--';
+								this.buildDisableServiceBinding(msg)
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.provider = msg.provider || '--';
+								// this.owner = msg.owner || '--';
 								break;
 							case TX_TYPE.recv_packet:
 								if(prodConfig.txDetail && prodConfig.txDetail.ibc) {
@@ -3556,14 +3541,17 @@
 								}
 							break;
 							case TX_TYPE.service_set_withdraw_address:
-							this.owner = msg.owner || '--';
-							this.withdrawAddress = msg.withdraw_address || '--';
+								this.buildServiceSetWithdrawAddress(msg)
+								// this.owner = msg.owner || '--';
+								// this.withdrawAddress = msg.withdraw_address || '--';
 							break;
 							case TX_TYPE.withdraw_earned_fees:
-								this.owner = msg.owner || '--';
-								this.provider = msg.provider || '--';
+								this.buildWithdrawEarnedFees(msg)
+								// this.owner = msg.owner || '--';
+								// this.provider = msg.provider || '--';
 							break;
 							case TX_TYPE.issue_token:
+								this.buildIssueToken(msg)
 								this.symbol = msg.symbol || '--';
 								this.name = msg.name || '--';
 								this.decimal = msg.scale || '--';
@@ -3973,8 +3961,10 @@
 								this.chainName=msg.chain_name|| '--'
 								this.signer = msg.signer
 								break;
-                            //新增Transfer Denom (Denom Transfer)
+              //新增Transfer Denom (Denom Transfer)
 							case TX_TYPE.transfer_denom:
+								this.buildTransferDenom(msg)
+
 								this.denomId=msg.id || '--'
 								this.sender= msg.sender|| '--'
 								this.receiver= msg.recipient|| '--'
@@ -4140,8 +4130,628 @@
 			},
 			judgeCosmos(addr){
 				return addr.startsWith(COSMOS_ADDRESS_PREFIX)
+			},
+			// bind_service
+			async buildBindService(msg){
+				let deposit;
+				if (msg.deposit && msg.deposit.length) {
+					let amount = await converCoin(msg.deposit[0]);
+					deposit = `${amount.amount} ${amount.denom.toUpperCase()}` || '--';
+				}
+				const serviceList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name,
+						isService: true,
+					}
+				]
+				const priceList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.pricing'),
+						value: msg.pricing,
+					}
+				]
+				const otherList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.qos'),
+						value: msg.qos,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.deposit'),
+						value: deposit,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bindService.options'),
+						value: msg.options
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value: msg.owner,
+						isAddress: true
+					}
+				]
+				this.detailInfo = this.isShowFee ? serviceList.concat(priceList,otherList) : serviceList.concat(otherList)
+			},
+			// define_service
+			buildDefineService(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.name,
+						isService: true,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.defineService.description'),
+						value: msg.description,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.defineService.author'),
+						value: msg.author,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.defineService.authorDescription'),
+						value: msg.author_description,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.defineService.tags'),
+						value: msg.tags.length && msg.tags || '--',
+					}
+				]
+			},
+			// call_service
+			async buildCallService(msg){
+				let requestContextId = '--',
+				 	serviceFeeCap='--';
+				if(this.eventsNew && this.eventsNew.length > 0) {
+					(this.eventsNew || []).forEach((item) => {
+						if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+								(events.attributes || []).forEach((attr) => {
+									if (attr.key == 'request_context_id') {
+										requestContextId = attr.value || '--';
+									}
+								});
+							})
+						}
+					});
+				} else {
+					(this.events || []).forEach((item) => {
+							(item.attributes || []).forEach((attr) => {
+								if (attr.key == 'request_context_id') {
+									requestContextId = attr.value || '--';
+								}
+							});
+					})
+				}
+				if (msg.service_fee_cap && msg.service_fee_cap.length) {
+					let res = await converCoin(msg.service_fee_cap[0]);
+					serviceFeeCap = `${res.amount} ${res.denom.toUpperCase()}`;
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.requestContextId'),
+						value: requestContextId.toUpperCase()
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.consumer'),
+						value: msg.consumer,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.callService.input'),
+						value: msg.input,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.providers,
+						isAddress: true,
+						isMulti: true,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.callService.input'),
+						value: msg.input,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.callService.repeated'),
+						value: msg.repeated ? '是' : '否',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedFrequency'),
+						value: msg.repeated_frequency
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedTotal'),
+						value: msg.repeated_total
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceFeeCap'),
+						value: serviceFeeCap
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.callService.superMode'),
+						value: msg.super_mode
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.timeOut'),
+						value: msg.timeout
+					},
+				]
+			},
+			// response_service
+			buildRespondService(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.respondService.requestId'),
+						value: (msg.request_id || '--').toUpperCase()
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.requestContextId'),
+						value: ((msg.ex || {}).request_context_id || '--').toUpperCase()
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value:  msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.respondService.result'),
+						value: msg.result
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.respondService.output'),
+						value:  msg.output,
+						isSchema: true
+					}
+				]
+			},
+			// update_service_binding
+			async buildUpdateServiceBinding(msg){
+				let deposit;
+				if (msg.deposit && msg.deposit.length) {
+					let amount = await converCoin(msg.deposit[0]);
+					deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
+				}
+				const serviceList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+				]
+				const priceList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.pricing'),
+						value: msg.pricing
+					}
+				]
+				const otherList = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.qos'),
+						value: msg.qos,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.deposit'),
+						value: deposit,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value: msg.owner,
+						isAddress: true
+					},
+				]
+				this.detailInfo = this.isShowFee ?  serviceList.concat(priceList, otherList) : serviceList.concat(otherList)
+			},
+			// disable_service_binding 未自测 refund_service_deposit 未自测
+			buildDisableServiceBinding(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value:  msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value:  msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value:  msg.owner,
+						isAddress: true
+					}	
+				]
+			},
+			// enable_service_binding  未自测
+			async buildEnableServiceBinding(msg){
+				let deposit;
+				if (msg.deposit && msg.deposit.length) {
+					let amount = await converCoin(msg.deposit[0]);
+					deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
+				}
+				this.detailInfo = [
+					{	
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value:  msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.deposit'),
+						value: deposit 
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value: msg.owner,
+						isAddress: true
+					}
+				]
+			},
+			// pause_request_context 未自测 start_request_context 未自测 kill_request_context 未自测
+			buildPauseRequestContext(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.requestContextId'),
+						value: (msg.request_context_id || '--').toUpperCase()
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.consumer'),
+						value:  msg.consumer,
+						isAddress: true
+					}
+				]
+			},
+			// update_request_context 未自测
+			async buildUpdateRequestContext(msg){
+				let serviceFeeCap
+				if (msg.service_fee_cap && msg.service_fee_cap.length) {
+					const res = await converCoin(msg.service_fee_cap[0])
+					serviceFeeCap = `${res.amount} ${res.denom.toUpperCase()}`;
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.service_name ||  (msg.ex || {}).service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.requestContextId'),
+						value: msg.request_context_id
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.consumer'),
+						value: msg.consumer,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.providers,
+						isAddress: true,
+						isMulti: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedFrequency'),
+						value: msg.repeated_frequency
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedTotal'),
+						value: msg.repeated_total
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceFeeCap'),
+						value: serviceFeeCap
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.timeOut'),
+						value: msg.timeout
+					}
+				]
+				if(!this.isShowFee){
+					// 去掉fee的展示
+					this.detailInfo.splice(-2, 1)
+				}
+			},
+			// service_set_withdraw_address 未自测
+			buildServiceSetWithdrawAddress(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value: msg.owner,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.withdrawAddress'),
+						value: msg.withdraw_address,
+						isAddress: true
+					},
+				]
+			},
+			// withdraw_earned_fees 未自测
+			buildWithdrawEarnedFees(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.provider'),
+						value: msg.provider,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.owner'),
+						value: msg.owner,
+						isAddress: true
+					}
+				]
+			},
+			// burn_nft
+			buildBurnNft(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomId'),
+						value: msg.denom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomName'),
+						value: msg.denom_name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftName'),
+						value: msg.nft_name,
+					}
+				]
+			},
+			// mint_nft
+			buildMintNft(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomId'),
+						value: msg.denom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomName'),
+						value: msg.denom_name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftName'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.to'),
+						value: msg.recipient,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						value: msg.uri,
+						isUri: true
+					}
+				]
+			},
+			// edit_nft
+			buildEditNft(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomId'),
+						value: msg.denom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomName'),
+						value: msg.denom_name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftName'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.data'),
+						value: msg.data,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						value: msg.uri,
+						isUri: true
+					}
+				]
+			},
+			// transfer_nft
+			buildTransferNft(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomId'),
+						value: msg.denom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.denomName'),
+						value: msg.denom_name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nftName'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.to'),
+						value: msg.recipient,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.data'),
+						value: msg.data,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						value: msg.uri,
+						isUri: true
+					}
+				]
+			},
+			// issue_denom
+			buildIssueDenom(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.denomId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.denomName'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.symbol'),
+						value: msg.symbol,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.schema'),
+						value: msg.schema,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.mintRestricted'),
+						value: msg.mint_restricted,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.updateRestricted'),
+						value: msg.update_restricted,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.issueDenom.sender'),
+						value: msg.sender,
+						isAddress: true
+					}
+				]
+			},
+			// transfer_denom
+			buildTransferDenom(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.denomId'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.receiver'),
+						value: msg.recipient,
+						isAddress: true
+					}
+				]
+			},
+			// issue_token
+			buildIssueDenom(msg){
+					// this.symbol = msg.symbol || '--';
+					// 			this.name = msg.name || '--';
+					// 			this.decimal = msg.scale || '--';
+					// 			this.initialSupply = msg.initial_supply || '--';
+					// 			this.maxSupply = msg.max_supply || '--';
+					// 			this.mintable = msg.mintable;
+					// 			this.owner = msg.owner || '--';
+					// 			this.minUnit = msg.min_unit || '--';
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.symbol'),
+						value: msg.symbol,
+						isAsset: true
+					},
+					//hxj
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.denomName'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.symbol'),
+						value: msg.symbol,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.schema'),
+						value: msg.schema,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.mintRestricted'),
+						value: msg.mint_restricted,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.nft.updateRestricted'),
+						value: msg.update_restricted,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.issueDenom.sender'),
+						value: msg.sender,
+						isAddress: true
+					}
+				]
 			}
-			
+
+
+
 		}
 	}
 </script>

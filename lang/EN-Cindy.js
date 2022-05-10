@@ -356,15 +356,15 @@ export const ExplorerLang = {
             chainName:'Chain Name:',
         },
         nft:{
-            denomId:'Denom ID:',//nft新增
-            sender:'Sender:',
-            receiver:'Receiver:',
-            denomName:'Denom Name:',
-            symbol:'Symbol:',
-            schema:'Schema:',
-            mintRestricted:'Mint Restricted:',
-            updateRestricted:'Update Restricted:',
-            signer:'Signer:',
+            denomId:'Denom ID',//nft新增
+            sender:'Sender',
+            receiver:'Receiver',
+            denomName:'Denom Name',
+            symbol:'Symbol',
+            schema:'Schema',
+            mintRestricted:'Mint Restricted',
+            updateRestricted:'Update Restricted',
+            signer:'Signer',
         },
         issueDenom:{
             schema: 'Schema',
