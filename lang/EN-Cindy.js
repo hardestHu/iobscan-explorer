@@ -268,6 +268,10 @@ export const ExplorerLang = {
         search: 'Search',
         placeHolder: 'Search by Denom Name or Denom ID',
     },
+    energyAsset: {
+        communicationFee: 'Communication Fee',
+        amount: 'Amount'
+    },
     identityList:{
         title: 'Identity',
         search: 'Search',
@@ -716,6 +720,7 @@ export const ExplorerLang = {
             identity:'Identity',
             iService:'iService',
             tx:'Txs',
+            energyAsset:'Assets'
         },
         content: {
             address: 'Address',
