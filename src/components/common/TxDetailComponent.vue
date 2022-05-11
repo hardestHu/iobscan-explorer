@@ -10,8 +10,12 @@
             isService: true, // 可选 可跳转到 /servcie
             isAddress: true, // 可选 可跳转到 /address
             isSchema: true // 可选 使用 LargeString 渲染内容
-            isMulti: true // 可选 配合isAddress 使用，对用具有多个值的情况
             isAsset: true // 可选 跳转到 /asset
+            isArray: true // 可选 渲染多个
+            isIdentity: true // 可选 跳转到 /identity
+
+            // 需要配合使用的配置
+            isMulti: true // 可选 配合isAddress 使用，针对具有多个值的情况
         }]
      -->
   	<div>
@@ -56,7 +60,7 @@
 					<span v-else>--</span>
         </template>
         
-        <!-- isAsset 为true 可跳转 /asset -->
+        <!-- isAsset 为true 可跳转 /assets -->
         <template v-else-if="info.isAsset">
           <span v-if="!info.value || info.value === '--'"> -- </span>
           <router-link v-else :to="`/assets/${ info.value }`">
@@ -64,6 +68,29 @@
           </router-link>
         </template>
         
+        <!-- isArray 为true 渲染多个 -->
+        <template v-else-if="info.isArray">
+            <span>
+                <p class="mb-5" v-for="item in info.value" :key="item">{{item}}</p>
+            </span>
+        </template>
+        
+        <!-- isIdentity 为true 跳转到/identity -->
+        <template v-else-if="info.isIdentity">
+          <span v-if="!info.value || info.value === '--'"> -- </span>
+          <router-link v-else :to="`/identity/${ info.value }`">
+            {{ info.value }}
+          </router-link>
+        </template>
+
+        <!-- isLink 为true 渲染成a标签，可以跳转 -->
+        <template v-else-if="info.isLink">
+           <span v-if="!info.value || info.value === '--'"> -- </span>
+          <a v-else :href="info.value" target="_blank">
+            {{ info.value }}
+          </a>
+        </template>
+
         <template v-else>
           <span>{{ formatValue(info.value) }}</span>
         </template>
@@ -164,5 +191,8 @@ export default {
   .verticalShow{
     display: flex;
     flex-direction: column;
+  }
+  .mb-5{
+    margin-bottom: 0.05rem;
   }
 </style>

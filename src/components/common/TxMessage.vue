@@ -288,18 +288,17 @@
 			</template>
 		</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.send">
-			    <p>
-                    <span>{{$t('ExplorerLang.transactionInformation.send.amount')}}：</span>
-                    <span>
-                        <p style="margin-bottom: 0.05rem" v-for="item in amountArray" :key="item">{{item}}</p>
-                    </span>
-                </p>
+		<!-- <div v-if="txType === TX_TYPE.send">
+			<p>
+					<span>{{$t('ExplorerLang.transactionInformation.send.amount')}}：</span>
+					<span>
+							<p style="margin-bottom: 0.05rem" v-for="item in amountArray" :key="item">{{item}}</p>
+					</span>
+			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.from')}}：</span>
 				<template>
 					<span v-if="from === '--' || this.judgeCosmos(from)">{{from}}</span>
-<!--					<span v-else @click="addressRoute(from)" class="address_link">{{from}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${from}`">{{from}}</router-link>
 				</template>
 			</p>
@@ -307,11 +306,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.to')}}：</span>
 				<template>
 					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
-<!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link v-else class="address_link" :to="`/address/${to}`">{{to}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<!-- <div v-if="txType === TX_TYPE.respond_service">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
@@ -397,7 +395,7 @@
 				<span>{{timeout}}</span>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.pause_request_context ||
+		<!-- <div v-if="txType === TX_TYPE.pause_request_context ||
                    txType === TX_TYPE.start_request_context ||
                    txType === TX_TYPE.kill_request_context">
 			<p>
@@ -415,12 +413,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
 					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
-<!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link v-else  class="address_link" :to="`/address/${consumer}`">{{consumer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.update_request_context">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.update_request_context">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
 				<router-link v-if="serviceName != '--'" :to="`/service?serviceName=${serviceName}`">
@@ -428,10 +425,6 @@
 				</router-link>
 				<span v-if="serviceName == '--'"> -- </span>
 			</p>
-			<!--  <p>
-				 <span>{{$t('ExplorerLang.transactionInformation.pricing')}}：</span>
-				 <span>{{pricing}}</span>
-			 </p> -->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.requestContextId')}}：</span>
 				<span>{{(requestContextId || '').toUpperCase()}}</span>
@@ -440,19 +433,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}：</span>
 				<template>
 					<span v-if="consumer === '--'  || this.judgeCosmos(consumer)">{{consumer}}</span>
-<!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link  v-else :to="`/address/${consumer}`" class="address_link">{{consumer}}</router-link>
 				</template>
 			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}：</span>
 				<span style="display: flex;flex-direction: column" v-if="provider.length > 0">
-<!--                    <span
-		                    v-for="(item,index) in provider"
-		                    :key="index"
-		                    @click="addressRoute(item)" class="address_link">
-                        {{item}}
-                    </span>-->
 					<router-link v-for="(item,index) in provider"
 								 :key="index"
 								 :to="`/address/${item}`" class="address_link">{{item}}</router-link>
@@ -475,7 +461,7 @@
 				<span>{{$t('ExplorerLang.transactionInformation.timeOut')}}：</span>
 				<span>{{timeout}}</span>
 			</p>
-		</div>
+		</div> -->
 		<!-- <div v-if="txType === TX_TYPE.update_service_binding">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}：</span>
@@ -561,11 +547,7 @@
 				</template>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.recv_packet && prodConfig.txDetail && prodConfig.txDetail.ibc">
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.recvPacket.packet')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(packet)"  v-if="packet" :text="packet"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
+		<!-- <div v-if="txType === TX_TYPE.recv_packet && prodConfig.txDetail && prodConfig.txDetail.ibc">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.recvPacket.proof')}}：</span>
 				<span>{{proof}}</span>
@@ -594,45 +576,29 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
 		</div>
 		<div v-if="txType === TX_TYPE.recv_packet && !(prodConfig.txDetail && prodConfig.txDetail.ibc)">
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.packet')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(packet)"
-                             expand
-                             v-if="packet" :text="packet"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
-            <p>
-                <span>{{$t('ExplorerLang.transactionInformation.ibc.amount')}}</span>
-                <span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
-            </p>
-            <p>
-						<!-- hxj -->
+			<p>
+				<span>{{$t('ExplorerLang.transactionInformation.ibc.amount')}}</span>
+				<span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
+			</p>
+      <p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.from')}}：</span>
-<!--                <span @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
-            <p>
+      <p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.to')}}：</span>
-<!--                <span @click="addressRoute(receiver)" class="address_link">{{ receiver }}</span>-->
-				<!-- <router-link :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link> -->
 				<template>
 					<span v-if="receiver === '--' || this.judgeCosmos(receiver)">{{receiver}}</span>
 					<router-link v-else :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
 				</template>
 			</p>
-
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofCommitment')}}：</span>
-				<LargeString v-if="proofCommitment" :text="proofCommitment"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofHeight')}}：</span>
 				<LargeString v-if="proofHeight" :text="proofHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -641,13 +607,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<!-- MsgTypeIBCTransfer -->
-		<div v-if="txType === TX_TYPE.transfer">
+		<!-- <div v-if="txType === TX_TYPE.transfer">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.sourcePort')}}：</span>
 				<span>{{sourcePort}}</span>
@@ -686,8 +651,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.timeoutTimestamp')}}：</span>
 				<span>{{timeoutTimestamp}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.create_identity || txType === TX_TYPE.update_identity">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.create_identity || txType === TX_TYPE.update_identity">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.identity.id')}}：</span>
 				<template>
@@ -716,12 +681,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.create_client && prodConfig.txDetail && prodConfig.txDetail.ibc">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.create_client && prodConfig.txDetail && prodConfig.txDetail.ibc">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.client.clientID')}}：</span>
 				<span>{{clientID}}</span>
@@ -734,47 +698,32 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.create_client && !(prodConfig.txDetail && prodConfig.txDetail.ibc)">
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientState')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(clientState)" v-if="clientState" :text="clientState"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.consensusState')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(consensusState)" v-if="consensusState" :text="consensusState"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.create_client && !(prodConfig.txDetail && prodConfig.txDetail.ibc)">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.update_client">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.update_client">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.client.clientID')}}：</span>
 				<span>{{clientID}}</span>
 			</p>
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.client.header')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(header)"  v-if="header" :text="header"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.upgrade_client">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientID')}}：</span>
@@ -1131,29 +1080,20 @@
 				</template>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.timeout_packet">
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.packet')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(packet)" v-if="packet" :text="packet"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
-            <p>
-                <span>{{$t('ExplorerLang.transactionInformation.ibc.amount')}}</span>
-                <span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
-            </p>
-            <p>
-                <span>{{$t('ExplorerLang.transactionInformation.ibc.from')}}：</span>
-<!--                <span @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
-				<router-link  :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
-            </p>
-            <p>
-                <span>{{$t('ExplorerLang.transactionInformation.ibc.to')}}：</span>
-<!--                <span @click="addressRoute(receiver)" class="address_link">{{ receiver }}</span>-->
-				<router-link  :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
-            </p>
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofUnreceived')}}：</span>
-				<LargeString v-if="proofUnreceived" :text="proofUnreceived"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p> -->
+		<!-- <div v-if="txType === TX_TYPE.timeout_packet">
+			<p>
+					<span>{{$t('ExplorerLang.transactionInformation.ibc.amount')}}</span>
+					<span>{{amount.amount}} {{ (amount.denom || '').toUpperCase()}}</span>
+			</p>
+			<p>
+							<span>{{$t('ExplorerLang.transactionInformation.ibc.from')}}：</span>
+			<router-link  :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
+					</p>
+					<p>
+							<span>{{$t('ExplorerLang.transactionInformation.ibc.to')}}：</span>
+			<router-link  :to="`/address/${receiver}`" class="address_link">{{receiver}}</router-link>
+			</p>
+	
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofHeight')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(proofHeight)" v-if="proofHeight" :text="proofHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -1166,11 +1106,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.timeout_on_close_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.packet')}}：</span>
@@ -1794,7 +1733,7 @@
 			</p>
 		</div>
 
-		<div v-if="txType === TX_TYPE.issue_token">
+		<!-- <div v-if="txType === TX_TYPE.issue_token">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.symbol')}}: </span>
 				<template>
@@ -1830,12 +1769,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.edit_token">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.edit_token">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.symbol')}}: </span>
 				<template>
@@ -1859,12 +1797,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.mint_token">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.mint_token">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.tokenId')}}: </span>
 				<template>
@@ -1876,7 +1813,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.owner')}}: </span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
@@ -1888,12 +1824,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.to')}}: </span>
 				<template>
 					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
-<!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link  v-else :to="`/address/${to}`" class="address_link">{{to}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.transfer_token_owner">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.transfer_token_owner">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.tokenId')}}: </span>
 				<template>
@@ -1905,7 +1840,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.originalOwner')}}: </span>
 				<template>
 					<span v-if="originalOwner === '--' || this.judgeCosmos(originalOwner)">{{originalOwner}}</span>
-<!--					<span v-else @click="addressRoute(originalOwner)" class="address_link">{{originalOwner}}</span>-->
 					<router-link  v-else :to="`/address/${originalOwner}`" class="address_link">{{originalOwner}}</router-link>
 				</template>
 			</p>
@@ -1913,12 +1847,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.newOwner')}}: </span>
 				<template>
 					<span v-if="newOwner === '--' || this.judgeCosmos(newOwner)">{{newOwner}}</span>
-<!--					<span v-else @click="addressRoute(newOwner)" class="address_link">{{newOwner}}</span>-->
 					<router-link  v-else :to="`/address/${newOwner}`" class="address_link">{{newOwner}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.burn_token">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.burn_token">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.asset.symbol')}}: </span>
 				<template>
@@ -1930,7 +1863,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.sender')}}: </span>
 				<template>
 					<span v-if="sender === '--'  || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link  v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -1938,7 +1870,7 @@
 				<span>{{$t('ExplorerLang.transactionInformation.asset.amount')}}: </span>
 				<span>{{ amount }}</span>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.deposit">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.depositor')}}: </span>
@@ -2963,18 +2895,19 @@
 								// this.options = msg.options || '--';
 								break;
 							case TX_TYPE.send:
-								// this.from = msg.fromaddress || '--';
-								// this.to = msg.toaddress || '--';
-								this.from = msg.from_address || '--';
-								this.to = msg.to_address || '--';
-								this.amountArray = [];
-								if (msg.amount && msg.amount.length > 0) {
-									for (const item of msg.amount) {
-										const amount = await converCoin(item);
-										this.amountArray.push(`${amount.amount} ${amount.denom.toUpperCase()}` || '--')
-									}
-								}
-								this.amountArray && this.amountArray.length > 0 ? '' : this.amountArray = ['--']
+								this.buildSend(msg)
+								// // this.from = msg.fromaddress || '--';
+								// // this.to = msg.toaddress || '--';
+								// this.from = msg.from_address || '--';
+								// this.to = msg.to_address || '--';
+								// this.amountArray = [];
+								// if (msg.amount && msg.amount.length > 0) {
+								// 	for (const item of msg.amount) {
+								// 		const amount = await converCoin(item);
+								// 		this.amountArray.push(`${amount.amount} ${amount.denom.toUpperCase()}` || '--')
+								// 	}
+								// }
+								// this.amountArray && this.amountArray.length > 0 ? '' : this.amountArray = ['--']
 								break;
 							case TX_TYPE.call_service:
 								this.buildCallService(msg)
@@ -3080,20 +3013,20 @@
 								break;
 							case TX_TYPE.update_request_context:
 								this.buildUpdateRequestContext(msg)
-								// this.serviceName = (msg.ex || {}).service_name || '--';
-								this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
-								this.requestContextId = msg.request_context_id || '--';
-								this.consumer = msg.consumer || '--';
-								this.provider = msg.providers || '--';
-								this.repeatedFrequency = msg.repeated_frequency || '--';
-								this.repeatedTotal = msg.repeated_total || '--';
-								if (msg.service_fee_cap && msg.service_fee_cap.length) {
-									let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
-									this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
-								} else {
-									this.serviceFeeCap = '--';
-								}
-								this.timeout = (msg.timeout) ? msg.timeout : '--';
+								// // this.serviceName = (msg.ex || {}).service_name || '--';
+								// this.serviceName = msg.service_name ||  (msg.ex || {}).service_name || '--';
+								// this.requestContextId = msg.request_context_id || '--';
+								// this.consumer = msg.consumer || '--';
+								// this.provider = msg.providers || '--';
+								// this.repeatedFrequency = msg.repeated_frequency || '--';
+								// this.repeatedTotal = msg.repeated_total || '--';
+								// if (msg.service_fee_cap && msg.service_fee_cap.length) {
+								// 	let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
+								// 	this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
+								// } else {
+								// 	this.serviceFeeCap = '--';
+								// }
+								// this.timeout = (msg.timeout) ? msg.timeout : '--';
 								break;
 							case TX_TYPE.update_service_binding:
 								this.buildUpdateServiceBinding(msg)
@@ -3138,42 +3071,48 @@
 								// this.owner = msg.owner || '--';
 								break;
 							case TX_TYPE.recv_packet:
-								if(prodConfig.txDetail && prodConfig.txDetail.ibc) {
-									this.packet = JSON.stringify(msg.packet || {}) || '--';
-									this.proof = msg.proof || '--';
-									this.proofHeight = msg.proof_height || '--';
-									this.proofPath = JSON.stringify(msg.proof_path || []) || '--';
-									this.proofData = msg.proof_data || '--';
-									this.clientID = msg.client_id || '--';
-									this.module = msg.module || '--';
-									this.signer = msg.signer || '--';
-								} else {
-									this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
-									this.proofCommitment = msg.proof_commitment || '--';
-									this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-									this.signer = msg.signer || '--';
-									let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,message.type);
-									if(msg.packet && msg.packet.data){
-										this.sender = msg.packet.data.sender;
-										this.receiver = msg.packet.data.receiver;
-										this.amount = await converCoin({
-											denom:originalDenom || msg.packet.data.denom,
-											amount:msg.packet.data.amount,
-										});
-									}
-								}
+								this.buildRecvPacket(msg, message.type)
+
+								// if(prodConfig.txDetail && prodConfig.txDetail.ibc) {
+								// 	this.packet = JSON.stringify(msg.packet || {}) || '--';
+								// 	this.proof = msg.proof || '--';
+								// 	this.proofHeight = msg.proof_height || '--';
+								// 	this.proofPath = JSON.stringify(msg.proof_path || []) || '--';
+								// 	this.proofData = msg.proof_data || '--';
+								// 	this.clientID = msg.client_id || '--';
+								// 	this.module = msg.module || '--';
+								// 	this.signer = msg.signer || '--';
+								// } else {
+								// 	this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
+								// 	this.proofCommitment = msg.proof_commitment || '--';
+								// 	this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// 	this.signer = msg.signer || '--';
+								// 	let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,message.type);
+								// 	if(msg.packet && msg.packet.data){
+								// 		this.sender = msg.packet.data.sender;
+								// 		this.receiver = msg.packet.data.receiver;
+								// 		this.amount = await converCoin({
+								// 			denom:originalDenom || msg.packet.data.denom,
+								// 			amount:msg.packet.data.amount,
+								// 		});
+								// 	}
+								// }
 								break;
 							case TX_TYPE.create_identity:
 							case TX_TYPE.update_identity:
-								let pubkey = msg.pubkey || {};
-								this.id = msg.id || '--';
-								this.pubkey = pubkey.pubkey || '--';
-								this.certificate = msg.certificate || '--';
-								this.credentials = msg.credentials && msg.credentials !== '[do-not-modify]' ? msg.credentials : '--';
-								this.pubKeyAlgo = TxHelper.getPubKeyAlgorithm(pubkey.algorithm) || '--';
-								this.owner = msg.owner || '--';
+								this.buildCreateIdentity(msg)
+								
+								// let pubkey = msg.pubkey || {};
+								// this.id = msg.id || '--';
+								// this.pubkey = pubkey.pubkey || '--';
+								// this.certificate = msg.certificate || '--';
+								// this.credentials = msg.credentials && msg.credentials !== '[do-not-modify]' ? msg.credentials : '--';
+								// this.pubKeyAlgo = TxHelper.getPubKeyAlgorithm(pubkey.algorithm) || '--';
+								// this.owner = msg.owner || '--';
 								break;
 							case TX_TYPE.create_client:
+								this.buildCreateClient(msg)
+
 								if(prodConfig.txDetail && prodConfig.txDetail.ibc) {
 									this.clientID = msg.client_id || '--';
 									this.header = JSON.stringify(msg.header || {}) || '--';
@@ -3185,9 +3124,11 @@
 								}
 								break;
 							case TX_TYPE.update_client:
-								this.clientID = msg.client_id || '--';
-								this.header = msg.header || '--';
-								this.signer = msg.signer || '--';
+								this.buildUpdateClient(msg)
+
+								// this.clientID = msg.client_id || '--';
+								// this.header = msg.header || '--';
+								// this.signer = msg.signer || '--';
 								break;
 							case TX_TYPE.begin_redelegate:
                                 let amount = await converCoin(msg.amount);
@@ -3552,37 +3493,44 @@
 							break;
 							case TX_TYPE.issue_token:
 								this.buildIssueToken(msg)
-								this.symbol = msg.symbol || '--';
-								this.name = msg.name || '--';
-								this.decimal = msg.scale || '--';
-								this.initialSupply = msg.initial_supply || '--';
-								this.maxSupply = msg.max_supply || '--';
-								this.mintable = msg.mintable;
-								this.owner = msg.owner || '--';
-								this.minUnit = msg.min_unit || '--';
+								// this.symbol = msg.symbol || '--';
+								// this.name = msg.name || '--';
+								// this.decimal = msg.scale || '--';
+								// this.initialSupply = msg.initial_supply || '--';
+								// this.maxSupply = msg.max_supply || '--';
+								// this.mintable = msg.mintable;
+								// this.owner = msg.owner || '--';
+								// this.minUnit = msg.min_unit || '--';
 							break;
 							case TX_TYPE.edit_token:
-								this.symbol = msg.symbol || '--';
-								this.name = msg.name || '--';
-								this.maxSupply = msg.max_supply !== 0 ? msg.max_supply || '--' : msg.max_supply;
-								this.mintable = msg.mintable;
-								this.owner = msg.owner || '--';
+								this.buildEditToken(msg)
+
+								// this.symbol = msg.symbol || '--';
+								// this.name = msg.name || '--';
+								// this.maxSupply = msg.max_supply !== 0 ? msg.max_supply || '--' : msg.max_supply;
+								// this.mintable = msg.mintable;
+								// this.owner = msg.owner || '--';
 							break;
 							case TX_TYPE.mint_token:
-								this.symbol = msg.symbol || '--';
-								this.owner = msg.owner || '--';
-								this.amount = msg.amount || '--';
-								this.to = msg.to || '--';
+								this.buildMintToken(msg)
+
+								// this.symbol = msg.symbol || '--';
+								// this.owner = msg.owner || '--';
+								// this.amount = msg.amount || '--';
+								// this.to = msg.to || '--';
 							break;
 							case TX_TYPE.transfer_token_owner:
-								this.symbol = msg.symbol || '--';
-								this.originalOwner = msg.src_owner || '--';
-								this.newOwner = msg.dst_owner || '--';
+								this.buildTransferTokenOwner(msg)
+
+								// this.symbol = msg.symbol || '--';
+								// this.originalOwner = msg.src_owner || '--';
+								// this.newOwner = msg.dst_owner || '--';
 							break;
 							case TX_TYPE.burn_token:
-								this.symbol = msg.symbol || '--';
-								this.sender = msg.sender || '--';
-								this.amount = msg.amount || '--';
+								this.buildBurnToken(msg)
+								// this.symbol = msg.symbol || '--';
+								// this.sender = msg.sender || '--';
+								// this.amount = msg.amount || '--';
 							break;
 							case TX_TYPE.deposit:
 								if(msg.amount && msg.amount.length > 0) {
@@ -3731,20 +3679,22 @@
 								this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.timeout_packet:
-								this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
-								this.proofUnreceived = msg.proof_unreceived || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.nextSequenceRecv = msg.next_sequence_recv || '--';
-								this.signer = msg.signer || '--';
-								let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,message.type);
-                                if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}'){
-                                    this.sender = msg.packet.data.sender;
-                                    this.receiver = msg.packet.data.receiver;
-                                    this.amount = await converCoin({
-                                        denom:originalDenom || msg.packet.data.denom,
-                                        amount:msg.packet.data.amount,
-                                    });
-                                }
+								this.buildTimeoutPacket(msg, message.type)
+
+								// this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
+								// this.proofUnreceived = msg.proof_unreceived || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.nextSequenceRecv = msg.next_sequence_recv || '--';
+								// this.signer = msg.signer || '--';
+								// let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,message.type);
+                //                 if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}'){
+                //                     this.sender = msg.packet.data.sender;
+                //                     this.receiver = msg.packet.data.receiver;
+                //                     this.amount = await converCoin({
+                //                         denom:originalDenom || msg.packet.data.denom,
+                //                         amount:msg.packet.data.amount,
+                //                     });
+                //                 }
 							break;
 							case TX_TYPE.timeout_on_close_packet:
 								this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
@@ -3770,14 +3720,16 @@
 							break;
 							// MsgTypeIBCTransfer
 							case TX_TYPE.transfer:
-								this.sourcePort = msg.source_port || '--';
-								this.sourceChannel = msg.source_channel || '--';
-								this.token = msg.token ?  await converCoin(msg.token) : '--';
-								this.sender = msg.sender || '--';
-								this.receiver = msg.receiver || '--';
-								this.timeoutHeight = msg.timeout_height ? JSON.stringify(msg.timeout_height) : '--';
-								let timeoutTimestamp = msg.timeout_timestamp  && Math.floor(new Date(msg.timeout_timestamp).getTime() / 1000);
-								timeoutTimestamp ? this.timeoutTimestamp = Tools.formatLocalTime(timeoutTimestamp) : this.timeoutTimestamp ='--';
+								this.buildTransfer(msg)
+
+								// this.sourcePort = msg.source_port || '--';
+								// this.sourceChannel = msg.source_channel || '--';
+								// this.token = msg.token ?  await converCoin(msg.token) : '--';
+								// this.sender = msg.sender || '--';
+								// this.receiver = msg.receiver || '--';
+								// this.timeoutHeight = msg.timeout_height ? JSON.stringify(msg.timeout_height) : '--';
+								// let timeoutTimestamp = msg.timeout_timestamp  && Math.floor(new Date(msg.timeout_timestamp).getTime() / 1000);
+								// timeoutTimestamp ? this.timeoutTimestamp = Tools.formatLocalTime(timeoutTimestamp) : this.timeoutTimestamp ='--';
 							break;
 							case TX_TYPE.multisend:
 								this.inputs = [];
@@ -4706,52 +4658,409 @@
 				]
 			},
 			// issue_token
-			buildIssueDenom(msg){
-					// this.symbol = msg.symbol || '--';
-					// 			this.name = msg.name || '--';
-					// 			this.decimal = msg.scale || '--';
-					// 			this.initialSupply = msg.initial_supply || '--';
-					// 			this.maxSupply = msg.max_supply || '--';
-					// 			this.mintable = msg.mintable;
-					// 			this.owner = msg.owner || '--';
-					// 			this.minUnit = msg.min_unit || '--';
+			buildIssueToken(msg){
 				this.detailInfo = [
 					{
 						label: this.$t('ExplorerLang.transactionInformation.asset.symbol'),
 						value: msg.symbol,
 						isAsset: true
 					},
-					//hxj
 					{
-						label: this.$t('ExplorerLang.transactionInformation.nft.denomName'),
+						label: this.$t('ExplorerLang.transactionInformation.asset.name'),
 						value: msg.name,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.nft.symbol'),
-						value: msg.symbol,
+						label: this.$t('ExplorerLang.transactionInformation.asset.minUnit'),
+						value: msg.min_unit,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.nft.schema'),
-						value: msg.schema,
+						label: this.$t('ExplorerLang.transactionInformation.asset.decimal'),
+						value: msg.scale,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.nft.mintRestricted'),
-						value: msg.mint_restricted,
+						label: this.$t('ExplorerLang.transactionInformation.asset.initialSupply'),
+						value: msg.max_supply,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.nft.updateRestricted'),
+						label: this.$t('ExplorerLang.transactionInformation.asset.maxSupply'),
 						value: msg.update_restricted,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.issueDenom.sender'),
+						label: this.$t('ExplorerLang.transactionInformation.asset.mintable'),
+						value: msg.mintable,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.owner'),
+						value: msg.owner,
+						isAddress: true
+					}
+				]
+			},
+		  // edit_token
+			buildEditToken(msg){
+				this.detailInfo =  [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.symbol'),
+						value: msg.symbol,
+						isAsset: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.name'),
+						value: msg.name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.maxSupply'),
+						value: msg.max_supply !== 0 ? (msg.max_supply || '--') : msg.max_supply,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.mintable'),
+						value: msg.mintable,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.owner'),
+						value: msg.owner,
+						isAddress: true
+					}
+				]
+			},
+			// mint_token
+			buildMintToken(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.tokenId'),
+						value: msg.symbol,
+						isAsset: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.owner'),
+						value: msg.owner,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.amount'),
+						value: msg.amount,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.to'),
+						value: msg.to,
+						isAddress: true
+					}
+				]
+			},
+			// transfer_token_owner
+			buildTransferTokenOwner(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.tokenId'),
+						value: msg.symbol,
+						isAsset: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.originalOwner'),
+						value: msg.src_owner,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.newOwner'),
+						value: msg.dst_owner,
+						isAddress: true
+					}
+				]
+			},
+			// burn_token
+			buildBurnToken(msg){
+					this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.symbol'),
+						value: msg.symbol,
+						isAsset: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.sender'),
 						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.asset.amount'),
+						value: msg.amount,
+					}
+				]
+			},
+			// send
+			async buildSend(msg){
+				const amountArray = [];
+				if (msg.amount && msg.amount.length > 0) {
+					for (const item of msg.amount) {
+						const amount = await converCoin(item);
+						amountArray.push(`${amount.amount} ${amount.denom.toUpperCase()}` || '--')
+					}
+				}
+				amountArray && amountArray.length > 0 ? '' : amountArray.push('--')
+
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.send.amount'),
+						value: amountArray,
+						isArray: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.from_address,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.to'),
+						value: msg.to_address,
+						isAddress: true
+					}
+				]
+			},
+			// transfer 
+			async buildTransfer(msg){
+				const token = msg.token ?  await converCoin(msg.token) : '--';
+				const timeoutHeight = msg.timeout_height ? JSON.stringify(msg.timeout_height) : '--';
+				let timeoutTimestamp = msg.timeout_timestamp  && Math.floor(new Date(msg.timeout_timestamp).getTime() / 1000);
+				timeoutTimestamp = timeoutTimestamp ? Tools.formatLocalTime(timeoutTimestamp) : '--';
+			
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.sourcePort'),
+						value: msg.source_port,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.sourceChannel'),
+						value: msg.source_channel,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.token'),
+						value: token.amount + ' ' + (token.denom || '').toUpperCase(),
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.receiver'),
+						value: msg.receiver,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.timeoutHeight'),
+						value: timeoutHeight,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.timeoutTimestamp'),
+						value: timeoutTimestamp,
+					}
+				]
+			},
+			// recv_packet
+			async buildRecvPacket(msg, type){
+				let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet, type);
+				let amount,sender,receiver;
+				if(msg.packet && msg.packet.data){
+					sender = msg.packet.data.sender;
+					receiver = msg.packet.data.receiver;
+					amount = await converCoin({
+						denom:originalDenom || msg.packet.data.denom,
+						amount:msg.packet.data.amount,
+					});
+				}
+
+				let infoList = []
+				if(prodConfig.txDetail && prodConfig.txDetail.ibc){
+					infoList = [
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.proof'),
+							value: msg.proof,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.proofHeight'),
+							value: msg.proof_height,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.proofPath'),
+							value: JSON.stringify(msg.proof_path || []) || '--',
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.proofData'),
+							value: msg.proof_data || '--',
+							isSchema: true
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.clientID'),
+							value: msg.client_id,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.recvPacket.module'),
+							value: msg.module,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.signer'),
+							value: msg.signer,
+							isAddress: true
+						}
+					]
+				}else{
+					infoList = [
+						{
+							label: this.$t('ExplorerLang.transactionInformation.ibc.amount'),
+							value: amount.amount + ' ' + (amount.denom || '').toUpperCase(),
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.ibc.from'),
+							value: sender,
+							isAddress: true,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.ibc.to'),
+							value: receiver,
+							isAddress: true,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+							value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+							isSchema: true,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.signer'),
+							value: msg.signer,
+							isAddress: true
+						}
+					]
+				}
+				this.detailInfo = infoList
+			},
+
+			// timeout_packet
+			async buildTimeoutPacket(msg, type){
+				let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,type);
+				let sender, receiver, amount;
+				if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}'){
+						sender = msg.packet.data.sender;
+						receiver = msg.packet.data.receiver;
+						amount = await converCoin({
+								denom:originalDenom || msg.packet.data.denom,
+								amount:msg.packet.data.amount,
+						});
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.amount'),
+						value: amount.amount + ' ' + (amount.denom || '').toUpperCase(),
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.from'),
+						value: sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.to'),
+						value: receiver,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.nextSequenceRecv'),
+						value: msg.next_sequence_recv,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// create_identity/update_identity -未自测
+			buildCreateIdentity(msg){
+				const credentials = msg.credentials && msg.credentials !== '[do-not-modify]' ? msg.credentials : '--';
+				const pubKeyAlgo = TxHelper.getPubKeyAlgorithm(pubkey.algorithm) || '--';
+				this.detailInfo = [
+					{
+							label: this.$t('ExplorerLang.transactionInformation.identity.id'),
+							value: msg.id,
+							isIdentity: true
+					},
+					{
+							label: this.$t('ExplorerLang.transactionInformation.identity.pubkey'),
+							value: msg?.pubkey?.pubkey || '--',
+							isSchema: true
+					},
+					{
+							label: this.$t('ExplorerLang.transactionInformation.identity.pubKeyAlgo'),
+							value: pubKeyAlgo,
+							isIdentity: true
+					},
+					{
+							label: this.$t('ExplorerLang.transactionInformation.identity.certificate'),
+							value: msg.certificate,
+							isSchema: true
+					},
+					{
+							label: this.$t('ExplorerLang.transactionInformation.identity.credentials'),
+							value: credentials,
+							isLink: true
+					},
+					{
+							label: this.$t('ExplorerLang.transactionInformation.owner'),
+							value: msg.owner,
+							isAddress: true
+					}
+				]
+			},
+
+			//create_client
+			buildCreateClient(msg){
+				if(prodConfig.txDetail && prodConfig.txDetail.ibc){
+					this.detailInfo = [
+						{
+							label: this.$t('ExplorerLang.transactionInformation.client.clientID'),
+							value: msg.client_id,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.client.header'),
+							value: JSON.stringify(msg.header || {}) || '--',
+							isSchema: true
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.signer'),
+							value: msg.signer,
+							isAddress: true
+						}
+					]
+				}else{
+					this.detailInfo = [
+						{
+							label: this.$t('ExplorerLang.transactionInformation.signer'),
+							value: msg.signer,
+							isAddress: true
+						}
+					]
+				}
+				
+			}, 
+
+			// update_client
+			buildUpdateClient(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.client.clientID'),
+						value: msg.client_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
 						isAddress: true
 					}
 				]
 			}
-
-
-
 		}
 	}
 </script>
