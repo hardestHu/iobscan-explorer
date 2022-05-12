@@ -724,7 +724,7 @@
 				</template>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.upgrade_client">
+		<!-- <div v-if="txType === TX_TYPE.upgrade_client">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientID')}}：</span>
 				<span>{{clientID}}</span>
@@ -749,12 +749,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.submit_misbehaviour">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.submit_misbehaviour">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientID')}}：</span>
 				<span>{{clientID}}</span>
@@ -767,12 +766,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.connection_open_init">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.connection_open_init">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientID')}}：</span>
 				<span>{{clientID}}</span>
@@ -793,12 +791,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.connection_open_try">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.connection_open_try">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientID')}}：</span>
 				<span>{{clientID}}</span>
@@ -847,12 +844,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.connection_open_ack">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.connection_open_ack">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.connectionId')}}：</span>
 				<span>{{connectionId}}</span>
@@ -865,26 +861,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.version')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(version)" v-if="version" :text="version"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
 			</p>
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.clientState')}}：</span>
-				<span>{{clientState}}</span>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofHeight')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(proofHeight)" v-if="proofHeight" :text="proofHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
 			</p>
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofTry')}}：</span>
-				<span>{{proofTry}}</span>
-			</p>-->
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofClient')}}：</span>
-				<span>{{proofClient}}</span>
-			</p>-->
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofConsensus')}}：</span>
-				<span>{{proofConsensus}}</span>
-			</p>-->
+
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.consensusHeight')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(consensusHeight)" v-if="consensusHeight" :text="consensusHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -893,12 +874,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.connection_open_confirm">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.connection_open_confirm">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.connectionId')}}：</span>
 				<span>{{connectionId}}</span>
@@ -915,30 +895,24 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_open_init">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_open_init">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
 			</p>
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.channel')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(channel)" v-if="channel" :text="channel"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_open_try">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_open_try">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
@@ -967,12 +941,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_open_ack">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_open_ack">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
@@ -989,14 +962,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.counterpartyVersion')}}：</span>
 				<span>{{counterpartyVersion}}</span>
 			</p>
-			<!-- <p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofTry')}}：</span>
-				<span>{{proofTry}}</span>
-			</p> -->
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofTry')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(proofTry)" v-if="proofTry" :text="proofTry"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofHeight')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(proofHeight)" v-if="proofHeight" :text="proofHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -1005,12 +970,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_open_confirm">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_open_confirm">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
@@ -1031,12 +995,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_close_init">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_close_init">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
@@ -1049,12 +1012,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.channel_close_confirm">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.channel_close_confirm">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.portId')}}：</span>
 				<span>{{portId}}</span>
@@ -1075,11 +1037,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--' || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link  v-else :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<!-- <div v-if="txType === TX_TYPE.timeout_packet">
 			<p>
 					<span>{{$t('ExplorerLang.transactionInformation.ibc.amount')}}</span>
@@ -1110,7 +1071,7 @@
 				</template>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.timeout_on_close_packet">
+		<!-- <div v-if="txType === TX_TYPE.timeout_on_close_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.packet')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(packet)" v-if="packet" :text="packet"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -1135,16 +1096,11 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.acknowledge_packet">
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.packet')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(packet)" v-if="packet" :text="packet"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.acknowledge_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.acknowledgement')}}：</span>
 				<span>{{acknowledgement}}</span>
@@ -1153,11 +1109,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.token')}}：</span>
 				<span>{{amount}}</span>
 			</p>
-
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofAcked')}}：</span>
-				<LargeString :isShowPre="Tools.isJSON(proofAcked)" v-if="proofAcked" :text="proofAcked"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.ibc.proofHeight')}}：</span>
 				<LargeString :isShowPre="Tools.isJSON(proofHeight)" v-if="proofHeight" :text="proofHeight"  :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
@@ -1166,11 +1117,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.signer')}}：</span>
 				<template>
 					<span v-if="signer === '--'  || this.judgeCosmos(signer)">{{signer}}</span>
-<!--					<span v-else @click="addressRoute(signer)" class="address_link">{{signer}}</span>-->
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 
 		<div v-if="txType === TX_TYPE.begin_redelegate">
 			<p>
@@ -1871,12 +1821,11 @@
 				<span>{{ amount }}</span>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.deposit">
+		<!-- <div v-if="txType === TX_TYPE.deposit">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.depositor')}}: </span>
 				<template>
 					<span v-if="depositor === '--' || this.judgeCosmos(depositor)">{{depositor}}</span>
-<!--					<span v-else @click="addressRoute(depositor)" class="address_link">{{depositor}}</span>-->
 					<router-link  v-else :to="`/address/${depositor}`" class="address_link">{{depositor}}</router-link>
 				</template>
 			</p>
@@ -1891,13 +1840,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.gov.deposit')}}: </span>
 				<span>{{deposit}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.vote">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.vote">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.voter')}}: </span>
 				<template>
 					<span v-if="voter === '--' || this.judgeCosmos(voter)">{{voter}}</span>
-<!--					<span v-else @click="addressRoute(voter)" class="address_link">{{voter}}</span>-->
 					<router-link  v-else :to="`/address/${voter}`" class="address_link">{{voter}}</router-link>
 				</template>
 			</p>
@@ -1912,13 +1860,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.gov.option')}}: </span>
 				<span>{{option}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.submit_proposal">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.submit_proposal">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.gov.proposer')}} : </span>
 				<template>
 					<span v-if="proposer === '--' || this.judgeCosmos(proposer)">{{proposer}}</span>
-<!--					<span v-else @click="addressRoute(proposer)" class="address_link">{{proposer}}</span>-->
 					<router-link  v-else :to="`/address/${proposer}`" class="address_link">{{proposer}}</router-link>
 				</template>
 			</p>
@@ -1966,7 +1913,7 @@
 				<span>{{$t('ExplorerLang.transactionInformation.gov.amount')}} : </span>
 				<span>{{amount}}</span>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.multisend">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.multisend.inputs')}}: </span>
@@ -1989,7 +1936,7 @@
 				</span>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.create_htlc">
+		<!-- <div v-if="txType === TX_TYPE.create_htlc">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.id')}} : </span>
 				<span>{{id || '--'}}</span>
@@ -2002,7 +1949,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -2010,7 +1956,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.to')}} : </span>
 				<template>
 					<span v-if="to === '--' || this.judgeCosmos(to)">{{to}}</span>
-<!--					<span v-else @click="addressRoute(to)" class="address_link">{{to}}</span>-->
 					<router-link v-else :to="`/address/${to}`" class="address_link">{{to}}</router-link>
 				</template>
 			</p>
@@ -2038,8 +1983,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.transfer')}} : </span>
 				<span>{{transfer}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.claim_htlc">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.claim_htlc">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.id')}} : </span>
 				<span>{{id}}</span>
@@ -2056,7 +2001,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{sender}}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -2064,7 +2008,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.recipient')}} : </span>
 				<template>
 					<span v-if="recipient === '--' || this.judgeCosmos(recipient)">{{recipient}}</span>
-<!--					<span v-else @click="addressRoute(recipient)" class="address_link">{{recipient}}</span>-->
 					<router-link v-else :to="`/address/${recipient}`" class="address_link">{{recipient}}</router-link>
 				</template>
 			</p>
@@ -2076,7 +2019,7 @@
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.transfer')}} : </span>
 				<span>{{transfer}}</span>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.refund_htlc">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.htlc.sender')}} : </span>
@@ -2092,7 +2035,7 @@
 			</p>
 		</div>
 		<!--新增TIBC NFT Transfer Out-->
-		<div v-if="txType === TX_TYPE.tibc_nft_transfer">
+		<!-- <div v-if="txType === TX_TYPE.tibc_nft_transfer">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.idTibc')}}</span>
 				<span>{{idTibc}}</span>
@@ -2126,7 +2069,7 @@
 				</template>
 			</p>
 
-			</div>
+			</div> -->
 		<!--新增TIBC NFT Transfer In -->
 		<div v-if="txType === TX_TYPE.tibc_recv_packet">
 				<p>
@@ -3533,150 +3476,179 @@
 								// this.amount = msg.amount || '--';
 							break;
 							case TX_TYPE.deposit:
-								if(msg.amount && msg.amount.length > 0) {
-									let deposit = await converCoin(msg.amount[0]);
-									this.deposit = `${deposit.amount} ${deposit.denom.toUpperCase()}`;
-								} else {
-									this.deposit = '--'
-								}
-								this.depositor = msg.depositor || '--';
-								this.proposalID = msg.proposal_id || '--';
+								this.buildDeposit(msg)
+
+								// if(msg.amount && msg.amount.length > 0) {
+								// 	let deposit = await converCoin(msg.amount[0]);
+								// 	this.deposit = `${deposit.amount} ${deposit.denom.toUpperCase()}`;
+								// } else {
+								// 	this.deposit = '--'
+								// }
+								// this.depositor = msg.depositor || '--';
+								// this.proposalID = msg.proposal_id || '--';
 							break;
 							case TX_TYPE.vote:
-								this.voter = msg.voter || '--';
-								this.proposalID = msg.proposal_id || '--';
-								this.option = msg.option ? formatVoteOptions[voteOptions[msg.option]] : '--';
+								this.buildVote(msg)
+								// this.voter = msg.voter || '--';
+								// this.proposalID = msg.proposal_id || '--';
+								// this.option = msg.option ? formatVoteOptions[voteOptions[msg.option]] : '--';
 							break;
 							case TX_TYPE.submit_proposal:
-								this.proposer = msg.proposer || '--';
-								if(msg.initial_deposit && msg.initial_deposit.length > 0) {
-									let initialDeposit = await converCoin(msg.initial_deposit[0]);
-									this.initialDeposit = `${initialDeposit.amount} ${initialDeposit.denom.toUpperCase()}`;
-								} else {
-									this.initialDeposit = '--'
-								}
-								this.title = msg.content && msg.content.title || '--'
-								this.description = msg.content && msg.content.description || '--'
-								this.parameter = msg.content && msg.content.changes
-								let plan = msg.content &&  msg.content.plan
-								if(plan) {
-									this.name = plan.name
-									let timestamp = plan.time  && Math.floor(new Date(plan.time).getTime() / 1000)
-									this.time = timestamp && Tools.formatLocalTime(timestamp)
-									this.switchHeight = plan.height ? plan.height : '--'
-									if(this.switchHeight && this.switchHeight !== '--') {
-										this.time = '--'
-									} else {
-										this.time = timestamp && Tools.formatLocalTime(timestamp)
-									}
-									this.info = plan.info
-									this.upgradedClientState = plan.upgradedclientstate || '--'
-								}
-								this.recipient = msg.content && msg.content.recipient
-								let n = msg.content && msg.content.amount && msg.content.amount[0]
-								if(n) {
-									n = await converCoin(n)
-									if(n.amount !== '0') {
-										this.amount = `${n.amount} ${n.denom.toUpperCase()}`
-									} else {
-										this.amount = '--'
-									}
+								this.buildSubmitProposal(msg)
 
-								}
+								// this.proposer = msg.proposer || '--';
+								// if(msg.initial_deposit && msg.initial_deposit.length > 0) {
+								// 	let initialDeposit = await converCoin(msg.initial_deposit[0]);
+								// 	this.initialDeposit = `${initialDeposit.amount} ${initialDeposit.denom.toUpperCase()}`;
+								// } else {
+								// 	this.initialDeposit = '--'
+								// }
+								// this.title = msg.content && msg.content.title || '--'
+								// this.description = msg.content && msg.content.description || '--'
+								// this.parameter = msg.content && msg.content.changes
+								// let plan = msg.content &&  msg.content.plan
+								// if(plan) {
+								// 	this.name = plan.name
+								// 	let timestamp = plan.time  && Math.floor(new Date(plan.time).getTime() / 1000)
+								// 	this.time = timestamp && Tools.formatLocalTime(timestamp)
+								// 	this.switchHeight = plan.height ? plan.height : '--'
+								// 	if(this.switchHeight && this.switchHeight !== '--') {
+								// 		this.time = '--'
+								// 	} else {
+								// 		this.time = timestamp && Tools.formatLocalTime(timestamp)
+								// 	}
+								// 	this.info = plan.info
+								// 	this.upgradedClientState = plan.upgradedclientstate || '--'
+								// }
+								// this.recipient = msg.content && msg.content.recipient
+								// let n = msg.content && msg.content.amount && msg.content.amount[0]
+								// if(n) {
+								// 	n = await converCoin(n)
+								// 	if(n.amount !== '0') {
+								// 		this.amount = `${n.amount} ${n.denom.toUpperCase()}`
+								// 	} else {
+								// 		this.amount = '--'
+								// 	}
+
+								// }
 							break;
 							case TX_TYPE.upgrade_client:
-								this.clientID = msg.client_id || '--';
-								this.clientState = msg.client_state || '--';
-								this.consensusState = msg.consensus_state || '--';
-								this.proofUpgradeClient = msg.proof_upgrade_client || '--';
-								this.proofUpgradeConsensusState = msg.proof_upgrade_consensus_state || '--';
-								this.signer = msg.signer || '--';
+								this.buildUpgradeClient(msg)
+
+								// this.clientID = msg.client_id || '--';
+								// this.clientState = msg.client_state || '--';
+								// this.consensusState = msg.consensus_state || '--';
+								// this.proofUpgradeClient = msg.proof_upgrade_client || '--';
+								// this.proofUpgradeConsensusState = msg.proof_upgrade_consensus_state || '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.submit_misbehaviour:
-								this.clientID = msg.client_id || '--';
-								this.misbehaviour = msg.misbehaviour || '--';
-								this.signer = msg.signer || '--';
+								this.buildSubmitMisbehaviour(msg)
+
+								// this.clientID = msg.client_id || '--';
+								// this.misbehaviour = msg.misbehaviour || '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.connection_open_init:
-								this.clientID = msg.client_id || '--';
-								this.counterparty = msg.counterparty ? JSON.stringify(msg.counterparty) : '--';
-								this.version = msg.version ? JSON.stringify(msg.version) : '--';
-								this.delayPeriod = msg.delay_period || '--';
-								this.signer = msg.signer || '--';
+								this.buildConnectionOpenInit(msg)
+
+								// this.clientID = msg.client_id || '--';
+								// this.counterparty = msg.counterparty ? JSON.stringify(msg.counterparty) : '--';
+								// this.version = msg.version ? JSON.stringify(msg.version) : '--';
+								// this.delayPeriod = msg.delay_period || '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.connection_open_try:
-								this.clientID = msg.client_id || '--';
-								this.previousConnectionId  = msg.previous_connection_id  || '--';
-								this.clientState = msg.client_state || '--';
-								this.counterparty = msg.counterparty ? JSON.stringify(msg.counterparty) : '--';
-								this.delayPeriod = msg.delay_period || '--';
-								this.counterpartyVersions = msg.counterparty_versions ? JSON.stringify(msg.counterparty_versions) : '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.proofInit = msg.proof_init || '--';
-								this.proofClient = msg.proof_client || '--';
-								this.proofConsensus = msg.proof_consensus || '--';
-								this.consensusHeight = msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildConnectionOpenTry(msg)
+
+								// this.clientID = msg.client_id || '--';
+								// this.previousConnectionId  = msg.previous_connection_id  || '--';
+								// this.clientState = msg.client_state || '--';
+								// this.counterparty = msg.counterparty ? JSON.stringify(msg.counterparty) : '--';
+								// this.delayPeriod = msg.delay_period || '--';
+								// this.counterpartyVersions = msg.counterparty_versions ? JSON.stringify(msg.counterparty_versions) : '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.proofInit = msg.proof_init || '--';
+								// this.proofClient = msg.proof_client || '--';
+								// this.proofConsensus = msg.proof_consensus || '--';
+								// this.consensusHeight = msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.connection_open_ack:
-								this.connectionId = msg.connection_id || '--';
-								this.counterpartyConnectionId = msg.counterparty_connection_id || '--';
-								this.version = msg.version ? JSON.stringify(msg.version) : '--';
-								this.clientState = msg.client_state  || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.proofTry = msg.proof_try || '--';
-								this.proofClient = msg.proof_client || '--';
-								this.proofConsensus = msg.proof_consensus || '--';
-								this.consensusHeight = msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildConnectionOpenAck(msg)
+
+								// this.connectionId = msg.connection_id || '--';
+								// this.counterpartyConnectionId = msg.counterparty_connection_id || '--';
+								// this.version = msg.version ? JSON.stringify(msg.version) : '--';
+								// this.clientState = msg.client_state  || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.proofTry = msg.proof_try || '--';
+								// this.proofClient = msg.proof_client || '--';
+								// this.proofConsensus = msg.proof_consensus || '--';
+								// this.consensusHeight = msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.connection_open_confirm:
-								this.connectionId = msg.connection_id || '--';
-								this.proofAck = msg.proof_ack || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildConnectionOpenConfirm(msg)
+
+								// this.connectionId = msg.connection_id || '--';
+								// this.proofAck = msg.proof_ack || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_open_init:
-								this.portId = msg.port_id || '--';
-								this.channel = msg.channel ? JSON.stringify(msg.channel) : '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelOpenInit(msg)
+								
+								// this.portId = msg.port_id || '--';
+								// this.channel = msg.channel ? JSON.stringify(msg.channel) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_open_try:
-								this.portId = msg.port_id || '--';
-								this.previousChannelId = msg.previous_channel_id || '--';
-								this.channel = msg.channel ? JSON.stringify(msg.channel) : '--';
-								this.counterpartyVersion = msg.counterparty_version || '--';
-								this.proofInit  = msg.proof_init || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelOpenTry(msg)
+
+								// this.portId = msg.port_id || '--';
+								// this.previousChannelId = msg.previous_channel_id || '--';
+								// this.channel = msg.channel ? JSON.stringify(msg.channel) : '--';
+								// this.counterpartyVersion = msg.counterparty_version || '--';
+								// this.proofInit  = msg.proof_init || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_open_ack:
-								this.portId = msg.port_id || '--';
-								this.channelId = msg.channel_id || '--';
-								this.counterpartyChannelId = msg.counterparty_channel_id || '--',
-								this.counterpartyVersion = msg.counterparty_version || '--',
-								this.proofTry = msg.proof_try || '--',
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelOpenAck(msg)
+
+								// this.portId = msg.port_id || '--';
+								// this.channelId = msg.channel_id || '--';
+								// this.counterpartyChannelId = msg.counterparty_channel_id || '--',
+								// this.counterpartyVersion = msg.counterparty_version || '--',
+								// this.proofTry = msg.proof_try || '--',
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_open_confirm:
-								this.portId = msg.port_id || '--';
-								this.channelId = msg.channel_id || '--';
-								this.proofAck = msg.proof_ack || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelOpenConfirm(msg)
+
+								// this.portId = msg.port_id || '--';
+								// this.channelId = msg.channel_id || '--';
+								// this.proofAck = msg.proof_ack || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_close_init:
-								this.portId = msg.port_id || '--';
-								this.channelId = msg.channel_id || '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelCloseInit(msg)
+
+								// this.portId = msg.port_id || '--';
+								// this.channelId = msg.channel_id || '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.channel_close_confirm:
-								this.portId = msg.port_id || '--';
-								this.channelId = msg.channel_id || '--';
-								this.proofInit = msg.proof_init || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
+								this.buildChannelCloseConfirm(msg)
+
+								// this.portId = msg.port_id || '--';
+								// this.channelId = msg.channel_id || '--';
+								// this.proofInit = msg.proof_init || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.timeout_packet:
 								this.buildTimeoutPacket(msg, message.type)
@@ -3697,26 +3669,30 @@
                 //                 }
 							break;
 							case TX_TYPE.timeout_on_close_packet:
-								this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
-								this.proofUnreceived = msg.proof_unreceived || '--';
-								this.proofClose = msg.proof_close || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.nextSequenceRecv = msg.next_sequence_recv || '--';
-								this.signer = msg.signer || '--';
+								this.buildTimeoutOnClosePacket(msg)
+
+								// this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
+								// this.proofUnreceived = msg.proof_unreceived || '--';
+								// this.proofClose = msg.proof_close || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.nextSequenceRecv = msg.next_sequence_recv || '--';
+								// this.signer = msg.signer || '--';
 							break;
 							case TX_TYPE.acknowledge_packet:
-								if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}' ){
-									this.amount = await converCoin({
-										denom:originalDenom || msg.packet.data.denom,
-										amount:msg.packet.data.amount,
-									});
-								}
-								this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
-								this.acknowledgement = msg.acknowledgement || '--';
-								this.proofAcked = msg.proof_acked || '--';
-								this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
-								this.signer = msg.signer || '--';
-								this.amount = `${this.amount.amount} ${this.amount.denom.toUpperCase()}`
+								this.buildAcknowledgePacket(msg, message.type)
+								// let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet,message.type);
+								// if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}' ){
+								// 	this.amount = await converCoin({
+								// 		denom:originalDenom || msg.packet.data.denom,
+								// 		amount:msg.packet.data.amount,
+								// 	});
+								// }
+								// this.packet = msg.packet ? JSON.stringify(msg.packet) : '--';
+								// this.acknowledgement = msg.acknowledgement || '--';
+								// this.proofAcked = msg.proof_acked || '--';
+								// this.proofHeight = msg.proof_height ? JSON.stringify(msg.proof_height) : '--';
+								// this.signer = msg.signer || '--';
+								// this.amount = `${this.amount.amount} ${this.amount.denom.toUpperCase()}`
 							break;
 							// MsgTypeIBCTransfer
 							case TX_TYPE.transfer:
@@ -3752,81 +3728,85 @@
 								}
 							break;
 							case TX_TYPE.create_htlc:
-								(this.eventsNew || []).forEach((item) => {
-									if(item.msg_index === this.msgIndex) {
-										(item.events || []).forEach((events) => {
-											if(events.type === 'create_htlc') {
-												(events.attributes || []).forEach(attrs => {
-													if(attrs.key === 'id') {
-														this.id = attrs.value
-													}
-												})
-											}
-										})
-									}
-								});
-								this.sender = msg.sender || '--';
-								this.to = msg.to || '--';
-								this.receiverOnOtherChain = msg.receiver_on_other_chain || '--';
-								this.senderOnOtherChain = msg.sender_on_other_chain || '--';
-								if(msg.amount && msg.amount[0]) {
-                  let coin = await converCoin(msg.amount[0])
-									this.amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
-								} else {
-									this.amount = '--';
-								}
-								this.hashLock = msg.hash_lock || '--';
-								// this.timestamp = msg.timestamp ? `${msg.timestamp} s` : '--';
-								this.timestamp = Tools.formatLocalTime(msg.timestamp) || '--';
-								this.timeLock = msg.time_lock ? `${msg.time_lock} block` : '--';
-								this.transfer = msg.transfer === false ? 'HTLC' : 'HTLT';
-								// let timeLock = msg.time_lock  && Math.floor(new Date(msg.time_lock).getTime() / 1000);
-								// timeLock ? this.timeLock = Tools.getDisplayDate(timeLock) : this.timeLock ='--';
+								this.buildCreateHtlc(msg);
+
+								// (this.eventsNew || []).forEach((item) => {
+								// 	if(item.msg_index === this.msgIndex) {
+								// 		(item.events || []).forEach((events) => {
+								// 			if(events.type === 'create_htlc') {
+								// 				(events.attributes || []).forEach(attrs => {
+								// 					if(attrs.key === 'id') {
+								// 						this.id = attrs.value
+								// 					}
+								// 				})
+								// 			}
+								// 		})
+								// 	}
+								// });
+								// this.sender = msg.sender || '--';
+								// this.to = msg.to || '--';
+								// this.receiverOnOtherChain = msg.receiver_on_other_chain || '--';
+								// this.senderOnOtherChain = msg.sender_on_other_chain || '--';
+								// if(msg.amount && msg.amount[0]) {
+                //   let coin = await converCoin(msg.amount[0])
+								// 	this.amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
+								// } else {
+								// 	this.amount = '--';
+								// }
+								// this.hashLock = msg.hash_lock || '--';
+								// // this.timestamp = msg.timestamp ? `${msg.timestamp} s` : '--';
+								// this.timestamp = Tools.formatLocalTime(msg.timestamp) || '--';
+								// this.timeLock = msg.time_lock ? `${msg.time_lock} block` : '--';
+								// this.transfer = msg.transfer === false ? 'HTLC' : 'HTLT';
+								// // let timeLock = msg.time_lock  && Math.floor(new Date(msg.time_lock).getTime() / 1000);
+								// // timeLock ? this.timeLock = Tools.getDisplayDate(timeLock) : this.timeLock ='--';
 							break;
 							case TX_TYPE.claim_htlc:
-								let transfer;
-                let attributeMap;
-								(this.eventsNew || []).forEach((item) => {
-									if(item.msg_index === this.msgIndex) {
-										(item.events || []).forEach((events) => {
-												if(events.type === 'claim_htlc') {
-													(events.attributes || []).forEach(item => {
-														if(item.key === 'transfer')  {
-															transfer = item.value
-														}
-														if(item.key == 'hash_lock') {
-															this.hashLock = item.value
-														}
-													})
-												}
-											  if(events.type === "transfer") {
-                          attributeMap = Tools.MultKeyValueObjToOneMap(events.attributes)
-                        //   (events.attributes || []).forEach(item => {
-												// 		if(item.key === 'amount')  {
-                        //       this.amount = item.value
-												// 		}
-												// 		if(item.key === 'recipient') {
-												// 			this.recipient = item.value
-												// 		}
-												// })
-											}
-										})
-									}
-								});
-								if(attributeMap && attributeMap.has('amount')){
-								  let coin = await converCoin(attributeMap.get('amount'))
-								  this.amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
-								}
-								if(attributeMap && attributeMap.has('recipient')){
-								  this.recipient = attributeMap.get('recipient')
-								}
-								if(!this.recipient) {
-									this.recipient = '--'
-								}
-								this.transfer = transfer === 'false' ? 'HTLC' : 'HTLT';
-								this.sender = msg.sender || '--';
-								this.id = msg.id || '--';
-								this.secret = msg.secret || '--';
+								this.buildClaimHtlc(msg)
+
+								// let transfer;
+                // let attributeMap;
+								// (this.eventsNew || []).forEach((item) => {
+								// 	if(item.msg_index === this.msgIndex) {
+								// 		(item.events || []).forEach((events) => {
+								// 				if(events.type === 'claim_htlc') {
+								// 					(events.attributes || []).forEach(item => {
+								// 						if(item.key === 'transfer')  {
+								// 							transfer = item.value
+								// 						}
+								// 						if(item.key == 'hash_lock') {
+								// 							this.hashLock = item.value
+								// 						}
+								// 					})
+								// 				}
+								// 			  if(events.type === "transfer") {
+                //           attributeMap = Tools.MultKeyValueObjToOneMap(events.attributes)
+                //         //   (events.attributes || []).forEach(item => {
+								// 				// 		if(item.key === 'amount')  {
+                //         //       this.amount = item.value
+								// 				// 		}
+								// 				// 		if(item.key === 'recipient') {
+								// 				// 			this.recipient = item.value
+								// 				// 		}
+								// 				// })
+								// 			}
+								// 		})
+								// 	}
+								// });
+								// if(attributeMap && attributeMap.has('amount')){
+								//   let coin = await converCoin(attributeMap.get('amount'))
+								//   this.amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
+								// }
+								// if(attributeMap && attributeMap.has('recipient')){
+								//   this.recipient = attributeMap.get('recipient')
+								// }
+								// if(!this.recipient) {
+								// 	this.recipient = '--'
+								// }
+								// this.transfer = transfer === 'false' ? 'HTLC' : 'HTLT';
+								// this.sender = msg.sender || '--';
+								// this.id = msg.id || '--';
+								// this.secret = msg.secret || '--';
 							break;
 							case TX_TYPE.refund_htlc:
 								this.sender = msg.sender || '--';
@@ -3834,12 +3814,14 @@
 							break;
 							//新增TIBC NFT Transfer Out
 							case TX_TYPE.tibc_nft_transfer:
-								this.classTibc = msg.class  || '--';
-								this.idTibc = msg.id|| '--';
-								this.destChain = msg. dest_chain || '--';
-								this.realayChain = msg.realay_chain || '--';
-								this.sender = msg.sender || '--';
-								this.receiver = msg.receiver || '--';
+								this.buildTibcNftTransfer(msg)
+
+								// this.classTibc = msg.class  || '--';
+								// this.idTibc = msg.id|| '--';
+								// this.destChain = msg. dest_chain || '--';
+								// this.realayChain = msg.realay_chain || '--';
+								// this.sender = msg.sender || '--';
+								// this.receiver = msg.receiver || '--';
 								break;
 							//新增TIBC NFT Transfer In
 							case TX_TYPE.tibc_recv_packet:
@@ -3860,6 +3842,9 @@
 										
 									})
 								}*/
+
+								this.buildTibcRecvPacket(msg)
+
 								this.idTibc=msg.packet.data.id || '--';
 								this.urlTibc = msg.packet.data.uri || '--';
 								this.classTibc = msg.packet.data.class|| '--'
@@ -5060,7 +5045,811 @@
 						isAddress: true
 					}
 				]
-			}
+			},
+
+			// upgrade_client 未自测
+			buildUpgradeClient(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientID'),
+						value: msg.client_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientState'),
+						value: msg.client_state,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.consensusState'),
+						value: msg.consensus_state,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofUpgradeClient'),
+						value: msg.proof_upgrade_client,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofUpgradeConsensusState'),
+						value: msg.proof_upgrade_consensus_state,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+			
+			//submit_misbehaviour 未自测
+			buildSubmitMisbehaviour(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientID'),
+						value: msg.client_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.misbehaviour'),
+						value: msg.misbehaviour
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+			
+			// connection_open_init
+			buildConnectionOpenInit(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientID'),
+						value: msg.client_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterparty'),
+						value: msg.counterparty ? JSON.stringify(msg.counterparty) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.version'),
+						value: msg.version ? JSON.stringify(msg.version) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.delayPeriod'),
+						value: msg.delay_period,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// connection_open_try
+			buildConnectionOpenTry(msg){
+				this.detailInfo =  [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientID'),
+						value: msg.client_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.previousConnectionId'),
+						value: msg.previous_connection_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.clientState'),
+						value: msg.client_state,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterparty'),
+						value: msg.counterparty ? JSON.stringify(msg.counterparty) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.delayPeriod'),
+						value: msg.delay_period,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterpartyVersions'),
+						value: msg.counterparty_versions ? JSON.stringify(msg.counterparty_versions) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofInit'),
+						value: msg.proof_init,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofClient'),
+						value: msg.proof_client,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofConsensus'),
+						value: msg.proof_consensus,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.consensusHeight'),
+						value: msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// connection_open_ack
+			buildConnectionOpenAck(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.connectionId'),
+						value: msg.connection_id,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterpartyConnectionId'),
+						value: msg.counterparty_connection_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.version'),
+						value: msg.version ? JSON.stringify(msg.version) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.consensusHeight'),
+						value: msg.consensus_height ? JSON.stringify(msg.consensus_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// connection_open_confirm
+			buildConnectionOpenConfirm(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.connectionId'),
+						value: msg.connection_id,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofAck'),
+						value: msg.proof_ack,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value:  msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// channel_open_init 
+			buildChannelOpenInit(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// channel_open_try
+			buildChannelOpenTry(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.previousChannelId'),
+						value: msg.previous_channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.channel'),
+						value: msg.channel ? JSON.stringify(msg.channel) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterpartyVersion'),
+						value: msg.counterparty_version,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofInit'),
+						value: msg.proof_init,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// channel_open_ack
+			buildChannelOpenAck(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.channelId'),
+						value: msg.channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterpartyChannelId'),
+						value: msg.counterparty_channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.counterpartyVersion'),
+						value: msg.counterparty_version,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// channel_open_confirm
+			buildChannelOpenConfirm(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.channelId'),
+						value: msg.channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofAck'),
+						value: msg.proof_ack,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			}, 
+
+			// channel_close_init -未自测
+			buildChannelCloseInit(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.channelId'),
+						value: msg.channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// channel_close_confirm -未自测
+			buildChannelCloseConfirm(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.portId'),
+						value: msg.port_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.channelId'),
+						value: msg.channel_id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofInit'),
+						value: msg.proof_init,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// timeout_on_close_packet -未自测
+			buildTimeoutOnClosePacket(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.packet'),
+						value: msg.packet ? JSON.stringify(msg.packet) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofUnreceived'),
+						value: msg.proof_unreceived,
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofClose'),
+						value: msg.proof_close,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.nextSequenceRecv'),
+						value: msg.next_sequence_recv,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// acknowledge_packet
+			async buildAcknowledgePacket(msg, type){
+				let amount;
+				let originalDenom = TxHelper.getOriginalDenomFromPacket(msg.packet, type);
+				if(msg.packet && msg.packet.data && JSON.stringify(msg.packet.data) !== '{}' ){
+					amount = await converCoin({
+							denom: originalDenom || msg.packet.data.denom,
+							amount:msg.packet.data.amount,
+					});
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.acknowledgement'),
+						value: msg.acknowledgement,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.token'),
+						value: `${amount.amount} ${amount.denom.toUpperCase()}`,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.ibc.proofHeight'),
+						value: msg.proof_height ? JSON.stringify(msg.proof_height) : '--',
+						isSchema: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+			// deposit
+			async buildDeposit(msg){
+				let deposit;
+				if(msg.amount && msg.amount.length > 0) {
+					let amount = await converCoin(msg.amount[0]);
+					deposit = `${amount.amount} ${amount.denom.toUpperCase()}`;
+				} else {
+					deposit = '--'
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.depositor'),
+						value: msg.depositor,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.proposalID'),
+						value: msg.proposal_id,
+						isProposal: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.deposit'),
+						value: deposit,
+					}
+				]
+				
+			},
+
+			// vote
+			buildVote(msg){
+				const option = msg.option ? formatVoteOptions[voteOptions[msg.option]] : '--';
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.voter'),
+						value: msg.voter,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.proposalID'),
+						value: msg.proposal_id,
+						isProposal: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.option'),
+						value: option
+					}
+			
+				]
+			},
+
+			// submit_proposal 
+			async buildSubmitProposal(msg){	
+				let initialDeposit;
+				if(msg.initial_deposit && msg.initial_deposit.length > 0) {
+					let res  = await converCoin(msg.initial_deposit[0]);
+					initialDeposit = `${res.amount} ${res.denom.toUpperCase()}`;
+				} else {
+					initialDeposit = '--'
+				}
+				let plan = msg.content &&  msg.content.plan
+				let name, switchHeight, time, info, upgradedClientState, amount;
+				if(plan) {
+					name = plan.name
+					let timestamp = plan.time  && Math.floor(new Date(plan.time).getTime() / 1000)
+					switchHeight = plan.height ? plan.height : '--'
+					if(switchHeight && switchHeight !== '--') {
+						time = '--'
+					} else {
+						time = timestamp && Tools.formatLocalTime(timestamp)
+					}
+					info = plan.info
+					upgradedClientState = plan.upgradedclientstate || '--'
+				}
+				let n = msg.content && msg.content.amount && msg.content.amount[0]
+				if(n) {
+					n = await converCoin(n)
+					if(n.amount !== '0') {
+						amount = `${n.amount} ${n.denom.toUpperCase()}`
+					} else {
+						amount = '--'
+					}
+				}
+
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.proposer'),
+						value: msg.proposer,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.title'),
+						value: msg.content && msg.content.title || '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.initialDeposit'),
+						value: initialDeposit,
+					}, 
+					{
+						label: this.$t('ExplorerLang.transactionInformation.gov.description'),
+						value: msg.content && msg.content.description || '--',
+					}
+				]
+				if(msg.content && msg.content.changes){
+					this.detailInfo.push(
+						{
+							label: this.$t('ExplorerLang.transactionInformation.gov.parameter'),
+							value: msg.content && msg.content.changes,
+					})
+				}
+				if(name){
+					this.detailInfo.push(
+						{
+							label: this.$t('ExplorerLang.transactionInformation.gov.name'),
+							value: name,
+						}
+					)
+				}
+				if(time){
+					this.detailInfo.push(
+						{
+						label: this.$t('ExplorerLang.transactionInformation.gov.time'),
+						value: time,
+						})
+				}
+				if(switchHeight){
+					this.detailInfo.push(
+						{
+							label: this.$t('ExplorerLang.transactionInformation.gov.switchHeight'),
+							value: switchHeight,
+					})
+				}
+				if(info){
+					this.detailInfo.push({
+						label: this.$t('ExplorerLang.transactionInformation.gov.info'),
+						value: info,
+					})
+				}
+				if(upgradedClientState){
+					this.detailInfo.push({
+						label: this.$t('ExplorerLang.transactionInformation.gov.upgradedClientState'),
+						value: upgradedClientState,
+					})
+				}
+				if(msg.content && msg.content.recipient){
+					this.detailInfo.push({
+						label: this.$t('ExplorerLang.transactionInformation.gov.recipient'),
+						value: msg.content && msg.content.recipient,
+					})
+				}
+				if(amount){
+					this.detailInfo.push({
+						label: this.$t('ExplorerLang.transactionInformation.gov.amount'),
+						value: amount,
+					})
+				}	
+			},
+
+			// create_htlc
+			async buildCreateHtlc(msg){
+				let id, amount;
+				(this.eventsNew || []).forEach((item) => {
+					if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+								if(events.type === 'create_htlc') {
+									(events.attributes || []).forEach(attrs => {
+										if(attrs.key === 'id') {
+											id = attrs.value
+										}
+									})
+								}
+							})
+						}
+				});
+
+				if(msg.amount && msg.amount[0]) {
+					let coin = await converCoin(msg.amount[0])
+					amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
+				} else {
+					amount = '--';
+				}
+
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.id'),
+						value: id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.amount'),
+						value: amount,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.to'),
+						value: msg.to,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.receiverOnOtherChain'),
+						value: msg.receiver_on_other_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.senderOnOtherChain'),
+						value: msg.sender_on_other_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.hashLock'),
+						value: msg.hash_lock,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.timestamp'),
+						value: Tools.formatLocalTime(msg.timestamp) || '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.timeLock'),
+						value: msg.time_lock ? `${msg.time_lock} block` : '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.transfer'),
+						value: msg.transfer === false ? 'HTLC' : 'HTLT',
+					},
+				]
+			},
+
+			// claim_htlc 
+			async buildClaimHtlc(msg){
+					let transfer, attributeMap, hashLock, amount, recipient;
+					(this.eventsNew || []).forEach((item) => {
+						if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+									if(events.type === 'claim_htlc') {
+										(events.attributes || []).forEach(item => {
+											if(item.key === 'transfer')  {
+												transfer = item.value
+											}
+											if(item.key == 'hash_lock') {
+												hashLock = item.value
+											}
+										})
+									}
+									if(events.type === "transfer") {
+										attributeMap = Tools.MultKeyValueObjToOneMap(events.attributes)
+									}
+							})
+						}
+					});
+					if(attributeMap && attributeMap.has('amount')){
+						let coin = await converCoin(attributeMap.get('amount'))
+						amount = `${coin.amount} ${coin.denom.toUpperCase()}`;
+					}
+					if(attributeMap && attributeMap.has('recipient')){
+						recipient = attributeMap.get('recipient')
+					}
+					this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.id'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.amount'),
+						value: amount,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.secret'),
+						value: msg.secret,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.recipient'),
+						value: recipient,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.hashLock'),
+						value: hashLock,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.htlc.transfer'),
+						value: transfer === 'false' ? 'HTLC' : 'HTLT',
+					},
+				]
+			},
+
+			// tibc_nft_transfer
+			buildTibcNftTransfer(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.idTibc'),
+						value: msg.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.classTibc'),
+						value: msg.class,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.destChain'),
+						value: msg.dest_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.realayChain'),
+						value: msg.realay_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.receiver'),
+						value: msg.receiver,
+						isAddress: true
+					}
+				]
+			},
+			
+			// tibc_recv_packet
+			buildTibcRecvPacket(msg){
+			// 		this.idTibc= || '--';
+			// 					this.urlTibc = msg.packet.data. || '--';
+			// 					this.classTibc = || '--'
+			// 					this.sequence = msg.|| '--'
+			// 					this.port = msg.|| '--'
+			// 					this.sourceChain = msg.|| '--'
+			// 					this.destChain = msg.packet.|| '--'
+			// 					this.realayChain = msg.packet.|| '--'
+			// 					this.sender = msg.packet.|| '--'
+			// 					this.signer = msg.signer|| '--'
+			// 					this.receiver = msg.packet.data.receiver || '--';
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.idTibc'),
+						value: msg?.packet?.data?.id,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.urlTibc'),
+						value: msg?.packet?.data?.uri,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.classTibc'),
+						value: msg?.packet?.data?.class,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sequence'),
+						value: msg?.packet?.sequence,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.port'),
+						value: msg?.packet?.port,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sourceChain'),
+						value: msg?.packet?.source_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.destChain'),
+						value: msg?.packet?.destination_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.realayChain'),
+						value: msg?.packet?.relay_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sender'),
+						value: msg?.packet?.data?.sender,
+					}
+				]
+			},
+
+
+
 		}
 	}
 </script>
