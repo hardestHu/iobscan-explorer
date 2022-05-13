@@ -269,7 +269,7 @@ export const ExplorerLang = {
         placeHolder: 'Search by Denom Name or Denom ID',
     },
     energyAsset: {
-        communicationFee: 'Communication Fee',
+        name: 'Name',
         amount: 'Amount'
     },
     identityList:{
