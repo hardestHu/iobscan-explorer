@@ -14,7 +14,8 @@
             isArray: true // 可选 渲染多个
             isIdentity: true // 可选 跳转到 /identity
             isProposal: true // 跳转到/ProposalsDetail
-            
+            isComplexAddr: true // 需要代码判断跳转路径
+
             // 需要配合使用的配置
             isMulti: true // 可选 配合isAddress 使用，针对具有多个值的情况
         }]
@@ -100,6 +101,16 @@
             </router-link>
           </template>
           
+          <!-- isComplexAddr 为true  需要通过代码判断跳转地址 -->
+          <template v-else-if="info.isComplexAddr">
+            <span v-if="!info.value || info.value === '--'"> -- </span>
+            <span v-else-if="judgeCosmos(info.value)">{{ info.value }}</span>
+            <span v-else @click="addressRoute(info.value)"
+              :class="(info.value.startsWith(COSMOS_ADDRESS_PREFIX) || info.value.startsWith(IRIS_ADDRESS_PREFIX))? 'address_link' : ''"
+            >{{ info.value }}</span>
+          </template>
+
+
           <template v-else>
             <span>{{ formatValue(info.value) }}</span>
           </template>
@@ -108,9 +119,11 @@
 		</div>
 </template>
 <script>
-import { COSMOS_ADDRESS_PREFIX } from '@/constant';
+import { COSMOS_ADDRESS_PREFIX,IRIS_ADDRESS_PREFIX } from '@/constant';
 import Tools from '@/util/Tools'
 import LargeString from './LargeString';
+import { addressRoute } from "@/helper/IritaHelper"
+
 export default {
   name: "TxDetailComponent",
   components:{LargeString, },
@@ -129,7 +142,9 @@ export default {
       LargeStringMinHeight: 100,
       LargeStringLineHeight: 20,
       Tools,
-
+      COSMOS_ADDRESS_PREFIX,
+      IRIS_ADDRESS_PREFIX,
+      addressRoute
     }
   },
   methods:{
@@ -148,8 +163,7 @@ export default {
     },
     startStr(url){
 			return url.startsWith('www.')
-		},
-
+		}
   }
 }
 </script>

@@ -1249,12 +1249,11 @@
 				</template>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.set_withdraw_address">
+		<!-- <div v-if="txType === TX_TYPE.set_withdraw_address">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.delegatorAddress')}}</span>
 				<template>
 					<span v-if="delegatorAddress === '--' || this.judgeCosmos(delegatorAddress)">{{delegatorAddress}}</span>
-<!--					<span v-else @click="addressRoute(delegatorAddress)" class="address_link">{{delegatorAddress}}</span>-->
 					<router-link v-else  :to="`/address/${delegatorAddress}`" class="address_link">{{delegatorAddress}}</router-link>
 					
 				</template>
@@ -1263,11 +1262,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.staking.withdrawAddress')}}</span>
 				<template>
 					<span v-if="withdrawAddress === '--' || this.judgeCosmos(withdrawAddress)">{{withdrawAddress}}</span>
-<!--					<span v-else @click="addressRoute(withdrawAddress)" class="address_link">{{withdrawAddress}}</span>-->
 					<router-link v-else  :to="`/address/${withdrawAddress}`" class="address_link">{{withdrawAddress}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.begin_unbonding">
       <p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.amount')}}</span>
@@ -1355,7 +1353,7 @@
 				</template>
 			</p>
 		</div>
-		<div v-if="txType === TX_TYPE.fund_community_pool">
+		<!-- <div v-if="txType === TX_TYPE.fund_community_pool">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.amount')}}</span>
 				<span>{{amount}}</span>
@@ -1364,11 +1362,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.staking.depositor')}}</span>
 				<template>
 					<span v-if="depositor === '--' || this.judgeCosmos(depositor)">{{depositor}}</span>
-					<!-- <span @click="addressRoute(depositor)" class="address_link">{{depositor}}</span> -->
 					<router-link :to="`/address/${depositor}`" class="address_link">{{depositor}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<div v-if="txType === TX_TYPE.swap_order">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.isBuyOrder')}}</span>
@@ -2071,7 +2068,7 @@
 
 			</div> -->
 		<!--新增TIBC NFT Transfer In -->
-		<div v-if="txType === TX_TYPE.tibc_recv_packet">
+		<!-- <div v-if="txType === TX_TYPE.tibc_recv_packet">
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.idTibc')}}</span>
 					<span>{{idTibc}}</span>
@@ -2129,11 +2126,6 @@
 					>{{receiver}}</span>
 					</template>
 				</p>
-
-<!--				<p>
-					<span>{{$t('ExplorerLang.transactionInformation.tibc.nftStatus')}}</span>
-					<span>{{ nftStatus}}</span>
-				</p>-->
 				<p>
 					<span>{{$t('ExplorerLang.transactionInformation.tibc.signer')}}</span>
 					<template>
@@ -2141,9 +2133,9 @@
 						<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 					</template>
 				</p>
-		</div>
+		</div> -->
 		<!--新增TIBC Acknowledge Packet-->
-        <div v-if="txType === TX_TYPE.tibc_acknowledge_packet">
+    <!-- <div v-if="txType === TX_TYPE.tibc_acknowledge_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.idTibc')}}</span>
 				<span>{{idTibc}}</span>
@@ -2213,9 +2205,9 @@
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 		<!--TIBC Clean Packet Out-->
-		<div v-if="txType === TX_TYPE.clean_packet">
+		<!-- <div v-if="txType === TX_TYPE.clean_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.sequence')}}</span>
 				<span>{{sequence}}</span>
@@ -2241,9 +2233,9 @@
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
         <!--  TIBC Clean Packet In-->
-		<div v-if="txType === TX_TYPE.recv_clean_packet">
+		<!-- <div v-if="txType === TX_TYPE.recv_clean_packet">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.cleanPacket')}}</span>
 				<span>{{cleanPacket}}</span>
@@ -2255,9 +2247,9 @@
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
         <!--TIBC Update Client-->
-		<div v-if="txType === TX_TYPE.tibc_update_client">
+		<!-- <div v-if="txType === TX_TYPE.tibc_update_client">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.tibc.chainName')}}</span>
 				<span>{{chainName}}</span>
@@ -2269,7 +2261,7 @@
 					<router-link v-else  :to="`/address/${signer}`" class="address_link">{{signer}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
         <!--新增Transfer Denom (Denom Transfer)-->
 		<!-- <div v-if="txType === TX_TYPE.transfer_denom">
 			<p>
@@ -3145,8 +3137,10 @@
 								this.moniker = this.getMoniker(this.validatorAddress,this.monikers)
 								break;
 							case TX_TYPE.set_withdraw_address:
-								this.delegatorAddress = msg.delegator_address;
-								this.withdrawAddress = msg.withdraw_address;
+								this.buildSetWithdrawAddress(msg)
+
+								// this.delegatorAddress = msg.delegator_address;
+								// this.withdrawAddress = msg.withdraw_address;
 								break;
 							case TX_TYPE.begin_unbonding:
 								if(msg.amount) {
@@ -3186,11 +3180,15 @@
 								this.fromMoniker = this.getMoniker(this.from,this.monikers)
 								break;
 							case TX_TYPE.fund_community_pool:
-								this.depositor = msg.depositor;
-								let poolAmount = await converCoin(msg.amount[0])
-								this.amount =  `${poolAmount.amount} ${poolAmount.denom.toLocaleUpperCase()}`
+								this.buildFundCommunityPool(msg)
+
+								// this.depositor = msg.depositor;
+								// let poolAmount = await converCoin(msg.amount[0])
+								// this.amount =  `${poolAmount.amount} ${poolAmount.denom.toLocaleUpperCase()}`
 								break;
 							case TX_TYPE.swap_order:
+								this.buildSwapOrder(msg)
+
 								(this.eventsNew || []).forEach((item) => {
 									if(item.msg_index === this.msgIndex) {
 										(item.events || []).forEach((events) => {
@@ -3825,86 +3823,94 @@
 								break;
 							//新增TIBC NFT Transfer In
 							case TX_TYPE.tibc_recv_packet:
-								/*let recvPacketAcknowledgementValue = ''
-								if(this?.eventsNew?.length){
-									this.eventsNew.forEach( item => {
-										if(item?.msg_index === this.msgIndex && item?.events?.length){
-											item.events.forEach( i => {
-												if(i.type === EVENTS_TYPE.writeAcknowledgement && i?.attributes?.length){
-													i.attributes.forEach( value => {
-														if(value?.key === 'packet_ack'){
-															recvPacketAcknowledgementValue = value.value
-														}
-													})
-												}
-											})
-										}
-										
-									})
-								}*/
-
 								this.buildTibcRecvPacket(msg)
+								// /*let recvPacketAcknowledgementValue = ''
+								// if(this?.eventsNew?.length){
+								// 	this.eventsNew.forEach( item => {
+								// 		if(item?.msg_index === this.msgIndex && item?.events?.length){
+								// 			item.events.forEach( i => {
+								// 				if(i.type === EVENTS_TYPE.writeAcknowledgement && i?.attributes?.length){
+								// 					i.attributes.forEach( value => {
+								// 						if(value?.key === 'packet_ack'){
+								// 							recvPacketAcknowledgementValue = value.value
+								// 						}
+								// 					})
+								// 				}
+								// 			})
+								// 		}
+										
+								// 	})
+								// }*/
 
-								this.idTibc=msg.packet.data.id || '--';
-								this.urlTibc = msg.packet.data.uri || '--';
-								this.classTibc = msg.packet.data.class|| '--'
-								this.sequence = msg.packet.sequence|| '--'
-								this.port = msg.packet.port|| '--'
-								this.sourceChain = msg.packet.source_chain|| '--'
-								this.destChain = msg.packet.destination_chain|| '--'
-								this.realayChain = msg.packet.relay_chain|| '--'
-								this.sender = msg.packet.data.sender|| '--'
-								this.signer = msg.signer|| '--'
-								this.receiver = msg.packet.data.receiver || '--';
-								// const recvPacketAcknowledgementResult = recvPacketAcknowledgementValue ? recvPacketAcknowledgementValue.splice(/[^0-9]/ig,"") : '';
-								// this.nftStatus = recvPacketAcknowledgementResult && Number(acknowledgementResult) === 1  ? this.$t('ExplorerLang.common.success'):this.$t('ExplorerLang.common.failed')
+								
+
+								// this.idTibc=msg.packet.data.id || '--';
+								// this.urlTibc = msg.packet.data.uri || '--';
+								// this.classTibc = msg.packet.data.class|| '--'
+								// this.sequence = msg.packet.sequence|| '--'
+								// this.port = msg.packet.port|| '--'
+								// this.sourceChain = msg.packet.source_chain|| '--'
+								// this.destChain = msg.packet.destination_chain|| '--'
+								// this.realayChain = msg.packet.relay_chain|| '--'
+								// this.sender = msg.packet.data.sender|| '--'
+								// this.signer = msg.signer|| '--'
+								// this.receiver = msg.packet.data.receiver || '--';
+								// // const recvPacketAcknowledgementResult = recvPacketAcknowledgementValue ? recvPacketAcknowledgementValue.splice(/[^0-9]/ig,"") : '';
+								// // this.nftStatus = recvPacketAcknowledgementResult && Number(acknowledgementResult) === 1  ? this.$t('ExplorerLang.common.success'):this.$t('ExplorerLang.common.failed')
 
 								break;
 							//新增TIBC Acknowledge Packet
 							case TX_TYPE.tibc_acknowledge_packet:
-								
-								this.idTibc=msg.packet.data.id || '--';
-								this.urlTibc = msg.packet.data.uri || '--';
-								this.classTibc = msg.packet.data.class|| '--'
-								this.sequence = msg.packet.sequence|| '--'
-								this.port = msg.packet.port|| '--'
-								this.sourceChain = msg.packet.source_chain|| '--'
-								this.destChain = msg.packet.destination_chain|| '--'
-								this.realayChain = msg.packet.relay_chain|| '--'
-								this.sender = msg.packet.data.sender|| '--'
-								this.signer = msg.signer|| '--'
-								this.receiver = msg.packet.data.receiver || '--';
-								let acknowledgementResult = ''
-								if(msg?.acknowledgement){
-									acknowledgementResult = msg.acknowledgement.replace(/[^0-9]/ig,"");
-								}
-								this.nftStatus = acknowledgementResult && Number(acknowledgementResult) === 1 ? this.$t('ExplorerLang.common.success'):this.$t('ExplorerLang.common.failed')
+								this.buildTibcAcknowledgePacket(msg)
+
+								// this.idTibc=msg.packet.data.id || '--';
+								// this.urlTibc = msg.packet.data.uri || '--';
+								// this.classTibc = msg.packet.data.class|| '--'
+								// this.sequence = msg.packet.sequence|| '--'
+								// this.port = msg.packet.port|| '--'
+								// this.sourceChain = msg.packet.source_chain|| '--'
+								// this.destChain = msg.packet.destination_chain|| '--'
+								// this.realayChain = msg.packet.relay_chain|| '--'
+								// this.sender = msg.packet.data.sender|| '--'
+								// this.signer = msg.signer|| '--'
+								// this.receiver = msg.packet.data.receiver || '--';
+								// let acknowledgementResult = ''
+								// if(msg?.acknowledgement){
+								// 	acknowledgementResult = msg.acknowledgement.replace(/[^0-9]/ig,"");
+								// }
+								// this.nftStatus = acknowledgementResult && Number(acknowledgementResult) === 1 ? this.$t('ExplorerLang.common.success'):this.$t('ExplorerLang.common.failed')
 								break;
-                            //新增 TIBC Clean Packet Out
+              //新增 TIBC Clean Packet Out
 							case TX_TYPE.clean_packet:
-								this.sequence = msg.clean_packet.sequence|| '--'
-								this.sourceChain = msg.clean_packet.source_chain|| '--'
-								this.destChain = msg.clean_packet.destination_chain|| '--'
-								this.realayChain = msg.clean_packet.relay_chain|| '--'
-								this.signer = msg.signer|| '--'
+								this.buildCleanPacket(msg)
+
+								// this.sequence = msg.clean_packet.sequence|| '--'
+								// this.sourceChain = msg.clean_packet.source_chain|| '--'
+								// this.destChain = msg.clean_packet.destination_chain|| '--'
+								// this.realayChain = msg.clean_packet.relay_chain|| '--'
+								// this.signer = msg.signer|| '--'
 								break;
 							//新增 	TIBC Clean Packet In
 							case TX_TYPE.recv_clean_packet:
-								this.cleanPacket= msg.clean_packet|| '--'
-								this.signer = msg.signer|| '--'
+								this.buildRecvCleanPacket(msg)
+								
+								// this.cleanPacket= msg.clean_packet|| '--'
+								// this.signer = msg.signer|| '--'
 								break;
 							//新增TIBC Update Client
 							case TX_TYPE.tibc_update_client:
-								this.chainName=msg.chain_name|| '--'
-								this.signer = msg.signer
+								this.buildTibcUpdateClient(msg)
+
+								// this.chainName=msg.chain_name|| '--'
+								// this.signer = msg.signer
 								break;
               //新增Transfer Denom (Denom Transfer)
 							case TX_TYPE.transfer_denom:
 								this.buildTransferDenom(msg)
 
-								this.denomId=msg.id || '--'
-								this.sender= msg.sender|| '--'
-								this.receiver= msg.recipient|| '--'
+								// this.denomId=msg.id || '--'
+								// this.sender= msg.sender|| '--'
+								// this.receiver= msg.recipient|| '--'
 								break;
 
 							case TX_TYPE.stake:		    
@@ -4638,7 +4644,7 @@
 					{
 						label: this.$t('ExplorerLang.transactionInformation.nft.receiver'),
 						value: msg.recipient,
-						isAddress: true
+						isComplexAddr: true
 					}
 				]
 			},
@@ -4823,12 +4829,12 @@
 					{
 						label: this.$t('ExplorerLang.transactionInformation.ibc.sender'),
 						value: msg.sender,
-						isAddress: true
+						isComplexAddr: true
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.ibc.receiver'),
 						value: msg.receiver,
-						isAddress: true
+						isComplexAddr: true
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.ibc.timeoutHeight'),
@@ -5790,24 +5796,13 @@
 					{
 						label: this.$t('ExplorerLang.transactionInformation.tibc.receiver'),
 						value: msg.receiver,
-						isAddress: true
+						isComplexAddr: true
 					}
 				]
 			},
 			
 			// tibc_recv_packet
 			buildTibcRecvPacket(msg){
-			// 		this.idTibc= || '--';
-			// 					this.urlTibc = msg.packet.data. || '--';
-			// 					this.classTibc = || '--'
-			// 					this.sequence = msg.|| '--'
-			// 					this.port = msg.|| '--'
-			// 					this.sourceChain = msg.|| '--'
-			// 					this.destChain = msg.packet.|| '--'
-			// 					this.realayChain = msg.packet.|| '--'
-			// 					this.sender = msg.packet.|| '--'
-			// 					this.signer = msg.signer|| '--'
-			// 					this.receiver = msg.packet.data.receiver || '--';
 				this.detailInfo = [
 					{
 						label: this.$t('ExplorerLang.transactionInformation.tibc.idTibc'),
@@ -5844,12 +5839,178 @@
 					{
 						label: this.$t('ExplorerLang.transactionInformation.tibc.sender'),
 						value: msg?.packet?.data?.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.receiver'),
+						value: msg?.packet?.data?.receiver,
+						isComplexAddr: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.signer'),
+						value: msg.signer,
+						isAddress: true
 					}
 				]
 			},
 
+			// tibc_acknowledge_packet -未自测
+			buildTibcAcknowledgePacket(msg){
+				let acknowledgementResult = ''
+				if(msg?.acknowledgement){
+					acknowledgementResult = msg.acknowledgement.replace(/[^0-9]/ig,"");
+				}
+				const nftStatus = acknowledgementResult && Number(acknowledgementResult) === 1 ? this.$t('ExplorerLang.common.success'):this.$t('ExplorerLang.common.failed')
+				
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.idTibc'),
+						value: msg.packet.data.id
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.urlTibc'),
+						value: msg.packet.data.uri,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.classTibc'),
+						value: msg.packet.data.class,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sequence'),
+						value: msg.packet.sequence,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.port'),
+						value: msg.packet.port,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sourceChain'),
+						value: msg.packet.source_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.destChain'),
+						value: msg.packet.destination_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.realayChain'),
+						value: msg.packet.relay_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sender'),
+						value: msg.packet.data.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.receiver'),
+						value: msg.packet.data.receiver,
+						isComplexAddr: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.nftStatus'),
+						value: nftStatus,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.signer'),
+						value: msg.signer,
+						isAddress: true
+					},
+				]
+			},
 
+			// clean_packet 
+			buildCleanPacket(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sequence'),
+						value: msg.clean_packet.sequence
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.sourceChain'),
+						value: msg.clean_packet.source_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.destChain'),
+						value: msg.clean_packet.destination_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.realayChain'),
+						value: msg.clean_packet.relay_chain,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
 
+			// recv_clean_packet - 未自测
+			buildRecvCleanPacket(msg){
+		    this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.cleanPacket'),
+						value: msg.clean_packet
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// tibc_update_client
+			buildTibcUpdateClient(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.chainName'),
+						value: msg.chain_name
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.tibc.signer'),
+						value: msg.signer,
+						isAddress: true
+					}
+				]
+			},
+
+			// set_withdraw_address 
+			buildSetWithdrawAddress(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.staking.delegatorAddress'),
+						value: msg.delegator_address,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.staking.withdrawAddress'),
+						value: msg.withdraw_address,
+						isAddress: true
+					}
+				]
+			},
+
+			// fund_community_pool
+			async buildFundCommunityPool(msg){					
+				let poolAmount = await converCoin(msg.amount[0])
+				const amount =  `${poolAmount.amount} ${poolAmount.denom.toLocaleUpperCase()}`
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.staking.amount'),
+						value: amount
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.staking.from'),
+						value: msg.depositor,
+						isAddress: true
+					}
+				]
+			},
+
+			// swap_order
+			buildSwapOrder(msg){
+				//todo
+			}
 		}
 	}
 </script>
