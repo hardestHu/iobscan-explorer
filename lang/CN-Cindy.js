@@ -256,7 +256,7 @@ export const ExplorerLang = {
         placeHolder: '搜索数据类别或数据类别标识',
     },
     energyAsset: {
-        communicationFee: '通信费',
+        name: '名称',
         amount: '数量'
     },
     identityList:{

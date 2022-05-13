@@ -9,7 +9,7 @@ const i18n = new VueI18n({
 })
 export default [
     {
-        label: i18n.t('ExplorerLang.energyAsset.communicationFee'),
+        label: i18n.t('ExplorerLang.energyAsset.name'),
         displayValue:'title',       
     },
    
