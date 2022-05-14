@@ -1366,7 +1366,7 @@
 				</template>
 			</p>
 		</div> -->
-		<div v-if="txType === TX_TYPE.swap_order">
+		<!-- <div v-if="txType === TX_TYPE.swap_order">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.isBuyOrder')}}</span>
 				<span>{{isBuyOrder}}</span>
@@ -1375,7 +1375,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.inputAddress')}}</span>
 				<template>
 					<span v-if="inputAddress === '--' || this.judgeCosmos(inputAddress)">{{inputAddress}}</span>
-<!--					<span v-else @click="addressRoute(inputAddress)" class="address_link">{{ inputAddress }}</span>-->
 					<router-link v-else :to="`/address/${inputAddress}`" class="address_link">{{inputAddress}}</router-link>
 				</template>
 			</p>
@@ -1387,7 +1386,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.outputAddress')}}</span>
 				<template>
 					<span v-if="outputAddress === '--' || this.judgeCosmos(outputAddress)">{{outputAddress}}</span>
-<!--					<span v-else @click="addressRoute(outputAddress)" class="address_link">{{ outputAddress }}</span>-->
 					<router-link v-else :to="`/address/${outputAddress}`" class="address_link">{{outputAddress}}</router-link>
 				</template>
 			</p>
@@ -1403,13 +1401,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.deadline')}}</span>
 				<span>{{deadline}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.add_liquidity">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.add_liquidity">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.sender')}}</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -1437,13 +1434,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.deadline')}}</span>
 				<span>{{deadline}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.remove_liquidity">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.remove_liquidity">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.sender')}}</span>
 				<template>
 					<span v-if="sender === '--' || this.judgeCosmos(sender)">{{sender}}</span>
-<!--					<span v-else @click="addressRoute(sender)" class="address_link">{{ sender }}</span>-->
 					<router-link v-else :to="`/address/${sender}`" class="address_link">{{sender}}</router-link>
 				</template>
 			</p>
@@ -1471,18 +1467,17 @@
 				<span>{{$t('ExplorerLang.transactionInformation.coinswap.deadline')}}</span>
 				<span>{{deadline}}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.unjail">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.unjail">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.staking.operatorAddress')}}</span>
 				<template>
 					<span v-if="operatorAddress === '--' || this.judgeCosmos(operatorAddress)">{{operatorAddress}}</span>
-<!--					<span v-else @click="addressRoute(operatorAddress)" class="address_link">{{operatorAddress}}</span>-->
 					<router-link v-else :to="`/address/${operatorAddress}`" class="address_link">{{operatorAddress}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.create_feed">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.create_feed">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceName')}}: </span>
 				<template>
@@ -1508,28 +1503,17 @@
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.creator')}}: </span>
 				<template>
 					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{ creator }}</span>
-<!--					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>-->
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
 			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.providers')}}: </span>
 				<span style="display: flex;flex-direction: column" v-if="providers.length > 0">
-<!--                    <span
-		                    v-for="(item,index) in providers"
-		                    :key="index"
-		                    @click="addressRoute(item)" class="address_link">
-                        {{item}}
-                    </span>-->
 					<router-link v-for="(item,index) in providers"
 								 :key="index" :to="`/address/${item}`" class="address_link">{{item}}</router-link>
                 </span>
 				<span v-else>--</span>
 			</p>
-<!--			<p>
-				<span>{{$t('ExplorerLang.transactionInformation.oracle.input')}}:</span>
-				<span>{{ input }}</span>
-			</p>-->
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.serviceFeeCap')}}: </span>
 				<span>{{ serviceFeeCap }}</span>
@@ -1554,8 +1538,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.timeOut')}}: </span>
 				<span>{{ timeout }}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.start_feed || txType === TX_TYPE.pause_feed">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.start_feed || txType === TX_TYPE.pause_feed">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.feedName')}}: </span>
 				<span>{{ feedName }}</span>
@@ -1565,11 +1549,10 @@
 				<template>
 					<span v-if="creator === '--' || this.judgeCosmos(creator)">{{ creator }}</span>
 					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>
-					<!-- <router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link> -->
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.edit_feed">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.edit_feed">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.feedName')}}: </span>
 				<span>{{ feedName }}</span>
@@ -1586,19 +1569,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.creator')}}: </span>
 				<template>
 					<span v-if="creator === '--'  || this.judgeCosmos(creator)">{{ creator }}</span>
-<!--					<span  v-else @click="addressRoute(creator)" class="address_link">{{ creator }}</span>-->
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
 			</p>
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.oracle.providers')}}: </span>
 				<span style="display: flex;flex-direction: column" v-if="providers.length > 0">
-<!--                    <span
-		                    v-for="(item,index) in providers"
-		                    :key="index"
-		                    @click="addressRoute(item)" class="address_link">
-                        {{item}}
-                    </span>-->
 					<router-link  v-for="(item,index) in providers"
 								  :key="index" :to="`/address/${item}`" class="address_link">{{item}}</router-link>
                 </span>
@@ -1620,8 +1596,8 @@
 				<span>{{$t('ExplorerLang.transactionInformation.timeOut')}}: </span>
 				<span>{{ timeout }}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.request_rand">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.request_rand">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.random.blockInterval')}}: </span>
 				<span>{{ blockInterval }}</span>
@@ -1630,7 +1606,6 @@
 				<span>{{$t('ExplorerLang.transactionInformation.consumer')}}: </span>
 				<template>
 					<span v-if="consumer === '--' || this.judgeCosmos(consumer)">{{consumer}}</span>
-<!--					<span v-else @click="addressRoute(consumer)" class="address_link">{{consumer}}</span>-->
 					<router-link  v-else :to="`/address/${consumer}`" class="address_link">{{consumer}}</router-link>
 				</template>
 			</p>
@@ -1642,13 +1617,12 @@
 				<span>{{$t('ExplorerLang.transactionInformation.serviceFeeCap')}}: </span>
 				<span>{{ serviceFeeCap }}</span>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.service_set_withdraw_address">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.service_set_withdraw_address">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
@@ -1656,17 +1630,15 @@
 				<span>{{$t('ExplorerLang.transactionInformation.staking.withdrawAddress')}}</span>
 				<template>
 					<span v-if="withdrawAddress === '--' || this.judgeCosmos(withdrawAddress)">{{withdrawAddress}}</span>
-<!--					<span @click="addressRoute(withdrawAddress)" class="address_link">{{withdrawAddress}}</span>-->
 					<router-link  v-else :to="`/address/${withdrawAddress}`" class="address_link">{{withdrawAddress}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.withdraw_earned_fees">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.withdraw_earned_fees">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.provider')}}: </span>
 				<template>
 					<span v-if="provider === '--' || this.judgeCosmos(provider)">{{provider}}</span>
-<!--					<span v-else @click="addressRoute(provider)" class="address_link">{{provider}}</span>-->
 					<router-link  v-else :to="`/address/${provider}`" class="address_link">{{provider}}</router-link>
 				</template>
 			</p>
@@ -1674,11 +1646,10 @@
 				<span>{{$t('ExplorerLang.transactionInformation.owner')}}：</span>
 				<template>
 					<span v-if="owner === '--' || this.judgeCosmos(owner)">{{owner}}</span>
-<!--					<span v-else @click="addressRoute(owner)" class="address_link">{{owner}}</span>-->
 					<router-link  v-else :to="`/address/${owner}`" class="address_link">{{owner}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 
 		<!-- <div v-if="txType === TX_TYPE.issue_token">
 			<p>
@@ -2289,7 +2260,7 @@
 
 		</div> -->
 		<!-- Farm stake/unstake -->
-		<div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
+		<!-- <div v-if="txType === TX_TYPE.stake || txType === TX_TYPE.unstake">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -2311,8 +2282,8 @@
 				</template>
 			</p>
 
-		</div>
-		<div v-if="txType === TX_TYPE.harvest">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.harvest">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -2329,9 +2300,9 @@
 				</template>
 			</p>
 
-		</div>
+		</div> -->
 	
-		<div v-if="txType === TX_TYPE.create_pool">
+		<!-- <div v-if="txType === TX_TYPE.create_pool">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -2370,9 +2341,9 @@
 			</p>
 			
 
-		</div>
+		</div> -->
 			
-		<div v-if="txType === TX_TYPE.create_pool_with_community_pool">    
+		<!-- <div v-if="txType === TX_TYPE.create_pool_with_community_pool">    
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.proposalId')}}</span>
 				<span>{{proposalID}}</span>
@@ -2418,9 +2389,9 @@
 				<span>{{poolDescription}}</span>
 			</p>			
 
-		</div>
+		</div> -->
 		
-		<div v-if="txType === TX_TYPE.destroy_pool">
+		<!-- <div v-if="txType === TX_TYPE.destroy_pool">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -2436,8 +2407,8 @@
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
 			</p>
-		</div>
-		<div v-if="txType === TX_TYPE.adjust_pool">
+		</div> -->
+		<!-- <div v-if="txType === TX_TYPE.adjust_pool">
 			<p>
 				<span>{{$t('ExplorerLang.transactionInformation.farm.poolId')}}</span>
 				<span>{{poolId}}</span>
@@ -2457,7 +2428,7 @@
 					<router-link v-else :to="`/address/${creator}`" class="address_link">{{creator}}</router-link>
 				</template>
 			</p>
-		</div>
+		</div> -->
 <!-- exclude UpdateClient -->
 		<p v-if="txType !== TX_TYPE.update_client" :style="{marginTop: '0.26rem'}">
 			<span>{{$t('ExplorerLang.transactionInformation.recvPacket.viewSource')}}：</span>
@@ -3187,240 +3158,249 @@
 								// this.amount =  `${poolAmount.amount} ${poolAmount.denom.toLocaleUpperCase()}`
 								break;
 							case TX_TYPE.swap_order:
-								this.buildSwapOrder(msg)
+								this.buildSwapOrder(msg);
 
-								(this.eventsNew || []).forEach((item) => {
-									if(item.msg_index === this.msgIndex) {
-										(item.events || []).forEach((events) => {
-											if(events.type === 'swap') {
-												(events.attributes || []).forEach(async attribute => {
-													if(attribute.key === 'token_pair') {
-														let list = attribute.value.split('-');
-														if(list.length > 1){
-															let token1 = await converCoin({
-																denom:list[0],
-																amount:0
-															})
-															let token2 = await converCoin({
-																denom:list[1],
-																amount:0
-															})
-															this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
-														}
+							// 	(this.eventsNew || []).forEach((item) => {
+							// 		if(item.msg_index === this.msgIndex) {
+							// 			(item.events || []).forEach((events) => {
+							// 				if(events.type === 'swap') {
+							// 					(events.attributes || []).forEach(async attribute => {
+							// 						if(attribute.key === 'token_pair') {
+							// 							let list = attribute.value.split('-');
+							// 							if(list.length > 1){
+							// 								let token1 = await converCoin({
+							// 									denom:list[0],
+							// 									amount:0
+							// 								})
+							// 								let token2 = await converCoin({
+							// 									denom:list[1],
+							// 									amount:0
+							// 								})
+							// 								this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+							// 							}
 
-													}
-												})
-											}
-										})
-									}
-								});
-								this.isBuyOrder = msg.is_buy_order;
-								this.inputAddress = msg.input.address || '--';
-                                if(this.eventsNew && this.eventsNew.length > 0){
-                                    let currentEvents = this.eventsNew.find((e)=>e.msg_index === this.msgIndex);
-                                    if(currentEvents && currentEvents.events.length > 0){
-                                        let transferItem = currentEvents.events.find(e=>e.type === TX_TYPE.transfer);
-                                        if(transferItem && transferItem.attributes && transferItem.attributes.length > 0){
-                                            let amountList = transferItem.attributes.filter((t)=>t.key === 'amount');
-                                            if(amountList && amountList.length > 0){
-                                                let inputItem = amountList[0],
-                                                    outputItem = amountList[amountList.length - 1]
-                                                let inputAmount = inputItem.value.match(/\d+/g), inputDenom = '',
-                                                    outputAmount = outputItem.value.match(/\d+/g), outputDenom = '';
-                                                if(inputAmount && inputAmount.length > 0){
-                                                    inputDenom = inputItem.value.substr(inputAmount[0].length);
-                                                }
-                                                if(outputAmount && outputAmount.length > 0){
-													outputDenom = outputItem.value.substr(outputAmount[0].length);
-                                                }
-                                                let input = await converCoin({
-                                                    denom:inputDenom,
-                                                    amount:inputAmount[0]
-												})
+							// 						}
+							// 					})
+							// 				}
+							// 			})
+							// 		}
+							// 	});
+							// 	this.isBuyOrder = msg.is_buy_order;
+							// 	this.inputAddress = msg.input.address || '--';
+              //                   if(this.eventsNew && this.eventsNew.length > 0){
+              //                       let currentEvents = this.eventsNew.find((e)=>e.msg_index === this.msgIndex);
+              //                       if(currentEvents && currentEvents.events.length > 0){
+              //                           let transferItem = currentEvents.events.find(e=>e.type === TX_TYPE.transfer);
+              //                           if(transferItem && transferItem.attributes && transferItem.attributes.length > 0){
+              //                               let amountList = transferItem.attributes.filter((t)=>t.key === 'amount');
+              //                               if(amountList && amountList.length > 0){
+              //                                   let inputItem = amountList[0],
+              //                                       outputItem = amountList[amountList.length - 1]
+              //                                   let inputAmount = inputItem.value.match(/\d+/g), inputDenom = '',
+              //                                       outputAmount = outputItem.value.match(/\d+/g), outputDenom = '';
+              //                                   if(inputAmount && inputAmount.length > 0){
+              //                                       inputDenom = inputItem.value.substr(inputAmount[0].length);
+              //                                   }
+              //                                   if(outputAmount && outputAmount.length > 0){
+							// 						outputDenom = outputItem.value.substr(outputAmount[0].length);
+              //                                   }
+              //                                   let input = await converCoin({
+              //                                       denom:inputDenom,
+              //                                       amount:inputAmount[0]
+							// 					})
 
-                                                this.input = `${input.amount} ${input.denom.toLocaleUpperCase()}`;
-                                                let output = await converCoin({
-                                                    denom:outputDenom,
-                                                    amount:outputAmount[0]
-                                                })
-                                                this.output = `${output.amount} ${output.denom.toLocaleUpperCase()}`;
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    let input = await converCoin({
-                                        denom:msg.input.coin.denom,
-                                        amount:msg.input.coin.amount
-                                    })
-                                    this.input = `${input.amount} ${input.denom.toLocaleUpperCase()}`;
-                                    let output = await converCoin({
-                                        denom:msg.output.coin.denom,
-                                        amount:msg.output.coin.amount
-                                    })
-                                    this.output = `${output.amount} ${output.denom.toLocaleUpperCase()}`;
-                                }
+              //                                   this.input = `${input.amount} ${input.denom.toLocaleUpperCase()}`;
+              //                                   let output = await converCoin({
+              //                                       denom:outputDenom,
+              //                                       amount:outputAmount[0]
+              //                                   })
+              //                                   this.output = `${output.amount} ${output.denom.toLocaleUpperCase()}`;
+              //                               }
+              //                           }
+              //                       }
+              //                   }else{
+              //                       let input = await converCoin({
+              //                           denom:msg.input.coin.denom,
+              //                           amount:msg.input.coin.amount
+              //                       })
+              //                       this.input = `${input.amount} ${input.denom.toLocaleUpperCase()}`;
+              //                       let output = await converCoin({
+              //                           denom:msg.output.coin.denom,
+              //                           amount:msg.output.coin.amount
+              //                       })
+              //                       this.output = `${output.amount} ${output.denom.toLocaleUpperCase()}`;
+              //                   }
 
 
-								this.outputAddress = msg.output.address || '--';
-								this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
+							// 	this.outputAddress = msg.output.address || '--';
+							// 	this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
 								break;
 							case TX_TYPE.add_liquidity:
-								(this.eventsNew || []).forEach((item) => {
-									if(item.msg_index === this.msgIndex) {
-										(item.events || []).forEach((events) => {
-											if(events.type === 'transfer') {
-												(events.attributes || []).forEach(async attribute => {
-													if(attribute.key === 'amount') {
-														if(attribute.value && attribute.value.includes(",")) {
-															const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
-															const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
-															const amountItem1 = await converCoin(amount1);
-															const amountItem2 = await converCoin(amount2);
-															this.amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
-														}
-													}
-												})
-											}
-											if(events.type === 'add_liquidity') {
-												(events.attributes || []).forEach(async attribute => {
-													if(attribute.key === 'token_pair') {
-														let list = attribute.value.split('-');
-														if(list.length > 1){
-															let token1 = await converCoin({
-																denom:list[0],
-																amount:0
-															})
-															let token2 = await converCoin({
-																denom:list[1],
-																amount:0
-															})
-															this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
-														}
-													}
-												})
-											}
-										})
-									}
-								});
-								this.sender = msg.sender || '--';
-								// let exactIrisAmt = await converCoin({
-								// 	amount: msg.exact_iris_amt,
-								// 	denom: mainToken.denom
-								// })
-								// this.exactIrisAmt = `${exactIrisAmt.amount} ${exactIrisAmt.denom.toLocaleUpperCase()}`;
-								this.exactIrisAmt = msg.exact_iris_amt;
-								let maxToken = await converCoin(msg.max_token);
-								this.maxToken = `${maxToken.amount} ${maxToken.denom.toLocaleUpperCase()}`;
-								this.minLiquidity = msg.min_liquidity || '--';
-								this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
+								this.buildAddLiquidity(msg);
+								// (this.eventsNew || []).forEach((item) => {
+								// 	if(item.msg_index === this.msgIndex) {
+								// 		(item.events || []).forEach((events) => {
+								// 			if(events.type === 'transfer') {
+								// 				(events.attributes || []).forEach(async attribute => {
+								// 					if(attribute.key === 'amount') {
+								// 						if(attribute.value && attribute.value.includes(",")) {
+								// 							const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
+								// 							const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
+								// 							const amountItem1 = await converCoin(amount1);
+								// 							const amountItem2 = await converCoin(amount2);
+								// 							this.amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
+
+								// 						}
+								// 					}
+								// 				})
+								// 			}
+								// 			if(events.type === 'add_liquidity') {
+								// 				(events.attributes || []).forEach(async attribute => {
+								// 					if(attribute.key === 'token_pair') {
+								// 						let list = attribute.value.split('-');
+								// 						if(list.length > 1){
+								// 							let token1 = await converCoin({
+								// 								denom:list[0],
+								// 								amount:0
+								// 							})
+								// 							let token2 = await converCoin({
+								// 								denom:list[1],
+								// 								amount:0
+								// 							})
+								// 							this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+								// 						}
+								// 					}
+								// 				})
+								// 			}
+								// 		})
+								// 	}
+								// });
+								// this.sender = msg.sender || '--';
+								// // let exactIrisAmt = await converCoin({
+								// // 	amount: msg.exact_iris_amt,
+								// // 	denom: mainToken.denom
+								// // })
+								// // this.exactIrisAmt = `${exactIrisAmt.amount} ${exactIrisAmt.denom.toLocaleUpperCase()}`;
+								// this.exactIrisAmt = msg.exact_iris_amt;
+								// let maxToken = await converCoin(msg.max_token);
+								// this.maxToken = `${maxToken.amount} ${maxToken.denom.toLocaleUpperCase()}`;
+								// this.minLiquidity = msg.min_liquidity || '--';
+								// this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
 								break;
 							case TX_TYPE.remove_liquidity:
-								(this.eventsNew || []).forEach((item) => {
-									if(item.msg_index === this.msgIndex) {
-										(item.events || []).forEach((events) => {
-											if(events.type === 'transfer') {
-												(events.attributes || []).forEach(async attribute => {
-													if(attribute.key === 'amount') {
-														if(attribute.value && attribute.value.includes(",")) {
-															const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
-															const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
-															const amountItem1 = await converCoin(amount1);
-															const amountItem2 = await converCoin(amount2);
-															this.amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
-														}
-													}
-												})
-											}
-											if(events.type === 'remove_liquidity') {
-												(events.attributes || []).forEach(async attribute => {
-													if(attribute.key === 'token_pair') {
-														let list = attribute.value.split('-');
-														if(list.length > 1){
-															let token1 = await converCoin({
-																denom:list[0],
-																amount:0
-															})
-															let token2 = await converCoin({
-																denom:list[1],
-																amount:0
-															})
-															this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
-														}
-													}
-												})
-											}
-										})
-									}
-								});
-								this.sender = msg.sender || '--';
-								let withdrawLiquidity = await converCoin(msg.withdraw_liquidity)
-								this.withdrawLiquidity = `${withdrawLiquidity.amount} ${withdrawLiquidity.denom.toLocaleUpperCase()}` ;
-								// let minIrisAmt = await converCoin({
-								// 	amount: msg.min_iris_amt,
-								// 	denom: mainToken.denom
-								// })
-								// this.minIrisAmt = `${minIrisAmt.amount} ${minIrisAmt.denom.toLocaleUpperCase()}`;
-								this.minIrisAmt = msg.min_iris_amt;
-								this.minToken = msg.min_token;
-								this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
+								this.buildRemoveLiquidity(msg);
+								// (this.eventsNew || []).forEach((item) => {
+								// 	if(item.msg_index === this.msgIndex) {
+								// 		(item.events || []).forEach((events) => {
+								// 			if(events.type === 'transfer') {
+								// 				(events.attributes || []).forEach(async attribute => {
+								// 					if(attribute.key === 'amount') {
+								// 						if(attribute.value && attribute.value.includes(",")) {
+								// 							const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
+								// 							const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
+								// 							const amountItem1 = await converCoin(amount1);
+								// 							const amountItem2 = await converCoin(amount2);
+								// 							this.amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
+								// 						}
+								// 					}
+								// 				})
+								// 			}
+								// 			if(events.type === 'remove_liquidity') {
+								// 				(events.attributes || []).forEach(async attribute => {
+								// 					if(attribute.key === 'token_pair') {
+								// 						let list = attribute.value.split('-');
+								// 						if(list.length > 1){
+								// 							let token1 = await converCoin({
+								// 								denom:list[0],
+								// 								amount:0
+								// 							})
+								// 							let token2 = await converCoin({
+								// 								denom:list[1],
+								// 								amount:0
+								// 							})
+								// 							this.tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+								// 						}
+								// 					}
+								// 				})
+								// 			}
+								// 		})
+								// 	}
+								// });
+								// this.sender = msg.sender || '--';
+								// let withdrawLiquidity = await converCoin(msg.withdraw_liquidity)
+								// this.withdrawLiquidity = `${withdrawLiquidity.amount} ${withdrawLiquidity.denom.toLocaleUpperCase()}` ;
+								// // let minIrisAmt = await converCoin({
+								// // 	amount: msg.min_iris_amt,
+								// // 	denom: mainToken.denom
+								// // })
+								// // this.minIrisAmt = `${minIrisAmt.amount} ${minIrisAmt.denom.toLocaleUpperCase()}`;
+								// this.minIrisAmt = msg.min_iris_amt;
+								// this.minToken = msg.min_token;
+								// this.deadline = Tools.formatLocalTime(msg.deadline)  || '--';
 							break;
 							case TX_TYPE.unjail:
-								this.operatorAddress = msg.address || '--';
+								this.buildUnjail(msg);
+								// this.operatorAddress = msg.address || '--';
 							break;
 							case TX_TYPE.create_feed:
-								this.serviceName = msg.serviceName || msg.service_name || '--';
-								this.feedName = msg.feed_name || '--';
-								this.description = msg.description || '--';
-								this.latestHistory = msg.latest_history !== 0 ?  msg.latest_history || '--' : '--';
-								this.creator = msg.creator || '--';
-								this.providers = msg.providers || '--';
-								this.input = msg.input || '--';
-								if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
-									let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
-									this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toLocaleUpperCase()}`;
-								} else {
-									this.serviceFeeCap = '--'
-								}
-								this.aggregateFunc = msg.aggregate_func || '--';
-								this.valueJsonPath = msg.value_json_path || '--';
-								this.repeatedFrequency = msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--';
-								this.responseThreshold = msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--';
-								this.timeout = msg.timeout !== 0 ? msg.timeout || '--' : '--';
+								this.buildCreateFeed(msg)
+								// this.serviceName = msg.serviceName || msg.service_name || '--';
+								// this.feedName = msg.feed_name || '--';
+								// this.description = msg.description || '--';
+								// this.latestHistory = msg.latest_history !== 0 ?  msg.latest_history || '--' : '--';
+								// this.creator = msg.creator || '--';
+								// this.providers = msg.providers || '--';
+								// this.input = msg.input || '--';
+								// if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
+								// 	let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
+								// 	this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toLocaleUpperCase()}`;
+								// } else {
+								// 	this.serviceFeeCap = '--'
+								// }
+								// this.aggregateFunc = msg.aggregate_func || '--';
+								// this.valueJsonPath = msg.value_json_path || '--';
+								// this.repeatedFrequency = msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--';
+								// this.responseThreshold = msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--';
+								// this.timeout = msg.timeout !== 0 ? msg.timeout || '--' : '--';
 							break;
 							case TX_TYPE.start_feed:
-								this.feedName = msg.feed_name || '--';
-								this.creator = msg.creator || '--';
+								this.buildStartFeed(msg)
+								// this.feedName = msg.feed_name || '--';
+								// this.creator = msg.creator || '--';
 							break;
 							case TX_TYPE.pause_feed:
-								this.feedName = msg.feed_name || '--';
-								this.creator = msg.creator || '--';
+								this.buildStartFeed(msg)
+								// this.feedName = msg.feed_name || '--';
+								// this.creator = msg.creator || '--';
 							break;
 							case TX_TYPE.edit_feed:
-								this.feedName = msg.feed_name || '--';
-								this.description = msg.description || '--';
-								this.latestHistory = msg.latest_history !== 0 ?  msg.latest_history || '--' : '--';
-								this.creator = msg.creator || '--';
-								this.providers = msg.providers || '--';
-								if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
-									let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
-									this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toLocaleUpperCase()}`;
-								} else {
-									this.serviceFeeCap = '--'
-								}
-								this.repeatedFrequency = msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--';
-								this.responseThreshold = msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--';
-								this.timeout = msg.timeout !== 0 ? msg.timeout || '--' : '--';
+								this.buildEditFeed(msg)
+								// this.feedName = msg.feed_name || '--';
+								// this.description = msg.description || '--';
+								// this.latestHistory = msg.latest_history !== 0 ?  msg.latest_history || '--' : '--';
+								// this.creator = msg.creator || '--';
+								// this.providers = msg.providers || '--';
+								// if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
+								// 	let serviceFeeCap = await converCoin(msg.service_fee_cap[0])
+								// 	this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toLocaleUpperCase()}`;
+								// } else {
+								// 	this.serviceFeeCap = '--'
+								// }
+								// this.repeatedFrequency = msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--';
+								// this.responseThreshold = msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--';
+								// this.timeout = msg.timeout !== 0 ? msg.timeout || '--' : '--';
 							break;
 							case TX_TYPE.request_rand:
-								this.blockInterval = msg.block_interval == 0 ? msg.block_interval : msg.block_interval || '--';
-								this.consumer = msg.consumer || '--';
-								this.oracle = msg.oracle;
-								if (msg.service_fee_cap && msg.service_fee_cap.length) {
-									let serviceFeeCap = await converCoin(msg.service_fee_cap[0]);
-									this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
-								} else {
-									this.serviceFeeCap = '--';
-								}
+								this.buildRequestRand(msg)
+								// this.blockInterval = msg.block_interval == 0 ? msg.block_interval : msg.block_interval || '--';
+								// this.consumer = msg.consumer || '--';
+								// this.oracle = msg.oracle;
+								// if (msg.service_fee_cap && msg.service_fee_cap.length) {
+								// 	let serviceFeeCap = await converCoin(msg.service_fee_cap[0]);
+								// 	this.serviceFeeCap = `${serviceFeeCap.amount} ${serviceFeeCap.denom.toUpperCase()}`;
+								// } else {
+								// 	this.serviceFeeCap = '--';
+								// }
 							break;
 							case TX_TYPE.service_set_withdraw_address:
 								this.buildServiceSetWithdrawAddress(msg)
@@ -3913,56 +3893,64 @@
 								// this.receiver= msg.recipient|| '--'
 								break;
 
-							case TX_TYPE.stake:		    
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
-								this.amount = await this.handleAmount(msg.amount);
-								this.reward = await this.handleReward(TX_TYPE.stake,'reward');
-								this.sender = msg.sender || '--';
+							case TX_TYPE.stake:		  
+							  this.buildStake(msg)  
+								// this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								// this.amount = await this.handleAmount(msg.amount);
+								// this.reward = await this.handleReward(TX_TYPE.stake,'reward');
+								// this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.unstake:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
-								this.amount = await this.handleAmount(msg.amount);
-								this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
-								this.sender = msg.sender || '--';
+								this.buildStake(msg)
+								// this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								// this.amount = await this.handleAmount(msg.amount);
+								// this.reward = await this.handleReward(TX_TYPE.unstake,'reward');
+								// this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.harvest:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
-								this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
-								this.sender = msg.sender || '--';
+								this.buildHarvest(msg)
+								// this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								// this.reward = await this.handleReward(TX_TYPE.harvest,'reward');
+								// this.sender = msg.sender || '--';
 								break;
 							case TX_TYPE.create_pool:
-								const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
-								this.poolId = Tools.formatPoolId(createPoolId) || '--';
-								this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
-								this.totalReward = await this.handleTotalReward(msg.total_reward);
-								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
-							  this.startHeight = msg.start_height || '--';
-								this.editable = msg.editable;
-								this.creator = msg.creator || '--';
-								this.description = msg.description || '--';		
+								this.buildCreatePool(msg)
+								// const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
+								// this.poolId = Tools.formatPoolId(createPoolId) || '--';
+								// this.lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
+								// this.totalReward = await this.handleTotalReward(msg.total_reward);
+								// this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
+							  // this.startHeight = msg.start_height || '--';
+								// this.editable = msg.editable;
+								// this.creator = msg.creator || '--';
+								// this.description = msg.description || '--';		
 								break;	
 							case TX_TYPE.create_pool_with_community_pool:
-								this.proposalID = this.getValueFromEvents(TX_TYPE.create_pool_with_community_pool, 'proposal_id');
-								this.proposer = msg.proposer || '--';
-								this.initialDeposit = await this.handleTotalReward(msg?.initial_deposit);
-								this.proposalTitle = msg?.content?.title || '--';
-								this.proposalDescription = msg?.content?.description || '--';
-								this.lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
-								this.rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
-								this.fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
-								this.fundSelfBond = await this.handleTotalReward(msg?.content?.fund_self_bond);
-								this.poolDescription = msg?.content?.pool_description || '--';
+								this.buildCreatePoolWithCP(msg)
+
+								// this.proposalID = this.getValueFromEvents(TX_TYPE.create_pool_with_community_pool, 'proposal_id');
+								// this.proposer = msg.proposer || '--';
+								// this.initialDeposit = await this.handleTotalReward(msg?.initial_deposit);
+								// this.proposalTitle = msg?.content?.title || '--';
+								// this.proposalDescription = msg?.content?.description || '--';
+								// this.lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
+								// this.rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
+								// this.fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
+								// this.fundSelfBond = await this.handleTotalReward(msg?.content?.fund_self_bond);
+								// this.poolDescription = msg?.content?.pool_description || '--';
 								break;
 							case TX_TYPE.destroy_pool:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
-								this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
-								this.creator = msg.creator || '--';
+								this.buildDestroyPool(msg)
+								// this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								// this.refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
+								// this.creator = msg.creator || '--';
 								break;
 							case TX_TYPE.adjust_pool:
-								this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
-								this.additionalReward = await this.handleTotalReward(msg.additional_reward);
-								this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
-								this.creator = msg.creator || '--';
+								this.buildAdjustPool(msg)
+								// this.poolId = Tools.formatPoolId(msg.pool_id) || '--';
+								// this.additionalReward = await this.handleTotalReward(msg.additional_reward);
+								// this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
+								// this.creator = msg.creator || '--';
 								break;
 						}
 					}
@@ -6008,9 +5996,628 @@
 			},
 
 			// swap_order
-			buildSwapOrder(msg){
-				//todo
+			async buildSwapOrder(msg){
+				let input,output,tokenPair;
+					(this.eventsNew || []).forEach((item) => {
+						if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+								if(events.type === 'swap') {
+									(events.attributes || []).forEach(async attribute => {
+										if(attribute.key === 'token_pair') {
+											let list = attribute.value.split('-');
+											if(list.length > 1){
+												let token1 = await converCoin({
+													denom:list[0],
+													amount:0
+												})
+												let token2 = await converCoin({
+													denom:list[1],
+													amount:0
+												})
+												tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+											}
+
+										}
+									})
+								}
+							})
+						}
+					});
+					if(this.eventsNew && this.eventsNew.length > 0){
+							let currentEvents = this.eventsNew.find((e)=>e.msg_index === this.msgIndex);
+							if(currentEvents && currentEvents.events.length > 0){
+									let transferItem = currentEvents.events.find(e=>e.type === TX_TYPE.transfer);
+									if(transferItem && transferItem.attributes && transferItem.attributes.length > 0){
+											let amountList = transferItem.attributes.filter((t)=>t.key === 'amount');
+											if(amountList && amountList.length > 0){
+													let inputItem = amountList[0],
+															outputItem = amountList[amountList.length - 1]
+													let inputAmount = inputItem.value.match(/\d+/g), inputDenom = '',
+															outputAmount = outputItem.value.match(/\d+/g), outputDenom = '';
+													if(inputAmount && inputAmount.length > 0){
+															inputDenom = inputItem.value.substr(inputAmount[0].length);
+													}
+													if(outputAmount && outputAmount.length > 0){
+														outputDenom = outputItem.value.substr(outputAmount[0].length);
+													}
+													let inputRes = await converCoin({
+															denom:inputDenom,
+															amount:inputAmount[0]})
+
+													input = `${inputRes.amount} ${inputRes.denom.toLocaleUpperCase()}`;
+													let outputRes = await converCoin({
+															denom:outputDenom,
+															amount:outputAmount[0]
+													})
+													output = `${outputRes.amount} ${outputRes.denom.toLocaleUpperCase()}`;
+											}
+									}
+							}
+					}else{
+						let inputRes = await converCoin({
+								denom:msg.input.coin.denom,
+								amount:msg.input.coin.amount
+						})
+						input = `${inputRes.amount} ${inputRes.denom.toLocaleUpperCase()}`;
+						let outputRes = await converCoin({
+								denom:msg.output.coin.denom,
+								amount:msg.output.coin.amount
+						})
+						output = `${outputRes.amount} ${outputRes.denom.toLocaleUpperCase()}`;
+					}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.isBuyOrder'),
+						value: msg.is_buy_order
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.inputAddress'),
+						value: msg.input.address ,
+						isAddress: true
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.Input'),
+						value: input,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.outputAddress'),
+						value: msg.output.address,
+						isAddress: true
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.output'),
+						value: output,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.tokenPair'),
+						value: tokenPair,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.deadline'),
+						value: Tools.formatLocalTime(msg.deadline)  || '--',
+					},
+				]
+			},
+
+			// remove_liquidity
+			async buildRemoveLiquidity(msg){
+				let amount, tokenPair, withdrawLiquidity;
+				(this.eventsNew || []).forEach((item) => {
+						if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+								if(events.type === 'transfer') {
+									(events.attributes || []).forEach(async attribute => {
+										if(attribute.key === 'amount') {
+											if(attribute.value && attribute.value.includes(",")) {
+												const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
+												const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
+												const amountItem1 = await converCoin(amount1);
+												const amountItem2 = await converCoin(amount2);
+												amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
+											  this.detailInfo[4].value = amount;
+											}
+										}
+									})
+								}
+								if(events.type === 'remove_liquidity') {
+									(events.attributes || []).forEach(async attribute => {
+										if(attribute.key === 'token_pair') {
+											let list = attribute.value.split('-');
+											if(list.length > 1){
+												let token1 = await converCoin({
+													denom:list[0],
+													amount:0
+												})
+												let token2 = await converCoin({
+													denom:list[1],
+													amount:0
+												})
+												tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+												this.detailInfo[5].value = tokenPair;
+											}
+										}
+									})
+								}
+							})
+						}
+				});
+				let res = await converCoin(msg.withdraw_liquidity)
+				withdrawLiquidity = `${res.amount} ${res.denom.toLocaleUpperCase()}`;
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.sender'),
+						value: msg.sender,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.withdrawLiquidity'),
+						value: withdrawLiquidity ,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.minIrisAmt'),
+						value: msg.min_iris_amt,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.minToken'),
+						value: msg.min_token,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.amount'),
+						value: amount,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.tokenPair'),
+						value: tokenPair,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.coinswap.deadline'),
+						value: Tools.formatLocalTime(msg.deadline)  || '--',
+					},
+				]
+			},
+
+			// add_liquidity
+			async buildAddLiquidity(msg){
+				let amount, tokenPair, maxToken;
+				(this.eventsNew || []).forEach((item) => {
+					if(item.msg_index === this.msgIndex) {
+							(item.events || []).forEach((events) => {
+								if(events.type === 'transfer') {
+									(events.attributes || []).forEach(async attribute => {
+										if(attribute.key === 'amount') {
+											if(attribute.value && attribute.value.includes(",")) {
+												const amount1 = this.getAmountByAmountStr(attribute.value.split(',')[0]);
+												const amount2 = this.getAmountByAmountStr(attribute.value.split(',')[1]);
+												const amountItem1 = await converCoin(amount1);
+												const amountItem2 = await converCoin(amount2);
+												amount = `${amountItem1.amount} ${amountItem1.denom.toUpperCase()}, ${amountItem2.amount} ${amountItem2.denom.toUpperCase()}`
+												this.detailInfo[3].value = amount;
+											}
+										}
+									})
+								}
+								if(events.type === 'add_liquidity') {
+									(events.attributes || []).forEach(async attribute => {
+										if(attribute.key === 'token_pair') {
+											let list = attribute.value.split('-');
+											if(list.length > 1){
+												let token1 = await converCoin({
+													denom:list[0],
+													amount:0
+												})
+												let token2 = await converCoin({
+													denom:list[1],
+													amount:0
+												})
+												tokenPair = `${token1.denom.toUpperCase()} - ${token2.denom.toUpperCase()}`;
+												this.detailInfo[5].value = tokenPair;
+											}
+										}
+									})
+								}
+							})
+						}
+					});
+					let res = await converCoin(msg.max_token);
+					maxToken = `${res.amount} ${res.denom.toLocaleUpperCase()}`;
+				
+					this.detailInfo = [
+						{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.sender'),
+							value: msg.sender,
+							isAddress: true
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.exactIrisAmt'),
+							value: msg.exact_iris_amt ,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.maxToken'),
+							value: maxToken,
+						},
+						{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.amount'),
+							value: amount,
+						},
+						
+							{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.minLiquidity'),
+							value: msg.min_liquidity,
+						},
+							{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.tokenPair'),
+							value: tokenPair,
+						},
+							{
+							label: this.$t('ExplorerLang.transactionInformation.coinswap.deadline'),
+							value: Tools.formatLocalTime(msg.deadline)  || '--',
+						},
+					]
+			},
+
+			// unjail 
+			buildUnjail(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.staking.operatorAddress'),
+						value: msg.address,
+						isAddress: true
+					}
+				]
+			},
+
+			// create_feed -未自测
+			async buildCreateFeed(msg){
+				let serviceFeeCap;
+				if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
+					let res = await converCoin(msg.service_fee_cap[0])
+					serviceFeeCap = `${res.amount} ${res.denom.toLocaleUpperCase()}`;
+				} else {
+					serviceFeeCap = '--'
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceName'),
+						value: msg.serviceName || msg.service_name,
+						isService: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.feedName'),
+						value: msg.feed_name ,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.description'),
+						value: msg.description,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.latestHistory'),
+						value: msg.latest_history !== 0 ?  msg.latest_history || '--' : '--',
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.creator'),
+						value: msg.creator,
+						isAddress: true
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.providers'),
+						value: msg.providers,
+						isAddress: true,
+						isMulti: true
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.serviceFeeCap'),
+						value: serviceFeeCap,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.aggregateFunc'),
+						value: msg.aggregate_func,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.valueJsonPath'),
+						value: msg.value_json_path,
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedFrequency'),
+						value: msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--',
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.responseThreshold'),
+						value: msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--',
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.timeOut'),
+						value: msg.timeout !== 0 ? msg.timeout || '--' : '--',
+					}
+				]
+			},
+
+			// start_feed pause_feed
+			buildStartFeed(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.feedName'),
+						value: msg.feed_name
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.creator'),
+						value: msg.creator ,
+						isComplexAddr: true
+					}
+				]
+			},
+
+			// edit_feed
+			async buildEditFeed(msg){
+				let serviceFeeCap;
+				if( msg && msg.service_fee_cap && msg.service_fee_cap[0]) {
+					let res = await converCoin(msg.service_fee_cap[0])
+					serviceFeeCap = `${res.amount} ${res.denom.toLocaleUpperCase()}`;
+				} else {
+					serviceFeeCap = '--'
+				}
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.feedName'),
+						value: msg.feed_name
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.description'),
+						value: msg.description,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.latestHistory'),
+						value: msg.latest_history !== 0 ?  msg.latest_history || '--' : '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.creator'),
+						value: msg.creator,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.providers'),
+						value: msg.providers,
+						isAddress: true,
+						isMulti: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceFeeCap'),
+						value: serviceFeeCap,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.repeatedFrequency'),
+						value: msg.repeatedFrequency !== 0 ? msg.repeated_frequency || '--' : '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.oracle.responseThreshold'),
+						value: msg.responseThreshold !== 0 ? msg.response_threshold || '--' : '--',
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.timeOut'),
+						value:  msg.timeout !== 0 ? msg.timeout || '--' : '--',
+					},
+					
+				]
+			},
+
+			// request_rand
+			async buildRequestRand(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.random.blockInterval'),
+						value: msg.block_interval == 0 ? msg.block_interval : msg.block_interval || '--'
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.consumer'),
+						value: msg.consumer ,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.random.oracle'),
+						value: msg.oracle ,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.serviceFeeCap'),
+						value: '',
+					}
+				]
+				if (msg.service_fee_cap && msg.service_fee_cap.length) {
+					const res = await converCoin(msg.service_fee_cap[0]);
+					const serviceFeeCap = `${res.amount} ${res.denom.toUpperCase()}`;
+					this.detailInfo[3].value = serviceFeeCap;
+				}
+			},
+
+			// stake
+			async buildStake(msg){
+				const amount = await this.handleAmount(msg.amount);
+				const reward = await this.handleReward(TX_TYPE.stake,'reward');
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+						value: Tools.formatPoolId(msg.pool_id)
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.amount'),
+						value: amount,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.reward'),
+						value: reward,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.sender'),
+						value: msg.sender,
+						isAddress: true
+					}
+				]
+			},
+
+			// harvest
+			async buildHarvest(msg){
+			  const reward = await this.handleReward(TX_TYPE.harvest,'reward');
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+						value: Tools.formatPoolId(msg.pool_id)
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.reward'),
+						value: reward,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.sender'),
+						value: msg.sender,
+						isAddress: true
+					}
+				]
+			},
+
+			// create_pool
+			async buildCreatePool(msg){
+				const createPoolId =  await this.getValueFromEvents(TX_TYPE.create_pool,'pool_id');
+				const poolId = Tools.formatPoolId(createPoolId) || '--';
+				const lptDenom = msg.lpt_denom ? msg.lpt_denom.toLocaleUpperCase() : '--';
+				const totalReward = await this.handleTotalReward(msg.total_reward);
+				const rewardPerBlock = await this.handleTotalReward(msg.reward_per_block);
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+						value: poolId
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.lptDenom'),
+						value: lptDenom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.totalReward'),
+						value: totalReward,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.rewardPerBlock'),
+						value: rewardPerBlock,
+					},	
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.startHeight'),
+						value: msg.start_height,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.editable'),
+						value: msg.editable ? 'Yes': 'No' ,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.creator'),
+						value: msg.creator,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.description'),
+						value: msg.description,
+					}
+
+				]
+			},
+
+			// create_pool_with_community_pool
+			async buildCreatePoolWithCP(msg){
+				const proposalID = this.getValueFromEvents(TX_TYPE.create_pool_with_community_pool, 'proposal_id');
+				const initialDeposit = await this.handleTotalReward(msg?.initial_deposit);
+				const lptDenom = msg?.content?.lpt_denom ? msg?.content?.lpt_denom.toLocaleUpperCase() : '--';
+				const rewardPerBlock = await this.handleTotalReward(msg?.content?.reward_per_block);
+				const fundApplied = await this.handleTotalReward(msg?.content?.fund_applied);
+				const fundSelfBond = await this.handleTotalReward(msg?.content?.fund_self_bond);
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.proposalId'),
+						value: proposalID
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.proposer'),
+						value: msg.proposer,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.initialDeposit'),
+						value: initialDeposit,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.proposalTitle'),
+						value: msg?.content?.title,
+					},	
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.proposalDescription'),
+						value: msg?.content?.description,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.lptDenom'),
+						value: lptDenom,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.rewardPerBlock'),
+						value: rewardPerBlock,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.fundApplied'),
+						value: fundApplied,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.fundSelfBond'),
+						value: fundSelfBond,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolDescription'),
+						value:  msg?.content?.pool_description,
+					},
+				]
+			},
+
+			// destroy_pool
+			async buildDestroyPool(msg){
+				const poolId = Tools.formatPoolId(msg.pool_id) || '--';
+				const refund = await this.handleReward(TX_TYPE.destroy_pool,'amount');
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+						value: poolId
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.refund'),
+						value: refund,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.creator'),
+						value: msg.creator,
+						isAddress: true
+					}
+				]
+			},
+
+			// adjust_pool
+			async buildAdjustPool(msg){
+				const poolId = Tools.formatPoolId(msg.pool_id) || '--';
+				const additionalReward = await this.handleTotalReward(msg.additional_reward);
+				const rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+						value: poolId
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.additionalReward'),
+						value: additionalReward,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.rewardPerBlock'),
+						value: rewardPerBlock,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.farm.creator'),
+						value: msg.creator,
+						isAddress: true
+					}
+				]
 			}
+			
+
 		}
 	}
 </script>
