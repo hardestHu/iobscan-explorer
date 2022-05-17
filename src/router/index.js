@@ -119,7 +119,7 @@ const router = new Router({
 			component: () => import('@/components/ddc/index.vue')
 		},
 		{
-			path: '/ddc/:ddcId',
+			path: '/ddc/detail',
 			component: () => import('@/components/ddc/detail.vue')
 		}
 

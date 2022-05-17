@@ -424,21 +424,21 @@ export const ExplorerLang = {
             securityContact:'安全联络人 :'
         },
         coinswap: {
-            isBuyOrder: '买入订单 :',
-            inputAddress: '输入地址 :',
-            Input: '输入地址 :',
-            outputAddress: '输出地址 :',
-            output: '输出数量 :',
-            deadline: '截止日期 :',
-            sender: '发送者 :',
-            exactIrisAmt: '增加的iris数量 :', //需修改
-            minIrisAmt: '最少iris数量 :', //需修改
-            maxToken: '最大可兑换数量 :',
-            minToken: '最少可兑换数量 :',
-            minLiquidity: '流动性凭证 :',
-            withdrawLiquidity: '提出流动性凭证 :',
-            amount: '数量 :', // 新增
-            tokenPair: 'Token Pair :', // 新增
+            isBuyOrder: '买入订单',
+            inputAddress: '输入地址',
+            Input: '输入地址',
+            outputAddress: '输出地址',
+            output: '输出数量',
+            deadline: '截止日期',
+            sender: '发送者',
+            exactIrisAmt: '增加的iris数量', //需修改
+            minIrisAmt: '最少iris数量', //需修改
+            maxToken: '最大可兑换数量',
+            minToken: '最少可兑换数量',
+            minLiquidity: '流动性凭证',
+            withdrawLiquidity: '提出流动性凭证 ',
+            amount: '数量', // 新增
+            tokenPair: 'Token Pair', // 新增
         },
         oracle: {
             feedName: '任务名称',
@@ -556,6 +556,12 @@ export const ExplorerLang = {
             id: 'Id',
             secret: 'Secret',
             recipient: 'Recipient'
+        },
+        bsnddc: {
+            contractType:'合约模块',
+            contractMethod:'合约方法',
+            ddcId: 'DDC ID',
+            ddcName: 'DDC 名称',
         }
     },
     addressDetail: {

@@ -26,22 +26,20 @@ export default [
         label: i18n.t('ExplorerLang.table.txType'),
         displayValue:'txType',
         nativeValue:'txType',
-        isNeedFormat:true,
         isShowTag:true,
-        isLink:false,
-        isShowMoniker:false
+     
     },
     {
         label: i18n.t('ExplorerLang.table.contractAddress'),
-        displayValue: 'denomId',
-        nativeValue: 'denomId',
+        displayValue: 'contractAddr',
+        nativeValue: 'contractAddr',
         isFormatAddress: true,
         isNeedFormat: true
     },
     {
         label: i18n.t('ExplorerLang.table.signer'),
-        displayValue: 'sender',
-        nativeValue: 'sender',
+        displayValue: 'signer',
+        nativeValue: 'signer',
         isLink: true,
         isNeedFormat: true,
         isFormatAddress: true,

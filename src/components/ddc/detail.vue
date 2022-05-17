@@ -51,19 +51,14 @@
 			</div>
 			<div class="nft_token_list_content">
 				<div class="nft_token_list_title"> {{ $t('ExplorerLang.nftDetail.nftTxs') }}</div>
-				<!--				<TxListComponent :txData="txListByToken"></TxListComponent>-->
 				<list-component
 					:token-symbol="mainTokenSymbol"
-					:list-data="txListByToken"
-					:is-loading="isNftDetailTxLoading"
+					:list-data="txListByDDC"
+					:is-loading="isDDCDetailTxLoading"
 					:column-list="ddcDetailColumn"
 					:pagination="{pageSize:Number(pageSize),dataCount:count,pageNum:Number(pageNum)}"
 					@pageChange="pageChange"
 				></list-component>
-<!--				<div class="pagination_content">
-					<m-pagination :page-size="pageSize" :total="count" :page="pageNum"
-								  :page-change="pageChange"></m-pagination>
-				</div>-->
 			</div>
 		</div>
 	</div>
@@ -71,10 +66,10 @@
 
 <script>
 import TxListComponent from '../common/TxListComponent'
-import {getNftDetail, getTokenTxList, getDdcDetail} from '@/service/api'
+import { getDdcTxList, getDdcDetail } from '@/service/api'
 import Tools from '@/util/Tools'
 import MPagination from '../common/MPagination'
-import {TX_TYPE, TX_STATUS, decimals} from '@/constant'
+import {TX_TYPE, TX_STATUS, decimals, DDC_TYPE_LIST} from '@/constant'
 import LargeString from '../common/LargeString'
 import ListComponent from "../common/ListComponent"
 import ddcDetailTxColumn from "../tableListColumnConfig/ddcDetailTxColumn";
@@ -86,7 +81,7 @@ export default {
 	data() {
 		return {
 			ddcDetailColumn: [],
-			isNftDetailTxLoading: false,
+			isDDCDetailTxLoading: false,
 			mainTokenSymbol: '',
 			Tools,
 			TX_TYPE,
@@ -98,7 +93,7 @@ export default {
 			pageNum: 1,
 			count: 0,
 			pageSize: 10,
-			txListByToken: [],
+			txListByDDC: [],
 			creator: '',
 			schema: '',
 			amount: '',
@@ -129,24 +124,13 @@ export default {
 		async getTokenInformation() {
 			try {
 				let ddcDetail = await getDdcDetail({
-						ddc_id:this.$route.query.ddc_id,
-						contract_address:this.$route.query.contract_address
+						ddc_id: this.$route.query.ddcId,
+						contract_address:this.$route.query.contractAddr
 					}
 				)
-				console.log('ddcDetail',ddcDetail)
-				ddcDetail = ddcDetail.data.data
 				if (ddcDetail) {
-					// amount: 2000
-					// contract_address: "0x354c6aF2cB870BEFEA8Ea0284C76e4A46B8F2870"
-					// ddc_data: "{\\\"amount\\\":2000,\\\"unique\\\":\\\"sc3dutc0f2ogwj6\\\",\\\"name\\\":\\\"CHIZHANG“天使与魔鬼”首发限量版\\\",\\\"issuer\\\":\\\"数藏中国\\\",\\\"seq\\\":903,\\\"url\\\":\\\"https://oss.shucang.cn/upload/file/%E5%A4%A9%E4%BD%BF%E4%B8%8E%E9%AD%94%E9%AC%BC-20220209140448.jpg\\\"}"
-					// ddc_id: "518"
-					// ddc_name: "CHIZHANG“天使与魔鬼”首发限量版"
-					// ddc_type: "DDC721"
-					// ddc_uri: "https://oss.shucang.cn/upload/file/%E5%A4%A9%E4%BD%BF%E4%B8%8E%E9%AD%94%E9%AC%BC-20220209140448.jpg"
-					// owner: "iaa18ngk2m2ejw6utj645fja7txwm6ujtchyl8484u"
-					
 					this.owner = ddcDetail.owner || '--'
-					this.ddcType = ddcDetail.ddc_type || '--'
+					this.ddcType = DDC_TYPE_LIST[ddcDetail.ddc_type] || '--'
 					this.ddcName = ddcDetail.ddc_name || '--'
 					this.ddcId = ddcDetail.ddc_id || '--'
 					this.amount = ddcDetail.amount || '--'
@@ -154,9 +138,9 @@ export default {
 					this.creator = ddcDetail.creator || '--'
 					this.ddcUri = ddcDetail.ddc_uri || '--'
 
-					this.denomId = ddcDetail.denom_id
-					this.getTokenTxCount()
-					this.getTokenTx()
+					// this.denomId = ddcDetail.denom_id
+					this.getDDCTxCount()
+					this.getDDCTx()
 				}
 			} catch (e) {
 				console.error(e)
@@ -164,7 +148,7 @@ export default {
 		},
 		pageChange(pageNum) {
 			this.pageNum = pageNum
-			this.getTokenTx()
+			this.getDDCTx()
 		},
 		async getTxTypeData() {
 			try {
@@ -174,90 +158,90 @@ export default {
 				console.log(error)
 			}
 		},
-		async getTokenTx() {
+		async getDDCTx() {
 			try {
-				const res = await getTokenTxList(
-
-					this.$route.query.denom,
-					this.pageNum,
-					this.pageSize,
-					false
-				)
+				debugger
+				const res = await getDdcTxList({
+					type: this.ddcType,
+					pageNum: this.pageNum,
+					pageSize: this.pageSize,
+					useCount:false
+				})
+				console.log(res)	
 				if (res?.data.length > 0) {
-					this.txListByToken = res.data.map((item) => {
-						let mintNftArr = [], burnNftArr = [], editNftArr = [], issueDenomArr = [], transferNftArr = [],
-							allNftTxMsgArr = [];
-						if (item?.msgs?.length) {
-							allNftTxMsgArr = [];
-							mintNftArr = item.msgs.filter(item => {
-								if (item.type === TX_TYPE.mint_nft) {
-									return item
-								}
-							})
-							burnNftArr = item.msgs.filter(item => {
-								if (item.type === TX_TYPE.burn_nft) {
-									return item
-								}
-							})
-							editNftArr = item.msgs.filter(item => {
-								if (item.type === TX_TYPE.edit_nft) {
-									return item
-								}
-							})
-							issueDenomArr = item.msgs.filter(item => {
-								if (item.type === TX_TYPE.issue_denom) {
-									return item
-								}
-							})
-							transferNftArr = item.msgs.filter(item => {
-								if (item.type === TX_TYPE.transfer_nft) {
-									return item
-								}
-							})
-							allNftTxMsgArr = mintNftArr.concat(burnNftArr, editNftArr, issueDenomArr, transferNftArr)
+					this.txListByDDC = res.data.map((item) => {
+						// let mintNftArr = [], burnNftArr = [], editNftArr = [], issueDenomArr = [], transferNftArr = [],
+						// 	allNftTxMsgArr = [];
+						// if (item?.msgs?.length) {
+						// 	allNftTxMsgArr = [];
+						// 	mintNftArr = item.msgs.filter(item => {
+						// 		if (item.type === TX_TYPE.mint_nft) {
+						// 			return item
+						// 		}
+						// 	})
+						// 	burnNftArr = item.msgs.filter(item => {
+						// 		if (item.type === TX_TYPE.burn_nft) {
+						// 			return item
+						// 		}
+						// 	})
+						// 	editNftArr = item.msgs.filter(item => {
+						// 		if (item.type === TX_TYPE.edit_nft) {
+						// 			return item
+						// 		}
+						// 	})
+						// 	issueDenomArr = item.msgs.filter(item => {
+						// 		if (item.type === TX_TYPE.issue_denom) {
+						// 			return item
+						// 		}
+						// 	})
+						// 	transferNftArr = item.msgs.filter(item => {
+						// 		if (item.type === TX_TYPE.transfer_nft) {
+						// 			return item
+						// 		}
+						// 	})
+						// 	allNftTxMsgArr = mintNftArr.concat(burnNftArr, editNftArr, issueDenomArr, transferNftArr)
 							
-						}
-						let sender = ' ', denomId = ' ', filterSenderArr = [], filterDenomId = []
-						if (allNftTxMsgArr?.length === 1) {
-							if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.sender) {
-								filterSenderArr = [allNftTxMsgArr[0].msg.sender]
-							}
-							if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.denom) {
-								filterDenomId = [allNftTxMsgArr[0].msg.denom]
-							}
-						} else if (allNftTxMsgArr?.length > 1) {
-							let senderArr = allNftTxMsgArr.map(item => {
-								if (item?.msg?.sender) {
-									return item.msg.sender
-								}
-							})
-							let denomIdArr = allNftTxMsgArr.map(item => {
-								if (item?.msg?.denom) {
-									return item.msg.denom
-								}
-							})
-							filterSenderArr = Array.from(new Set(senderArr))
-							filterDenomId = Array.from(new Set(denomIdArr))
-						}
-						if (filterSenderArr?.length === 1) {
-							sender = filterSenderArr [0]
-						}
-						if (filterDenomId?.length === 1) {
-							denomId = filterDenomId[0]
-						}
+						// }
+						// let sender = ' ', denomId = ' ', filterSenderArr = [], filterDenomId = []
+						// if (allNftTxMsgArr?.length === 1) {
+						// 	if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.sender) {
+						// 		filterSenderArr = [allNftTxMsgArr[0].msg.sender]
+						// 	}
+						// 	if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.denom) {
+						// 		filterDenomId = [allNftTxMsgArr[0].msg.denom]
+						// 	}
+						// } else if (allNftTxMsgArr?.length > 1) {
+						// 	let senderArr = allNftTxMsgArr.map(item => {
+						// 		if (item?.msg?.sender) {
+						// 			return item.msg.sender
+						// 		}
+						// 	})
+						// 	let denomIdArr = allNftTxMsgArr.map(item => {
+						// 		if (item?.msg?.denom) {
+						// 			return item.msg.denom
+						// 		}
+						// 	})
+						// 	filterSenderArr = Array.from(new Set(senderArr))
+						// 	filterDenomId = Array.from(new Set(denomIdArr))
+						// }
+						// if (filterSenderArr?.length === 1) {
+						// 	sender = filterSenderArr [0]
+						// }
+						// if (filterDenomId?.length === 1) {
+						// 	denomId = filterDenomId[0]
+						// }
 						return {
 							txHash: item.tx_hash,
-							txType: (item.msgs || []).map(item =>  item.type),
+							txType: TX_TYPE.bsn_ddc,
+							contractAddr: item.contract_addrs[0],
+							signer: item.signers && item.signers.length > 0 ? item.signers[0] : '--',
 							blockHeight: item.height,
 							fee: item?.fee?.amount[0]?.amount ? item?.fee.amount[0] : ' ',
 							Time: Tools.formatLocalTime(item.time),
-							status: item.status,
-							sender: sender,
-							denomId: denomId
 						}
 					})
-					if (this.txListByToken?.length) {
-						this.txListByToken.forEach(async (item) => {
+					if (this.txListByDDC?.length) {
+						this.txListByDDC.forEach(async (item) => {
 							if (item?.fee) {
 								let formatFee = await converCoin(item.fee)
 								item.fee = formatFee?.amount ? Tools.toDecimal(formatFee.amount, this.feeDecimals) : ''
@@ -265,22 +249,21 @@ export default {
 						})
 					}
 				} else {
-					this.txListByToken = []
+					this.txListByDDC = []
 				}
 			} catch (e) {
 				console.error(e)
 				this.$message.error(this.$t('ExplorerLang.message.requestFailed'))
 			}
 		},
-		async getTokenTxCount() {
+		async getDDCTxCount() {
 			try {
-				const res = await getTokenTxList(
-					this.amount,
-					this.$route.query.denom,
-					null,
-					null,
-					true
-				)
+				const res = await getDdcTxList({
+					type: this.ddcType,
+					pageNum: this.pageNum,
+					pageSize: this.pageSize,
+					useCount: true
+				})
 				if (res?.count) {
 					this.count = res.count
 				} else {

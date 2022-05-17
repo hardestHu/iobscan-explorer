@@ -143,14 +143,14 @@ export const TX_TYPE = {
   destroy_pool:'destroy_pool',
   adjust_pool:'adjust_pool',
   
-  // Smart contract
-  bsn_ddc:'bsn_ddc'
+  //EVM只能合约
+  bsn_ddc:'ethereum_tx'
 }
 
 // 展示 abandon
 export const TX_TYPE_DISPLAY = {
   // Smart contract
-  bsn_ddc:'BSN-DDC',
+  bsn_ddc:'BSN-DDC 合约',
   //farm
   stake:'Stake',
   unstake:'Unstake',
@@ -617,3 +617,7 @@ export const IRIS_ADDRESS_PREFIX = 'iaa';
 
 export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目
 export const DTC_ADDRESS_PREFIX = 'dtc';
+export const DDC_TYPE_LIST = {
+  1:'DDC721',
+  2:'DDC1155'
+}

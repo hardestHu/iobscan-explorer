@@ -441,20 +441,20 @@ export const ExplorerLang = {
         },
         coinswap: {
             isBuyOrder: 'isBuyOrder :',
-            inputAddress: 'Input Address :',
-            Input: 'Input :',
-            outputAddress: 'Output Address :',
-            output: 'Output :',
-            deadline: 'Deadline :',
+            inputAddress: 'Input Address',
+            Input: 'Input',
+            outputAddress: 'Output Address',
+            output: 'Output',
+            deadline: 'Deadline',
             sender: 'Sender :',
-            exactIrisAmt: 'Exact Standard Amt :',
-            minIrisAmt: 'Min Standard Amt :',
-            maxToken: 'Max Token :',
-            minToken: 'Min Token :',
-            minLiquidity: 'Min Liquidity :',
-            withdrawLiquidity: 'Withdraw Liquidity :',
-            amount: 'Amount :', // 新增
-            tokenPair: 'Token Pair :', // 新增
+            exactIrisAmt: 'Exact Standard Amt',
+            minIrisAmt: 'Min Standard Amt',
+            maxToken: 'Max Token',
+            minToken: 'Min Token',
+            minLiquidity: 'Min Liquidity',
+            withdrawLiquidity: 'Withdraw Liquidity',
+            amount: 'Amount', // 新增
+            tokenPair: 'Token Pair', // 新增
         },
         oracle: {
             feedName: 'Feed Name',
@@ -599,7 +599,12 @@ export const ExplorerLang = {
             totalReward2: 'Total Reward ',
             creator: 'Creator',
             title: 'Title',
-            
+        },
+        bsnddc: {
+            contractType:'Contract Type',
+            contractMethod:'Contract Method',
+            ddcId: 'DDC ID',
+            ddcName: 'DDC Name',
         }
     },
     addressDetail: {

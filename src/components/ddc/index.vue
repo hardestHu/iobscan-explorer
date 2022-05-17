@@ -9,7 +9,7 @@
       <div class="nef_list_table_container">
         <list-component
           :empty-text="$t('ExplorerLang.table.emptyDescription')"
-          :is-loading="isDenomListLoading"
+          :is-loading="isDdcListLoading"
           :list-data="ddcList"
           :column-list="ddcListColumn"
           :pagination="{pageSize:Number(pageSize),dataCount:count,pageNum:Number(pageNum)}"
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getDenoms } from "@/service/api";
+import { getDdcList } from "@/service/api";
 import Tools from "@/util/Tools";
 import MPagination from "../common/MPagination";
 import { ColumnMinWidth } from "@/constant";
@@ -50,7 +50,7 @@ export default {
   mixins: [parseTimeMixin],
   data() {
     return {
-      isDenomListLoading:false,//新增
+      isDdcListLoading:false,//新增
       ddcListColumn:[],//新增的
       ColumnMinWidth,
       ddcList: [],
@@ -64,8 +64,8 @@ export default {
   },
   mounted() {
     this.ddcListColumn = ddcListColumnConfig
-    this.getDenoms();
-    this.getDenomsCount();
+    this.getDdc();
+    this.getDdcCount();
   },
   computed: {
     isShowPlurality() {
@@ -76,8 +76,8 @@ export default {
     resetFilterCondition() {
       this.input = "";
       this.pageNum = 1;
-      this.getDenomsCount();
-      this.getDenoms();
+      this.getDdcCount();
+      this.getDdc();
       this.$refs.denomSearchNode.resetFilterCondition()
     },
     handleNftCountClick(denomId) {
@@ -86,38 +86,40 @@ export default {
     },
     pageChange(pageNum) {
       this.pageNum = pageNum;
-      this.getDenoms();
+      this.getDdc();
     },
     handleSearchClick(input) {
       this.input = input
       this.pageNum = 1;
-      this.getDenomsCount();
-      this.getDenoms();
+      this.getDdcCount();
+      this.getDdc();
     },
-    async getDenoms() {
-        this.isDenomListLoading = true
+    async getDdc() {
+        this.isDdcListLoading = true
       try {
-        const res = await getDenoms(
-          this.pageNum,
-          this.pageSize,
-          false,
-          false,
-          this.input
-        );
+        const res = await getDdcList({
+          owner:'',
+          ddc_id: this.input,
+          contract_address: '',
+          useCount: false,
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        });
+        
         if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
-          this.ddcList = res.data.map(denom => {
+          this.ddcList = res.data.map(item => {
             return {
-              denomId: denom.denomId,
-              denomName: denom.denomName || denom.denomId,
-              hash: denom.hash,
-              nftCount: denom.nftCount,
-              sender: denom.sender,
+              ddcId: item.ddc_id,
+              ddcName: item.ddc_name,
+              contractAddr: item.contract_address,
+              owner: item.owner,
+              ddcUri: item.ddc_uri,
               time: Tools.formatAge(
                 Tools.getTimestamp(),
-                denom.time * 1000,
+                item.lastest_tx_time * 1000,
                 this.$t("ExplorerLang.table.suffix")
               ),
-              Time: Tools.formatLocalTime(denom.time),
+              Time: Tools.formatLocalTime(item.lastest_tx_time),
             };
           });
           /**
@@ -129,15 +131,22 @@ export default {
         } else {
             this.ddcList = [];
         }
-        this.isDenomListLoading = false//新增
+        this.isDdcListLoading = false//新增
       } catch (e) {
-          this.isDenomListLoading = false//新增
+          this.isDdcListLoading = false//新增
         console.error(e);
       }
     },
-    async getDenomsCount() {
+    async getDdcCount() {
       try {
-        const res = await getDenoms(null, null, true, false, this.input);
+        const res = await getDdcList({
+          owner:'',
+          ddc_id: this.input,
+          contract_address: '',
+          useCount: true,
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        });
         if (res?.count) {
           this.count = res.count;
         } else {
