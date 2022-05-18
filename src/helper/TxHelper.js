@@ -434,12 +434,24 @@ export class TxHelper {
 				value: LEVEL_TX_TYPE.Other,
 				label: LEVEL_TX_TYPE.Other,
 				children:[]
-			};
+			},
+            smartContractObj={
+                value: LEVEL_TX_TYPE.SmartContract,
+                label: LEVEL_TX_TYPE.SmartContract,
+                children:[]
+            };
 		txTypeArray.forEach( item => {
             switch (item.typeName) {
+                // smartContractObj
 
-              // farm
-              //#region 
+                case TX_TYPE.bsn_ddc:
+                    smartContractObj.children.push({
+                        value:TX_TYPE.bsn_ddc,
+                        label:TX_TYPE_DISPLAY[TX_TYPE.bsn_ddc]
+                    })
+                    break;
+                // farm
+                //#region 
 
               case TX_TYPE.stake:
                     farmObj.children.push({
@@ -1079,7 +1091,7 @@ export class TxHelper {
 
         // 添加Farm
         
-		allTxType.push(tansferObj, nftObj,tibcObj, identityObj, ibcObj, stakingObj, coinswapObj, farmObj, htlcObj, assetObj, govObj, oracleObj, randomObj, recordObj, iServiceObj,crossChainObj,othersObj);
+		allTxType.push(tansferObj, nftObj,tibcObj, identityObj, ibcObj, stakingObj, coinswapObj, farmObj, htlcObj, assetObj, govObj, oracleObj, randomObj, recordObj, iServiceObj,crossChainObj,othersObj, smartContractObj);
         allTxType = allTxType.filter(item => item.children.length)
         allTxType.forEach(item=>{
             if(item?.children?.length && item.children.length > 1){

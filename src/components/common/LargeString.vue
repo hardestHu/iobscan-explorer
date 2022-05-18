@@ -125,6 +125,15 @@
             overflow-y: auto;
             max-height: 2rem;
         }
+        .text::-webkit-scrollbar{
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+        }
+        .text::-webkit-scrollbar-thumb{
+            background-color: #C4C5C7;
+            border-radius: 10px;
+        }
         .width {
             white-space:nowrap;
             overflow:hidden;

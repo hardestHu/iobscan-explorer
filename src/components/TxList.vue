@@ -1195,6 +1195,8 @@ export default {
 							// farm create_pool_with_community_pool
 							proposer,
 							initialDeposit,
+							// EVM智能合约
+							contractAddr: tx?.contract_addrs && tx?.contract_addrs.length > 0 ? tx?.contract_addrs[0] : '--',
 						})
 						/**
 						 * @description: from parseTimeMixin
