@@ -621,3 +621,4 @@ export const DDC_TYPE_LIST = {
   1:'DDC721',
   2:'DDC1155'
 }
+export const UGAS = 'ugas'; // 用于比对ugas

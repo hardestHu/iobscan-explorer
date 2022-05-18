@@ -710,7 +710,6 @@
 				<div class="content_title">
 					{{ $t("ExplorerLang.ddc.mainTitle") }}
 				</div>
-				<!-- todo list-component -->
 				 <list-component
           :empty-text="$t('ExplorerLang.table.emptyDescription')"
           :list-data="ddcList"
@@ -722,6 +721,16 @@
             <tx-count-component :title="ddcCount > 1  ? $t('ExplorerLang.ddc.subTitles') : $t('ExplorerLang.ddc.subTitle')" :icon="'iconxingzhuangjiehe'" :tx-count="ddcCount"></tx-count-component>
           </template>
         </list-component>
+		  </div>
+			<!-- energy asset -->
+			<div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
+					<list-component
+					:is-loading="isLoading"
+					:list-data="energyAssetData"
+					:column-list="energyAssetColumn"
+					:pagination="{pageSize:5,dataCount:0,pageNum:1}"
+					>
+				</list-component>
 			</div>
 		</div>
 	</div>
@@ -739,7 +748,9 @@ import Constant, {
 	TX_STATUS,
 	ColumnMinWidth,
 	monikerNum,
-	ibcDenomPrefix, decimals
+	ibcDenomPrefix, 
+	decimals,
+	UGAS
 } from '../constant'
 import AddressInformationComponent from './AddressInformationComponent'
 import LargeString from './common/LargeString'
@@ -760,7 +771,8 @@ import {
 	getRewardsItemsApi,
 	getValidatorRewardsApi,
 	getIbcTransferByHash,
-	getDdcList
+	getDdcList,
+	getEnergyAssetApi
 } from '@/service/api'
 import BigNumber from 'bignumber.js'
 import moveDecimal from 'move-decimal-point'
@@ -777,6 +789,7 @@ import MClip from "./common/MClip";
 import SignerColunmn from "./tableListColumnConfig/SignerColunmn";
 import TxResetButtonComponent from "./common/TxResetButtonComponent";
 import ddcListColumnConfig from "./tableListColumnConfig/ddcListColumnConfig";
+import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
 export default {
 	name: 'OwnerDetail',
 	components: {
@@ -936,7 +949,11 @@ export default {
 				label: this.$t('ExplorerLang.addressInformation.tab.tx'),
 				isActive: false,
 			},
-			
+			energyAsset: {
+				label: this.$t('ExplorerLang.addressInformation.tab.energyAsset'),
+				isActive: false,
+				moduleNumber: '116'
+			},
 			LargeStringMinHeight: 69,
 			LargeStringLineHeight: 23,
 			mainTokenSymbol: '',
@@ -944,7 +961,13 @@ export default {
 			ddcListColumn: [],
 			ddcPageSize: 5,
 			ddcCount: 0,
-			ddcPageNum: 1
+			ddcPageNum: 1,
+			LargeStringMinHeight: 69,
+			LargeStringLineHeight: 23,
+			mainTokenSymbol: '',
+			energyAssetData:[],
+			energyAssetColumn: energyAssetColumn,
+			isEnergyAsset:false,
 		}
 	},
 	watch: {
@@ -1040,6 +1063,10 @@ export default {
 		},
 		getTabList() {
 			this.tabList = []
+			if(moduleSupport('116', prodConfig.navFuncList)){
+				this.tabList.push(this.energyAsset)
+				this.getEnergyAssetList()
+			}
 			if (moduleSupport('107', prodConfig.navFuncList)) {
 				this.tabList.push(this.assetInfo)
 				this.getAddressInformation()
@@ -1083,6 +1110,7 @@ export default {
 			this.isAsset = false
 			this.isTx = false
 			this.isDDC = false
+			this.isEnergyAsset = false
 			this.tabList.forEach((item) => {
 				if (item.isActive) {
 					switch (item.moduleNumber) {
@@ -1098,6 +1126,9 @@ export default {
 							break
 						case '107':
 							this.isAsset = true
+							break
+						case '116':
+							this.isEnergyAsset = true
 							break
 						case '117':
 							this.isDDC = true
@@ -2731,9 +2762,27 @@ export default {
 			} catch (e) {
 				console.error(e)
 			}
+		},
+		async getEnergyAssetList(){
+			this.isLoading = true
+			const res = await getEnergyAssetApi(this.address)
+			this.isLoading = false
+			if(res && res.result && res.result.length > 0){
+				const energyItem = res.result.find(item => item.denom === UGAS)
+				this.energyAssetData = [{
+					title: this.$t('ExplorerLang.table.energy'),
+					amount: energyItem?.amount || '--'
+				}]
+			}else{
+				this.energyAssetData = [{
+					title: this.$t('ExplorerLang.table.energy'),
+					amount: '--'
+				}]
+			}
+			
 		}
 	}
-	,
+	
 }
 </script>
 

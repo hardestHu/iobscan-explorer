@@ -280,6 +280,10 @@ export const ExplorerLang = {
         search: 'Search',
         placeHolder: 'Search by DDC ID or DDC Name',
     },
+    energyAsset: {
+        name: 'Name',
+        amount: 'Amount'
+    },
     identityList:{
         title: 'Identity',
         search: 'Search',
@@ -740,7 +744,8 @@ export const ExplorerLang = {
             identity:'Identity',
             iService:'iService',
             tx:'Txs',
-            ddc:'BSN-DDC'
+            ddc:'BSN-DDC',
+            energyAsset:'Assets'
         },
         content: {
             address: 'Address',

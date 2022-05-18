@@ -266,6 +266,10 @@ export const ExplorerLang = {
         search: '搜索',
         placeHolder: '搜索 DDC ID 或 DDC 名称',
     },
+    energyAsset: {
+        name: '名称',
+        amount: '数量'
+    },
     identityList:{
         title: '身份',
         search: '搜索',
@@ -697,7 +701,8 @@ export const ExplorerLang = {
           identity:'身份',
           iService:'服务',
           tx:'交易记录',
-          ddc:'BSN-DDC'
+          ddc:'BSN-DDC',
+          energyAsset:'资产'
         },
         content: {
             address: 'Address',

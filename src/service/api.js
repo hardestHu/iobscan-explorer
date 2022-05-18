@@ -672,3 +672,10 @@ export function getDdcTxList(params){
   const url = '/txs/ddcs' + Tools.formatParams(params)
   return get(url)
 }
+
+
+export function getEnergyAssetApi(valAddress){
+  let url = `/bank/balances/${valAddress}`
+  return  getFromLcd(url);
+}
+
