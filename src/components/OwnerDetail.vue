@@ -705,6 +705,24 @@
 					</template>
 				</list-component>
 			</div>
+      <!-- bsn ddc -->
+			<div class="address_nft_content" v-if="moduleSupport('117', prodConfig.navFuncList)" v-show="isDDC">
+				<div class="content_title">
+					{{ $t("ExplorerLang.ddc.mainTitle") }}
+				</div>
+				<!-- todo list-component -->
+				 <list-component
+          :empty-text="$t('ExplorerLang.table.emptyDescription')"
+          :list-data="ddcList"
+          :column-list="ddcListColumn"
+          :pagination="{pageSize:Number(ddcPageSize),dataCount:ddcCount,pageNum:Number(ddcPageNum)}"
+          @pageChange="ddcPageChange"
+        >
+          <template v-slot:txCount>
+            <tx-count-component :title="ddcCount > 1  ? $t('ExplorerLang.ddc.subTitles') : $t('ExplorerLang.ddc.subTitle')" :icon="'iconxingzhuangjiehe'" :tx-count="ddcCount"></tx-count-component>
+          </template>
+        </list-component>
+			</div>
 		</div>
 	</div>
 </template>
@@ -742,6 +760,7 @@ import {
 	getRewardsItemsApi,
 	getValidatorRewardsApi,
 	getIbcTransferByHash,
+	getDdcList
 } from '@/service/api'
 import BigNumber from 'bignumber.js'
 import moveDecimal from 'move-decimal-point'
@@ -757,6 +776,7 @@ import TxCountComponent from "./TxCountComponent";
 import MClip from "./common/MClip";
 import SignerColunmn from "./tableListColumnConfig/SignerColunmn";
 import TxResetButtonComponent from "./common/TxResetButtonComponent";
+import ddcListColumnConfig from "./tableListColumnConfig/ddcListColumnConfig";
 export default {
 	name: 'OwnerDetail',
 	components: {
@@ -886,6 +906,7 @@ export default {
 			isIdentity: false,
 			isIservice: false,
 			isTx: false,
+			isDDC: false,
 			assetInfo: {
 				label: this.$t('ExplorerLang.addressInformation.tab.assetInfo'),
 				isActive: false,
@@ -906,13 +927,24 @@ export default {
 				isActive: false,
 				moduleNumber: '105',
 			},
+			ddc:{
+				label: this.$t('ExplorerLang.addressInformation.tab.ddc'),
+				isActive: false,
+				moduleNumber: '117'
+			},
 			tx: {
 				label: this.$t('ExplorerLang.addressInformation.tab.tx'),
 				isActive: false,
 			},
+			
 			LargeStringMinHeight: 69,
 			LargeStringLineHeight: 23,
 			mainTokenSymbol: '',
+			ddcList: [],
+			ddcListColumn: [],
+			ddcPageSize: 5,
+			ddcCount: 0,
+			ddcPageNum: 1
 		}
 	},
 	watch: {
@@ -946,6 +978,7 @@ export default {
 	},
 	async mounted() {
 		this.txColumnList = txCommonTable.concat(SignerColunmn,txCommonLatestTable)
+		this.ddcListColumn = ddcListColumnConfig
 		await this.getTxTypeData()
 		document.documentElement.scrollTop = 0
 		this.address = this.$route.params.param
@@ -1020,6 +1053,11 @@ export default {
 				this.getNftListCount()
 				this.getNftList()
 			}
+			if(moduleSupport('117',prodConfig.navFuncList)){
+				this.tabList.push(this.ddc)
+				this.getDdcListCount()
+				this.getDdcList()
+			}
 			if (moduleSupport('106', prodConfig.navFuncList)) {
 				this.tabList.push(this.identity)
 				this.getIdentityListCount()
@@ -1044,6 +1082,7 @@ export default {
 			this.isIdentity = false
 			this.isAsset = false
 			this.isTx = false
+			this.isDDC = false
 			this.tabList.forEach((item) => {
 				if (item.isActive) {
 					switch (item.moduleNumber) {
@@ -1059,6 +1098,9 @@ export default {
 							break
 						case '107':
 							this.isAsset = true
+							break
+						case '117':
+							this.isDDC = true
 							break
 						default:
 							this.isTx = true
@@ -2640,6 +2682,56 @@ export default {
 		 const res = await getConfig();
 		 this.tokenData = res.tokenData;
 		},
+		ddcPageChange(pageNum){
+			this.ddcPageNum = pageNum
+			this.getDdcList()
+		},
+		async getDdcList(){
+			try {
+				const ddcData = await getDdcList({
+          owner:this.$route.params.param,
+          ddc_id: '',
+          contract_address: '',
+          useCount: false,
+          pageNum: this.ddcPageNum,
+          pageSize: this.ddcPageSize
+        });
+				if (ddcData && ddcData.data) {
+					this.ddcList = ddcData.data.map(item => {
+						return {
+							ddcId: item.ddc_id,
+              ddcName: item.ddc_name,
+              contractAddr: item.contract_address,
+              owner: item.owner,
+              ddcUri: item.ddc_uri,
+              Time: Tools.formatLocalTime(item.lastest_tx_time),
+						}
+					})
+				}
+			} catch (e) {
+				console.error(e)
+			}
+
+		},
+		async getDdcListCount(){
+			try {
+				const res = await getDdcList({
+          owner:this.$route.params.param,
+          ddc_id: '',
+          contract_address: '',
+          useCount: true,
+          pageNum: this.ddcPageNum,
+          pageSize: this.ddcPageSize
+        });
+				if (res?.count) {
+					this.ddcCount = res.count
+				} else {
+					this.ddcCount = 0
+				}
+			} catch (e) {
+				console.error(e)
+			}
+		}
 	}
 	,
 }

@@ -1857,11 +1857,13 @@ export const needAddColumn = {
         },
     ],
     //EVM 智能合约 二级标签
-    bsn_ddc:[
+    ethereum_tx:[
         {
             label:i18n.t('ExplorerLang.table.contractAddress'),
-            displayValue:'contractAddress',
+            displayValue:'contractAddr',
+            nativeValue:'contractAddr',
             isFormatAddress: true,
+            isNeedFormat:true
         },
     ]
 

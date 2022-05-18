@@ -12,40 +12,43 @@ export default [
         label: i18n.t('ExplorerLang.table.ddcId'),
         displayValue: 'ddcId',
         nativeValue: 'ddcId',
-
+        isLink: true,
+        linkRoute: '/ddc/detail?contractAddr=',
+        nftRouterParamsValue: 'contractAddr',
+        denomRouter: '&ddcId=',
+        isNft: true,
     },
     {
         label: i18n.t('ExplorerLang.table.ddcName'),
         displayValue: 'ddcName',
-        nativeValue: 'ddcName',
+        nativeValue: 'ddcId',
+        isLink: true,
+        linkRoute: '/ddc/',
     },
-
 
     {
         label: i18n.t('ExplorerLang.table.contractAddress'),
-        displayValue: 'hash',
-        nativeValue: 'hash',
-        linkRoute: '/tx?txHash=',
-        isLink: true,
+        displayValue: 'contractAddr',
+        nativeValue: 'contractAddr',
         isNeedFormat: true,
-        isNeedFormatHash: true,
+        isFormatAddress: true
     },
     {
         label: i18n.t('ExplorerLang.table.owner'),
-        displayValue: 'nftCount',
-        nativeValue: 'denomId',
-        linkRoute: '/nftAsset?denomId=',
+        displayValue: 'owner',
+        nativeValue: 'owner',
+        linkRoute: '/address/',
         isLink: true,
+        isNeedFormat:true,
+        isFormatAddress: true
+
     },
 
     {
         label: i18n.t('ExplorerLang.table.uri'),
-        displayValue: 'sender',
-        nativeValue: 'sender',
-        isLink: true,
-        isNeedFormat: true,
-        isFormatAddress: true,
-        linkRoute: '/address/',
+        displayValue: 'ddcUri',
+        nativeValue: 'ddcUri',
+        isNftHref:true,
     },
 
     {

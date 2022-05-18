@@ -660,7 +660,7 @@ export function getDdcDetail(params){
 
 
 /**
- * ddc详情页交易记录列表
+ * ddc详情页/地址详情页bsn-ddc交易记录列表
  * @param {*} params	 
  * @param {*} params.pageNum	 
  * @param {*} params.pageSize	 

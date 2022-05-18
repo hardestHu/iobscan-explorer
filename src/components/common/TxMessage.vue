@@ -3952,6 +3952,9 @@
 								// this.rewardPerBlock = await this.handleTotalReward(msg.reward_per_block)
 								// this.creator = msg.creator || '--';
 								break;
+							case TX_TYPE.bsn_ddc:
+								this.buildBsnDdc(msg)
+								break;
 						}
 					}
 				} catch (e) {
@@ -6613,6 +6616,48 @@
 						label: this.$t('ExplorerLang.transactionInformation.farm.creator'),
 						value: msg.creator,
 						isAddress: true
+					}
+				]
+			},
+
+			// BSN-DDC 合约
+			buildBsnDdc(msg){
+				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.table.contractAddress'),
+						value: msg.ex.contract_address
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractType'),
+						value: msg.ex.ddc_type,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
+						value:  msg.ex.ddc_method,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
+						value: msg.ex.ddc_id,
+						isSchema: true
+					},
+						{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcName'),
+						value: msg.ex.ddc_name,
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.from'),
+						value: msg.from,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.to'),
+						value: msg.to,
+						isAddress: true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						value: msg.ex.ddc_uri,
+						isUri: true
 					}
 				]
 			}

@@ -564,9 +564,9 @@ export default {
 				return '--'
 			}
 		},
-		formatStr(str,displayStr) {
+		formatStr(str, displayStr) {
 			if(displayStr){
-				return  displayStr
+				return  displayStr+''
 			}
 			if (str && Array.isArray(str)) {
 				let {txType} = Tools.urlParser();

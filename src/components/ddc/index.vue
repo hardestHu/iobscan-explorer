@@ -64,8 +64,8 @@ export default {
   },
   mounted() {
     this.ddcListColumn = ddcListColumnConfig
-    this.getDdc();
-    this.getDdcCount();
+    this.getDdcList();
+    this.getDdcListCount();
   },
   computed: {
     isShowPlurality() {
@@ -76,8 +76,8 @@ export default {
     resetFilterCondition() {
       this.input = "";
       this.pageNum = 1;
-      this.getDdcCount();
-      this.getDdc();
+      this.getDdcListCount();
+      this.getDdcList();
       this.$refs.denomSearchNode.resetFilterCondition()
     },
     handleNftCountClick(denomId) {
@@ -86,15 +86,15 @@ export default {
     },
     pageChange(pageNum) {
       this.pageNum = pageNum;
-      this.getDdc();
+      this.getDdcList();
     },
     handleSearchClick(input) {
       this.input = input
       this.pageNum = 1;
-      this.getDdcCount();
-      this.getDdc();
+      this.getDdcListCount();
+      this.getDdcList();
     },
-    async getDdc() {
+    async getDdcList() {
         this.isDdcListLoading = true
       try {
         const res = await getDdcList({
@@ -137,7 +137,7 @@ export default {
         console.error(e);
       }
     },
-    async getDdcCount() {
+    async getDdcListCount() {
       try {
         const res = await getDdcList({
           owner:'',
