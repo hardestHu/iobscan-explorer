@@ -481,6 +481,8 @@ CHAINID.GOZTESTNET = 'Testnet GOZ'
 CHAINID.BIFROST = 'Testnet BIFROST'
 CHAINID.STARGATE = 'Testnet STARGATE'
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub'
+CHAINID.WENCHANG = 'Mainnet WenChang'
+CHAINID.IRITA = 'Testnet IRITA'
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
