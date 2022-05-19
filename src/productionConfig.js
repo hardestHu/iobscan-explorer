@@ -84,10 +84,10 @@ let config = {
     {title:'区块浏览',id:'100'},
     {title:'交易浏览',id:'101'},
     {
-     title: 'NFT 浏览',
+     title: 'DAW 浏览',
      children: [
-      { title: 'NFT', id: '103' },
-      { title: 'NFT 类别', id: '104' }
+      { title: 'DAW', id: '103' },
+      { title: 'DAW 类别', id: '104' }
      ]
     },
     {title:'共识节点',id:'102'},
