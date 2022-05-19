@@ -21,9 +21,14 @@ export default [
     {
         label: i18n.t('ExplorerLang.table.ddcName'),
         displayValue: 'ddcName',
-        nativeValue: 'ddcId',
+        nativeValue: 'ddcName',
         isLink: true,
-        linkRoute: '/ddc/',
+        linkRoute: '/ddc/detail?contractAddr=',
+        nftRouterParamsValue: 'contractAddr',
+        denomRouter: '&ddcId=',
+        isNft: true,
+        isNeedFormat: true,
+        isFormatAddress: true,
     },
 
     {
@@ -49,6 +54,7 @@ export default [
         displayValue: 'ddcUri',
         nativeValue: 'ddcUri',
         isNftHref:true,
+        isNeedFormat:true,
     },
 
     {

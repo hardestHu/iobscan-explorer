@@ -1865,6 +1865,15 @@ export const needAddColumn = {
             isFormatAddress: true,
             isNeedFormat:true
         },
+        {
+            label: i18n.t('ExplorerLang.table.signer'),
+            displayValue: 'signer',
+            nativeValue: 'signer',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
     ]
 
 }
