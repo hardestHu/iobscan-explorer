@@ -557,7 +557,7 @@ export const ExplorerLang = {
         identities:'身份列表'
     },
     nftDetail: {
-        nftInformation: '数据对象详情',
+        nftInformation: 'DAW 详情',
         owner: '拥有者',
         denom: 'DAW 类别',
         tokenName:'DAW',
