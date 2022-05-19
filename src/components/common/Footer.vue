@@ -113,7 +113,7 @@
 			.footer_content_bottom{
 				display: flex;
 				flex:1;
-				justify-content: center;
+				justify-content: space-between;
 				align-items:center;
 				// font-size:$s12;
 				font-size:$s14;
