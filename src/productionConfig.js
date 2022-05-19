@@ -38,37 +38,42 @@
 
 let config = {
   //国际化 CN / EN 默认CN
-  lang:'EN',
+  lang:'CN',
   //浏览器标签标题 必填
-  title:'Internet of Blockchains Scan - IRIS Hub',
+  title:'SpiritsChain 酒链浏览器',
   //主题色 作用于非直接干预的文字、背景、边框颜色(如输入框边框高亮、首页卡片图标等) 优先级较低
-  themeColor:'#3264FD',
+  themeColor:'#DBB44F',
   //通用背景色
   background: '#F8F8F8',
+   //日期组件开始时间：设置可选择最早开始时间
+  firstBlockTimestamp:1612072898000,
+  //列表斑马纹的颜色
+  tableTrColor: '#FEFDF9',
+  tableTrHoverColor: '#FCF9F1',
   logo:{
       //logo标题 必填
-      title:'IRISHUB',
+      title:'酒链浏览器',
       //logo副标题
       subTitle:'',
   },
-  product:'IRISHUB',
+  product:'spiritschain',
   nav:{
       //nav导航文字颜色
       color:'',
       //nav导航文字高亮颜色
       activeTextColor:'',
       //nav背景颜色 上半部分
-      bgColor:'#3264FD'
+      bgColor:'#332A12'
   },
   footer:{
       //页脚文字背景颜色
       color:'',
       //页脚背景颜色 上半部分
       bgColor_top:'',
-      //页脚背景颜色 下半部分
+      //页脚背景颜色 下半部分  
       bgColor_bottom:'',
       //页脚版权信息   必填
-      copyright:'Copyright © IRISplorer 2021 All Rights Reserved.',
+      copyright:'Copyright © 2022 北京酒域灵境科技有限公司. All Rights Reserved.',
       chainIdShow: true,
       versionShow: true,
       //页脚右侧是否显示跳转链接
@@ -76,51 +81,20 @@ let config = {
   },
   //导航栏功能列表 详见 导航栏功能映射 注：title为配置文案暂不支持国际化
   navFuncList:[
-      { title: 'Blockchain', id: '100' },
-      { title: 'Transactions', id: '101' },
-      {
-        title: 'Staking',
-        children: [
-          { title: 'Validators', id: '107' },
-          { title: 'Delegation Txs', id: '108' },
-          { title: 'Validation Txs', id: '109' },
-        ],
-      },
-      {
-        title: 'NFT',
-        children: [
-          { title: 'NFT', id: '103' },
-          { title: 'Denom', id: '104' },
-        ],
-      },
-      { title: 'iService', id: '105' },
-      {
-        title: 'Asset',
-        children: [
-          { title: 'Native Asset', id: '110' },
-          { title: 'Native Asset Txs', id: '111' },
-        ],
-      },
-      {
-        title: 'Gov',
-        children: [
-          { title: 'Proposals', id: '112' },
-          { title: 'Gov Txs', id: '113' },
-        ],
-      },
-      {
-        title: 'Stats',
-        children: [
-            //main token
-          { title: '${mainToken} Rich List', id: '114' },
-          { title: '${mainToken} Stats', id: '115' },
-        ],
-      },
-      '1000',
-      '1001',
+    {title:'区块浏览',id:'100'},
+    {title:'交易浏览',id:'101'},
+    {
+     title: '数字藏品',
+     children: [
+      { title: '数字藏品', id: '103' },
+      { title: '藏品类别', id: '104' }
+     ]
+    },
+    {title:'共识节点',id:'102'},
+    "1000",
   ],
   //首页卡片配置
-  homeCard:[200,201,203,209,208,204,205,206],
+  homeCard:[200,201,203,204,205] ,
   text:{
       //预设字体颜色
       color:{
@@ -133,7 +107,7 @@ let config = {
           //四级文字色
           fourth: '',
           //链接文字色
-          link: '#3264FD',
+          link: '#DBB44F',
       }
   },
   button:{
@@ -143,31 +117,41 @@ let config = {
       },
       //预设按钮背景颜色
       bgColor:{
-          common:'#3264FD',
+          common:'#5953FF',
       }
   },
+  // el-tag 背景色
+  tagBackground:'#FCF3DC',
   // 区块列表页面是否显示 Proposer
   blockList: {
-      proposer: true,
+      proposer: false,
   },
   // 切换交易
   txDetail: {
-      ibc: false // 交易是否切换成联盟链IBC交易
+      ibc: true // 交易是否切换成联盟链IBC交易
   },
   // 控制表格中列的显示和隐藏
   table: {
-      votingPower: true // Validator List中Voting_Power是否显示
+      votingPower: true // Validator List中Voting_Power是否显示 
   },
-  utcOffset: '+0', // 页面转换时区,默认值为 +0
-  isShowUTC: true, // 是否显示时区,默认值为true
+  utcOffset: '+8', // 页面转换时区,默认值为 +0
+  isShowUTC: false, // 是否显示时区,默认值为true
   fee: {
-    isShowFee: true, // 是否展示fee
+    isShowFee: false, // 是否展示fee
     isShowDenom: false, //列表中fee是否展示单位
-    decimals: 4 // 列表中fee展示的数值精度
+    decimals: 0// 列表中fee展示的数值精度
   },
-  umeng: {
-    umengId: 1279754478,
-    umengWebId: 1279754478
-  }
+  token:{
+    // main token
+    symbol:'iris',
+    decimal: 6,
+  },
+   umeng: {
+        umengId: 1279754478,
+        umengWebId: 1279754478
+    }
+  
 }
-module.exports = config;
+  
+  module.exports = config;
+  
