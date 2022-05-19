@@ -40,19 +40,19 @@ let config = {
   //国际化 CN / EN 默认CN
   lang:'CN',
   //浏览器标签标题 必填
-  title:'BSN IRITA-OPB大唐链浏览器',
+  title:'SpiritsChain 酒链浏览器',
   //主题色 作用于非直接干预的文字、背景、边框颜色(如输入框边框高亮、首页卡片图标等) 优先级较低
-  themeColor:'#FF6000',
+  themeColor:'#DBB44F',
   //通用背景色
   background: '#F8F8F8',
    //日期组件开始时间：设置可选择最早开始时间
   firstBlockTimestamp:1612072898000,
   //列表斑马纹的颜色
-  tableTrColor: '#FCFAF9',
-  tableTrHoverColor: '#FAF5F2',
+  tableTrColor: '#FEFDF9',
+  tableTrHoverColor: '#FCF9F1',
   logo:{
       //logo标题 必填
-      title:'大唐链浏览器',
+      title:'酒链浏览器',
       //logo副标题
       subTitle:'',
   },
@@ -63,7 +63,7 @@ let config = {
       //nav导航文字高亮颜色
       activeTextColor:'',
       //nav背景颜色 上半部分
-      bgColor:'#22243F'
+      bgColor:'#332A12'
   },
   footer:{
       //页脚文字背景颜色
@@ -73,9 +73,9 @@ let config = {
       //页脚背景颜色 下半部分  
       bgColor_bottom:'',
       //页脚版权信息   必填
-      copyright:'© 2022 唐华北斗数据中心有限公司. All Rights Reserved. ',
+      copyright:'Copyright © 2022 北京酒域灵境科技有限公司. All Rights Reserved.',
       chainIdShow: true,
-      versionShow: false,
+      versionShow: true,
       //页脚右侧是否显示跳转链接
       linkShow: false
   },
@@ -84,15 +84,14 @@ let config = {
     {title:'区块浏览',id:'100'},
     {title:'交易浏览',id:'101'},
     {
-     title: 'NFT 浏览',
+     title: '数字藏品',
      children: [
-      { title: 'NFT', id: '103' },
-      { title: 'NFT 类别', id: '104' }
+      { title: '数字藏品', id: '103' },
+      { title: '藏品类别', id: '104' }
      ]
     },
     {title:'共识节点',id:'102'},
     "1000",
-    '1001'
   ],
   //首页卡片配置
   homeCard:[200,201,203,204,205] ,
@@ -108,7 +107,7 @@ let config = {
           //四级文字色
           fourth: '',
           //链接文字色
-          link: '#FF6000',
+          link: '#DBB44F',
       }
   },
   button:{
@@ -122,7 +121,7 @@ let config = {
       }
   },
   // el-tag 背景色
-  tagBackground:'#FAECE3',
+  tagBackground:'#FCF3DC',
   // 区块列表页面是否显示 Proposer
   blockList: {
       proposer: false,
