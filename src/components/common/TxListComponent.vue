@@ -132,7 +132,7 @@
             </el-table-column> -->
             <el-table-column v-if="isShowFee" align="left" class-name="fee" prop="Tx_Fee" :min-width="ColumnMinWidth.fee">
                 <template slot="header">
-                    <template v-if="productNameWC === productName">
+                    <template v-if="productNameWC.includes(productName)">
                         <span>{{ $t('ExplorerLang.table.energy') }}</span>
                     </template>
                     <template v-else>
@@ -158,7 +158,7 @@
 <script>
     import Tools from "../../util/Tools";
     import {TxHelper} from "../../helper/TxHelper";
-    import { TX_TYPE,TX_STATUS,ColumnMinWidth,monikerNum,decimals, IRIS_ADDRESS_PREFIX, COSMOS_ADDRESS_PREFIX, PRODUCT_WENCHANG} from '../../constant';
+    import { TX_TYPE,TX_STATUS,ColumnMinWidth,monikerNum,decimals, IRIS_ADDRESS_PREFIX, COSMOS_ADDRESS_PREFIX, PRODUCT_ALLOW_ENERGY} from '../../constant';
     import { addressRoute, formatMoniker, converCoin, getMainToken, getTxType } from '@/helper/IritaHelper';
     import { getAmountByTx, getDenomMap, getDenomTheme } from "../../helper/txListAmoutHelper";
     import prodConfig from '../../productionConfig';
@@ -185,7 +185,7 @@
                 isShowFee: prodConfig.fee.isShowFee,
                 isShowDenom: prodConfig.fee.isShowDenom,
                 productName: prodConfig.product || '',
-                productNameWC: PRODUCT_WENCHANG, 
+                productNameWC: PRODUCT_ALLOW_ENERGY, 
                 TX_TYPE,
                 TX_STATUS,
                 ColumnMinWidth,

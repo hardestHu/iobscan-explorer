@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "29504075",
+      "name": "大唐链",
+      "font_class": "huaban",
+      "unicode": "e6f9",
+      "unicode_decimal": 59129
+    },
+    {
+      "icon_id": "29376344",
+      "name": "BSN-DDC",
+      "font_class": "xingzhuangjiehe",
+      "unicode": "e6f7",
+      "unicode_decimal": 59127
+    },
+    {
       "icon_id": "27673634",
       "name": "Community Pool",
       "font_class": "a-bianzu24",
