@@ -56,7 +56,7 @@ let config = {
       //logo副标题
       subTitle:'',
   },
-  product:'datangchain',
+  product:'spiritschain',
   nav:{
       //nav导航文字颜色
       color:'',
@@ -151,7 +151,7 @@ let config = {
         umengWebId: 1279754478
     }
   
-  }
+}
   
   module.exports = config;
   
