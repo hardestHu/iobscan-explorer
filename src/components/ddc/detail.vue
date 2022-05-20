@@ -144,9 +144,9 @@ export default {
 		},
 		async getDdcTx() {
 			try {
-				debugger
 				const res = await getDdcTxList({
-					type: this.ddcType,
+					ddc_id: this.$route.query.ddcId,
+					contract_address: this.$route.query.contractAddr,
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,
 					useCount:false
@@ -184,7 +184,8 @@ export default {
 		async getDdcTxCount() {
 			try {
 				const res = await getDdcTxList({
-					type: this.ddcType,
+					ddc_id: this.$route.query.ddcId,
+					contract_address: this.$route.query.contractAddr,
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,
 					useCount: true
