@@ -16,7 +16,7 @@
           @pageChange="pageChange"
         >
           <template v-slot:txCount>
-            <tx-count-component :title="count > 1 && isShowPlurality ? $t('ExplorerLang.ddc.subTitles') : $t('ExplorerLang.ddc.subTitle')" :icon="'iconxingzhuangjiehe'" :tx-count="count"></tx-count-component>
+            <tx-count-component :title="$t('ExplorerLang.ddc.subTitle')" :icon="'iconxingzhuangjiehe'" :tx-count="count"></tx-count-component>
           </template>
 			<template v-slot:resetButton>
 				<nft-reset-button-component @resetFilterCondition="resetFilterCondition"></nft-reset-button-component>
@@ -35,10 +35,6 @@
 <script>
 import { getDdcList } from "@/service/api";
 import Tools from "@/util/Tools";
-import MPagination from "../common/MPagination";
-import { ColumnMinWidth } from "@/constant";
-import productionConfig from "@/productionConfig.js";
-import parseTimeMixin from "@/mixins/parseTime";
 import ListComponent from "../common/ListComponent";//新增
 import ddcListColumnConfig from "../tableListColumnConfig/ddcListColumnConfig";
 import TxCountComponent from "../TxCountComponent";
@@ -46,16 +42,13 @@ import NftSearchComponent from "../common/NftSearchComponent";
 import NftResetButtonComponent from "../common/NftResetButtonComponent";
 export default {
   name: "DDCList",
-  components: {NftResetButtonComponent, NftSearchComponent, MPagination,ListComponent,TxCountComponent },//新增
-  mixins: [parseTimeMixin],
+  components: {NftResetButtonComponent, NftSearchComponent,ListComponent,TxCountComponent },//新增
   data() {
     return {
       isDdcListLoading:false,//新增
       ddcListColumn:[],//新增的
-      ColumnMinWidth,
       ddcList: [],
       value: "all",
-      denom: "",
       pageNum: 1,
       pageSize: 10,
       input: "",
@@ -66,11 +59,6 @@ export default {
     this.ddcListColumn = ddcListColumnConfig
     this.getDdcList();
     this.getDdcListCount();
-  },
-  computed: {
-    isShowPlurality() {
-      return productionConfig.lang === "EN";
-    }
   },
   methods: {
     resetFilterCondition() {
@@ -113,19 +101,10 @@ export default {
               ddcName: item.ddc_name,
               contractAddr: item.contract_address,
               owner: item.owner,
-              ddcUri: item.ddc_uri,
-              time: Tools.formatAge(
-                Tools.getTimestamp(),
-                item.lastest_tx_time * 1000,
-                this.$t("ExplorerLang.table.suffix")
-              ),
+              ddcUri: item.ddc_uri || '--',
               Time: Tools.formatLocalTime(item.lastest_tx_time),
             };
           });
-          /**
-           * @description: from parseTimeMixin
-           */
-          this.parseTime("ddcList", "Time", "time");
           this.pageSize = res.pageSize;
           this.pageNum = res.pageNum;
         } else {
@@ -144,8 +123,8 @@ export default {
           ddc_id: this.input,
           contract_address: '',
           useCount: true,
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
+          pageNum: 1,
+          pageSize: 1
         });
         if (res?.count) {
           this.count = res.count;

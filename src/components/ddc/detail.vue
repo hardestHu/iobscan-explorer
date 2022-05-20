@@ -53,8 +53,8 @@
 				<div class="nft_token_list_title"> {{ $t('ExplorerLang.nftDetail.nftTxs') }}</div>
 				<list-component
 					:token-symbol="mainTokenSymbol"
-					:list-data="txListByDDC"
-					:is-loading="isDDCDetailTxLoading"
+					:list-data="txListByDdc"
+					:is-loading="isDdcDetailTxLoading"
 					:column-list="ddcDetailColumn"
 					:pagination="{pageSize:Number(pageSize),dataCount:count,pageNum:Number(pageNum)}"
 					@pageChange="pageChange"
@@ -69,31 +69,27 @@ import TxListComponent from '../common/TxListComponent'
 import { getDdcTxList, getDdcDetail } from '@/service/api'
 import Tools from '@/util/Tools'
 import MPagination from '../common/MPagination'
-import {TX_TYPE, TX_STATUS, decimals, DDC_TYPE_LIST} from '@/constant'
+import {TX_TYPE, decimals, DDC_TYPE_LIST} from '@/constant'
 import LargeString from '../common/LargeString'
 import ListComponent from "../common/ListComponent"
 import ddcDetailTxColumn from "../tableListColumnConfig/ddcDetailTxColumn";
 import {getTxType, getMainToken, converCoin} from "@/helper/IritaHelper";
 
 export default {
-	name: 'DDCDetail',
+	name: 'DdcDetail',
 	components: {ListComponent, MPagination, TxListComponent, LargeString},
 	data() {
 		return {
 			ddcDetailColumn: [],
-			isDDCDetailTxLoading: false,
+			isDdcDetailTxLoading: false,
 			mainTokenSymbol: '',
 			Tools,
 			TX_TYPE,
-			TX_STATUS,
 			owner: '',
-			Denom: '',
-			TokenID: '',
-			Uri: '',
 			pageNum: 1,
-			count: 0,
 			pageSize: 10,
-			txListByDDC: [],
+			count: 0,
+			txListByDdc: [],
 			creator: '',
 			schema: '',
 			amount: '',
@@ -101,17 +97,14 @@ export default {
 			ddcType: '',
 			ddcName: '',
 			ddcId:'',
-			denomId: '',
 			LargeStringMinHeight: 95,
 			LargeStringLineHeight: 19,
 			feeDecimals: decimals.fee,
-			TX_TYPE_DISPLAY: {},
 		}
 	},
 	async mounted() {
 		this.ddcDetailColumn = ddcDetailTxColumn
 		this.setMainToken();
-		await this.getTxTypeData()
 		await this.getTokenInformation()
 	},
 	methods: {
@@ -138,9 +131,8 @@ export default {
 					this.creator = ddcDetail.creator || '--'
 					this.ddcUri = ddcDetail.ddc_uri || '--'
 
-					// this.denomId = ddcDetail.denom_id
-					this.getDDCTxCount()
-					this.getDDCTx()
+					this.getDdcTxCount()
+					this.getDdcTx()
 				}
 			} catch (e) {
 				console.error(e)
@@ -148,89 +140,22 @@ export default {
 		},
 		pageChange(pageNum) {
 			this.pageNum = pageNum
-			this.getDDCTx()
+			this.getDdcTx()
 		},
-		async getTxTypeData() {
+		async getDdcTx() {
 			try {
-				let res = await getTxType()
-				this.TX_TYPE_DISPLAY = res?.TX_TYPE_DISPLAY
-			} catch (error) {
-				console.log(error)
-			}
-		},
-		async getDDCTx() {
-			try {
-				debugger
 				const res = await getDdcTxList({
-					type: this.ddcType,
+					ddc_id: this.$route.query.ddcId,
+					contract_address: this.$route.query.contractAddr,
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,
 					useCount:false
 				})
 				console.log(res)	
 				if (res?.data.length > 0) {
-					this.txListByDDC = res.data.map((item) => {
-						// let mintNftArr = [], burnNftArr = [], editNftArr = [], issueDenomArr = [], transferNftArr = [],
-						// 	allNftTxMsgArr = [];
-						// if (item?.msgs?.length) {
-						// 	allNftTxMsgArr = [];
-						// 	mintNftArr = item.msgs.filter(item => {
-						// 		if (item.type === TX_TYPE.mint_nft) {
-						// 			return item
-						// 		}
-						// 	})
-						// 	burnNftArr = item.msgs.filter(item => {
-						// 		if (item.type === TX_TYPE.burn_nft) {
-						// 			return item
-						// 		}
-						// 	})
-						// 	editNftArr = item.msgs.filter(item => {
-						// 		if (item.type === TX_TYPE.edit_nft) {
-						// 			return item
-						// 		}
-						// 	})
-						// 	issueDenomArr = item.msgs.filter(item => {
-						// 		if (item.type === TX_TYPE.issue_denom) {
-						// 			return item
-						// 		}
-						// 	})
-						// 	transferNftArr = item.msgs.filter(item => {
-						// 		if (item.type === TX_TYPE.transfer_nft) {
-						// 			return item
-						// 		}
-						// 	})
-						// 	allNftTxMsgArr = mintNftArr.concat(burnNftArr, editNftArr, issueDenomArr, transferNftArr)
-							
-						// }
-						// let sender = ' ', denomId = ' ', filterSenderArr = [], filterDenomId = []
-						// if (allNftTxMsgArr?.length === 1) {
-						// 	if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.sender) {
-						// 		filterSenderArr = [allNftTxMsgArr[0].msg.sender]
-						// 	}
-						// 	if (allNftTxMsgArr && allNftTxMsgArr[0]?.msg?.denom) {
-						// 		filterDenomId = [allNftTxMsgArr[0].msg.denom]
-						// 	}
-						// } else if (allNftTxMsgArr?.length > 1) {
-						// 	let senderArr = allNftTxMsgArr.map(item => {
-						// 		if (item?.msg?.sender) {
-						// 			return item.msg.sender
-						// 		}
-						// 	})
-						// 	let denomIdArr = allNftTxMsgArr.map(item => {
-						// 		if (item?.msg?.denom) {
-						// 			return item.msg.denom
-						// 		}
-						// 	})
-						// 	filterSenderArr = Array.from(new Set(senderArr))
-						// 	filterDenomId = Array.from(new Set(denomIdArr))
-						// }
-						// if (filterSenderArr?.length === 1) {
-						// 	sender = filterSenderArr [0]
-						// }
-						// if (filterDenomId?.length === 1) {
-						// 	denomId = filterDenomId[0]
-						// }
+					this.txListByDdc = res.data.map((item) => {
 						return {
+							status: item.status,
 							txHash: item.tx_hash,
 							txType: TX_TYPE.bsn_ddc,
 							contractAddr: item.contract_addrs[0],
@@ -240,8 +165,8 @@ export default {
 							Time: Tools.formatLocalTime(item.time),
 						}
 					})
-					if (this.txListByDDC?.length) {
-						this.txListByDDC.forEach(async (item) => {
+					if (this.txListByDdc?.length) {
+						this.txListByDdc.forEach(async (item) => {
 							if (item?.fee) {
 								let formatFee = await converCoin(item.fee)
 								item.fee = formatFee?.amount ? Tools.toDecimal(formatFee.amount, this.feeDecimals) : ''
@@ -249,17 +174,18 @@ export default {
 						})
 					}
 				} else {
-					this.txListByDDC = []
+					this.txListByDdc = []
 				}
 			} catch (e) {
 				console.error(e)
 				this.$message.error(this.$t('ExplorerLang.message.requestFailed'))
 			}
 		},
-		async getDDCTxCount() {
+		async getDdcTxCount() {
 			try {
 				const res = await getDdcTxList({
-					type: this.ddcType,
+					ddc_id: this.$route.query.ddcId,
+					contract_address: this.$route.query.contractAddr,
 					pageNum: this.pageNum,
 					pageSize: this.pageSize,
 					useCount: true
