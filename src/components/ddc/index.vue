@@ -123,8 +123,6 @@ export default {
           ddc_id: this.input,
           contract_address: '',
           useCount: true,
-          pageNum: 1,
-          pageSize: 1
         });
         if (res?.count) {
           this.count = res.count;

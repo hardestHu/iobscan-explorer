@@ -6622,6 +6622,12 @@
 
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
+				let ddcId;
+				if(Array.isArray(msg?.ex?.ddc_id)){
+					ddcId = msg.ex.ddc_id.join('、')
+				}else{
+					ddcId = msg.ex.ddc_id || '--'
+				}
 				this.detailInfo = [
 					{
 						label: this.$t('ExplorerLang.table.contractAddress'),
@@ -6637,7 +6643,7 @@
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
-						value: msg.ex.ddc_id,
+						value: ddcId,
 						isSchema: true
 					},
 						{
@@ -6646,12 +6652,12 @@
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.from'),
-						value: msg.from,
+						value: msg.ex.sender,
 						isAddress: true
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.to'),
-						value: msg.to,
+						value: msg.ex.recipient,
 						isAddress: true
 					},
 					{
