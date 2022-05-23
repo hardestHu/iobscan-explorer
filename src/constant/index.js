@@ -280,7 +280,7 @@ export const LEVEL_TX_TYPE = {
   Transfer: 'Transfer',
   Staking: 'Staking',
   iService: 'iService',
-  NFT: 'NFT',
+  NFT: 'DAW',
   TIBC:'TIBC',//新增
   Coinswap: 'Coinswap',
   Identity: 'Identity',
@@ -473,6 +473,7 @@ CHAINID.BIFROST = 'Testnet BIFROST'
 CHAINID.STARGATE = 'Testnet STARGATE'
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub'
 CHAINID.DATANG = '大唐链主网'
+CHAINID.DATANGTEST = '大唐链测试网'
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
