@@ -706,7 +706,7 @@
 				</list-component>
 			</div>
       <!-- bsn ddc -->
-			<div class="address_nft_content" v-if="moduleSupport('117', prodConfig.navFuncList)" v-show="isDDC">
+			<div class="address_transaction_content" v-if="moduleSupport('117', prodConfig.navFuncList)" v-show="isDDC">
 				<div class="content_title">
 					{{ $t("ExplorerLang.ddc.mainTitle") }}
 				</div>
@@ -716,11 +716,7 @@
           :column-list="ddcListColumn"
           :pagination="{pageSize:Number(ddcPageSize),dataCount:ddcCount,pageNum:Number(ddcPageNum)}"
           @pageChange="ddcPageChange"
-        >
-          <template v-slot:txCount>
-            <tx-count-component :title="ddcCount > 1  ? $t('ExplorerLang.ddc.subTitles') : $t('ExplorerLang.ddc.subTitle')" :icon="'iconxingzhuangjiehe'" :tx-count="ddcCount"></tx-count-component>
-          </template>
-        </list-component>
+        />
 		  </div>
 			<!-- energy asset -->
 			<div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
@@ -1804,6 +1800,8 @@ export default {
 							// farm create_pool_with_community_pool
 							proposer,
 							initialDeposit,
+							// EVM智能合约
+							contractAddr: tx?.contract_addrs && tx?.contract_addrs.length > 0 ? tx?.contract_addrs[0] : '--',
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -2981,7 +2979,21 @@ a {
 			//padding: 0.25rem;
 			border-radius: 0.05rem;
 			// border: 0.01rem solid $bd_first_c;
-			
+			.content_title{
+				padding-top: 0.25rem;
+				padding-left: 0.25rem;
+				color: #171D44;
+				margin-bottom: 0.4rem;
+				text-align: left;
+				font-size: 0.16rem;
+				font-family: PublicSans;
+				font-weight: 600;
+				line-height: 22px;
+			}
+			.list_table_content_container .box-card{
+				padding-left: 0.25rem;
+				padding-top: 0;
+			}
 			.address_transaction_content_hash {
 				display: flex;
 				align-items: center;

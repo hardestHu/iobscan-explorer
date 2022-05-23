@@ -21,7 +21,7 @@ export default [
     {
         label: i18n.t('ExplorerLang.table.ddcName'),
         displayValue: 'ddcName',
-        nativeValue: 'ddcName',
+        nativeValue: 'ddcId',
         isLink: true,
         linkRoute: '/ddc/detail?contractAddr=',
         nftRouterParamsValue: 'contractAddr',
