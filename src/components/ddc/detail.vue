@@ -3,7 +3,7 @@
 		<div class="nft_token_content_wrap">
 			<div class="nft_token_title">{{ $t('ExplorerLang.ddcDetail.ddcInformation') }}</div>
 			<div class="nft_token_information_content">
-				<div class="nft_token_information_item">
+				<div class="nft_token_information_item" v-if="ddcType !== DDC_TYPE_LIST[2]">
 					<span>{{ $t('ExplorerLang.table.owner') }}：</span>
 					<span>
             <router-link :to="`/address/${owner}`">{{ owner }}</router-link>
@@ -21,10 +21,10 @@
 					<span>{{ $t('ExplorerLang.table.ddcId') }}：</span>
 					<span>{{ ddcId }}</span>
 				</div>
-        <div class="nft_token_information_item">
+        <!-- <div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.ddcDetail.amount') }}：</span>
 					<span>{{ amount }}</span>
-				</div>
+				</div> -->
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.ddcDetail.schema') }}：</span>
 					<LargeString :isShowPre="Tools.isJSON(schema)" v-if="schema" :text="schema"
@@ -100,6 +100,7 @@ export default {
 			LargeStringMinHeight: 95,
 			LargeStringLineHeight: 19,
 			feeDecimals: decimals.fee,
+			DDC_TYPE_LIST,
 		}
 	},
 	async mounted() {

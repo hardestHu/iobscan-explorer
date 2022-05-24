@@ -39,9 +39,9 @@ export default [
         isFormatAddress: true
     },
     {
-        label: i18n.t('ExplorerLang.table.owner'),
-        displayValue: 'owner',
-        nativeValue: 'owner',
+        label: i18n.t('ExplorerLang.table.creator'),
+        displayValue: 'creator',
+        nativeValue: 'creator',
         linkRoute: '/address/',
         isLink: true,
         isNeedFormat:true,

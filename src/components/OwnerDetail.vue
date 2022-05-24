@@ -1315,7 +1315,7 @@ export default {
 							initialDeposit = '--';
 							// farm => destory pool/ adjust pool : poolId poolCreator
 						;
-						if (tx.msgs.length > 0) {
+						if (tx?.msgs?.length > 0) {
 							tx.msgs.forEach(item => {
 								if(item.type === msgType){
 									sameMsg.push(item)
@@ -1730,7 +1730,7 @@ export default {
 						this.transactionArray.push({
 							txHash: tx.tx_hash,
 							blockHeight: tx.height,
-							txType: (tx.msgs || []).map(item => item.type ),
+							txType: tx.msgs ? (tx.msgs || []).map(item => item.type ) : tx.type,
 							from,
 							author : authorArr?.length > 1 ?  ' ' : authorArr?.length === 1 ? authorArr[0] : author ,
 							provider: providerArr?.length > 1 ? ' ' : providerArr?.length === 1 ? providerArr[0] : provider,
@@ -1769,7 +1769,7 @@ export default {
 							title,
 							signer: tx.signers?.length > 1 ? ' ' : tx.signers?.length === 1 ? tx.signers[0] : '--',
 							status: tx.status,
-							msgCount: tx.msgs.length,
+							msgCount: tx?.msgs?.length,
 							// time :Tools.getDisplayDate(tx.time),
 							Tx_Fee: '',
 							Time: Tools.formatLocalTime(tx.time),
@@ -2732,7 +2732,8 @@ export default {
               ddcName: item.ddc_name,
               contractAddr: item.contract_address,
               owner: item.owner,
-              ddcUri: item.ddc_uri,
+							creator: item.creator,
+              ddcUri: item.ddc_uri || '--',
               Time: Tools.formatLocalTime(item.lastest_tx_time),
 						}
 					})
@@ -2749,8 +2750,6 @@ export default {
           ddc_id: '',
           contract_address: '',
           useCount: true,
-          pageNum: this.ddcPageNum,
-          pageSize: this.ddcPageSize
         });
 				if (res?.count) {
 					this.ddcCount = res.count
