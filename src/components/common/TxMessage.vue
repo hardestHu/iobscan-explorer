@@ -6629,7 +6629,9 @@
 					ddcId = msg.ex.ddc_id || '--'
 				}
 				if(Array.isArray(msg?.ex?.ddc_uri)){
-					ddcUri = msg.ex.ddc_uri
+					// 去掉空值
+					ddcUri = msg.ex.ddc_uri.filter(item => item)
+					ddcUri = ddcUri.length === 0 ? ['--']: ddcUri
 				}else{
 					ddcUri = (msg.ex.ddc_uri &&  [msg.ex.ddc_uri]) || ['--']
 				}

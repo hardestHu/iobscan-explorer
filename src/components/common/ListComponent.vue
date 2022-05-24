@@ -45,7 +45,7 @@
 										 :src="require(`../../assets/${scope.row.status==TX_STATUS.success?'success.png':'failed.png'}`)"/>
 								</div>
 								
-								<el-tooltip popper-class="custom_tooltip" :manual="setManual(item.isNeedFormat,scope.row[item.displayValue])"
+								<el-tooltip popper-class="custom_tooltip" :manual="setManual(item.isNeedFormat,scope.row[item.displayValue],item)"
 											:content="formatStr(scope.row[item.nativeValue],item.isNft ? scope.row[item.displayValue] : null)">
 <!--									-->
                   <div>
@@ -447,14 +447,14 @@ export default {
 				return 'statistics-white-row';
 			}
 		},
-		setManual(isNeed, data) {
+		setManual(isNeed, data, item) {
 			if (isNeed || Array.isArray(data)) {
 				// 如果不满足超长省略 ...，则不需要鼠标划上再完整显示
 				if(typeof data  === 'string' && data?.length <= NFT_AND_DENOM_SPLIT_NUM.num){
 					return true
 				}
 				// 目的同上，针对处理uri
-				if(Tools.testUrl(data)){
+				if(item.isNftHref){
 					return data.length <= NFT_AND_DENOM_SPLIT_NUM.uriNum
 				}
 				if (data?.length <= 1) {
