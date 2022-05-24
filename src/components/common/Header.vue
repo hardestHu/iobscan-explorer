@@ -60,7 +60,11 @@
                   :class="item.network_id == constant.CHAINID.STARGATE ? 'stargate_icon' : ''"
                   v-for="item in netWorkArray"
                   :key="item.network_id"
-                  @click="windowOpenUrl(item.uri)"><i :class="item.icon"></i>{{item.network_name}}</li>
+                  @click="windowOpenUrl(item.uri)">
+                  <!-- datang chain 特殊要求 主网需要彩色logo -->
+                  <img src="../../assets/datang.png" class="datang_icon" v-if="item.network_id === constant.CHAINID.DATANG">
+                  <i  v-else :class="item.icon"></i>
+                  {{item.network_name}}</li>
           </ul>
       </div>
 
@@ -315,7 +319,7 @@ export default {
           } else if (item.network_id === constant.CHAINID.COSMOSHUB) {
               item.icon = 'iconfont iconCosmosHub'
           }else if(item.network_id === constant.CHAINID.DATANG || item.network_id === constant.CHAINID.DATANGTEST){
-            item.icon = 'iconfont iconhuaban'
+            item.icon = 'iconfont iconhuaban' //注意在dom处做的特殊处理，针对constant.CHAINID.DATANG 使用彩色logo
           }
           if (item.is_main) {
               this.mainnet = {...item};
@@ -519,6 +523,7 @@ export default {
               cursor: pointer;
               font-size: $s14;
               display: flex;
+              align-items: center;
               &:hover{
                   background: #F6F7FF;
               }
@@ -526,6 +531,11 @@ export default {
                   font-size: $s18;
                   color: var(--titleColor);
                   padding-right: 0.2rem;
+              }
+              .datang_icon{
+                width: 0.18rem;
+                height: 0.18rem;
+                padding-right: 0.2rem;
               }
           }
           .stargate_icon {
