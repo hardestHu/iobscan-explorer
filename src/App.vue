@@ -225,4 +225,7 @@ export default {
 	overflow: visible !important;
 	background-color: transparent!important;
 }
+.custom_tooltip{
+	max-width: 800px;
+}
 </style>

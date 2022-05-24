@@ -101,6 +101,7 @@ export default {
               ddcName: item.ddc_name,
               contractAddr: item.contract_address,
               owner: item.owner,
+              creator: item.creator,
               ddcUri: item.ddc_uri || '--',
               Time: Tools.formatLocalTime(item.lastest_tx_time),
             };

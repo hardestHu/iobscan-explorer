@@ -15,9 +15,11 @@
             isIdentity: true // 可选 跳转到 /identity
             isProposal: true // 跳转到/ProposalsDetail
             isComplexAddr: true // 需要代码判断跳转路径
+             isMultiLink: true // 针对多链接地址
 
             // 需要配合使用的配置
             isMulti: true // 可选 配合isAddress 使用，针对具有多个值的情况
+           
         }]
      -->
   	<div>
@@ -110,7 +112,11 @@
             >{{ info.value }}</span>
           </template>
 
-
+          <!--  isMultiLink  true 对多链接地址 -->
+          <template v-else-if="info.isMultiLink">
+             <MultiLink v-if="info.value" :text="info.value" :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
+          </template>
+          
           <template v-else>
             <span>{{ formatValue(info.value) }}</span>
           </template>
@@ -122,11 +128,12 @@
 import { COSMOS_ADDRESS_PREFIX,IRIS_ADDRESS_PREFIX } from '@/constant';
 import Tools from '@/util/Tools'
 import LargeString from './LargeString';
+import MultiLink from './MultiLink.vue';
 import { addressRoute } from "@/helper/IritaHelper"
 
 export default {
   name: "TxDetailComponent",
-  components:{LargeString, },
+  components:{LargeString, MultiLink},
   props: {
     detailInfo:{
       type: Array,
