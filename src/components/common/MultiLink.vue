@@ -1,26 +1,19 @@
 <template>
     <span :class="`tx_message_content_largeStr ${mode=='cell'?'flex-row':'flex-colum'}`">
-       
-        <div v-if="isLarge" ref="text" :style="`width:${textWidth || 'auto'}`">
-            <div v-for="(item,index) in text" :key="index" class="mb-10">
+
+        <!-- 这里才是渲染结果，通过text_f控制渲染内容 -->
+        <div class="text" ref="text"  :style="`width:${textWidth || 'auto'}`">
+            <div v-for="(item,index) in text_f" :key="index" class="mb-10" :class=" !showDesc ? 'width': ''">
                 <a v-if="startStr(item)" :href="'http://' + item" target="_blank" class="address_link">{{item}}</a>
+                <span v-else-if="item === '--'">{{item}}</span>
                 <a v-else :href="item" target="_blank" class="address_link">{{item}}</a>
             </div>
         </div>
-        <div class="text" v-else :class=" !showDesc ? 'width': ''" :style="`width:${textWidth || 'auto'}`">
-            <div v-for="(item,index) in text_f" :key="index" class="mb-10">
-                <a v-if="startStr(item)" :href="'http://' + item" target="_blank" class="address_link">{{item}}</a>
-                <a v-else :href="item" target="_blank" class="address_link">{{item}}</a>
-            </div>
-        </div>
-     
         <template>
             <span class="tx_message_content_largeStr_btn" v-if="showDescBtn(text)" @click="btnDidClick">
                 {{`${showDesc ? $t('ExplorerLang.common.fewer') : $t('ExplorerLang.common.more')}`}}
             </span>
-            <span class="tx_message_content_largeStr_btn" v-if="isLarge && mode=='cell'" @click="btnDidClick">
-                {{$t('ExplorerLang.common.fewer')}}
-            </span>
+      
         </template>
     </span>
 </template>
@@ -38,40 +31,23 @@
                 type:Array,
                 required:true,
             },
-            maxLength:{
-                type:Number,
-                required:false,
-                default:10,
-            },
-            mode:{//nomal or cell
+            mode:{//normal or cell
                 type:String,
                 required:false,
-                default:'nomal'
+                default:'normal'
             },
             textWidth:{
                 type:String,
                 required:false,
                 default:''
             },
-            minHeight:{
-                type:Number,
-                required:false,
-                default: 0
-            },
-            lineHeight:{
-                type:Number,
-                default: 0
-            },
-            expand:{
-                type:Boolean,
-                required:false
-            }
+
         },
         data(){
             return {
                 showDesc:false, // true 为收起 false 为展开     
-                isLarge: true, // 开始为true是为了拿到ref='text'的高度
-                isHeight:false,// height为ref='text'内容高度，如果高于lineHeight,为true
+                maxLength: 8,
+                maxHeight: 200,
             }
         },
         computed:{
@@ -82,16 +58,8 @@
         mounted(){
             setTimeout( () => {
                 this.$nextTick(()=>{
-                    let height = this.$refs.text.offsetHeight;
-                    if(this.expand){
-                        this.showDesc = true;
-                    }else{
-                        this.showDesc = height <= this.minHeight
-                    }
-                    this.isLarge = false
-                    if(this.lineHeight) {
-                        this.isHeight  = height > this.lineHeight
-                    }
+                    const height = this.$refs.text.offsetHeight;
+                    this.showDesc = this.text.length > 1 && this.text.length <= this.maxLength
                 })
             },0)
         },
@@ -99,19 +67,14 @@
             btnDidClick(){
                 this.showDesc = !this.showDesc;
             },
-            formatMultiList(list, length){
-                length = length || this.maxLength;
-                if (list && list.length > this.maxLength) {
+            formatMultiList(list){
+                if (list && list.length > 1) {
                     return list.slice(0,1);
                 }
                 return list || '';
             },
             showDescBtn(list){
-                if(this.lineHeight) {
-                    return this.isHeight;
-                } else {
-                    return list && list.length > this.maxLength;
-                }
+                return list.length > 1
             },
             startStr(url){
 			    return url.startsWith('www.')

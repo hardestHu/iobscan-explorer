@@ -187,8 +187,6 @@ export default {
 				const res = await getDdcTxList({
 					ddc_id: this.$route.query.ddcId,
 					contract_address: this.$route.query.contractAddr,
-					pageNum: this.pageNum,
-					pageSize: this.pageSize,
 					useCount: true
 				})
 				if (res?.count) {

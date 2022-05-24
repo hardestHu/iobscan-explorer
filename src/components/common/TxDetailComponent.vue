@@ -114,7 +114,7 @@
 
           <!--  isMultiLink  true 对多链接地址 -->
           <template v-else-if="info.isMultiLink">
-             <MultiLink v-if="info.value" :text="info.value" :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
+             <MultiLink v-if="info.value" :text="info.value"/>
           </template>
           
           <template v-else>
