@@ -546,7 +546,8 @@ export const monikerNum = {
 }
 
 export  const NFT_AND_DENOM_SPLIT_NUM = {
-  num:8
+  num: 8,
+  uriNum: 20
 }
 
 export const proposalStatus = {

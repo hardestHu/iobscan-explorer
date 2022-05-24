@@ -6622,11 +6622,16 @@
 
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
-				let ddcId;
+				let ddcId,ddcUri;
 				if(Array.isArray(msg?.ex?.ddc_id)){
 					ddcId = msg.ex.ddc_id.join('、')
 				}else{
 					ddcId = msg.ex.ddc_id || '--'
+				}
+				if(Array.isArray(msg?.ex?.ddc_uri)){
+					ddcUri = msg.ex.ddc_uri
+				}else{
+					ddcUri = (msg.ex.ddc_uri &&  [msg.ex.ddc_uri]) || ['--']
 				}
 				this.detailInfo = [
 					{
@@ -6662,8 +6667,8 @@
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.uri'),
-						value: msg.ex.ddc_uri,
-						isUri: true
+						value: ddcUri,
+						isMultiLink: true
 					}
 				]
 			}
