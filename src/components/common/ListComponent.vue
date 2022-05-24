@@ -45,7 +45,7 @@
 										 :src="require(`../../assets/${scope.row.status==TX_STATUS.success?'success.png':'failed.png'}`)"/>
 								</div>
 								
-								<el-tooltip :manual="setManual(item.isNeedFormat,scope.row[item.displayValue])"
+								<el-tooltip popper-class="custom_tooltip" :manual="setManual(item.isNeedFormat,scope.row[item.displayValue])"
 											:content="formatStr(scope.row[item.nativeValue],item.isNft ? scope.row[item.displayValue] : null)">
 <!--									-->
                   <div>
@@ -452,6 +452,10 @@ export default {
 				// 如果不满足超长省略 ...，则不需要鼠标划上再完整显示
 				if(typeof data  === 'string' && data?.length <= NFT_AND_DENOM_SPLIT_NUM.num){
 					return true
+				}
+				// 目的同上，针对处理uri
+				if(Tools.testUrl(data)){
+					return data.length <= NFT_AND_DENOM_SPLIT_NUM.uriNum
 				}
 				if (data?.length <= 1) {
 					return true
@@ -934,7 +938,7 @@ export default {
 			
 		}
 		.custom_uri{
-			width: 2rem;
+			width: 1.45rem;
 			display: inline-block;
 			text-overflow:ellipsis;
 			overflow: hidden;

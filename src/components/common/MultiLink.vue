@@ -3,12 +3,14 @@
        
         <div v-if="isLarge" ref="text" :style="`width:${textWidth || 'auto'}`">
             <div v-for="(item,index) in text" :key="index" class="mb-10">
-                <a :href="item" target="_blank" class="address_link">{{item}}</a>
+                <a v-if="startStr(item)" :href="'http://' + item" target="_blank" class="address_link">{{item}}</a>
+                <a v-else :href="item" target="_blank" class="address_link">{{item}}</a>
             </div>
         </div>
-        <div v-else class="text" :class=" !showDesc ? 'width': ''" :style="`width:${textWidth || 'auto'}`">
+        <div class="text" v-else :class=" !showDesc ? 'width': ''" :style="`width:${textWidth || 'auto'}`">
             <div v-for="(item,index) in text_f" :key="index" class="mb-10">
-                <a :href="item" target="_blank" class="address_link">{{item}}</a>
+                <a v-if="startStr(item)" :href="'http://' + item" target="_blank" class="address_link">{{item}}</a>
+                <a v-else :href="item" target="_blank" class="address_link">{{item}}</a>
             </div>
         </div>
      
@@ -24,6 +26,10 @@
 </template>
 
 <script>
+    /**
+     * 用于展示多uri场景，
+     * 首次用于bsn-ddc 多uri展示
+     */
     export default {
         name : "MultiLink",
         components : {},
@@ -63,8 +69,9 @@
         },
         data(){
             return {
-                showDesc:false,
-                isLarge:false,//todo  what 
+                showDesc:false, // true 为收起 false 为展开     
+                isLarge: true, // 开始为true是为了拿到ref='text'的高度
+                isHeight:false,// height为ref='text'内容高度，如果高于lineHeight,为true
             }
         },
         computed:{
@@ -74,12 +81,16 @@
         },
         mounted(){
             setTimeout( () => {
-                    this.$nextTick(()=>{
+                this.$nextTick(()=>{
                     let height = this.$refs.text.offsetHeight;
                     if(this.expand){
                         this.showDesc = true;
                     }else{
                         this.showDesc = height <= this.minHeight
+                    }
+                    this.isLarge = false
+                    if(this.lineHeight) {
+                        this.isHeight  = height > this.lineHeight
                     }
                 })
             },0)
@@ -90,14 +101,21 @@
             },
             formatMultiList(list, length){
                 length = length || this.maxLength;
-                if (list && list.length >= this.maxLength) {
+                if (list && list.length > this.maxLength) {
                     return list.slice(0,1);
                 }
                 return list || '';
             },
             showDescBtn(list){
-                return list && list.length >= this.maxLength;
-            }
+                if(this.lineHeight) {
+                    return this.isHeight;
+                } else {
+                    return list && list.length > this.maxLength;
+                }
+            },
+            startStr(url){
+			    return url.startsWith('www.')
+		    }
         }
     }
 </script>
