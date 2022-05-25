@@ -109,6 +109,7 @@ export default {
 		await this.getTokenInformation()
 	},
 	methods: {
+
 		async setMainToken() {
 			let mainToken = await getMainToken();
 			if (mainToken && mainToken.symbol) {

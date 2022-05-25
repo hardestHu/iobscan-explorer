@@ -180,8 +180,8 @@ export const ExplorerLang = {
         // ddc
         ddcId: 'DDC ID',
         ddcName: 'DDC Name',
-        contractMethod:'ContractMethod'
-       
+        contractMethod:'ContractMethod',
+        contractAddress:'ContractAddress',
     },
     unit:{
         ellipsis:' ,...',
@@ -848,5 +848,16 @@ export const ExplorerLang = {
             minDeposit: 'MinDeposit',
             upgradedClientState: 'Upgraded Client State',
         }
+    },
+    smartContract:{
+        mint:'mint',
+        safeMint:'safeMint',
+        transferFrom:'transferFrom',
+        safeTransferFrom:'safeTransferFrom',
+        burn:'burn',
+        safeMintBatch:'safeMintBatch',
+        safeBatchTransferFrom:'safeBatchTransferFrom',
+        burnBatch:'burnBatch',
+        edit:'edit'
     }
 }

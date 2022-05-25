@@ -1859,7 +1859,7 @@ export const needAddColumn = {
     //EVM 智能合约 二级标签
     ethereum_tx:[
         {
-            label:i18n.t('ExplorerLang.table.contractAddress'),
+            label:i18n.t('ExplorerLang.table.contractMethod'),
             displayValue:'contractAddr',
             nativeValue:'contractAddr',
             isFormatAddress: true,

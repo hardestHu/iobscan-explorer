@@ -2446,6 +2446,8 @@
 	import prodConfig from "../../productionConfig";
 	import axios from '@/axios';
 	import {ExplorerLang} from "../../../lang/EN-Cindy";
+	const enLang = require( '../../../lang/EN-Cindy')
+	const cnLang = require( '../../../lang/CN-Cindy')
 	import TxDetailComponent from './TxDetailComponent.vue'
 	export default {
 		name: "txMessage",
@@ -6623,7 +6625,17 @@
 					}
 				]
 			},
-
+			setMethodLang(ddcMethod){
+				if(ddcMethod){
+					if(prodConfig?.lang === 'EN'){
+						return enLang?.ExplorerLang?.smartContract[ddcMethod]
+					}
+					if(prodConfig?.lang === 'CN'){
+						return cnLang?.ExplorerLang?.smartContract[ddcMethod]
+					}
+					return ddcMethod
+				}
+			},
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
 				let ddcId,ddcUri;
@@ -6650,7 +6662,7 @@
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
-						value:  msg.ex.ddc_method,
+						value: this.setMethodLang(msg.ex.ddc_method),
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),

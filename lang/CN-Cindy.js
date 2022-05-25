@@ -168,6 +168,7 @@ export const ExplorerLang = {
         ddcId: 'DDC ID',
         ddcName: 'DDC 名称',
         contractMethod:'合约方法',
+        contractAddress:'合约地址',
     },
     unit:{
         ellipsis:' ,...',
@@ -803,5 +804,16 @@ export const ExplorerLang = {
             minDeposit: 'MinDeposit',
             upgradedClientState: 'Upgraded Client State',
         }
+    },
+    smartContract:{
+        mint:'发行',
+        safeMint:'安全发行',
+        transferFrom:'转让',
+        safeTransferFrom:'安全转让',
+        burn:'销毁',
+        safeMintBatch:'批量安全发行',
+        safeBatchTransferFrom:'批量安全转让',
+        burnBatch:'批量销毁',
+        edit:'编辑'
     }
 }
