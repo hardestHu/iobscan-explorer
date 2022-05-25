@@ -2728,19 +2728,23 @@
 						let msg = message.msg;
 						this.txType = message.type || '--';
 						(this.txType !== TX_TYPE.update_client) && (function (that) {
+							let copyMsg = JSON.parse(JSON.stringify(that.msg))
+							delete copyMsg.msg.ex
 							if(that.eventsNew && that.eventsNew.length > 0) {
 								that.eventsNew.forEach((item) => {
 									if(item.msg_index === that.msgIndex) {
 										that.viewSource = JSON.stringify({
-											msgs: that.msg,
+											msgs: copyMsg.msg,
 											events: item.events
 										})
 									}
 								})
 							} else {
+								let copyMsg = JSON.parse(JSON.stringify(that.msg))
+								delete copyMsg.msg.ex
 								// compatible no eventsNew situation
 								that.viewSource = JSON.stringify({
-									msgs: that.msg
+									msgs: copyMsg
 								})
 							}
 						}(this))
