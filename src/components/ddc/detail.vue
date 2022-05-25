@@ -25,11 +25,11 @@
 					<span>{{ $t('ExplorerLang.ddcDetail.amount') }}：</span>
 					<span>{{ amount }}</span>
 				</div> -->
-				<div class="nft_token_information_item">
-					<span>{{ $t('ExplorerLang.ddcDetail.schema') }}：</span>
-					<LargeString :isShowPre="Tools.isJSON(schema)" v-if="schema" :text="schema"
-								 :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>
-				</div>
+<!--				<div class="nft_token_information_item">-->
+<!--					<span>{{ $t('ExplorerLang.ddcDetail.schema') }}：</span>-->
+<!--					<LargeString :isShowPre="Tools.isJSON(schema)" v-if="schema" :text="schema"-->
+<!--								 :minHeight="LargeStringMinHeight" :lineHeight="LargeStringLineHeight"/>-->
+<!--				</div>-->
 				<div class="nft_token_information_item">
 					<span>{{ $t('ExplorerLang.nftDetail.creator') }}：</span>
 					<span>
@@ -109,6 +109,7 @@ export default {
 		await this.getTokenInformation()
 	},
 	methods: {
+
 		async setMainToken() {
 			let mainToken = await getMainToken();
 			if (mainToken && mainToken.symbol) {

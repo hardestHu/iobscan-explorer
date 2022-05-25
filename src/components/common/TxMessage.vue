@@ -2446,6 +2446,8 @@
 	import prodConfig from "../../productionConfig";
 	import axios from '@/axios';
 	import {ExplorerLang} from "../../../lang/EN-Cindy";
+	const enLang = require( '../../../lang/EN-Cindy')
+	const cnLang = require( '../../../lang/CN-Cindy')
 	import TxDetailComponent from './TxDetailComponent.vue'
 	export default {
 		name: "txMessage",
@@ -2728,19 +2730,23 @@
 						let msg = message.msg;
 						this.txType = message.type || '--';
 						(this.txType !== TX_TYPE.update_client) && (function (that) {
+							let copyMsg = JSON.parse(JSON.stringify(that.msg))
+							delete copyMsg.msg.ex
 							if(that.eventsNew && that.eventsNew.length > 0) {
 								that.eventsNew.forEach((item) => {
 									if(item.msg_index === that.msgIndex) {
 										that.viewSource = JSON.stringify({
-											msgs: that.msg,
+											msgs: copyMsg.msg,
 											events: item.events
 										})
 									}
 								})
 							} else {
+								let copyMsg = JSON.parse(JSON.stringify(that.msg))
+								delete copyMsg.msg.ex
 								// compatible no eventsNew situation
 								that.viewSource = JSON.stringify({
-									msgs: that.msg
+									msgs: copyMsg
 								})
 							}
 						}(this))
@@ -6619,7 +6625,17 @@
 					}
 				]
 			},
-
+			setMethodLang(ddcMethod){
+				if(ddcMethod){
+					if(prodConfig?.lang === 'EN'){
+						return enLang?.ExplorerLang?.smartContract[ddcMethod]
+					}
+					if(prodConfig?.lang === 'CN'){
+						return cnLang?.ExplorerLang?.smartContract[ddcMethod]
+					}
+					return ddcMethod
+				}
+			},
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
 				let ddcId,ddcUri;
@@ -6646,7 +6662,7 @@
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
-						value:  msg.ex.ddc_method,
+						value: this.setMethodLang(msg.ex.ddc_method),
 					},
 					{
 						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),

@@ -443,11 +443,16 @@ export class TxHelper {
 		txTypeArray.forEach( item => {
             switch (item.typeName) {
                 // smartContractObj
-
-                case TX_TYPE.bsn_ddc:
+                case TX_TYPE.ddc_1155:
                     smartContractObj.children.push({
-                        value:TX_TYPE.bsn_ddc,
-                        label:TX_TYPE_DISPLAY[TX_TYPE.bsn_ddc]
+                        value:TX_TYPE.ddc_1155,
+                        label:TX_TYPE_DISPLAY[TX_TYPE.ddc_1155]
+                    })
+                    break;
+                case TX_TYPE.ddc_721:
+                    smartContractObj.children.push({
+                        value:TX_TYPE.ddc_721,
+                        label:TX_TYPE_DISPLAY[TX_TYPE.ddc_721]
                     })
                     break;
                 // farm
@@ -1095,10 +1100,15 @@ export class TxHelper {
         allTxType = allTxType.filter(item => item.children.length)
         allTxType.forEach(item=>{
             if(item?.children?.length && item.children.length > 1){
-                item.children.unshift({
+                if(item.children.some((item) => {
+                    return item.value !== TX_TYPE.ddc_721 && item.value !== TX_TYPE.ddc_1155
+                })){
+                    item.children.unshift({
                         label:'secondaryAll',
                         value:i18n.t('ExplorerLang.common.all'),
-                })
+                    })
+                }
+
 
             }
         })

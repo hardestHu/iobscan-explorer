@@ -144,13 +144,17 @@ export const TX_TYPE = {
   adjust_pool:'adjust_pool',
   
   //EVM只能合约
-  bsn_ddc:'ethereum_tx'
+  bsn_ddc:'ethereum_tx',
+  ddc_721:'ddc_721',
+  ddc_1155:'ddc_1155'
 }
 
 // 展示 abandon
 export const TX_TYPE_DISPLAY = {
   // Smart contract
   bsn_ddc:'BSN-DDC 合约',
+  ddc_721:'BSN-DDC721',
+  ddc_1155:'BSN-DDC1155',
   //farm
   stake:'Stake',
   unstake:'Unstake',
@@ -275,7 +279,7 @@ export const TX_TYPE_DISPLAY = {
   recv_clean_packet:'TIBC Clean Packet In',
   tibc_update_client:'TIBC Update Client',
 
-  
+
 }
 
 export const LEVEL_TX_TYPE = {

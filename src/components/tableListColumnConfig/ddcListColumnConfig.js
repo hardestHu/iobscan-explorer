@@ -32,7 +32,7 @@ export default [
     },
 
     {
-        label: i18n.t('ExplorerLang.table.contractAddress'),
+        label: i18n.t('ExplorerLang.table.contractMethod'),
         displayValue: 'contractAddr',
         nativeValue: 'contractAddr',
         isNeedFormat: true,
