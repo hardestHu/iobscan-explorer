@@ -180,7 +180,7 @@ export const ExplorerLang = {
         // ddc
         ddcId: 'DDC ID',
         ddcName: 'DDC Name',
-        contractAddress:'ContractAddress'
+        contractMethod:'ContractMethod'
        
     },
     unit:{

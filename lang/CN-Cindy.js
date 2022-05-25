@@ -167,7 +167,7 @@ export const ExplorerLang = {
         // ddc 相关
         ddcId: 'DDC ID',
         ddcName: 'DDC 名称',
-        contractAddress:'合约地址',
+        contractMethod:'合约方法',
     },
     unit:{
         ellipsis:' ,...',
