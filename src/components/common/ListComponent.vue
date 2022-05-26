@@ -669,7 +669,7 @@ export default {
 			})
 		},
 		async getAllTokens() {
-			let allTokens = await fetchAllTokens()
+			let allTokens = sessionStorage.getItem('allToken') ? JSON.parse(sessionStorage.getItem('allToken')) : await fetchAllTokens()
 			if (allTokens?.supply?.length) {
 				let ibcTokens = [], htltTokens = []
 				ibcTokens = allTokens.supply.filter(item => {
