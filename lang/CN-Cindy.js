@@ -814,6 +814,7 @@ export const ExplorerLang = {
         safeMintBatch:'批量安全发行',
         safeBatchTransferFrom:'批量安全转让',
         burnBatch:'批量销毁',
-        edit:'编辑'
+        setURI:'编辑',
+        setNameAndSymbol:'编辑',
     }
 }

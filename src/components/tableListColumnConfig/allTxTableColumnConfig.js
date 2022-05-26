@@ -1860,10 +1860,40 @@ export const needAddColumn = {
     ethereum_tx:[
         {
             label:i18n.t('ExplorerLang.table.contractMethod'),
-            displayValue:'contractAddr',
-            nativeValue:'contractAddr',
+            displayValue:'contractMethod',
+            nativeValue:'contractMethod',
+        },
+        {
+            label: i18n.t('ExplorerLang.table.signer'),
+            displayValue: 'signer',
+            nativeValue: 'signer',
+            isLink: true,
+            isNeedFormat: true,
             isFormatAddress: true,
-            isNeedFormat:true
+            linkRoute: '/address/',
+        },
+    ],
+    ddc_721:[
+        {
+            label:i18n.t('ExplorerLang.table.contractMethod'),
+            displayValue:'contractMethod',
+            nativeValue:'contractMethod',
+        },
+        {
+            label: i18n.t('ExplorerLang.table.signer'),
+            displayValue: 'signer',
+            nativeValue: 'signer',
+            isLink: true,
+            isNeedFormat: true,
+            isFormatAddress: true,
+            linkRoute: '/address/',
+        },
+    ],
+    ddc_1155:[
+        {
+            label:i18n.t('ExplorerLang.table.contractMethod'),
+            displayValue:'contractMethod',
+            nativeValue:'contractMethod',
         },
         {
             label: i18n.t('ExplorerLang.table.signer'),
