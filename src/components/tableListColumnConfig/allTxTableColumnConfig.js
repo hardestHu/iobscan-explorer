@@ -1878,6 +1878,7 @@ export const needAddColumn = {
             label:i18n.t('ExplorerLang.table.contractMethod'),
             displayValue:'contractMethod',
             nativeValue:'contractMethod',
+            isShowTag:true,
         },
         {
             label: i18n.t('ExplorerLang.table.signer'),
@@ -1894,6 +1895,7 @@ export const needAddColumn = {
             label:i18n.t('ExplorerLang.table.contractMethod'),
             displayValue:'contractMethod',
             nativeValue:'contractMethod',
+            isShowTag:true,
         },
         {
             label: i18n.t('ExplorerLang.table.signer'),
