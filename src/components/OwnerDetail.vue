@@ -1727,6 +1727,7 @@ export default {
 								isShowMore = true
 							}
 						}
+						const _contractMethod =  this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract[tx?.msgs[0]?.msg?.ex?.ddc_method] || tx?.msgs[0]?.msg?.ex?.ddc_method
 						this.transactionArray.push({
 							txHash: tx.tx_hash,
 							blockHeight: tx.height,
@@ -1802,6 +1803,7 @@ export default {
 							initialDeposit,
 							// EVM智能合约
 							contractAddr: tx?.contract_addrs && tx?.contract_addrs.length > 0 ? tx?.contract_addrs[0] : '--',
+							contractMethod: _contractMethod || '--'
 						})
 						/**
 						 * @description: from parseTimeMixin
@@ -2726,7 +2728,9 @@ export default {
           pageSize: this.ddcPageSize
         });
 				if (ddcData && ddcData.data) {
+					console.log(ddcData,'这个数据是什么')
 					this.ddcList = ddcData.data.map(item => {
+						console.log(item,'类型是什么')
 						return {
 							ddcId: item.ddc_id,
               ddcName: item.ddc_name,

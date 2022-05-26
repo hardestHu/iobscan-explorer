@@ -179,7 +179,9 @@ export default {
 				const {txType} = Tools.urlParser();
 				value.children.forEach((item, index) => {
 					item.active = 0
-					value.children[0].active = 0
+					if(value.children[0].label ==='secondaryAll'){
+						value.children[0].active = 0
+					}
 					if(txType && txType.indexOf(',') !== -1){
 						const currentTxType = txType.split(',')
 						const currentMsgTypes = currentTxType.sort((a,b) =>{
@@ -202,6 +204,7 @@ export default {
 					}
 				})
 			}
+			console.log(value.children,'奇怪')
 			this.currentClickIndex = index
 			this.$store.commit('currentTxModelIndex',index)
 			sessionStorage.setItem('currentTxModelIndex',index)

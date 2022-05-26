@@ -858,6 +858,7 @@ export const ExplorerLang = {
         safeMintBatch:'safeMintBatch',
         safeBatchTransferFrom:'safeBatchTransferFrom',
         burnBatch:'burnBatch',
-        edit:'edit'
+        setURI:'setURI',
+        setNameAndSymbol:'setNameAndSymbol',
     }
 }
