@@ -204,7 +204,6 @@ export default {
 					}
 				})
 			}
-			console.log(value.children,'奇怪')
 			this.currentClickIndex = index
 			this.$store.commit('currentTxModelIndex',index)
 			sessionStorage.setItem('currentTxModelIndex',index)

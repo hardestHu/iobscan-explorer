@@ -2728,9 +2728,7 @@ export default {
           pageSize: this.ddcPageSize
         });
 				if (ddcData && ddcData.data) {
-					console.log(ddcData,'这个数据是什么')
 					this.ddcList = ddcData.data.map(item => {
-						console.log(item,'类型是什么')
 						return {
 							ddcId: item.ddc_id,
               ddcName: item.ddc_name,
