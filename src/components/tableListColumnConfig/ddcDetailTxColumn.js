@@ -30,11 +30,10 @@ export default [
      
     },
     {
-        label: i18n.t('ExplorerLang.table.contractAddress'),
-        displayValue: 'contractAddr',
-        nativeValue: 'contractAddr',
-        isFormatAddress: true,
-        isNeedFormat: true
+        label: i18n.t('ExplorerLang.table.contractMethod'),
+        displayValue: 'contractMethod',
+        nativeValue: 'contractMethod',
+        isShowTag: true
     },
     {
         label: i18n.t('ExplorerLang.table.signer'),

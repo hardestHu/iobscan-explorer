@@ -74,6 +74,7 @@ import LargeString from '../common/LargeString'
 import ListComponent from "../common/ListComponent"
 import ddcDetailTxColumn from "../tableListColumnConfig/ddcDetailTxColumn";
 import {getTxType, getMainToken, converCoin} from "@/helper/IritaHelper";
+import prodConfig from "@/productionConfig";
 
 export default {
 	name: 'DdcDetail',
@@ -156,11 +157,13 @@ export default {
 				console.log(res)	
 				if (res?.data.length > 0) {
 					this.txListByDdc = res.data.map((item) => {
+						const _contractMethod =  this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract[item?.msgs[0]?.msg?.ex?.ddc_method] || item?.msgs[0]?.msg?.ex?.ddc_method
 						return {
 							status: item.status,
 							txHash: item.tx_hash,
 							txType: TX_TYPE.bsn_ddc,
 							contractAddr: item.contract_addrs[0],
+							contractMethod: _contractMethod || '--',
 							signer: item.signers && item.signers.length > 0 ? item.signers[0] : '--',
 							blockHeight: item.height,
 							fee: item?.fee?.amount[0]?.amount ? item?.fee.amount[0] : ' ',

@@ -2855,7 +2855,7 @@ a {
 			}
 			
 			.active_content {
-				background: $bg_button_c !important;
+				background: $theme_c !important;
 				color: $t_white_c;
 				border: 0.01rem solid transparent !important;
 			}
