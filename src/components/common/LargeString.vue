@@ -115,16 +115,21 @@
 </script>
 
 <style scoped lang="scss">
-    .tx_message_content_largeStr{
-        font-size: $s14;
-        font-weight: 400;
-        color: $t_first_c;
-        word-break: break-all;
-        min-width: 0;
-        .text {
-            overflow-y: auto;
-            max-height: 2rem;
-        }
+p span {
+	word-break: keep-all !important;
+}
+
+.tx_message_content_largeStr {
+	font-size: $s14;
+	font-weight: 400;
+	color: $t_first_c;
+	word-break: break-all;
+	min-width: 0;
+
+	.text {
+		overflow-y: auto;
+		max-height: 2rem;
+	}
         .text::-webkit-scrollbar{
             width: 10px;
             height: 10px;
