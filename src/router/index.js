@@ -146,8 +146,9 @@ router.beforeEach((to,from,next) => {
 	if(to.path !== '/txs/delegations'){
 		sessionStorage.removeItem('selectMsgTypeIndex')
 	}
-    if(prodConfig.product === product.datangchain && to.path === '/nftAsset') {
-        router.push('/daw')
+    if(prodConfig.product === product.datangchain && to.path.includes('/nftAsset')) {
+        let fullPath = to.fullPath.replace(/nftAsset/g, 'daw');
+        next(fullPath)
     }
 	next()
 })
