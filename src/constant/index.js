@@ -487,6 +487,8 @@ CHAINID.STARGATE = 'Testnet STARGATE'
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub'
 CHAINID.WENCHANG = 'Mainnet WenChang'
 CHAINID.IRITA = 'Testnet IRITA'
+CHAINID.DATANGCHAINMAIN = '大唐链主网'
+CHAINID.DATANGCHAINTESTNET = '大唐链测试网'
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
@@ -590,7 +592,8 @@ export const product = {
   cosmosHub: 'Cosmos Hub',
   nyancat: 'NYANCAT',
   irishub: 'IRISHUB',
-  cschainOtc: 'CSChain-OTC'
+  cschainOtc: 'CSChain-OTC',
+  datangchain: 'datangchain'
 }
 
 export const ibcDenomPrefix = 'ibc/'
