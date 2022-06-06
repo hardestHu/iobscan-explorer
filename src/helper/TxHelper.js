@@ -390,20 +390,26 @@ export class TxHelper {
                 // smartContractObj
                 case TX_TYPE.ddc_1155:
                     smartContractObj.children.push({
-                        value:TX_TYPE.ddc_1155,
-                        label:TX_TYPE_DISPLAY[TX_TYPE.ddc_1155]
+                        value: TX_TYPE.ddc_1155,
+                        label: TX_TYPE_DISPLAY[TX_TYPE.ddc_1155]
                     })
                     break;
                 case TX_TYPE.ddc_721:
                     smartContractObj.children.push({
-                        value:TX_TYPE.ddc_721,
-                        label:TX_TYPE_DISPLAY[TX_TYPE.ddc_721]
+                        value: TX_TYPE.ddc_721,
+                        label: TX_TYPE_DISPLAY[TX_TYPE.ddc_721]
+                    })
+                    break;
+                case TX_TYPE.ddc_other:
+                    smartContractObj.children.push({
+                        value: TX_TYPE.ddc_other,
+                        label: TX_TYPE_DISPLAY[TX_TYPE.ddc_other]
                     })
                     break;
                 // farm
                 //#region 
 
-              case TX_TYPE.stake:
+                case TX_TYPE.stake:
                     farmObj.children.push({
                         value: TX_TYPE.stake,
                         label: TX_TYPE_DISPLAY[TX_TYPE.stake]
@@ -1046,7 +1052,7 @@ export class TxHelper {
         allTxType.forEach(item=>{
             if(item?.children?.length && item.children.length > 1){
                 if(item.children.some((item) => {
-                    return item.value !== TX_TYPE.ddc_721 && item.value !== TX_TYPE.ddc_1155
+                    return item.value !== TX_TYPE.ddc_721 && item.value !== TX_TYPE.ddc_1155 && item.value !== TX_TYPE.ddc_other
                 })){
                     item.children.unshift({
                         label:'secondaryAll',
