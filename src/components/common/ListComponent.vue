@@ -44,7 +44,6 @@
 									<img class="status_icon"
 										 :src="require(`../../assets/${scope.row.status==TX_STATUS.success?'success.png':'failed.png'}`)"/>
 								</div>
-								
 								<el-tooltip popper-class="custom_tooltip"
 								            :manual="setManual(item.isNeedFormat,scope.row[item.displayValue],item)"
 								            :content="formatStr(scope.row[item.nativeValue],item.isNft ? scope.row[item.displayValue] : null)">
@@ -736,7 +735,7 @@ export default {
 						this.tableListWidth = this.$adjustColumnWidth(this.$refs['listTable'].$el);
 						if(this.tableListWidth?.length){
 							//计算出实际内容占用的空间
-							let practicalWidth = this.tableListWidth.reduce((totalWidth,currentWidth) => {
+							let practicalWidth = this.tableListWidth.reduce((totalWidth, currentWidth) => {
 								return totalWidth + currentWidth
 							})
 							// 由于某些情况如验证人列表的索引，所在那一列不需要进行补偿（如果补偿会造成那一列宽度过宽），所以需要进行二次补偿
@@ -744,33 +743,34 @@ export default {
 								return item <= 40
 							})
 							// 为每一列设置补偿量
-							if(practicalWidth < tableWidth && this?.columns?.length){
-								let compensationWidth = (tableWidth - practicalWidth) / this.columns.length
-								if(compensationWidth < 20){
-									compensationWidth = 20
-								}
-								let secondPracticalWidth = 0
-								if(secondPracticalWidthCount?.length){
-									secondPracticalWidth = (compensationWidth * secondPracticalWidthCount.length) / (this.columns.length - secondPracticalWidthCount.length )
-								}
-								this.tableListWidth = this.tableListWidth.map( (item, index) => {
-									if(item <= 40){
-										item = 40
-										return item
-									}else {
-										const label = this.columns[index]['label']
-										if(label === this.$t('ExplorerLang.table.energy') || label === this.$t('ExplorerLang.table.fee')){
-											// 对fee/能量值 这一列要给足宽度160
-											return ColumnMinWidth.fee;
-										}else if(!label.trim()){
-											// 同时减少下 denom 列的宽度
-											return ColumnMinWidth.listDenom
-										}else{
-											return parseInt((item + compensationWidth + secondPracticalWidth))
-										}
+
+							// if(practicalWidth < tableWidth && this?.columns?.length){
+							let compensationWidth = (tableWidth - practicalWidth) / this.columns.length
+							if (compensationWidth < 20) {
+								compensationWidth = 30
+							}
+							let secondPracticalWidth = 0
+							if (secondPracticalWidthCount?.length) {
+								secondPracticalWidth = (compensationWidth * secondPracticalWidthCount.length) / (this.columns.length - secondPracticalWidthCount.length)
+							}
+							this.tableListWidth = this.tableListWidth.map((item, index) => {
+								if (item <= 40) {
+									item = 40
+									return item
+								} else {
+									const label = this.columns[index]['label']
+									if (label === this.$t('ExplorerLang.table.energy') || label === this.$t('ExplorerLang.table.fee')) {
+										// 对fee/能量值 这一列要给足宽度160
+										return ColumnMinWidth.fee;
+									} else if (!label.trim()) {
+										// 同时减少下 denom 列的宽度
+										return ColumnMinWidth.listDenom
+									} else {
+										return parseInt((item + compensationWidth + secondPracticalWidth))
+									}
 									}
 								})
-							}
+							// }
 						}
 						if(this.isSmallTable){
 							this.$refs['listTable'].$el.style.width = `550px`
