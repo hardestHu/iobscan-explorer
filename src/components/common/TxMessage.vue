@@ -3266,7 +3266,7 @@
 			 * 从events下匹配数据出来
 			 */
 			getValueFromEvents(msgType,attrKey){
-				const eventItem = this.eventsNew && this.msgIndex >= 0 ? this.eventsNew[this.msgIndex].find(item => item.type === msgType) : null;
+				const eventItem = this?.eventsNew && this?.eventsNew?.length && this.msgIndex >= 0 ? this?.eventsNew[this.msgIndex].find(item => item.type === msgType) : null;
 				const attrItem = eventItem && eventItem.attributes.find(item => item.key === attrKey);
 				const rewardValue = (attrItem && attrItem.value) ? attrItem.value : '--';
 				return rewardValue;
