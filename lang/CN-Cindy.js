@@ -567,6 +567,9 @@ export const ExplorerLang = {
             contractMethod:'合约方法',
             ddcId: 'DDC ID',
             ddcName: 'DDC 名称',
+            contractExecutionResult: '合约执行结果',
+            signer: '调用者',
+            tradingData: '交易数据'
         }
     },
     addressDetail: {

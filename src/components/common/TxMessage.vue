@@ -2472,6 +2472,9 @@
 				type: Array,
 				required: true,
 			},
+			ddcSigner: {
+				type: Array
+			},
 		},
 		data () {
 			return {
@@ -6638,7 +6641,7 @@
 			},
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
-				let ddcId,ddcUri;
+				let ddcId,ddcUri,ddcStatus;
 				if(Array.isArray(msg?.ex?.ddc_id)){
 					ddcId = msg.ex.ddc_id.join('、')
 				}else{
@@ -6651,42 +6654,67 @@
 				}else{
 					ddcUri = (msg.ex.ddc_uri &&  [msg.ex.ddc_uri]) || ['--']
 				}
+                if(msg?.ex?.tx_receipt) {
+                    switch(msg.ex.tx_receipt?.status) {
+                        case 0:
+                            ddcStatus = this.$t('ExplorerLang.common.failed');
+                            break;
+                        case 1:
+                            ddcStatus = this.$t('ExplorerLang.common.success');
+                            break;
+                    }
+                }
 				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.txHash'),
+						value: msg.hash
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractExecutionResult'),
+						value: ddcStatus,
+                        log: !(msg?.ex?.tx_receipt?.status) && JSON.parse(JSON.stringify(msg?.ex?.tx_receipt?.log)),
+                        isTip: msg?.ex?.tx_receipt?.status ? false : true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.signer'),
+						value: this.ddcSigner?.length && this.ddcSigner[0],
+                        isAddress: true
+					},
 					{
 						label: this.$t('ExplorerLang.table.contractAddress'),
 						value: msg.ex.contract_address
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractType'),
-						value: msg.ex.ddc_type,
-					},
-					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
 						value: this.setMethodLang(msg.ex.ddc_method),
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
 						value: ddcId,
 						isSchema: true
 					},
 						{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcName'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.ddcName'),
 						value: msg.ex.ddc_name,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.from'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.from'),
 						value: msg.ex.sender,
 						isAddress: true
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.to'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.to'),
 						value: msg.ex.recipient,
 						isAddress: true
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.uri'),
 						value: ddcUri,
 						isMultiLink: true
+					},
+					{
+						label: !msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.tradingData'),
+						value: JSON.parse(JSON.stringify(msg.data)),
 					}
 				]
 			}
