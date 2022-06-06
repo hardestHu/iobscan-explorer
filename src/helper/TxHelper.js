@@ -214,62 +214,7 @@ export class TxHelper {
         return res;
     }
 
-    static getContextId(msgs, events){
-        if(!msgs) return;
-        let requestContextId = '';
-        const {type, msg} = msgs;
-        switch (type){
-            case TX_TYPE.define_service:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.bind_service:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.update_service_binding:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.disable_service_binding:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.enable_service_binding:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.refund_service_deposit:
-                requestContextId = '--';
-                break;
-            case TX_TYPE.call_service:
-                if(events && Array.isArray(events)){
-                    for(let e of events){
-                        if(e && e.attributes && Array.isArray(e.attributes)){
-                            for(let a of e.attributes){
-                                if(a.key === 'request_context_id'){
-                                    requestContextId = a.value;
-                                    break;
-                                }
-                            }
-                        }
 
-                    }
-                }
-                break;
-            case TX_TYPE.respond_service:
-                requestContextId = msg.ex ? msg.ex.request_context_id : '';
-                break;
-            case TX_TYPE.pause_request_context:
-                requestContextId = msg.request_context_id;
-                break;
-            case TX_TYPE.start_request_context:
-                requestContextId = msg.request_context_id;
-                break;
-            case TX_TYPE.kill_request_context:
-                requestContextId = msg.request_context_id;
-                break;
-            case TX_TYPE.update_request_context:
-                requestContextId = msg.request_context_id;
-                break;
-        }
-        return requestContextId;
-    }
     static getPubKeyAlgorithm(algorithm){
         return PubKeyAlgorithm[String(algorithm)] ;
     }
