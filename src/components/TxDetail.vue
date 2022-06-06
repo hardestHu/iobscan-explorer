@@ -116,7 +116,6 @@ export default {
 			pageNum: 1,
 			pageSize: 10,
 			messages: [],
-			events: [],
 			eventsNew: [],
 			txHashValue: '',
 			blockValue: '',
@@ -186,7 +185,6 @@ export default {
 				if (res) {
 					this.monikers = res.monikers
 					this.messages = res.msgs || []
-					this.events = res.events || []
 					this.eventsNew = res.events_new
 					this.txHash = res.tx_hash || '--'
 					this.blockHeight = res.height || '--'
