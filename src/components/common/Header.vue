@@ -164,6 +164,7 @@ export default {
   },
   methods: {
     loadModules(funcList) {
+	    console.log(funcList, '列表页')
       let menuList = []
       if (funcList && funcList.length) {
         funcList.forEach(item => {
