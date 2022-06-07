@@ -23,7 +23,7 @@
         }]
      -->
   	<div>
-			<p v-for="(info, key) in detailInfo" :key="key">
+			<p v-for="(info, key) in detailInfo" :key="key" v-if="info.label">
           <span>{{ info.label }}：</span>
           
           <!-- isService 为 true 跳转到/service -->
@@ -118,9 +118,18 @@
           </template>
           
           <template v-else>
-            <span>{{ formatValue(info.value) }}</span>
+            <span :style="{color: info.value === $t('ExplorerLang.common.failed') ? '#fa8593' : ''}">{{ formatValue(info.value) }}</span>
           </template>
-
+          
+          <!-- isTip 合约执行结果 -->
+          <template v-if="info.isTip">
+            <el-tooltip popper-class="tooltip" placement="top" :style="{color: info.value === $t('ExplorerLang.common.failed') ? '#fa8593' : ''}">
+                <div slot="content">
+                    {{ info.log }}
+                </div>
+                <i class="iconfont iconyiwen"></i>
+            </el-tooltip>
+          </template>
 			</p>
 		</div>
 </template>
@@ -196,6 +205,11 @@ export default {
 				word-break: break-all;
 				line-height: 0.20rem;
 			}
+            ::v-deep .el-tooltip {
+                display: flex;
+                align-items: center;
+                margin-left: 0.04rem;
+            }
 			.wrap {
 				.text {
 					flex: 1;

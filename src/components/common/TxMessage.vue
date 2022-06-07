@@ -2468,6 +2468,9 @@
 				type: Array,
 				required: true,
 			},
+			ddcSigner: {
+				type: Array
+			},
 		},
 		data () {
 			return {
@@ -2749,11 +2752,9 @@
 						switch (this.txType) {
 							case TX_TYPE.mint_nft:
 								this.buildMintNft(msg)
-
 								break;
 							case TX_TYPE.burn_nft:
 								this.buildBurnNft(msg)
-
 								break;
 							case TX_TYPE.create_record:
 								this.recordArray = msg.contents.map(item => {
@@ -2767,80 +2768,61 @@
 								break;
 							case TX_TYPE.define_service:
 								this.buildDefineService(msg)
-
 								break;
 							case TX_TYPE.bind_service:
 								this.buildBindService(msg)
-
 								break;
 							case TX_TYPE.send:
 								this.buildSend(msg)
-
 								break;
 							case TX_TYPE.call_service:
 								this.buildCallService(msg)
-
 								break;
 							case TX_TYPE.transfer_nft:
 								this.buildTransferNft(msg)
-
 								break;
 							case TX_TYPE.edit_nft:
 								this.buildEditNft(msg)
-
 								break;
 							case TX_TYPE.issue_denom:
 								this.buildIssueDenom(msg)
-
 								break;
 							case TX_TYPE.respond_service:
 								this.buildRespondService(msg)
-
 								break;
 							case TX_TYPE.pause_request_context:
 								this.buildPauseRequestContext(msg)
-
 								break;
 							case TX_TYPE.start_request_context:
 								this.buildPauseRequestContext(msg)
-
 								break;
 							case TX_TYPE.kill_request_context:
 								this.buildPauseRequestContext(msg)
-
 								break;
 							case TX_TYPE.update_request_context:
 								this.buildUpdateRequestContext(msg)
-
 								break;
 							case TX_TYPE.update_service_binding:
 								this.buildUpdateServiceBinding(msg)
-
 								break;
 							case TX_TYPE.disable_service_binding:
 								this.buildDisableServiceBinding(msg)
-
 								break;
 							case TX_TYPE.enable_service_binding:
 								this.buildEnableServiceBinding(msg)
-
 								break;
 							case TX_TYPE.refund_service_deposit:
 								this.buildDisableServiceBinding(msg)
-
 								break;
 							case TX_TYPE.recv_packet:
 								this.buildRecvPacket(msg, message.type)
-
 								break;
 							case TX_TYPE.create_identity:
 							case TX_TYPE.update_identity:
 								this.buildCreateIdentity(msg)
-
 								break;
 							case TX_TYPE.create_client:
 								this.buildCreateClient(msg)
-
 								if(prodConfig.txDetail && prodConfig.txDetail.ibc) {
 									this.clientID = msg.client_id || '--';
 									this.header = JSON.stringify(msg.header || {}) || '--';
@@ -2853,7 +2835,6 @@
 								break;
 							case TX_TYPE.update_client:
 								this.buildUpdateClient(msg)
-
 								// this.clientID = msg.client_id || '--';
 								// this.header = msg.header || '--';
 								// this.signer = msg.signer || '--';
@@ -2974,147 +2955,112 @@
 								break;
 							case TX_TYPE.fund_community_pool:
 								this.buildFundCommunityPool(msg)
-
 								break;
 							case TX_TYPE.swap_order:
 								this.buildSwapOrder(msg);
-
 								break;
 							case TX_TYPE.add_liquidity:
 								this.buildAddLiquidity(msg);
-
 								break;
 							case TX_TYPE.remove_liquidity:
 								this.buildRemoveLiquidity(msg);
-
 								break;
 							case TX_TYPE.unjail:
 								this.buildUnjail(msg);
 								break;
 							case TX_TYPE.create_feed:
 								this.buildCreateFeed(msg)
-
 								break;
 							case TX_TYPE.start_feed:
 								this.buildStartFeed(msg)
-
 								break;
 							case TX_TYPE.pause_feed:
 								this.buildStartFeed(msg)
-
 								break;
 							case TX_TYPE.edit_feed:
 								this.buildEditFeed(msg)
-
 								break;
 							case TX_TYPE.request_rand:
 								this.buildRequestRand(msg)
-
 								break;
 							case TX_TYPE.service_set_withdraw_address:
 								this.buildServiceSetWithdrawAddress(msg)
-
 								break;
 							case TX_TYPE.withdraw_earned_fees:
 								this.buildWithdrawEarnedFees(msg)
-
 								break;
 							case TX_TYPE.issue_token:
 								this.buildIssueToken(msg)
-
 								break;
 							case TX_TYPE.edit_token:
 								this.buildEditToken(msg)
-
 								break;
 							case TX_TYPE.mint_token:
 								this.buildMintToken(msg)
-
 							break;
 							case TX_TYPE.transfer_token_owner:
 								this.buildTransferTokenOwner(msg)
-
 								break;
 							case TX_TYPE.burn_token:
 								this.buildBurnToken(msg)
-
 								break;
 							case TX_TYPE.deposit:
 								this.buildDeposit(msg)
-
 								break;
 							case TX_TYPE.vote:
 								this.buildVote(msg)
-
 								break;
 							case TX_TYPE.submit_proposal:
 								this.buildSubmitProposal(msg)
-
 								break;
 							case TX_TYPE.upgrade_client:
 								this.buildUpgradeClient(msg)
-
 							break;
 							case TX_TYPE.submit_misbehaviour:
 								this.buildSubmitMisbehaviour(msg)
-
 							break;
 							case TX_TYPE.connection_open_init:
 								this.buildConnectionOpenInit(msg)
-
 							break;
 							case TX_TYPE.connection_open_try:
 								this.buildConnectionOpenTry(msg)
-
 							break;
 							case TX_TYPE.connection_open_ack:
 								this.buildConnectionOpenAck(msg)
-
 							break;
 							case TX_TYPE.connection_open_confirm:
 								this.buildConnectionOpenConfirm(msg)
-
 								break;
 							case TX_TYPE.channel_open_init:
 								this.buildChannelOpenInit(msg)
-
 								break;
 							case TX_TYPE.channel_open_try:
 								this.buildChannelOpenTry(msg)
-
 								break;
 							case TX_TYPE.channel_open_ack:
 								this.buildChannelOpenAck(msg)
-
 							break;
 							case TX_TYPE.channel_open_confirm:
 								this.buildChannelOpenConfirm(msg)
-
 							break;
 							case TX_TYPE.channel_close_init:
 								this.buildChannelCloseInit(msg)
-
 							break;
 							case TX_TYPE.channel_close_confirm:
 								this.buildChannelCloseConfirm(msg)
-
 							break;
 							case TX_TYPE.timeout_packet:
 								this.buildTimeoutPacket(msg, message.type)
-
 							break;
 							case TX_TYPE.timeout_on_close_packet:
 								this.buildTimeoutOnClosePacket(msg)
-
 								break;
 							case TX_TYPE.acknowledge_packet:
 								this.buildAcknowledgePacket(msg, message.type)
-
 								break;
 							// MsgTypeIBCTransfer
 							case TX_TYPE.transfer:
 								this.buildTransfer(msg)
-
 							break;
 							case TX_TYPE.multisend:
 								this.inputs = [];
@@ -3138,11 +3084,9 @@
 							break;
 							case TX_TYPE.create_htlc:
 								this.buildCreateHtlc(msg);
-
 							break;
 							case TX_TYPE.claim_htlc:
 								this.buildClaimHtlc(msg)
-
 							break;
 							case TX_TYPE.refund_htlc:
 								this.sender = msg.sender || '--';
@@ -3151,13 +3095,10 @@
 							//新增TIBC NFT Transfer Out
 							case TX_TYPE.tibc_nft_transfer:
 								this.buildTibcNftTransfer(msg)
-
 								break;
 							//新增TIBC NFT Transfer In
 							case TX_TYPE.tibc_recv_packet:
 								this.buildTibcRecvPacket(msg)
-
-
 								break;
 							//新增TIBC Acknowledge Packet
 							case TX_TYPE.tibc_acknowledge_packet:
@@ -3166,22 +3107,17 @@
               //新增 TIBC Clean Packet Out
 							case TX_TYPE.clean_packet:
 								this.buildCleanPacket(msg)
-
 								break;
 							//新增 	TIBC Clean Packet In
 							case TX_TYPE.recv_clean_packet:
 								this.buildRecvCleanPacket(msg)
-
 								break;
 							case TX_TYPE.tibc_update_client:
 								this.buildTibcUpdateClient(msg)
-
 								break;
 							case TX_TYPE.transfer_denom:
 								this.buildTransferDenom(msg)
-
 								break;
-
 							case TX_TYPE.stake:		  
 							  this.buildStake(msg)  
 								break;
@@ -3199,7 +3135,6 @@
 								break;
 							case TX_TYPE.destroy_pool:
 								this.buildDestroyPool(msg)
-
 								break;
 							case TX_TYPE.adjust_pool:
 								this.buildAdjustPool(msg)
@@ -5884,7 +5819,7 @@
 			},
 			// BSN-DDC 合约
 			buildBsnDdc(msg){
-				let ddcId,ddcUri;
+				let ddcId,ddcUri,ddcStatus;
 				if(Array.isArray(msg?.ex?.ddc_id)){
 					ddcId = msg.ex.ddc_id.join('、')
 				}else{
@@ -5897,42 +5832,67 @@
 				}else{
 					ddcUri = (msg.ex.ddc_uri &&  [msg.ex.ddc_uri]) || ['--']
 				}
+                if(msg?.ex?.tx_receipt) {
+                    switch(msg.ex.tx_receipt?.status) {
+                        case 0:
+                            ddcStatus = this.$t('ExplorerLang.common.failed');
+                            break;
+                        case 1:
+                            ddcStatus = this.$t('ExplorerLang.common.success');
+                            break;
+                    }
+                }
 				this.detailInfo = [
+					{
+						label: this.$t('ExplorerLang.transactionInformation.txHash'),
+						value: msg.hash
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractExecutionResult'),
+						value: ddcStatus,
+                        log: !(msg?.ex?.tx_receipt?.status) && JSON.parse(JSON.stringify(msg?.ex?.tx_receipt?.log)),
+                        isTip: msg?.ex?.tx_receipt?.status ? false : true
+					},
+					{
+						label: this.$t('ExplorerLang.transactionInformation.bsnddc.signer'),
+						value: this.ddcSigner?.length && this.ddcSigner[0],
+                        isAddress: true
+					},
 					{
 						label: this.$t('ExplorerLang.table.contractAddress'),
 						value: msg.ex.contract_address
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractType'),
-						value: msg.ex.ddc_type,
-					},
-					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.contractMethod'),
 						value: this.setMethodLang(msg.ex.ddc_method),
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.ddcId'),
 						value: ddcId,
 						isSchema: true
 					},
 						{
-						label: this.$t('ExplorerLang.transactionInformation.bsnddc.ddcName'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.ddcName'),
 						value: msg.ex.ddc_name,
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.from'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.from'),
 						value: msg.ex.sender,
 						isAddress: true
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.to'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.to'),
 						value: msg.ex.recipient,
 						isAddress: true
 					},
 					{
-						label: this.$t('ExplorerLang.transactionInformation.uri'),
+						label: msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.uri'),
 						value: ddcUri,
 						isMultiLink: true
+					},
+					{
+						label: !msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.tradingData'),
+						value: JSON.parse(JSON.stringify(msg.data)),
 					}
 				]
 			}

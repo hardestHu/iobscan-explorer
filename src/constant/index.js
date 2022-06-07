@@ -143,7 +143,7 @@ export const TX_TYPE = {
   destroy_pool: 'destroy_pool',
   adjust_pool: 'adjust_pool',
 
-  //EVM只能合约
+  //EVM智能合约
   bsn_ddc: 'ethereum_tx',
   ddc_721: 'ddc_721',
   ddc_1155: 'ddc_1155',
