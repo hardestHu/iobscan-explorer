@@ -156,7 +156,7 @@ export const TX_TYPE_DISPLAY = {
   bsn_ddc: 'BSN-DDC 合约',
   ddc_721: 'BSN-DDC 721 Official contract',
   ddc_1155: 'BSN-DDC 1155 Official contract',
-  ddc_other: 'Other Contracts',
+  ddc_other: 'BSN-Other',
   //farm
   stake: 'Stake',
   unstake: 'Unstake',
