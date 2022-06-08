@@ -196,6 +196,9 @@ export default {
 				text-align: left;
 				font-size: $s14;
 				font-weight: 600;
+                @media(max-width: 768px) {
+                    min-width: 1.4rem;
+                }
 			}
 
 			span:nth-of-type(2) {
