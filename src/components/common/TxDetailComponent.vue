@@ -124,8 +124,8 @@
           <!-- isTip 合约执行结果 -->
           <template v-if="info.isTip">
             <el-tooltip popper-class="tooltip" placement="top" :style="{color: info.value === $t('ExplorerLang.common.failed') ? '#fa8593' : ''}">
-                <div slot="content">
-                    {{ info.log }}
+                <div slot="content" style="max-width: 7rem;">
+	                {{ info.log }}
                 </div>
                 <i class="iconfont iconyiwen"></i>
             </el-tooltip>
