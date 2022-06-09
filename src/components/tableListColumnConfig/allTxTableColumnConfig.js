@@ -238,6 +238,12 @@ export const needAddColumn = {
         {
             label: i18n.t('ExplorerLang.table.selfBonded'),
             displayValue: 'amount',
+            isRight: true
+        },
+        {
+            label: '',
+            displayValue: 'denom',
+            isShowDenomTip: true,
         },
         {
             label: i18n.t('ExplorerLang.table.operatorAddress'),
