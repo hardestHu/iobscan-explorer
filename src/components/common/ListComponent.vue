@@ -969,10 +969,12 @@ export default {
 			
 		}
 		.custom_uri{
-			width: 1.45rem;
-			display: inline-block;
-			text-overflow:ellipsis;
-			overflow: hidden;
+			a {
+				width: 1.45rem;
+				display: inline-block;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
 		}
 		.tag_num {
 			color: $theme_c !important;

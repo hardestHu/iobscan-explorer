@@ -663,21 +663,23 @@
 	                                    const time = Tools.formatAge(Tools.getTimestamp(), item.time * 1000, this.$t('ExplorerLang.table.suffix'))
 
 	                                    let amount = msg ? await getAmountByTx(msg, true) : '--'
+	                                    const result = amount.split('%');
+
 	                                    this.txList.push({
 		                                    txHash: item.tx_hash,
 		                                    blockHeight: item.height,
 		                                    validatorAddress: operatorAddr,
 		                                    validatorMoniker: operatorMonikers,
-		                                    amount: amount || '--',
+		                                    amount: result?.length ? result[0] : '--',
 		                                    txType: (item.msgs || []).map(item => item.type),
 		                                    MsgsNum: msgsNumber,
 		                                    // 'Tx_Fee': fee && fee.amount ? this.isShowDenom ? `${Tools.toDecimal(fee.amount,this.feeDecimals)} ${fee.denom.toLocaleUpperCase()}` : `${Tools.toDecimal(fee.amount,this.feeDecimals)}` : '--',
 		                                    'Tx_Fee': fee && fee.amount ? this.isShowDenom ? `${Tools.toDecimal(fee.amount, this.feeDecimals)}` : `${Tools.toDecimal(fee.amount, this.feeDecimals)}` : '--',
-												signer: item.signers[0] ? item.signers[0] : '--',
-												status: item.status,
-                                                Timestamp: Tools.formatAge(Tools.getTimestamp(),item.time*1000, this.$t('ExplorerLang.table.suffix')),
-                                                Time: Tools.formatLocalTime(item.time)
-                                        })
+		                                    signer: item.signers[0] ? item.signers[0] : '--',
+		                                    status: item.status,
+		                                    Timestamp: Tools.formatAge(Tools.getTimestamp(), item.time * 1000, this.$t('ExplorerLang.table.suffix')),
+		                                    Time: Tools.formatLocalTime(item.time)
+	                                    })
                                     }
                                 }
                             }
