@@ -1153,8 +1153,6 @@ export const needAddColumn = {
             label: i18n.t('ExplorerLang.table.sender'),
             displayValue: 'from',
             nativeValue: 'from',
-            isHref: true,
-            href: cfg.cosmosXpAddress,
             isNeedFormat: true,
             isFormatAddress: true,
         },
