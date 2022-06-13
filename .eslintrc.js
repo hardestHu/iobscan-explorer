@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
+  // plugins: ['prettier'],
   extends: [
     'plugin:vue/essential',
     'eslint:recommended',
@@ -15,5 +16,9 @@ module.exports = {
     'generator-star-spacing': 'off',
     'vuejs-accessibility/click-events-have-key-events': 'off',
     'no-tabs': 'off',
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never',
+    }],
   },
 };
