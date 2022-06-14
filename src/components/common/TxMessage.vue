@@ -5892,7 +5892,7 @@
 					},
 					{
 						label: !msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.tradingData'),
-						value: JSON.parse(JSON.stringify(msg.data)),
+						value: msg?.ex?.data,
 					}
 				]
 			}
