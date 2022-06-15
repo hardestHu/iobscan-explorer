@@ -1,15 +1,15 @@
 <template>
-	 <div
-		 class="header_container"
-		 :style="`background-color:${(prodConfig.nav || {}).bgColor || ''}`"
-	 >
-		 <div class="header_content">
-			 <div class="header_menu_content">
-				 <div class="header_logo_content" @click="logoClick">
-					 <img
-						 class="header_logo_content_icon"
-						 v-if="logoImg.length"
-						 :src="logoImg"
+	<div
+		class="header_container"
+		:style="`background-color:${(prodConfig.nav || {}).bgColor || ''}`"
+	>
+		<div class="header_content">
+			<div class="header_menu_content">
+				<div class="header_logo_content" @click="logoClick">
+					<img
+						class="header_logo_content_icon"
+						v-if="logoImg.length"
+						:src="logoImg"
 						alt=""
 					/>
 					<div :style="`color:${(prodConfig.nav || {}).color || ''}`">
@@ -127,7 +127,7 @@
 					</li>
 				</ul>
 			</div>
-			
+
 			<div class="use_feature_mobile" v-if="featureShow">
 				<div
 					v-for="(item, index) in menuList"
