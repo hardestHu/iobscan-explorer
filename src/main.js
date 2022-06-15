@@ -167,6 +167,7 @@ Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Tabs);
 Vue.use(TabPane);
+
 Vue.use(Tag);
 Vue.use(Tree);
 Vue.use(Alert);
@@ -232,12 +233,12 @@ Vue.config.productionTip = false;
         }, 500);
       } else {
         // eslint-disable-next-line no-use-before-define
-        store.commit('mainToken', '');
+        store.commit('setMainToken', '');
       }
     });
     if (mainToken) {
       const upperCaseMainToken = mainToken && mainToken.symbol.toUpperCase();
-      store.commit('mainToken', upperCaseMainToken);
+      store.commit('setMainToken', upperCaseMainToken);
     }
   }
 
