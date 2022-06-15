@@ -1,5 +1,5 @@
 <template>
-	<div
+	 <div
 		class="header_container"
 		:style="`background-color:${(prodConfig.nav || {}).bgColor || ''}`"
 	>
