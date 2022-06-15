@@ -1,5 +1,5 @@
 <template>
-	 <div
+	<div
 		class="header_container"
 		:style="`background-color:${(prodConfig.nav || {}).bgColor || ''}`"
 	>
@@ -222,13 +222,13 @@
 </template>
 <script>
 import {
-  getBlockWithHeight,
-  getTxDetail,
-  getAddressTxList,
+	getBlockWithHeight,
+	getTxDetail,
+	getAddressTxList,
 } from '@/service/api';
 import MenuItem from '@/components/common/MenuItem';
-import { moduleSupport } from '@/helper/ModulesHelper';
-import { getConfig, addressRoute, getMainToken } from '@/helper/IritaHelper';
+import {moduleSupport} from '@/helper/ModulesHelper';
+import {getConfig, addressRoute, getMainToken} from '@/helper/IritaHelper';
 import Tools from '../../util/Tools';
 import constant, {
 	ModuleMap,
@@ -238,236 +238,236 @@ import constant, {
 import prodConfig from '../../productionConfig';
 
 export default {
-  components: {
-    MenuItem,
-  },
-  data() {
-    return {
-      test: {},
-      moduleSupport,
-      prodConfig,
-      activeIndex: '1',
-      activeIndex2: '0',
-      searchInputValue: '',
-      featureShow: false,
-      menuList: [],
-      searchShow: false,
-      expandingList: [],
-      flShowNetwork: false,
-      flShowNetworkLogo: false,
-      netWorkArray: [],
-      // currentNetworkClass:'',
-      flShowNetWorkMenu: false,
-      mainnet: {},
-      constant,
-      mainToken: '',
-    };
-  },
-  computed: {
-    logoImg() {
-      let img = '';
-	    try {
-		    img = require('../../assets/logo.png');
-	    } catch (e) {
-	    }
-      return img;
-    },
-  },
-  created() {
-    this.getConfigApi();
-  },
-  mounted() {
-    // this.$Crypto.getCrypto('iris', 'testnet');
-    this.setActiveIndex();
-    this.menuList = this.loadModules(prodConfig.navFuncList);
-  },
-  watch: {
-    $route: {
-      handler(val) {
-        this.setActiveIndex(val.path);
-      },
-      deep: true,
-    },
-
-  },
-  methods: {
-    loadModules(funcList) {
-      const menuList = [];
-      if (funcList && funcList.length) {
-        funcList.forEach((item) => {
-          if (item.children && item.children.length) {
-            const submenu = {
-              ...item,
-              children: this.loadModules(item.children),
-            };
-            menuList.push(submenu);
-          } else if (ModuleMap[item.id]) {
-            const menu = ModuleMap[item.id];
-            if (item.title) {
-              menu.title = item.title.replace(
-                '\$\{mainToken\}',
-                this.$store.state.mainToken,
-              );
-            }
-            menuList.push(menu);
-          }
-	        if (item == '1000') {
-		        this.searchShow = true;
-	        }
-	        if (item == '1001') {
-		        this.flShowNetwork = true;
-	        }
-        });
-      }
-	    return menuList;
-    },
-	  handleSelect(key, keyPath) {
-	  },
-	  handleParentTitleClick(index) {
-		  if (this.expandingList.includes(index)) {
-			  this.expandingList.splice(
-				  this.expandingList.findIndex((i) => i === index),
-				  1,
-			  );
-		  } else {
-			  this.expandingList.push(index);
-		  }
-	  },
-    onInputChange() {
-      this.getData();
-    },
-    logoClick() {
-      this.$router.push('/home');
-    },
-    setActiveIndex(hash = window.location.hash) {
-      if (this.menuList.every((m) => !hash.includes(m.link))) {
-        this.activeIndex2 = '';
-      } else {
-        this.menuList.forEach((m, i) => {
-          if (hash.includes(m.link)) {
-            this.activeIndex2 = String(i + 1);
-          }
-        });
-      }
-    },
-    clearSearchContent() {
-      this.searchInputValue = '';
-    },
-    mobileMenuDidClick(item, index) {
-      this.$router.push(item.link);
-      this.activeIndex2 = String(index + 1);
-      this.featureShow = false;
-      this.expandingList = [];
-    },
-    getData() {
-      // 从if-else 改为if return，减少嵌套。if先后顺序不变，保持之前的判断先后。
-      if (!Tools.removeAllSpace(this.searchInputValue)) {
-        this.clearSearchContent();
-        return;
-      }
-
-      // cosmos 不让跳转了
-      if (this.searchInputValue.startsWith(COSMOS_ADDRESS_PREFIX)) {
-        this.toSearchResultPage();
-        return;
-      }
-
-      // 如果是tx_hash (/^[A-F0-9]{64}$/) 或者是evm的hash（以0x开头）
-      if (/^[A-F0-9]{64}|^0x\w*$/.test(this.searchInputValue)) {
-        this.searchTx();
-        return;
-      }
-
-      if (Tools.isBech32(this.searchInputValue)) {
-        this.searchDelegator();
-        return;
-      }
-
-      if (/^\+?[1-9][0-9]*$/.test(this.searchInputValue)) {
-        this.searchBlock();
-        return;
-      }
-
-      this.toSearchResultPage();
-    },
-    async searchBlock() {
-      try {
-        const blockData = await getBlockWithHeight(this.searchInputValue);
-        if (blockData && blockData.height) {
-          this.$router.push(`/block/${this.searchInputValue}`);
-          this.clearSearchContent();
-        } else {
-          this.toSearchResultPage();
-        }
-      } catch (e) {
-        console.error(e);
-        this.toSearchResultPage();
-      }
-    },
-    async searchDelegator() {
-      addressRoute.call(this, this.searchInputValue);
-      this.clearSearchContent();
-      // try {
-      //   const res = await getAddressTxList(this.searchInputValue, '', '', 1, 1)
-      //   if (res) {
-      //     addressRoute.call(this,this.searchInputValue);
-      //     this.clearSearchContent()
-      //   } else {
-      //     this.toSearchResultPage()
-      //   }
-      // } catch (e) {
-      //   console.error(e)
-      //   this.toSearchResultPage()
-      // }
-    },
-    async searchTx() {
-      try {
-        const res = await getTxDetail(this.searchInputValue);
-        if (res) {
-          this.$router.push(`/tx?txHash=${this.searchInputValue}`);
-          this.clearSearchContent();
-        } else {
-          this.toSearchResultPage();
-        }
-      } catch (e) {
-        console.error(e);
-        this.toSearchResultPage();
-      }
-    },
-    toSearchResultPage() {
-      this.$router.push(`/searchResult?${this.searchInputValue}`);
-      this.searchInputValue = '';
-    },
-    showNetWorkLogo() {
-      this.flShowNetworkLogo = true;
-    },
-    hideNetWorkLogo() {
-      this.flShowNetworkLogo = false;
-    },
-    async getConfigApi() {
-      const config = await getConfig();
-      this.handleConfigs(config.networkData);
-    },
-    handleConfigs(configs = []) {
-	    this.netWorkArray = configs.map((item) => {
-		    // eslint-disable-next-line no-param-reassign
-		    item.icon = item?.network_id ? NETWORK_ICON[item.network_id] : '';
-		    if (item.is_main) {
-			    this.mainnet = {...item};
-		    }
-		    return item;
-	    });
-	    if (prodConfig?.product) {
-		    this.mainnet = CHAIN_ICON[prodConfig.product];
-	    }
-    },
-    windowOpenUrl(url) {
-      window.open(url);
-    },
-    flShowNetWork() {
-      this.flShowNetWorkMenu = !this.flShowNetWorkMenu;
-    },
-  },
+	components: {
+		MenuItem,
+	},
+	data() {
+		return {
+			test: {},
+			moduleSupport,
+			prodConfig,
+			activeIndex: '1',
+			activeIndex2: '0',
+			searchInputValue: '',
+			featureShow: false,
+			menuList: [],
+			searchShow: false,
+			expandingList: [],
+			flShowNetwork: false,
+			flShowNetworkLogo: false,
+			netWorkArray: [],
+			// currentNetworkClass:'',
+			flShowNetWorkMenu: false,
+			mainnet: {},
+			constant,
+			mainToken: '',
+		};
+	},
+	computed: {
+		logoImg() {
+			let img = '';
+			try {
+				img = require('../../assets/logo.png');
+			} catch (e) {
+			}
+			return img;
+		},
+	},
+	created() {
+		this.getConfigApi();
+	},
+	mounted() {
+		// this.$Crypto.getCrypto('iris', 'testnet');
+		this.setActiveIndex();
+		this.menuList = this.loadModules(prodConfig.navFuncList);
+	},
+	watch: {
+		$route: {
+			handler(val) {
+				this.setActiveIndex(val.path);
+			},
+			deep: true,
+		},
+		
+	},
+	methods: {
+		loadModules(funcList) {
+			const menuList = [];
+			if (funcList && funcList.length) {
+				funcList.forEach((item) => {
+					if (item.children && item.children.length) {
+						const submenu = {
+							...item,
+							children: this.loadModules(item.children),
+						};
+						menuList.push(submenu);
+					} else if (ModuleMap[item.id]) {
+						const menu = ModuleMap[item.id];
+						if (item.title) {
+							menu.title = item.title.replace(
+								'\$\{mainToken\}',
+								this.$store.state.mainToken,
+							);
+						}
+						menuList.push(menu);
+					}
+					if (item == '1000') {
+						this.searchShow = true;
+					}
+					if (item == '1001') {
+						this.flShowNetwork = true;
+					}
+				});
+			}
+			return menuList;
+		},
+		handleSelect(key, keyPath) {
+		},
+		handleParentTitleClick(index) {
+			if (this.expandingList.includes(index)) {
+				this.expandingList.splice(
+					this.expandingList.findIndex((i) => i === index),
+					1,
+				);
+			} else {
+				this.expandingList.push(index);
+			}
+		},
+		onInputChange() {
+			this.getData();
+		},
+		logoClick() {
+			this.$router.push('/home');
+		},
+		setActiveIndex(hash = window.location.hash) {
+			if (this.menuList.every((m) => !hash.includes(m.link))) {
+				this.activeIndex2 = '';
+			} else {
+				this.menuList.forEach((m, i) => {
+					if (hash.includes(m.link)) {
+						this.activeIndex2 = String(i + 1);
+					}
+				});
+			}
+		},
+		clearSearchContent() {
+			this.searchInputValue = '';
+		},
+		mobileMenuDidClick(item, index) {
+			this.$router.push(item.link);
+			this.activeIndex2 = String(index + 1);
+			this.featureShow = false;
+			this.expandingList = [];
+		},
+		getData() {
+			// 从if-else 改为if return，减少嵌套。if先后顺序不变，保持之前的判断先后。
+			if (!Tools.removeAllSpace(this.searchInputValue)) {
+				this.clearSearchContent();
+				return;
+			}
+			
+			// cosmos 不让跳转了
+			if (this.searchInputValue.startsWith(COSMOS_ADDRESS_PREFIX)) {
+				this.toSearchResultPage();
+				return;
+			}
+			
+			// 如果是tx_hash (/^[A-F0-9]{64}$/) 或者是evm的hash（以0x开头）
+			if (/^[A-F0-9]{64}|^0x\w*$/.test(this.searchInputValue)) {
+				this.searchTx();
+				return;
+			}
+			
+			if (Tools.isBech32(this.searchInputValue)) {
+				this.searchDelegator();
+				return;
+			}
+			
+			if (/^\+?[1-9][0-9]*$/.test(this.searchInputValue)) {
+				this.searchBlock();
+				return;
+			}
+			
+			this.toSearchResultPage();
+		},
+		async searchBlock() {
+			try {
+				const blockData = await getBlockWithHeight(this.searchInputValue);
+				if (blockData && blockData.height) {
+					this.$router.push(`/block/${this.searchInputValue}`);
+					this.clearSearchContent();
+				} else {
+					this.toSearchResultPage();
+				}
+			} catch (e) {
+				console.error(e);
+				this.toSearchResultPage();
+			}
+		},
+		async searchDelegator() {
+			addressRoute.call(this, this.searchInputValue);
+			this.clearSearchContent();
+			// try {
+			//   const res = await getAddressTxList(this.searchInputValue, '', '', 1, 1)
+			//   if (res) {
+			//     addressRoute.call(this,this.searchInputValue);
+			//     this.clearSearchContent()
+			//   } else {
+			//     this.toSearchResultPage()
+			//   }
+			// } catch (e) {
+			//   console.error(e)
+			//   this.toSearchResultPage()
+			// }
+		},
+		async searchTx() {
+			try {
+				const res = await getTxDetail(this.searchInputValue);
+				if (res) {
+					this.$router.push(`/tx?txHash=${this.searchInputValue}`);
+					this.clearSearchContent();
+				} else {
+					this.toSearchResultPage();
+				}
+			} catch (e) {
+				console.error(e);
+				this.toSearchResultPage();
+			}
+		},
+		toSearchResultPage() {
+			this.$router.push(`/searchResult?${this.searchInputValue}`);
+			this.searchInputValue = '';
+		},
+		showNetWorkLogo() {
+			this.flShowNetworkLogo = true;
+		},
+		hideNetWorkLogo() {
+			this.flShowNetworkLogo = false;
+		},
+		async getConfigApi() {
+			const config = await getConfig();
+			this.handleConfigs(config.networkData);
+		},
+		handleConfigs(configs = []) {
+			this.netWorkArray = configs.map((item) => {
+				// eslint-disable-next-line no-param-reassign
+				item.icon = item?.network_id ? NETWORK_ICON[item.network_id] : '';
+				if (item.is_main) {
+					this.mainnet = {...item};
+				}
+				return item;
+			});
+			if (prodConfig?.product) {
+				this.mainnet = CHAIN_ICON[prodConfig.product];
+			}
+		},
+		windowOpenUrl(url) {
+			window.open(url);
+		},
+		flShowNetWork() {
+			this.flShowNetWorkMenu = !this.flShowNetWorkMenu;
+		},
+	},
 };
 </script>
 
