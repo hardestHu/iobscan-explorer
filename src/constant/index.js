@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-import prodConfig from '../productionConfig.js'
-Vue.use(VueI18n)
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import prodConfig from '../productionConfig.js';
+
+Vue.use(VueI18n);
 
 const i18n = new VueI18n({
   locale: prodConfig.lang == 'EN' ? 'EN' : 'CN',
@@ -9,11 +10,11 @@ const i18n = new VueI18n({
     CN: require('../../lang/CN-Cindy'),
     EN: require('../../lang/EN-Cindy'),
   },
-})
+});
 export const EVENTS_TYPE = {
-  writeAcknowledgement:'write_acknowledgement',
-  packet_ack:'packet_ack'
-}
+  writeAcknowledgement: 'write_acknowledgement',
+  packet_ack: 'packet_ack',
+};
 // 链上
 export const TX_TYPE = {
   // service
@@ -39,8 +40,8 @@ export const TX_TYPE = {
   edit_nft: 'edit_nft',
   issue_denom: 'issue_denom',
   mint_nft: 'mint_nft',
-  //新增
-  transfer_denom:'transfer_denom',//新增
+  // 新增
+  transfer_denom: 'transfer_denom', // 新增
 
   // Token
   issue_token: 'issue_token',
@@ -48,16 +49,15 @@ export const TX_TYPE = {
   mint_token: 'mint_token',
   transfer_token_owner: 'transfer_token_owner',
   burn_token: 'burn_token',
-  
 
-  //Bank
+  // Bank
   send: 'send',
   multisend: 'multisend',
-  //Crisis
+  // Crisis
   verify_invariant: 'verify_invariant',
-  //Evidence
+  // Evidence
   submit_evidence: 'submit_evidence',
-  //Staking
+  // Staking
   begin_unbonding: 'begin_unbonding',
   edit_validator: 'edit_validator',
   create_validator: 'create_validator',
@@ -99,14 +99,14 @@ export const TX_TYPE = {
   // IBC
   transfer: 'transfer',
   timeout_packet: 'timeout_packet',
-  recv_packet: 'recv_packet',     //和公有链ibc交易类型名称一致
-  create_client: 'create_client', //和公有链ibc交易类型名称一致
-  update_client: 'update_client', //和公有链ibc交易类型名称一致
+  recv_packet: 'recv_packet', // 和公有链ibc交易类型名称一致
+  create_client: 'create_client', // 和公有链ibc交易类型名称一致
+  update_client: 'update_client', // 和公有链ibc交易类型名称一致
 
   // IBC => Other
   // create_client: 'create_client',
   // update_client: 'update_client',
-  
+
   upgrade_client: 'upgrade_client',
   submit_misbehaviour: 'submit_misbehaviour',
   connection_open_init: 'connection_open_init',
@@ -125,7 +125,7 @@ export const TX_TYPE = {
   // Random
   request_rand: 'request_rand',
 
-  //TiBC
+  // TiBC
   tibc_nft_transfer: 'tibc_nft_transfer',
   tibc_recv_packet: 'tibc_recv_packet',
   tibc_acknowledge_packet: 'tibc_acknowledge_packet',
@@ -133,8 +133,7 @@ export const TX_TYPE = {
   recv_clean_packet: 'recv_clean_packet',
   tibc_update_client: 'tibc_update_client',
 
-
-  //Farm 
+  // Farm
   stake: 'stake',
   unstake: 'unstake',
   harvest: 'harvest',
@@ -143,12 +142,12 @@ export const TX_TYPE = {
   destroy_pool: 'destroy_pool',
   adjust_pool: 'adjust_pool',
 
-  //EVM智能合约
+  // EVM智能合约
   bsn_ddc: 'ethereum_tx',
   ddc_721: 'ddc_721',
   ddc_1155: 'ddc_1155',
-  ddc_other: 'ddc_other'
-}
+  ddc_other: 'ddc_other',
+};
 
 // 展示 abandon
 export const TX_TYPE_DISPLAY = {
@@ -157,7 +156,7 @@ export const TX_TYPE_DISPLAY = {
   ddc_721: 'BSN-DDC 721 Official contract',
   ddc_1155: 'BSN-DDC 1155 Official contract',
   ddc_other: 'BSN-Other',
-  //farm
+  // farm
   stake: 'Stake',
   unstake: 'Unstake',
   harvest: 'Harvest',
@@ -181,7 +180,7 @@ export const TX_TYPE_DISPLAY = {
   update_request_context: 'Update Request Context',
   'service/set_withdraw_address': 'Service Set Withdraw Address',
   withdraw_earned_fees: 'Withdraw Earned Fees',
-   // Record
+  // Record
   create_record: 'Create Record',
   // nft
   burn_nft: 'NFT Burn',
@@ -189,9 +188,7 @@ export const TX_TYPE_DISPLAY = {
   edit_nft: 'NFT Edit',
   issue_denom: 'Denom Issue ',
   mint_nft: 'NFT Mint',
-  transfer_denom:'Denom Transfer',//新增
-
-
+  transfer_denom: 'Denom Transfer', // 新增
 
   // Token
   issue_token: 'Issue Token',
@@ -199,14 +196,14 @@ export const TX_TYPE_DISPLAY = {
   mint_token: 'Mint Token',
   transfer_token_owner: 'Transfer Token Owner',
   burn_token: 'Burn Token',
-  //Bank
+  // Bank
   send: 'Transfer',
   multisend: 'Multi Send',
-  //Crisis
+  // Crisis
   verify_invariant: 'VerifyInvariant',
-  //Evidence
+  // Evidence
   submit_evidence: 'SubmitEvidence',
-  //Staking
+  // Staking
   begin_unbonding: 'Undelegate',
   edit_validator: 'Edit Validator',
   create_validator: 'Create Validator',
@@ -242,9 +239,9 @@ export const TX_TYPE_DISPLAY = {
   pause_feed: 'Pause Feed',
   edit_feed: 'Edit Feed',
   // CrossChain 联盟链
-  recv_packet: 'IBC Transfer In',     //和公有链ibc交易类型名称一致
-  create_client: 'IBC Create Client', //和公有链ibc交易类型名称一致
-  update_client: 'IBC Update Client', //和公有链ibc交易类型名称一致
+  recv_packet: 'IBC Transfer In', // 和公有链ibc交易类型名称一致
+  create_client: 'IBC Create Client', // 和公有链ibc交易类型名称一致
+  update_client: 'IBC Update Client', // 和公有链ibc交易类型名称一致
   // Identity
   create_identity: 'CreateIdentity',
   update_identity: 'UpdateIdentity',
@@ -273,25 +270,24 @@ export const TX_TYPE_DISPLAY = {
 
   // Random
   request_rand: 'Request Rand',
-  //TiBC
-  tibc_nft_transfer:'TIBC NFT Transfer Out',
-  tibc_recv_packet:'TIBC NFT Transfer In',
-  tibc_acknowledge_packet:'TIBC Acknowledge Packet',
-  clean_packet:'TIBC Clean Packet Out',
-  recv_clean_packet:'TIBC Clean Packet In',
-  tibc_update_client:'TIBC Update Client',
+  // TiBC
+  tibc_nft_transfer: 'TIBC NFT Transfer Out',
+  tibc_recv_packet: 'TIBC NFT Transfer In',
+  tibc_acknowledge_packet: 'TIBC Acknowledge Packet',
+  clean_packet: 'TIBC Clean Packet Out',
+  recv_clean_packet: 'TIBC Clean Packet In',
+  tibc_update_client: 'TIBC Update Client',
 
-
-}
+};
 
 export const LEVEL_TX_TYPE = {
-  SmartContract:'Smart Contract',
+  SmartContract: 'Smart Contract',
   Farm: 'Farm',
   Transfer: 'Transfer',
   Staking: 'Staking',
   iService: 'iService',
   NFT: 'NFT',
-  TIBC:'TIBC',//新增
+  TIBC: 'TIBC', // 新增
   Coinswap: 'Coinswap',
   Identity: 'Identity',
   IBC: 'IBC',
@@ -302,19 +298,19 @@ export const LEVEL_TX_TYPE = {
   Asset: 'Asset',
   Gov: 'Gov',
   Other: 'Others',
-  crossChain: 'CrossChain'
-}
+  crossChain: 'CrossChain',
+};
 
 export const TX_STATUS = {
   success: 1,
   fail: 0,
-}
+};
 
 export const ValidatorStatus = {
   bonded: 'bonded',
   unbonding: 'unbonding',
   unbonded: 'unbonded',
-}
+};
 
 export const ColumnMinWidth = {
   txHash: '135',
@@ -385,7 +381,7 @@ export const ColumnMinWidth = {
   nftListDenom: '100',
   nftListDate: '280',
   // timestamp: '145',
-  timestamp:  prodConfig.isShowUTC === false ? '158' : '205',
+  timestamp: prodConfig.isShowUTC === false ? '158' : '205',
   symbol: '121',
   assetListowner: '430',
   totalSupply: '160',
@@ -404,93 +400,112 @@ export const ColumnMinWidth = {
   validatorValue: '120',
   votingPowerValue: '120',
   ownerDetailDelegationsAmount: '135',
-  listDenom:'60'
-}
+  listDenom: '60',
+};
 
 export const ModuleMap = {
-  '100': {
+  100: {
     title: '区块浏览',
     link: '/blocks',
   },
-  '101': {
+  101: {
     title: '交易浏览',
     link: '/txs',
   },
-  '102': {
+  102: {
     title: '共识节点',
     link: '/validators',
   },
-  '103': {
+  103: {
     title: '数据对象',
     link: '/nftAsset',
   },
-  '104': {
+  104: {
     title: '数据类别',
     link: '/denoms',
   },
-  '105': {
+  105: {
     title: '服务浏览',
     link: '/services',
   },
-  '106': {
+  106: {
     title: '身份ID',
     link: '/identities',
   },
-  '107': {
+  107: {
     title: 'Validators',
     link: '/staking',
   },
-  '108': {
+  108: {
     title: 'Delegation Txs',
     link: '/txs/delegations',
   },
-  '109': {
+  109: {
     title: 'Validation Txs',
     link: '/txs/validations',
   },
-  '110': {
+  110: {
     title: 'Native Asset',
     link: '/assets/ntvassets',
   },
-  '111': {
+  111: {
     title: 'Native Asset',
     link: '/assets/ntvassetstxs',
   },
-  '112': {
+  112: {
     title: 'Proposals',
     link: '/gov/proposals',
   },
-  '113': {
+  113: {
     title: 'Gov Txs',
     link: '/txs/governance',
   },
-   '114': {
+  114: {
     title: '${mainToken} Rich List',
     link: '/stats/rich',
   },
-   '115': {
+  115: {
     title: '${mainToken} Stats',
     link: '/stats/stats',
   },
-  '117': {
-    title:'BSN-DDC',
-    link:'/ddc'
-  }
+  117: {
+    title: 'BSN-DDC',
+    link: '/ddc',
+  },
 
-}
-
-const CHAINID = {}
-CHAINID.IRISHUB = 'Mainnet IRISHUB'
-CHAINID.FUXI = 'Testnet FUXI'
-CHAINID.NYANCAT = 'Testnet NYANCAT'
-CHAINID.GOZTESTNET = 'Testnet GOZ'
-CHAINID.BIFROST = 'Testnet BIFROST'
-CHAINID.STARGATE = 'Testnet STARGATE'
-CHAINID.COSMOSHUB = 'Mainnet CosmosHub'
-CHAINID.WENCHANG = 'Mainnet WenChang'
-CHAINID.IRITA = 'Testnet IRITA'
-CHAINID.DATANGCHAINMAIN = '大唐链主网'
-CHAINID.DATANGCHAINTESTNET = '大唐链测试网'
+};
+export const NETWORK_ICON = {
+  'Mainnet IRISHUB': 'iconfont iconiris',
+  'Testnet FUXI': 'iconfont iconfuxi1',
+  'Testnet NYANCAT': 'iconfont iconcaihongmao',
+  'Testnet GOZ': 'iconfont iconGOZ',
+  'Testnet BIFROST': 'iconfont iconBI-01',
+  'Testnet STARGATE': 'iconfont iconStargate',
+  'Mainnet CosmosHub': 'iconfont iconCosmosHub',
+  'Mainnet WenChang': 'iconfont iconBianjie_wenchanglian_Logo-02',
+  'Testnet IRITA': 'iconfont iconxingzhuangjiehe1',
+  'Mainnet DaTang': 'iconfont iconhuaban',
+  'Testnet DaTang': 'iconfont iconhuaban',
+};
+export const CHAIN_ICON = {
+  Bifrost: {icon: 'iconfont iconBI-01'},
+  STARGATE: {icon: 'iconfont iconStargate'},
+  'Cosmos Hub': {icon: 'iconfont iconCosmosHub'},
+  NYANCAT: {icon: 'iconfont iconcaihongmao'},
+  IRISHUB: {icon: 'iconfont iconiris'},
+};
+const CHAINID = {};
+CHAINID.IRISHUB = 'Mainnet IRISHUB';
+CHAINID.FUXI = 'Testnet FUXI';
+CHAINID.NYANCAT = 'Testnet NYANCAT';
+CHAINID.GOZTESTNET = 'Testnet GOZ';
+CHAINID.BIFROST = 'Testnet BIFROST';
+CHAINID.STARGATE = 'Testnet STARGATE';
+CHAINID.COSMOSHUB = 'Mainnet CosmosHub';
+CHAINID.WENCHANG = 'Mainnet WenChang';
+CHAINID.IRITA = 'Testnet IRITA';
+CHAINID.DATANGCHAINMAIN = '大唐链主网';
+CHAINID.DATANGCHAINTESTNET = '大唐链测试网';
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
@@ -511,81 +526,81 @@ export const pageTitleConfig = {
   StatsRichList: '${mainToken} Rich List',
   StatsRichListAddress: 'Address',
   StatsStats: '${mainToken} Stats Analyse',
-}
+};
 
 export const PubKeyAlgorithm = {
-  '0': 'UnknownPubKeyAlgorithm',
-  '1': 'RSA',
-  '2': 'DSA',
-  '3': 'ECDSA',
-  '4': 'ED25519',
-  '5': 'SM2',
-}
+  0: 'UnknownPubKeyAlgorithm',
+  1: 'RSA',
+  2: 'DSA',
+  3: 'ECDSA',
+  4: 'ED25519',
+  5: 'SM2',
+};
 
 export const TxStatus = {
-  '0': 'Fail',
-  '1': 'Success',
-}
+  0: 'Fail',
+  1: 'Success',
+};
 
 export const numFormat = {
   num: '0.00',
-}
+};
 
 export const validator_Status = {
   active: 'Active',
   candidate: 'Candidate',
   jailed: 'Jailed',
-}
+};
 
 export const decimals = {
   amount: 2,
-  fee: prodConfig.fee && (prodConfig.fee.decimals  || prodConfig.fee.decimals === 0) ? prodConfig.fee.decimals : 2,
+  fee: prodConfig.fee && (prodConfig.fee.decimals || prodConfig.fee.decimals === 0) ? prodConfig.fee.decimals : 2,
   shares: 4,
-}
+};
 
 export default {
   CHAINID,
-}
+};
 
 export const monikerNum = {
   validatorList: 8,
   home: 12,
   otherTable: 11,
-}
+};
 
-export  const NFT_AND_DENOM_SPLIT_NUM = {
+export const NFT_AND_DENOM_SPLIT_NUM = {
   num: 8,
-  uriNum: 20
-}
+  uriNum: 20,
+};
 
 export const proposalStatus = {
   passed: 'Passed',
   rejected: 'Rejected',
   votingPeriod: 'VotingPeriod',
   depositPeriod: 'DepositPeriod',
-}
+};
 
 export const proposalType = {
   ParameterChangeProposal: 'ParameterChange',
   SoftwareUpgradeProposal: 'SoftwareUpgrade',
   CancelSoftwareUpgradeProposal: 'CancelSoftwareUpgrade',
   CommunityPoolSpendProposal: 'CommunityPoolSpend',
-  TextProposal:'Text'
-}
+  TextProposal: 'Text',
+};
 
 export const voteOptions = {
   1: 'yes',
   2: 'abstain',
   3: 'no',
-  4: 'no_with_veto'
-}
+  4: 'no_with_veto',
+};
 
 export const formatVoteOptions = {
-  'yes': 'Yes',
-  'abstain': 'Abstain',
-  'no': 'No',
-  'no_with_veto': 'NoWithVeto'
-}
+  yes: 'Yes',
+  abstain: 'Abstain',
+  no: 'No',
+  no_with_veto: 'NoWithVeto',
+};
 
 // 需和配置文件的产品名一致
 export const product = {
@@ -595,34 +610,34 @@ export const product = {
   nyancat: 'NYANCAT',
   irishub: 'IRISHUB',
   cschainOtc: 'CSChain-OTC',
-  datangchain: 'datangchain'
-}
+  datangchain: 'datangchain',
+};
 
-export const ibcDenomPrefix = 'ibc/'
+export const ibcDenomPrefix = 'ibc/';
 
 export const DISTRIBUTION = {
-    '1-5':{
-        name:'No. 1-5',
-    },
-    '6-10':{
-        name:'No. 6-10',
-    },
-    '11-50':{
-        name:'No. 11-50',
-    },
-    '51-100':{
-        name:'No. 51-100',
-    },
-    '101-500':{
-        name:'No. 101-500',
-    },
-    '501-1000':{
-        name:'No. 501-1000',
-    },
-    '1001-':{
-        name:'No. 1001-',
-    },
-}
+  '1-5': {
+    name: 'No. 1-5',
+  },
+  '6-10': {
+    name: 'No. 6-10',
+  },
+  '11-50': {
+    name: 'No. 11-50',
+  },
+  '51-100': {
+    name: 'No. 51-100',
+  },
+  '101-500': {
+    name: 'No. 101-500',
+  },
+  '501-1000': {
+    name: 'No. 501-1000',
+  },
+  '1001-': {
+    name: 'No. 1001-',
+  },
+};
 
 export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
@@ -630,7 +645,7 @@ export const IRIS_ADDRESS_PREFIX = 'iaa';
 export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目
 export const DTC_ADDRESS_PREFIX = 'dtc';
 export const DDC_TYPE_LIST = {
-  1:'DDC721',
-  2:'DDC1155'
-}
+  1: 'DDC721',
+  2: 'DDC1155',
+};
 export const UGAS = 'ugas'; // 用于比对ugas

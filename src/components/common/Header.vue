@@ -234,6 +234,8 @@ import constant, {
   ModuleMap,
   product,
   COSMOS_ADDRESS_PREFIX,
+	NETWORK_ICON,
+	CHAIN_ICON
 } from '../../constant';
 import prodConfig from '../../productionConfig';
 
@@ -447,53 +449,15 @@ export default {
     },
     handleConfigs(configs = []) {
       this.netWorkArray = configs.map((item) => {
-        if (item.network_id === constant.CHAINID.IRISHUB) {
-          item.icon = 'iconfont iconiris';
-        } else if (item.network_id === constant.CHAINID.FUXI) {
-          item.icon = 'iconfont iconfuxi1';
-        } else if (item.network_id === constant.CHAINID.NYANCAT) {
-          item.icon = 'iconfont iconcaihongmao';
-        } else if (item.network_id === constant.CHAINID.GOZTESTNET) {
-          item.icon = 'iconfont iconGOZ';
-        } else if (item.network_id === constant.CHAINID.BIFROST) {
-          item.icon = 'iconfont iconBI-01';
-        } else if (item.network_id === constant.CHAINID.STARGATE) {
-          item.icon = 'iconfont iconStargate';
-        } else if (item.network_id === constant.CHAINID.COSMOSHUB) {
-          item.icon = 'iconfont iconCosmosHub';
-        } else if (item.network_id === constant.CHAINID.WENCHANG) {
-          item.icon = 'iconfont iconBianjie_wenchanglian_Logo-02';
-        } else if (item.network_id === constant.CHAINID.IRITA) {
-          item.icon = 'iconfont iconxingzhuangjiehe1';
-        } else if (
-          item.network_id === constant.CHAINID.DATANGCHAINMAIN
-          || item.network_id === constant.CHAINID.DATANGCHAINTESTNET
-        ) {
-          item.icon = 'iconfont iconhuaban';
-        }
-        if (item.is_main) {
-          this.mainnet = { ...item };
-        }
+      // eslint-disable-next-line no-param-reassign
+        item.icon = item?.network_id ? NETWORK_ICON[item.network_id] : '';
+	      if (item.is_main) {
+	        this.mainnet = { ...item };
+	      }
         return item;
       });
-      switch (prodConfig.product) {
-        case product.bifrost:
-          this.mainnet = { icon: 'iconfont iconBI-01' };
-          break;
-        case product.stargate:
-          this.mainnet = { icon: 'iconfont iconStargate' };
-          break;
-        case product.cosmosHub:
-          this.mainnet = { icon: 'iconfont iconCosmosHub' };
-          break;
-        case product.nyancat:
-          this.mainnet = { icon: 'iconfont iconcaihongmao' };
-          break;
-        case product.irishub:
-          this.mainnet = { icon: 'iconfont iconiris' };
-          break;
-        default:
-          break;
+      if (prodConfig?.product) {
+        this.mainnet = CHAIN_ICON[prodConfig.product] || {};
       }
     },
     windowOpenUrl(url) {
