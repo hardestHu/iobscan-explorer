@@ -457,7 +457,7 @@ export default {
         return item;
       });
       if (prodConfig?.product) {
-        this.mainnet = CHAIN_ICON[prodConfig.product];
+        this.mainnet = CHAIN_ICON[prodConfig.product] || {};
       }
     },
     windowOpenUrl(url) {
