@@ -127,7 +127,7 @@
 					</li>
 				</ul>
 			</div>
-
+			
 			<div class="use_feature_mobile" v-if="featureShow">
 				<div
 					v-for="(item, index) in menuList"
