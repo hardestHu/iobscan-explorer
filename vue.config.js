@@ -8,7 +8,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target:'https://irishub.iobscan.io/api',
+        target:'http://localhost:3000/',
         secure: false,
         pathRewrite: { '^/api': '' },
       },
