@@ -359,6 +359,7 @@
       >
         <div class="content_title">
           {{ $t('ExplorerLang.addressDetail.assets') }}
+          <span>todo {{ this.nftTotal }}</span>
         </div>
         <el-table
           class="table"
@@ -985,11 +986,23 @@
             ></tx-status-tabs-components>
           </template>
           <template v-slot:txCount>
-            <tx-count-component
-              :title="$t('ExplorerLang.transactions.txs')"
-              :icon="'iconTrainsaction'"
-              :tx-count="totalTxNumber"
-            ></tx-count-component>
+            <!-- todo start -->
+            <div class="txCountWrap">
+              <tx-count-component
+                :title="$t('ExplorerLang.transactions.txs')"
+                :icon="'iconTrainsaction'"
+                :tx-count="totalTxNumber"
+              ></tx-count-component>
+              <tx-count-component
+                :title="$t('ExplorerLang.transactions.txs')"
+                :tx-count="totalTxNumber"
+              ></tx-count-component>
+              <tx-count-component
+                :title="$t('ExplorerLang.transactions.txs')"
+                :tx-count="totalTxNumber"
+              ></tx-count-component>
+            </div>
+            <!-- todo end -->
           </template>
         </list-component>
       </div>
@@ -1055,6 +1068,7 @@ import {
   getIbcTransferByHash,
   getDdcList,
   getEnergyAssetApi,
+  getNftCountApi,
 } from '@/service/api';
 import BigNumber from 'bignumber.js';
 import moveDecimal from 'move-decimal-point';
@@ -1088,6 +1102,7 @@ import SignerColunmn from './tableListColumnConfig/SignerColunmn';
 import TxResetButtonComponent from './common/TxResetButtonComponent';
 import ddcListColumnConfig from './tableListColumnConfig/ddcListColumnConfig';
 import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
+import { energyAsset, assetInfo, nftCount, ddc, identity, iService, tx } from './ownerDetail/lib';
 
 export default {
   name: 'OwnerDetail',
@@ -1219,43 +1234,6 @@ export default {
       isIservice: false,
       isTx: false,
       isDDC: false,
-      assetInfo: {
-        label: this.$t('ExplorerLang.addressInformation.tab.assetInfo'),
-        isActive: false,
-        moduleNumber: '107',
-      },
-      nftCount: {
-        label: this.$t('ExplorerLang.addressInformation.tab.nftCount'),
-        isActive: false,
-        moduleNumber: '103',
-      },
-      identity: {
-        label: this.$t('ExplorerLang.addressInformation.tab.identity'),
-        isActive: false,
-        moduleNumber: '106',
-      },
-      iService: {
-        label: this.$t('ExplorerLang.addressInformation.tab.iService'),
-        isActive: false,
-        moduleNumber: '105',
-      },
-      ddc: {
-        label: this.$t('ExplorerLang.addressInformation.tab.ddc'),
-        isActive: false,
-        moduleNumber: '117',
-      },
-      tx: {
-        label: this.$t('ExplorerLang.addressInformation.tab.tx'),
-        isActive: false,
-      },
-      energyAsset: {
-        label: this.$t('ExplorerLang.addressInformation.tab.energyAsset'),
-        isActive: false,
-        moduleNumber: '116',
-      },
-      LargeStringMinHeight: 69,
-      LargeStringLineHeight: 23,
-      mainTokenSymbol: '',
       ddcList: [],
       ddcListColumn: [],
       ddcPageSize: 5,
@@ -1267,6 +1245,7 @@ export default {
       energyAssetData: [],
       energyAssetColumn,
       isEnergyAsset: false,
+      nftTotal: 0,
     };
   },
   watch: {
@@ -1361,11 +1340,11 @@ export default {
     getTabList() {
       this.tabList = [];
       if (moduleSupport('116', prodConfig.navFuncList)) {
-        this.tabList.push(this.energyAsset);
+        this.tabList.push(energyAsset);
         this.getEnergyAssetList();
       }
       if (moduleSupport('107', prodConfig.navFuncList)) {
-        this.tabList.push(this.assetInfo);
+        this.tabList.push(assetInfo);
         this.getAddressInformation();
         this.getRewardsItems();
         this.getAssetList();
@@ -1373,22 +1352,24 @@ export default {
         this.getUnBondingDelegationList();
       }
       if (moduleSupport('103', prodConfig.navFuncList)) {
-        this.tabList.push(this.nftCount);
+        this.tabList.push(nftCount);
         this.getNftListCount();
         this.getNftList();
+        // todo
+        this.getNftCount();
       }
       if (moduleSupport('117', prodConfig.navFuncList)) {
-        this.tabList.push(this.ddc);
+        this.tabList.push(ddc);
         this.getDdcListCount();
         this.getDdcList();
       }
       if (moduleSupport('106', prodConfig.navFuncList)) {
-        this.tabList.push(this.identity);
+        this.tabList.push(identity);
         this.getIdentityListCount();
         this.getIdentityList();
       }
       if (moduleSupport('105', prodConfig.navFuncList)) {
-        this.tabList.push(this.iService);
+        this.tabList.push(iService);
         this.getRspondRecordListCount();
         this.getRspondRecordList();
         this.getProviderTxListCount();
@@ -1396,7 +1377,7 @@ export default {
         this.getConsumerTxListCount();
         this.getConsumerTxList();
       }
-      this.tabList.push(this.tx);
+      this.tabList.push(tx);
       this.tabList[0].isActive = true;
       this.showAndHideByModule();
     },
@@ -1482,6 +1463,17 @@ export default {
         const nftData = await getNfts(null, null, true, '', '', this.$route.params.param);
         if (nftData?.count) {
           this.assetCount = nftData.count;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    // 获取NFT数量统计 todo
+    async getNftCount() {
+      try {
+        const res = await getNftCountApi(this.$route.params.param);
+        if (res?.count) {
+          this.nftTotal = res.count;
         }
       } catch (e) {
         console.error(e);
@@ -3328,6 +3320,14 @@ a {
 ::v-deep .el-table__empty-block {
   height: 0.48rem !important;
   min-height: 0.48rem !important;
+}
+
+.txCountWrap {
+  display: flex;
+  flex-wrap: wrap;
+  > div + div {
+    margin-left: 20px;
+  }
 }
 
 .address_container_content {

@@ -712,3 +712,9 @@ export function getEnergyAssetApi(valAddress) {
   const url = `/bank/balances/${valAddress}`;
   return getFromLcd(url);
 }
+
+// 链账户地址 NFT 数量统计展示
+export const getNftCountApi = (params) => {
+  const url = `/txs/ddcs${Tools.formatParams(params)}`;
+  return get(url);
+};
