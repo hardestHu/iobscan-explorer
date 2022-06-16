@@ -106,7 +106,6 @@ export const ExplorerLang = {
         deposit: 'Deposit',
         createHash:'TxHash',
         nftCount:'NFT',
-        creator:'Creator',
         createTime:'Timestamp',
         identity:'ID',
         idPubkey:'Pubkey',
@@ -152,7 +151,6 @@ export const ExplorerLang = {
         proposalType: 'Proposal Type',
         proposalID: 'Proposal ID',
         proposalTitle: 'Proposal Title',
-        proposer: 'Proposer',
         submited: 'Submited',
         proposalStatus: 'Status',
         voted: 'voted',
@@ -225,7 +223,8 @@ export const ExplorerLang = {
         validatorNumCount: 'Validators',
         bondedTokens:'Bonded Tokens',
         votingPower: 'Voting Power',
-        communityPool: 'Community Pool'
+        communityPool: 'Community Pool',
+        address:'Address',
     },
     block:{
         title:'Blockchain',
@@ -863,5 +862,8 @@ export const ExplorerLang = {
         burnBatch:'burnBatch',
         setURI:'setURI',
         setNameAndSymbol:'setNameAndSymbol',
+    },
+    system:{
+        maintenance:'系统升级维护中...'
     }
 }

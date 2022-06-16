@@ -233,12 +233,12 @@ Vue.config.productionTip = false;
         }, 500);
       } else {
         // eslint-disable-next-line no-use-before-define
-        store.commit('setMainToken', '');
+        store.state.mainToken = '';
       }
     });
     if (mainToken) {
       const upperCaseMainToken = mainToken && mainToken.symbol.toUpperCase();
-      store.commit('setMainToken', upperCaseMainToken);
+      store.state.mainToken = upperCaseMainToken;
     }
   }
 

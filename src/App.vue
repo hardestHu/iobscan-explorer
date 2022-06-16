@@ -1,8 +1,8 @@
 <template>
   <div id="app" @click.stop="closeMsgChildrenType()">
-    <Header></Header>
+    <Header v-if="$store.state.isFlMaintenance"></Header>
     <router-view class="content" :key="$route.fullPath" />
-    <Footer></Footer>
+    <Footer v-if="$store.state.isFlMaintenance"></Footer>
   </div>
 </template>
 

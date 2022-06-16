@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import prodConfig from '../productionConfig';
 import {product} from '../constant';
+import store from "@/vuex";
 Vue.use(Router);
 
 const originalPush = Router.prototype.push
@@ -127,11 +128,15 @@ const router = new Router({
 		{
 			path: '/ddc/detail',
 			component: () => import('@/components/ddc/detail.vue')
+		},
+		{
+			path: '/system/maintenance',
+			component: () => import('@/system/Maintenance.vue')
 		}
-
 	]
 })
 router.beforeEach((to,from,next) => {
+	store.commit('isFlMaintenance',true)
 	sessionStorage.removeItem('currentChoiceMsgType')
 	if(to.path !== '/txs'){
 		sessionStorage.removeItem('lastChoiceMsgModelIndex')
@@ -145,6 +150,9 @@ router.beforeEach((to,from,next) => {
 	}
 	if(to.path !== '/txs/delegations'){
 		sessionStorage.removeItem('selectMsgTypeIndex')
+	}
+	if(to.path === '/system/maintenance'){
+		store.commit('isFlMaintenance',false)
 	}
     if(prodConfig.product === product.datangchain && to.path.includes('/nftAsset')) {
         let fullPath = to.fullPath.replace(/nftAsset/g, 'daw');
