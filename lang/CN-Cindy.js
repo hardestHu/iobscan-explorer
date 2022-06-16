@@ -212,7 +212,8 @@ export const ExplorerLang = {
         validatorNumCount: '验证人数量',
         bondedTokens: '质押率',
         votingPower: '在线投票权',
-        communityPool: '社区池'
+        communityPool: '社区池',
+        address:'地址',
     },
     block:{
         title:'区块',
@@ -819,5 +820,8 @@ export const ExplorerLang = {
         burnBatch:'批量销毁',
         setURI:'编辑',
         setNameAndSymbol:'编辑',
+    },
+    system:{
+        maintenance:'系统升级维护中...'
     }
 }
