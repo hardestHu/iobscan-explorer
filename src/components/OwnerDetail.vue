@@ -988,7 +988,7 @@
           <template v-slot:txCount>
             <!-- todo start -->
             <div class="txCountWrap">
-              <tx-count-compofnent
+              <tx-count-component
                 :title="$t('ExplorerLang.transactions.txs')"
                 :icon="'iconTrainsaction'"
                 :tx-count="totalTxNumber"
@@ -996,7 +996,7 @@
 	              <template v-slot:displayShowAddressSendTx>
 		              <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
 	              </template>
-              </tx-count-compofnent>
+              </tx-count-component>
 <!--              <tx-count-component-->
 <!--                :title="$t('ExplorerLang.transactions.txs')"-->
 <!--                :tx-count="totalTxNumber"-->
