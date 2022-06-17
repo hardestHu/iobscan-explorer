@@ -988,7 +988,7 @@
           <template v-slot:txCount>
             <!-- todo start -->
             <div class="txCountWrap">
-              <tx-count-component
+              <tx-count-compofnent
                 :title="$t('ExplorerLang.transactions.txs')"
                 :icon="'iconTrainsaction'"
                 :tx-count="totalTxNumber"
@@ -996,7 +996,7 @@
 	              <template v-slot:displayShowAddressSendTx>
 		              <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
 	              </template>
-              </tx-count-component>
+              </tx-count-compofnent>
 <!--              <tx-count-component-->
 <!--                :title="$t('ExplorerLang.transactions.txs')"-->
 <!--                :tx-count="totalTxNumber"-->
@@ -1476,11 +1476,9 @@ export default {
         console.error(e);
       }
     },
-    // 获取NFT数量统计 todo
     async getNftCount() {
       try {
         const res = await getNftCountApi(this.$route.params.param);
-	      console.log(res,"?????????")
         if (res?.count) {
           this.nftTotal = res.count;
         }
