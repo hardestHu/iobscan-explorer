@@ -864,6 +864,8 @@ export const ExplorerLang = {
         setNameAndSymbol:'setNameAndSymbol',
     },
     system:{
-        maintenance:'系统升级维护中...'
+        maintenance:'We are under maintenance',
+        pageNotFound:'Sorry! The page you visit does not exist',
+        goBack:"Go Back"
     }
 }

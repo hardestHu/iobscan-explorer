@@ -822,6 +822,8 @@ export const ExplorerLang = {
         setNameAndSymbol:'编辑',
     },
     system:{
-        maintenance:'系统升级维护中...'
+        maintenance:'系统升级维护中...',
+        pageNotFound:'抱歉！您访问页面不存在',
+        goBack:"返回"
     }
 }
