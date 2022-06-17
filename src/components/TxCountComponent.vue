@@ -1,13 +1,18 @@
 <template>
 	<div class="tx_count_content">
-		<span :class="`iconfont ${icon}` "></span>
-		<span class="tx_count_label"> {{ title }}</span>
-		<span class="tx_count_number">
+		<div class="tx_count_content_wrap">
+			<span :class="`iconfont ${icon}` "></span>
+			<span class="tx_count_label"> {{ title }}</span>
+			<span class="tx_count_number">
 			<router-link class="link_style" v-if="isLink" :to="`${linkRoute}/${txCount}`">
 				{{ txCount }}
 			</router-link>
 			<span v-else>{{ txCount }}</span>
 		</span>
+		</div>
+		<div class="show_address_send_tx_content">
+			<slot name="displayShowAddressSendTx"></slot>
+		</div>
 	</div>
 </template>
 
@@ -44,7 +49,10 @@ export default {
 	display: flex;
 	margin: 0.2rem 0 0 0;
 	align-items: center;
-
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 	.iconfont {
 		margin-right: 0.08rem;
 	}
@@ -62,6 +70,12 @@ export default {
 
 		.link_style {
 			color: $theme_c !important;
+		}
+	}
+	.show_address_send_tx_content{
+		margin-left: 0.2rem;
+		@media (max-width: 768px) {
+			margin-left: 0;
 		}
 	}
 }

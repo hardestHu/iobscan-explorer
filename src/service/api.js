@@ -718,3 +718,11 @@ export const getNftCountApi = (params) => {
   const url = `/txs/ddcs${Tools.formatParams(params)}`;
   return get(url);
 };
+// 地址发送交易 接收交易 总数
+export const getTxCountByAddress = (params,address) => {
+  if(!address && !params){
+    return
+  }
+  const url = ''
+  return get(url);
+}
