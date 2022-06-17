@@ -132,6 +132,14 @@ const router = new Router({
 		{
 			path: '/system/maintenance',
 			component: () => import('@/system/Maintenance.vue')
+		},
+		{
+			path: '/system/404',
+			component: () => import('@/system/404.vue')
+		},
+		{
+			path: '*',
+			redirect: '/system/404'
 		}
 	]
 })
@@ -151,7 +159,7 @@ router.beforeEach((to,from,next) => {
 	if(to.path !== '/txs/delegations'){
 		sessionStorage.removeItem('selectMsgTypeIndex')
 	}
-	if(to.path === '/system/maintenance'){
+	if(to.path === '/system/maintenance' || to.path.includes('/system/404')){
 		store.commit('isFlMaintenance',false)
 	}
     if(prodConfig.product === product.datangchain && to.path.includes('/nftAsset')) {

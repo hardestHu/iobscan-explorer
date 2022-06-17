@@ -31,7 +31,7 @@
 						</div>
 
 					</ul>
-					<ul class="home_transaction_bottom_content" v-else>
+					<ul class="home_block_bottom_content" v-else>
 						<li style="padding-top: 15px">{{$t('ExplorerLang.message.requestFailed')}}</li>
 					</ul>
 				</div>
