@@ -580,7 +580,9 @@ export const ExplorerLang = {
         providerTitle:'服务调用-作为提供者',
         respondRecord:'响应记录',
         assets: '数据对象',
-        identities:'身份列表'
+        identities:'身份列表',
+        sendTx: '发起交易',
+        receiptTx: '接收交易'
     },
     nftDetail: {
         nftInformation: '数据对象详情',

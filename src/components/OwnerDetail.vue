@@ -359,7 +359,7 @@
       >
         <div class="content_title">
           {{ $t('ExplorerLang.addressDetail.assets') }}
-          <span>todo {{ this.nftTotal }}</span>
+          <span> {{ this.assetCount }}</span>
         </div>
         <el-table
           class="table"
@@ -992,15 +992,19 @@
                 :title="$t('ExplorerLang.transactions.txs')"
                 :icon="'iconTrainsaction'"
                 :tx-count="totalTxNumber"
-              ></tx-count-component>
-              <tx-count-component
-                :title="$t('ExplorerLang.transactions.txs')"
-                :tx-count="totalTxNumber"
-              ></tx-count-component>
-              <tx-count-component
-                :title="$t('ExplorerLang.transactions.txs')"
-                :tx-count="totalTxNumber"
-              ></tx-count-component>
+              >
+	              <template v-slot:displayShowAddressSendTx>
+		              <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
+	              </template>
+              </tx-count-component>
+<!--              <tx-count-component-->
+<!--                :title="$t('ExplorerLang.transactions.txs')"-->
+<!--                :tx-count="totalTxNumber"-->
+<!--              ></tx-count-component>-->
+<!--              <tx-count-component-->
+<!--                :title="$t('ExplorerLang.transactions.txs')"-->
+<!--                :tx-count="totalTxNumber"-->
+<!--              ></tx-count-component>-->
             </div>
             <!-- todo end -->
           </template>
@@ -1103,10 +1107,12 @@ import TxResetButtonComponent from './common/TxResetButtonComponent';
 import ddcListColumnConfig from './tableListColumnConfig/ddcListColumnConfig';
 import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
 import { energyAsset, assetInfo, nftCount, ddc, identity, iService, tx } from './ownerDetail/lib';
+import AddressSendAndReceiveTx from "@/components/common/AddressSendAndReceiveTx";
 
 export default {
   name: 'OwnerDetail',
   components: {
+	  AddressSendAndReceiveTx,
     TxResetButtonComponent,
     MClip,
     TxCountComponent,
@@ -1246,6 +1252,7 @@ export default {
       energyAssetColumn,
       isEnergyAsset: false,
       nftTotal: 0,
+	    isShowSendAndReceiveTxComponent: false
     };
   },
   watch: {
@@ -1278,6 +1285,7 @@ export default {
     await this.getConfigTokenData();
   },
   async mounted() {
+		this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
     this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
     this.ddcListColumn = ddcListColumnConfig;
     await this.getTxTypeData();
@@ -1472,6 +1480,7 @@ export default {
     async getNftCount() {
       try {
         const res = await getNftCountApi(this.$route.params.param);
+	      console.log(res,"?????????")
         if (res?.count) {
           this.nftTotal = res.count;
         }

@@ -620,7 +620,9 @@ export const ExplorerLang = {
         providerTitle:'iService-As Provider',
         respondRecord:'Respond Record',
         assets: 'NFT',
-        identities:'身份列表'
+        identities:'Identities',
+        sendTx: 'Send Txs',
+        receiptTx: 'Receipt Txs'
     },
     nftDetail: {
         nftInformation:'NFT Details',
