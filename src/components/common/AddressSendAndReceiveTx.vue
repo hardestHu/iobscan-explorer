@@ -41,7 +41,7 @@ export default {
 				if(prodConfig?.isShowSendTxCount){
 					params = `${sendTxParams}`
 				}
-				if(prodConfig?.isShowSendTxCount){
+				if(prodConfig?.isShowReceiveTxCount){
 					params = `${receiveParams}`
 				}
 				if (prodConfig?.isShowSendTxCount && prodConfig?.isShowReceiveTxCount){

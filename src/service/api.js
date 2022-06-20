@@ -723,6 +723,6 @@ export const getTxCountByAddress = (params,address) => {
   if(!address && !params){
     return
   }
-  const url = ''
+  const url = `/txs/addresses/statistic?params=${params}&address=${address}`
   return get(url);
 }
