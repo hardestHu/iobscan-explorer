@@ -997,14 +997,6 @@
 		              <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
 	              </template>
               </tx-count-component>
-<!--              <tx-count-component-->
-<!--                :title="$t('ExplorerLang.transactions.txs')"-->
-<!--                :tx-count="totalTxNumber"-->
-<!--              ></tx-count-component>-->
-<!--              <tx-count-component-->
-<!--                :title="$t('ExplorerLang.transactions.txs')"-->
-<!--                :tx-count="totalTxNumber"-->
-<!--              ></tx-count-component>-->
             </div>
             <!-- todo end -->
           </template>
@@ -1072,7 +1064,6 @@ import {
   getIbcTransferByHash,
   getDdcList,
   getEnergyAssetApi,
-  getNftCountApi,
 } from '@/service/api';
 import BigNumber from 'bignumber.js';
 import moveDecimal from 'move-decimal-point';
@@ -1251,7 +1242,6 @@ export default {
       energyAssetData: [],
       energyAssetColumn,
       isEnergyAsset: false,
-      nftTotal: 0,
 	    isShowSendAndReceiveTxComponent: false
     };
   },
@@ -1363,8 +1353,6 @@ export default {
         this.tabList.push(nftCount);
         this.getNftListCount();
         this.getNftList();
-        // todo
-        this.getNftCount();
       }
       if (moduleSupport('117', prodConfig.navFuncList)) {
         this.tabList.push(ddc);
@@ -1471,16 +1459,6 @@ export default {
         const nftData = await getNfts(null, null, true, '', '', this.$route.params.param);
         if (nftData?.count) {
           this.assetCount = nftData.count;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    async getNftCount() {
-      try {
-        const res = await getNftCountApi(this.$route.params.param);
-        if (res?.count) {
-          this.nftTotal = res.count;
         }
       } catch (e) {
         console.error(e);
