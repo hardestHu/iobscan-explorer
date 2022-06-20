@@ -1338,11 +1338,11 @@ export default {
     getTabList() {
       this.tabList = [];
       if (moduleSupport('116', prodConfig.navFuncList)) {
-        this.tabList.push(energyAsset);
+        this.tabList.push({ ...energyAsset });
         this.getEnergyAssetList();
       }
       if (moduleSupport('107', prodConfig.navFuncList)) {
-        this.tabList.push(assetInfo);
+        this.tabList.push({ ...assetInfo });
         this.getAddressInformation();
         this.getRewardsItems();
         this.getAssetList();
@@ -1350,22 +1350,22 @@ export default {
         this.getUnBondingDelegationList();
       }
       if (moduleSupport('103', prodConfig.navFuncList)) {
-        this.tabList.push(nftCount);
+        this.tabList.push({ ...nftCount });
         this.getNftListCount();
         this.getNftList();
       }
       if (moduleSupport('117', prodConfig.navFuncList)) {
-        this.tabList.push(ddc);
+        this.tabList.push({ ...ddc });
         this.getDdcListCount();
         this.getDdcList();
       }
       if (moduleSupport('106', prodConfig.navFuncList)) {
-        this.tabList.push(identity);
+        this.tabList.push({ ...identity });
         this.getIdentityListCount();
         this.getIdentityList();
       }
       if (moduleSupport('105', prodConfig.navFuncList)) {
-        this.tabList.push(iService);
+        this.tabList.push({ ...iService });
         this.getRspondRecordListCount();
         this.getRspondRecordList();
         this.getProviderTxListCount();
@@ -1373,7 +1373,7 @@ export default {
         this.getConsumerTxListCount();
         this.getConsumerTxList();
       }
-      this.tabList.push(tx);
+      this.tabList.push({ ...tx });
       this.tabList[0].isActive = true;
       this.showAndHideByModule();
     },
