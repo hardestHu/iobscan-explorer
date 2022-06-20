@@ -59,7 +59,10 @@
 						:key="index"
 					>
 						<p class="statistical_header_content">
-							<i :class="item.iconClass"></i>
+							<i v-if="item.id !== 211" :class="item.iconClass"></i>
+							<span class="address_icon"  v-if="item.id === 211" >
+								<img src="../../assets/address_icon.png" alt="">
+							</span>
 							<span class="statistical_content">{{
 									item.label
 								}}</span>
@@ -620,7 +623,20 @@ a {
 						color: $theme_c;
 						margin-right: 0.1rem;
 					}
-					
+					.statistical_header_content{
+						display: flex;
+						align-items: center;
+						.address_icon{
+							display: inline-block;
+							width: 0.16rem;
+							height: 0.16rem;
+							background: $theme_c;
+							margin-right: 0.1rem;
+							img{
+								width: 100%;
+							}
+						}
+					}
 					.statistical_center_content {
 						font-size: $s20;
 						margin-top: 0.35rem;
