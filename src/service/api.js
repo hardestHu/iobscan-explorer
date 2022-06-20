@@ -713,11 +713,6 @@ export function getEnergyAssetApi(valAddress) {
   return getFromLcd(url);
 }
 
-// 链账户地址 NFT 数量统计展示
-export const getNftCountApi = (params) => {
-  const url = `/txs/ddcs${Tools.formatParams(params)}`;
-  return get(url);
-};
 // 地址发送交易 接收交易 总数
 export const getTxCountByAddress = (params,address) => {
   if(!address && !params){
