@@ -59,12 +59,15 @@
 						:key="index"
 					>
 						<p class="statistical_header_content">
-							<i :class="item.iconClass"></i>
+							<i v-if="item.id !== STATISTICAL.ADDRESS_COUNT_ID" :class="item.iconClass"></i>
+							<span class="address_icon"  v-if="item.id === STATISTICAL.ADDRESS_COUNT_ID" >
+								<img src="../../assets/address_icon.png" alt="">
+							</span>
 							<span class="statistical_content">{{
 									item.label
 								}}</span>
 						</p>
-						<p v-if="item.id !== 210" class="statistical_center_content">
+						<p v-if="item.id !== STATISTICAL.COMMUNITY_POOL_ID" class="statistical_center_content">
 							<router-link
 								v-if="item.to && item.value !== '--'"
 								:to="item.to"
@@ -111,7 +114,7 @@ import {
 	converCoin,
 } from "@/helper/IritaHelper";
 import {monikerNum, decimals} from "../../constant";
-
+import {STATISTICAL} from "../../constant";
 export default {
 	name: "StatisticalBar",
 	data() {
@@ -121,89 +124,90 @@ export default {
 			moduleSupport,
 			Tools,
 			addressRoute,
+			STATISTICAL,
 			navigationObj: {
-				201: {
-					id: 201,
+				[STATISTICAL.TRANSACTIONS_ID]: {
+					id: STATISTICAL.TRANSACTIONS_ID,
 					iconClass: "iconfont iconTransactions",
 					label: this.$t("ExplorerLang.home.transactions"),
 					footerLabel: "",
 					value: "--",
 					to: "/txs",
 				},
-				202: {
-					id: 202,
+				[STATISTICAL.BLOCKS_ID]: {
+					id: STATISTICAL.BLOCKS_ID,
 					iconClass: "iconfont iconBlocks",
 					label: this.$t("ExplorerLang.home.validators"),
 					footerLabel: "",
 					value: "--",
 					to: "/validators",
 				},
-				203: {
-					id: 203,
+				[STATISTICAL.AVG_BLOCK_TIME_ID]: {
+					id: STATISTICAL.AVG_BLOCK_TIME_ID,
 					iconClass: "iconfont iconAvgBlockTime",
 					label: this.$t("ExplorerLang.home.avgBlockTime"),
 					footerLabel: this.$t("ExplorerLang.home.last100Blocs"),
 					value: "--",
 					to: "",
 				},
-				204: {
-					id: 204,
+				[STATISTICAL.ASSETS_ID]: {
+					id: STATISTICAL.ASSETS_ID,
 					iconClass: "iconfont iconAssets",
 					label: this.$t("ExplorerLang.home.assets"),
 					footerLabel: "",
 					value: "--",
 					to: "/nftAsset",
 				},
-				205: {
-					id: 205,
+				[STATISTICAL.DENOMS_ID]: {
+					id: STATISTICAL.DENOMS_ID,
 					iconClass: "iconfont iconshujuleibie",
 					label: this.$t("ExplorerLang.home.denoms"),
 					footerLabel: "",
 					value: "--",
 					to: "/denoms",
 				},
-				206: {
-					id: 206,
+				[STATISTICAL.I_SERVICES]: {
+					id: STATISTICAL.I_SERVICES,
 					iconClass: "iconfont iconservice",
 					label: this.$t("ExplorerLang.home.services"),
 					footerLabel: "",
 					value: "--",
 					to: "/services",
 				},
-				207: {
-					id: 207,
+				[STATISTICAL.IDENTITIES_ID]: {
+					id: STATISTICAL.IDENTITIES_ID,
 					iconClass: "iconfont iconID",
 					label: this.$t("ExplorerLang.home.identities"),
 					footerLabel: "",
 					value: "--",
 					to: "/identities",
 				},
-				208: {
-					id: 208,
+				[STATISTICAL.VALIDATOR_COUNT_ID]: {
+					id: STATISTICAL.VALIDATOR_COUNT_ID,
 					iconClass: "iconfont iconVotingPower",
 					label: this.$t("ExplorerLang.home.validatorNumCount"),
 					footerLabel: "",
 					value: "--",
 					to: "/staking",
 				},
-				209: {
-					id: 209,
+				[STATISTICAL.BOND_TOKENS_ID]: {
+					id: STATISTICAL.BOND_TOKENS_ID,
 					iconClass: "iconfont iconBondedTokens",
 					label: this.$t("ExplorerLang.home.bondedTokens"),
 					footerLabel: "",
 					value: "--",
 					to: "",
 				},
-				210: {
-					id: 210,
+				[STATISTICAL.COMMUNITY_POOL_ID]: {
+					id: STATISTICAL.COMMUNITY_POOL_ID,
 					iconClass: "iconfont icona-bianzu24",
 					label: this.$t("ExplorerLang.home.communityPool"),
 					footerLabel: "",
 					value: "--",
 					to: "",
 				},
-				211: {
-					id: 211,
+				[STATISTICAL.ADDRESS_COUNT_ID]: {
+					id: STATISTICAL.ADDRESS_COUNT_ID,
 					iconClass: "iconfont icona-bianzu24",
 					label: this.$t("ExplorerLang.home.address"),
 					footerLabel: "",
@@ -225,7 +229,7 @@ export default {
 	computed: {
 		lineNum() {
 			let HomeCardArray = prodConfig.homeCard.filter((item) => {
-				return item !== 200;
+				return item !== STATISTICAL.LATEST_BLOCK_HEIGHT;
 			});
 			let num = HomeCardArray.length;
 			if (num <= 4) {
@@ -255,7 +259,7 @@ export default {
 				let HomeCardArrayDb = [],
 					HomeCardArrayNetwork = [];
 				prodConfig.homeCard.forEach((code) => {
-					if (code == 200) {
+					if (code == STATISTICAL.LATEST_BLOCK_HEIGHT) {
 						HomeCardArrayNetwork.push(code);
 					} else {
 						HomeCardArrayDb.push(code);
@@ -276,37 +280,37 @@ export default {
 					// this.proposerAddress = statisticsNetwork.operator_addr;
 					// this.currentBlockHeight = statisticsNetwork.blockHeight;
 					prodConfig.homeCard.forEach(async (item) => {
-						if (item === 200) return;
+						if (item === STATISTICAL.LATEST_BLOCK_HEIGHT) return;
 						let itemObj = this.navigationObj[item];
 						switch (item) {
-							case 201:
+							case STATISTICAL.TRANSACTIONS_ID:
 								itemObj.value = statisticsDb.txCount;
 								// itemObj.footerLabel = Tools.getDisplayDate(statisticsNetwork.latestBlockTime)
 								break;
-							case 202:
+							case STATISTICAL.BLOCKS_ID:
 								itemObj.value = statisticsDb.validatorCount;
 								break;
-							case 203:
+							case STATISTICAL.AVG_BLOCK_TIME_ID:
 								itemObj.value = `${
 									statisticsDb.avgBlockTime
 								}${this.$t("ExplorerLang.common.s")}`;
 								break;
-							case 204:
+							case STATISTICAL.ASSETS_ID:
 								itemObj.value = statisticsDb.assetCount;
 								break;
-							case 205:
+							case STATISTICAL.DENOMS_ID:
 								itemObj.value = statisticsDb.denomCount;
 								break;
-							case 206:
+							case STATISTICAL.I_SERVICES:
 								itemObj.value = statisticsDb.serviceCount;
 								break;
-							case 207:
+							case STATISTICAL.IDENTITIES_ID:
 								itemObj.value = statisticsDb.identityCount;
 								break;
-							case 208:
+							case STATISTICAL.VALIDATOR_COUNT_ID:
 								itemObj.value = statisticsDb.validatorNumCount;
 								break;
-							case 209:
+							case STATISTICAL.BOND_TOKENS_ID:
 								if (
 									Number(statisticsDb.total_supply) &&
 									Number(statisticsDb.bonded_tokens)
@@ -344,7 +348,7 @@ export default {
 									} / ${statisticsDb.total_supply || "--"}`;
 								}
 								break;
-							case 210:
+							case STATISTICAL.COMMUNITY_POOL_ID:
 								if (
 									statisticsDb?.community_pool?.length &&
 									JSON.stringify(
@@ -376,9 +380,8 @@ export default {
 									itemObj.value = "--";
 								}
 								break;
-							case 211:{
+							case STATISTICAL.ADDRESS_COUNT_ID:
 								itemObj.value = statisticsDb.total_address;
-							}
 						}
 						this.navigationArrayDbNet.push(itemObj);
 					});
@@ -426,40 +429,40 @@ export default {
 					this.proposerAddress = statisticsNetwork.operator_addr;
 					this.currentBlockHeight = statisticsNetwork.blockHeight;
 					for (const item of prodConfig.homeCard) {
-						if (item !== 200) {
+						if (item !== STATISTICAL.LATEST_BLOCK_HEIGHT) {
 							let itemObj = this.navigationObj[item];
 							switch (item) {
-								case 201:
+								case STATISTICAL.TRANSACTIONS_ID:
 									// itemObj.value = statisticsNetwork.txCount;
 									itemObj.footerLabel = Tools.formatLocalTime(
 										statisticsNetwork.latestBlockTime
 									);
 									break;
-								case 202:
+								case STATISTICAL.BLOCKS_ID:
 									itemObj.value = statisticsDb.validatorCount;
 									break;
-								case 203:
+								case STATISTICAL.AVG_BLOCK_TIME_ID:
 									itemObj.value = `${
 										statisticsDb.avgBlockTime
 									}${this.$t("ExplorerLang.common.s")}`;
 									break;
-								case 204:
+								case STATISTICAL.ASSETS_ID:
 									itemObj.value = statisticsDb.assetCount;
 									break;
-								case 205:
+								case STATISTICAL.DENOMS_ID:
 									itemObj.value = statisticsDb.denomCount;
 									break;
-								case 206:
+								case STATISTICAL.I_SERVICES:
 									itemObj.value = statisticsDb.serviceCount;
 									break;
-								case 207:
+								case STATISTICAL.IDENTITIES_ID:
 									itemObj.value = statisticsDb.identityCount;
 									break;
-								case 208:
+								case STATISTICAL.VALIDATOR_COUNT_ID:
 									itemObj.value =
 										statisticsDb.validatorNumCount;
 									break;
-								case 209:
+								case STATISTICAL.BOND_TOKENS_ID:
 									// if(Number(statisticsNetwork.total_supply) && Number(statisticsNetwork.bonded_tokens)) {
 									//     itemObj.value = Tools.formatPercentageNumbers(statisticsNetwork.bonded_tokens,statisticsNetwork.total_supply)
 									//     let mainToken  = await getMainToken()
@@ -476,9 +479,9 @@ export default {
 									//     itemObj.footerLabel = `${statisticsNetwork.bonded_tokens || '--'} / ${statisticsNetwork.total_supply || '--'}`;
 									// }
 									break;
-								case 210:
+								case STATISTICAL.COMMUNITY_POOL_ID:
 									break;
-								case 211:
+								case STATISTICAL.ADDRESS_COUNT_ID:
 									itemObj.value = statisticsDb.total_address;
 									break;
 							}
@@ -620,7 +623,20 @@ a {
 						color: $theme_c;
 						margin-right: 0.1rem;
 					}
-					
+					.statistical_header_content{
+						display: flex;
+						align-items: center;
+						.address_icon{
+							display: inline-block;
+							width: 0.16rem;
+							height: 0.16rem;
+							background: $theme_c;
+							margin-right: 0.1rem;
+							img{
+								width: 100%;
+							}
+						}
+					}
 					.statistical_center_content {
 						font-size: $s20;
 						margin-top: 0.35rem;

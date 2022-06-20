@@ -1476,11 +1476,9 @@ export default {
         console.error(e);
       }
     },
-    // 获取NFT数量统计 todo
     async getNftCount() {
       try {
         const res = await getNftCountApi(this.$route.params.param);
-	      console.log(res,"?????????")
         if (res?.count) {
           this.nftTotal = res.count;
         }
