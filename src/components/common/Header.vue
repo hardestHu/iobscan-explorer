@@ -199,6 +199,7 @@ import { getBlockWithHeight, getTxDetail, getAddressTxList } from '@/service/api
 import MenuItem from '@/components/common/MenuItem';
 import { moduleSupport } from '@/helper/ModulesHelper';
 import { getConfig, addressRoute, getMainToken } from '@/helper/IritaHelper';
+import { getActiveIndex } from '@/helper/lib';
 import Tools from '../../util/Tools';
 import constant, {
   ModuleMap,
@@ -306,15 +307,7 @@ export default {
       this.$router.push('/home');
     },
     setActiveIndex(hash = window.location.hash) {
-      if (this.menuList.every((m) => !hash.includes(m.link))) {
-        this.activeIndex2 = '';
-      } else {
-        this.menuList.forEach((m, i) => {
-          if (hash.includes(m.link)) {
-            this.activeIndex2 = String(i + 1);
-          }
-        });
-      }
+      this.activeIndex2 = getActiveIndex(this.menuList, hash);
     },
     clearSearchContent() {
       this.searchInputValue = '';
