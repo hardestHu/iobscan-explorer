@@ -220,10 +220,14 @@ export default {
           this.blockHeight = res.height || '--';
           // console.log(res.status === TX_STATUS.success ? this.$t("ExplorerLang.common.success"): this.$t("ExplorerLang.common.failed"),'展示的信息是什么')
 
-          this.status =
-            res.status === TX_STATUS.success
-              ? this.$t('ExplorerLang.common.success')
-              : this.$t('ExplorerLang.common.failed');
+          if (res.status || res.status === 0) {
+            this.status =
+              res.status === TX_STATUS.success
+                ? this.$t('ExplorerLang.common.success')
+                : this.$t('ExplorerLang.common.failed');
+          } else {
+            this.status = '--';
+          }
           // this.status = res.status === TX_STATUS.success ?"Failed":"Failed"
           this.log = res.log || '--';
           if (res.time) {
