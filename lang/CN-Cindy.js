@@ -595,6 +595,7 @@ export const ExplorerLang = {
     creator: '创建者',
     uri: '链外链接',
     nftTxs: '交易记录',
+    newest: '最新信息',
   },
   serviceDetail: {
     serviceDefinition: '服务详情',

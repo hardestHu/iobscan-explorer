@@ -632,6 +632,7 @@ export const ExplorerLang = {
     creator: 'Creator',
     uri: 'Uri',
     nftTxs: 'Txs',
+    newest: 'new message',
   },
   serviceDetail: {
     serviceDefinition: 'iService Details',

@@ -19,7 +19,18 @@
         </div>
         <div class="nft_token_information_item">
           <span>{{ $t('ExplorerLang.nftDetail.tokenId') }}：</span>
-          <span>{{ tokenID }}</span>
+          <span>
+            {{ tokenID }}
+            <el-tooltip
+              v-if="isNewest"
+              class="item"
+              effect="dark"
+              :content="$t('ExplorerLang.nftDetail.newest')"
+              placement="top"
+            >
+              <div class="newIcon">new</div>
+            </el-tooltip>
+          </span>
         </div>
         <div class="nft_token_information_item">
           <span>{{ $t('ExplorerLang.nftDetail.schema') }}：</span>
@@ -135,6 +146,7 @@ export default {
       LargeStringLineHeight: 19,
       feeDecimals: decimals.fee,
       TX_TYPE_DISPLAY: {},
+      lastBlockTime: null,
     };
   },
   async mounted() {
@@ -142,6 +154,16 @@ export default {
     this.setMainToken();
     await this.getTxTypeData();
     await this.getTokenInformation();
+  },
+  computed: {
+    // 最新交易时间和 NFT 最近更新时间进行匹配，就是最新详情
+    // 即详情里的lastBlockTime 和 列表的第一条数据时间判断
+    isNewest() {
+      if (!this.lastBlockTime || !this.txListByToken.length) {
+        return false;
+      }
+      return Tools.formatLocalTime(this.lastBlockTime) === this.txListByToken[0].Time;
+    },
   },
   methods: {
     async setMainToken() {
@@ -166,6 +188,7 @@ export default {
           this.owner = nftDetail.owner;
           this.tokenData = nftDetail.tokenData || '--';
           this.tokenUri = nftDetail.tokenUri || '--';
+          this.lastBlockTime = nftDetail.denomDetail?.last_block_time;
           this.getTokenTxCount();
           this.getTokenTx();
         }
@@ -326,6 +349,18 @@ export default {
 <style scoped lang="scss">
 a {
   color: $t_link_c !important;
+}
+
+.newIcon {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 0 10px;
+  color: #67c77e;
+  font-weight: 600;
+  background: rgba(103, 199, 126, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(103, 199, 126, 0.5);
 }
 
 .nft_token_container {
