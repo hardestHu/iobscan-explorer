@@ -6,17 +6,18 @@
           {{ `${$t('ExplorerLang.addressDetail.addressDetail')} |` }}
         </div>
         <div class="address_content_title_address">
-          {{ address }}<m-clip v-if="address" :text="address" style="margin-left: 0.09rem"></m-clip>
+          {{ address }}
+          <m-clip v-if="address" :text="address" style="margin-left: 0.09rem"></m-clip>
         </div>
       </div>
       <div class="address_tab_container">
         <div class="address_tab_content">
           <div
-            class="address_tab_item"
-            :key="index"
-            v-for="(item, index) in tabList"
-            :class="item.isActive ? 'active_content' : ''"
-            @click="selectOptions(index)"
+              class="address_tab_item"
+              :key="index"
+              v-for="(item, index) in tabList"
+              :class="item.isActive ? 'active_content' : ''"
+              @click="selectOptions(index)"
           >
             <span>{{ item.label }}</span>
           </div>
@@ -25,9 +26,9 @@
       <div v-if="moduleSupport('107', prodConfig.navFuncList)" v-show="isAsset">
         <!-- 地址详情 -->
         <address-information-component
-          :address="address"
-          :data="assetsItems"
-          :isProfiler="isProfiler"
+            :address="address"
+            :data="assetsItems"
+            :isProfiler="isProfiler"
         />
         <div class="delegations_wrap">
           <div class="delegations_container">
@@ -36,35 +37,35 @@
               <p class="validator_information_content_title">
                 {{ $t('ExplorerLang.validatorDetail.delegationsTitle') }}
                 <span class="address_information_delegation_value" v-show="totalDelegatorValue">{{
-                  totalDelegatorValue
-                }}</span>
+                    totalDelegatorValue
+                  }}</span>
               </p>
               <div class="delegations_table_container">
                 <el-table
-                  :empty-text="$t('ExplorerLang.table.emptyDescription')"
-                  :data="delegationsItems"
-                  style="width: 100%"
+                    :empty-text="$t('ExplorerLang.table.emptyDescription')"
+                    :data="delegationsItems"
+                    style="width: 100%"
                 >
                   <el-table-column
-                    class-name="address"
-                    prop="address"
-                    :label="$t('ExplorerLang.table.address')"
-                    :min-width="ColumnMinWidth.address"
+                      class-name="address"
+                      prop="address"
+                      :label="$t('ExplorerLang.table.address')"
+                      :min-width="ColumnMinWidth.address"
                   >
                     <template v-slot:default="{ row }">
                       <el-tooltip :content="`${row.address}`">
                         <span
-                          v-if="row.moniker"
-                          class="address_link"
-                          @click="addressRoute(row.address)"
+                            v-if="row.moniker"
+                            class="address_link"
+                            @click="addressRoute(row.address)"
                         >
                           {{ formatMoniker(row.moniker, monikerNum.otherTable) }}
                         </span>
                         <span
-                          v-if="!row.moniker"
-                          style="font-family: Arial"
-                          class="address_link"
-                          @click="addressRoute(row.address)"
+                            v-if="!row.moniker"
+                            style="font-family: Arial"
+                            class="address_link"
+                            @click="addressRoute(row.address)"
                         >
                           {{ formatAddress(row.address) }}
                         </span>
@@ -72,23 +73,23 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="amount"
-                    :label="$t('ExplorerLang.table.amount')"
-                    align="right"
-                    :min-width="ColumnMinWidth.ownerDetailDelegationsAmount"
+                      prop="amount"
+                      :label="$t('ExplorerLang.table.amount')"
+                      align="right"
+                      :min-width="ColumnMinWidth.ownerDetailDelegationsAmount"
                   >
                     <template slot="header" slot-scope="scope">
                       <span>{{ $t('ExplorerLang.table.amount') }}</span>
                       <el-tooltip :content="mainTokenSymbol" placement="top">
-                        <i class="iconfont iconyiwen yiwen_icon" />
+                        <i class="iconfont iconyiwen yiwen_icon"/>
                       </el-tooltip>
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="shares"
-                    :label="$t('ExplorerLang.table.shares')"
-                    align="left"
-                    :min-width="ColumnMinWidth.shares"
+                      prop="shares"
+                      :label="$t('ExplorerLang.table.shares')"
+                      align="left"
+                      :min-width="ColumnMinWidth.shares"
                   ></el-table-column>
                   <!-- <el-table-column prop="block" :label="$t('ExplorerLang.table.block')" min-width="100">
 														  <template v-slot:default="{ row }">
@@ -98,11 +99,11 @@
                 </el-table>
               </div>
               <m-pagination
-                v-if="flDelegationNextPage"
-                :page="delegationCurrentPage"
-                :page-size="tablePageSize"
-                :total="delegationCountNum"
-                :page-change="delegationPageChange"
+                  v-if="flDelegationNextPage"
+                  :page="delegationCurrentPage"
+                  :page-size="tablePageSize"
+                  :total="delegationCountNum"
+                  :page-change="delegationPageChange"
               ></m-pagination>
             </div>
             <!-- Unbonding Delegations -->
@@ -110,37 +111,37 @@
               <p class="validator_information_content_title">
                 {{ $t('ExplorerLang.validatorDetail.unbondingDelegationsTitle') }}
                 <span
-                  class="address_information_unbonding_delegation_value"
-                  v-show="totalUnBondingDelegatorValue"
-                  >{{ totalUnBondingDelegatorValue }}</span
+                    class="address_information_unbonding_delegation_value"
+                    v-show="totalUnBondingDelegatorValue"
+                >{{ totalUnBondingDelegatorValue }}</span
                 >
               </p>
               <div class="delegations_table_container">
                 <el-table
-                  :empty-text="$t('ExplorerLang.table.emptyDescription')"
-                  :data="unBondingDelegationsItems"
-                  style="width: 100%"
+                    :empty-text="$t('ExplorerLang.table.emptyDescription')"
+                    :data="unBondingDelegationsItems"
+                    style="width: 100%"
                 >
                   <el-table-column
-                    class-name="address"
-                    prop="address"
-                    :label="$t('ExplorerLang.table.address')"
-                    :min-width="ColumnMinWidth.address"
+                      class-name="address"
+                      prop="address"
+                      :label="$t('ExplorerLang.table.address')"
+                      :min-width="ColumnMinWidth.address"
                   >
                     <template v-slot:default="{ row }">
                       <el-tooltip :content="`${row.address}`">
                         <span
-                          v-if="row.moniker"
-                          class="address_link"
-                          @click="addressRoute(row.address)"
+                            v-if="row.moniker"
+                            class="address_link"
+                            @click="addressRoute(row.address)"
                         >
                           {{ formatMoniker(row.moniker, monikerNum.otherTable) }}
                         </span>
                         <span
-                          v-if="!row.moniker"
-                          style="font-family: Arial"
-                          class="address_link"
-                          @click="addressRoute(row.address)"
+                            v-if="!row.moniker"
+                            style="font-family: Arial"
+                            class="address_link"
+                            @click="addressRoute(row.address)"
                         >
                           {{ formatAddress(row.address) }}
                         </span>
@@ -148,44 +149,44 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="amount"
-                    :label="$t('ExplorerLang.table.amount')"
-                    :min-width="ColumnMinWidth.amount"
+                      prop="amount"
+                      :label="$t('ExplorerLang.table.amount')"
+                      :min-width="ColumnMinWidth.amount"
                   >
                     <template slot="header" slot-scope="scope">
                       <span>{{ $t('ExplorerLang.table.amount') }}</span>
                       <el-tooltip :content="mainTokenSymbol" placement="top">
-                        <i class="iconfont iconyiwen yiwen_icon" />
+                        <i class="iconfont iconyiwen yiwen_icon"/>
                       </el-tooltip>
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="block"
-                    :label="$t('ExplorerLang.table.block')"
-                    :min-width="ColumnMinWidth.blockListHeight"
+                      prop="block"
+                      :label="$t('ExplorerLang.table.block')"
+                      :min-width="ColumnMinWidth.blockListHeight"
                   >
                     <template v-slot:default="{ row }">
                       <router-link
-                        style="font-family: Arial"
-                        :to="'/block/' + row.block"
-                        :style="{ color: '$theme_c !important' }"
-                        >{{ row.block }}
+                          style="font-family: Arial"
+                          :to="'/block/' + row.block"
+                          :style="{ color: '$theme_c !important' }"
+                      >{{ row.block }}
                       </router-link>
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="endTime"
-                    :label="$t('ExplorerLang.table.endTime')"
-                    :min-width="ColumnMinWidth.time"
+                      prop="endTime"
+                      :label="$t('ExplorerLang.table.endTime')"
+                      :min-width="ColumnMinWidth.time"
                   ></el-table-column>
                 </el-table>
               </div>
               <m-pagination
-                v-if="flUnBondingDelegationNextPage"
-                :page-size="tablePageSize"
-                :total="unBondingDelegationCountNum"
-                :page="unBondingDelegationCurrentPage"
-                :page-change="unBondingDelegationPageChange"
+                  v-if="flUnBondingDelegationNextPage"
+                  :page-size="tablePageSize"
+                  :total="unBondingDelegationCountNum"
+                  :page="unBondingDelegationCurrentPage"
+                  :page-change="unBondingDelegationPageChange"
               ></m-pagination>
             </div>
           </div>
@@ -194,9 +195,9 @@
         <div class="address_information_redelegation_header_title">
           {{ $t('ExplorerLang.addressInformation.delegatorRewards.title') }}
           <span
-            class="address_information_redelegation_rewards_value"
-            v-show="totalDelegatorRewardValue"
-            >{{ totalDelegatorRewardValue }}</span
+              class="address_information_redelegation_rewards_value"
+              v-show="totalDelegatorRewardValue"
+          >{{ totalDelegatorRewardValue }}</span
           >
         </div>
         <div class="address_information_redelegation_tx_container">
@@ -204,48 +205,48 @@
             <!-- Withdraw To: -->
             <div class="address_information_detail_option">
               <span class="address_information_detail_option_name"
-                >{{ $t('ExplorerLang.addressInformation.delegatorRewards.withdrawTo') }}:</span
+              >{{ $t('ExplorerLang.addressInformation.delegatorRewards.withdrawTo') }}:</span
               >
               <span class="address_information_detail_option_value">
                 <router-link
-                  v-if="withdrewToAddress !== $route.params.param"
-                  :to="`/address/${withdrewToAddress}`"
-                  >{{ withdrewToAddress }}</router-link
+                    v-if="withdrewToAddress !== $route.params.param"
+                    :to="`/address/${withdrewToAddress}`"
+                >{{ withdrewToAddress }}</router-link
                 >
                 <span v-if="withdrewToAddress === $route.params.param">{{
-                  withdrewToAddress
-                }}</span>
+                    withdrewToAddress
+                  }}</span>
               </span>
             </div>
             <!-- Delegator Rewards 的表格 -->
             <div class="address_information_list_content">
               <div>
                 <el-table
-                  :empty-text="$t('ExplorerLang.table.emptyDescription')"
-                  :data="rewardsItems"
-                  style="width: 100%"
+                    :empty-text="$t('ExplorerLang.table.emptyDescription')"
+                    :data="rewardsItems"
+                    style="width: 100%"
                 >
                   <el-table-column
-                    class-name="address"
-                    prop="address"
-                    :label="$t('ExplorerLang.table.address')"
-                    align="left"
-                    :min-width="ColumnMinWidth.address"
+                      class-name="address"
+                      prop="address"
+                      :label="$t('ExplorerLang.table.address')"
+                      align="left"
+                      :min-width="ColumnMinWidth.address"
                   >
                     <template v-slot:default="{ row }">
                       <el-tooltip :content="`${row.address}`">
                         <router-link
-                          v-if="row.moniker"
-                          class="address_link"
-                          :to="`/staking/${row.address}`"
+                            v-if="row.moniker"
+                            class="address_link"
+                            :to="`/staking/${row.address}`"
                         >
                           {{ formatMoniker(row.moniker, monikerNum.otherTable) }}
                         </router-link>
                         <router-link
-                          v-if="!row.moniker"
-                          style="font-family: Arial"
-                          class="address_link"
-                          :to="`/staking/${row.address}`"
+                            v-if="!row.moniker"
+                            style="font-family: Arial"
+                            class="address_link"
+                            :to="`/staking/${row.address}`"
                         >
                           {{ formatAddress(row.address) }}
                         </router-link>
@@ -253,15 +254,15 @@
                     </template>
                   </el-table-column>
                   <el-table-column
-                    prop="amount"
-                    :label="$t('ExplorerLang.table.amount')"
-                    align="right"
-                    :min-width="ColumnMinWidth.amount"
+                      prop="amount"
+                      :label="$t('ExplorerLang.table.amount')"
+                      align="right"
+                      :min-width="ColumnMinWidth.amount"
                   >
                     <template slot="header" slot-scope="scope">
                       <span>{{ $t('ExplorerLang.table.amount') }}</span>
                       <el-tooltip :content="mainTokenSymbol" placement="top">
-                        <i class="iconfont iconyiwen yiwen_icon" />
+                        <i class="iconfont iconyiwen yiwen_icon"/>
                       </el-tooltip>
                     </template>
                   </el-table-column>
@@ -272,19 +273,19 @@
             <div class="pagination_content" v-if="flRewardsDelegationNextPage">
               <keep-alive>
                 <m-pagination
-                  :page-size="pageSize"
-                  :total="rewardsDelegationCountNum"
-                  :page="rewardsDelegationCurrentPage"
-                  :page-change="rewardsDelegationPageChange"
+                    :page-size="pageSize"
+                    :total="rewardsDelegationCountNum"
+                    :page="rewardsDelegationCurrentPage"
+                    :page-change="rewardsDelegationPageChange"
                 ></m-pagination>
               </keep-alive>
             </div>
           </div>
           <!-- Validator Rewards -->
           <div
-            class="address_information_detail_container"
-            :class="OperatorAddress !== '--' ? '' : 'hide_style'"
-            :style="{
+              class="address_information_detail_container"
+              :class="OperatorAddress !== '--' ? '' : 'hide_style'"
+              :style="{
               visibility: OperatorAddress && OperatorAddress !== '--' ? 'visible' : 'hidden',
             }"
           >
@@ -292,58 +293,58 @@
             <div class="address_information_redelegation_title">
               {{ $t('ExplorerLang.addressInformation.validatorRewards.title') }}
               <span
-                class="address_information_validator_rewards_value"
-                v-show="totalValidatorRewards"
-                >{{ totalValidatorRewards }}</span
+                  class="address_information_validator_rewards_value"
+                  v-show="totalValidatorRewards"
+              >{{ totalValidatorRewards }}</span
               >
             </div>
             <!-- 需展示的数据 -->
             <ul class="address_information_detail_content">
               <li class="address_information_detail_option">
                 <span class="address_information_detail_option_name"
-                  >{{
+                >{{
                     $t('ExplorerLang.addressInformation.validatorRewards.validatorMoniker')
                   }}:</span
                 >
                 <div class="validator_status_content">
                   <span class="address_information_detail_option_value">
                     <router-link
-                      v-show="OperatorAddress !== '--' && validatorMoniker !== '--'"
-                      :to="`/staking/${OperatorAddress}`"
-                      >{{ validatorMoniker }}</router-link
+                        v-show="OperatorAddress !== '--' && validatorMoniker !== '--'"
+                        :to="`/staking/${OperatorAddress}`"
+                    >{{ validatorMoniker }}</router-link
                     >
                     <span v-show="OperatorAddress === '--' || validatorMoniker === '--'">{{
-                      validatorMoniker
-                    }}</span>
+                        validatorMoniker
+                      }}</span>
                   </span>
                   <span
-                    class="address_information_address_status_active"
-                    v-if="validatorStatus === 'active'"
-                    >{{ $t('ExplorerLang.staking.status.active') }}</span
+                      class="address_information_address_status_active"
+                      v-if="validatorStatus === 'active'"
+                  >{{ $t('ExplorerLang.staking.status.active') }}</span
                   >
                   <span
-                    class="address_information_address_status_candidate"
-                    v-if="validatorStatus === 'candidate'"
-                    >{{ $t('ExplorerLang.staking.status.candidate') }}</span
+                      class="address_information_address_status_candidate"
+                      v-if="validatorStatus === 'candidate'"
+                  >{{ $t('ExplorerLang.staking.status.candidate') }}</span
                   >
                   <span
-                    class="address_information_address_status_jailed"
-                    v-if="validatorStatus === 'jailed'"
-                    >{{ $t('ExplorerLang.staking.status.jailed') }}</span
+                      class="address_information_address_status_jailed"
+                      v-if="validatorStatus === 'jailed'"
+                  >{{ $t('ExplorerLang.staking.status.jailed') }}</span
                   >
                 </div>
               </li>
               <li class="address_information_detail_option" style="margin-top: 0.05rem">
                 <span class="address_information_detail_option_name"
-                  >{{
+                >{{
                     $t('ExplorerLang.addressInformation.validatorRewards.operatorAddress')
                   }}:</span
                 >
                 <span class="address_information_detail_option_value">
                   <router-link
-                    v-show="OperatorAddress !== '--'"
-                    :to="`/staking/${OperatorAddress}`"
-                    >{{ OperatorAddress }}</router-link
+                      v-show="OperatorAddress !== '--'"
+                      :to="`/staking/${OperatorAddress}`"
+                  >{{ OperatorAddress }}</router-link
                   >
                   <span v-show="OperatorAddress === '--'">{{ OperatorAddress }}</span>
                 </span>
@@ -353,188 +354,109 @@
         </div>
       </div>
       <div
-        class="address_nft_content"
-        v-if="moduleSupport('103', prodConfig.navFuncList)"
-        v-show="isNftInfo"
+          class="address_nft_content"
+          v-if="moduleSupport('103', prodConfig.navFuncList)"
+          v-show="isNftInfo"
       >
-        <div class="content_title">
-          {{ $t('ExplorerLang.addressDetail.assets') }}
-          <span> {{ this.assetCount }}</span>
-        </div>
-        <el-table
-          class="table"
-          :data="assetArray"
-          row-key="nft_id"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
+        <!--				<div class="content_title">
+                  {{ $t('ExplorerLang.addressDetail.assets') }}
+                  <span> {{ this.assetCount }}</span>
+                </div>-->
+        <list-component
+            :is-loading="assetLoading"
+            :list-data="assetArray"
+            :column-list="assetColumnArray"
+            :pagination="{pageSize:Number(assetPageSize),dataCount:assetCount,pageNum:Number(assetPageNum)}"
+            @pageChange="assetPageChange"
         >
-          <el-table-column
-            :min-width="ColumnMinWidth.denom"
-            :label="$t('ExplorerLang.table.denom')"
-            prop="denomName"
-          ></el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.tokenId"
-            :label="$t('ExplorerLang.table.tokenName')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                :content="scope.row.nftName"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.nftName)"
-              >
-                <router-link
-                  v-if="formatAddress(scope.row.nftName) != '--'"
-                  :to="`/nft/token?denom=${scope.row.denomId}&&tokenId=${scope.row.id}`"
-                >
-                  {{ formatAddress(scope.row.nftName) }}
-                </router-link>
-                <span v-else>{{ '--' }}</span>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.tokenId"
-            :label="$t('ExplorerLang.table.tokenId')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                :content="scope.row.id"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.id)"
-              >
-                <router-link :to="`/nft/token?denom=${scope.row.denomId}&&tokenId=${scope.row.id}`">
-                  {{ formatAddress(scope.row.id) }}
-                </router-link>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :width="ColumnMinWidth.schema"
-            :label="$t('ExplorerLang.table.data')"
-            prop="tokenData"
-          >
-            <template slot-scope="scope">
-              <LargeString
-                :isShowPre="Tools.isJSON(scope.row.tokenData)"
-                :key="scope.row.nftName + scope.row.id + nftKey"
-                v-if="scope.row.tokenData"
-                :text="scope.row.tokenData"
-                mode="cell"
-                :minHeight="LargeStringMinHeight"
-                :lineHeight="LargeStringLineHeight"
-              />
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.URI"
-            :label="$t('ExplorerLang.table.uri')"
-            prop="tokenUri"
-          >
-            <template slot-scope="scope">
-              <a
-                v-if="scope.row.tokenUri"
-                :download="scope.row.tokenUri"
-                :href="scope.row.tokenUri"
-                target="_blank"
-                >{{ scope.row.tokenUri }}</a
-              >
-              <span v-else>--</span>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination_content" v-show="assetCount > assetPageSize">
-          <m-pagination
-            :page-size="assetPageSize"
-            :total="assetCount"
-            :page="assetPageNum"
-            :page-change="assetPageChange"
-          >
-          </m-pagination>
-        </div>
+          <template v-slot:txCount>
+            <tx-count-component
+                :title="assetCount > 1 ? $t('ExplorerLang.nftAsset.subTitles') : $t('ExplorerLang.nftAsset.subTitle')"
+                :icon="'iconNFT'" :tx-count="assetCount"></tx-count-component>
+          </template>
+        </list-component>
       </div>
 
       <div
-        class="consumer_transaction_content"
-        v-if="moduleSupport('105', prodConfig.navFuncList)"
-        v-show="isIservice"
+          class="consumer_transaction_content"
+          v-if="moduleSupport('105', prodConfig.navFuncList)"
+          v-show="isIservice"
       >
         <div class="content_title">
           {{ $t('ExplorerLang.addressDetail.consumerTitle') }}
         </div>
         <el-table
-          class="table"
-          :data="consumerTxList"
-          row-key="txHash"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-          :span-method="arraySpanMethod"
+            class="table"
+            :data="consumerTxList"
+            row-key="txHash"
+            :empty-text="$t('ExplorerLang.table.emptyDescription')"
+            :span-method="arraySpanMethod"
         >
           <el-table-column
-            :min-width="ColumnMinWidth.serviceName"
-            :label="$t('ExplorerLang.table.serviceName')"
+              :min-width="ColumnMinWidth.serviceName"
+              :label="$t('ExplorerLang.table.serviceName')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                v-if="!scope.row.isChildren"
-                :content="scope.row.serviceName"
-                placement="top"
+                  v-if="!scope.row.isChildren"
+                  :content="scope.row.serviceName"
+                  placement="top"
               >
                 <router-link :to="`/service?serviceName=${scope.row.serviceName}`">
                   {{ scope.row.serviceName }}
                 </router-link>
               </el-tooltip>
               <span class="serviceNameText" v-if="scope.row.isChildren && scope.row.index == 0">{{
-                getRespondCount(scope.row.count)
-              }}</span>
+                  getRespondCount(scope.row.count)
+                }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            class-name="tx_type"
-            :width="ColumnMinWidth.minTxType"
-            :label="$t('ExplorerLang.table.txType')"
-            prop="txType"
+              class-name="tx_type"
+              :width="ColumnMinWidth.minTxType"
+              :label="$t('ExplorerLang.table.txType')"
+              prop="txType"
           ></el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.state"
-            :label="$t('ExplorerLang.table.requestStatus')"
+              :min-width="ColumnMinWidth.state"
+              :label="$t('ExplorerLang.table.requestStatus')"
           >
             <template slot-scope="scope">
               <div v-if="scope.row.state" class="consumer_transaction_content_available">
                 <span
-                  class="consumer_transaction_content_available_icon"
-                  :style="`background:${getBgColorWithState(scope.row.state)}`"
+                    class="consumer_transaction_content_available_icon"
+                    :style="`background:${getBgColorWithState(scope.row.state)}`"
                 ></span>
                 <span>{{
-                  scope.row.state === 'Running'
-                    ? '--'
-                    : $t('ExplorerLang.table.' + getContentWithState(scope.row.state))
-                }}</span>
+                    scope.row.state === 'Running'
+                        ? '--'
+                        : $t('ExplorerLang.table.' + getContentWithState(scope.row.state))
+                  }}</span>
               </div>
               <div v-else>--</div>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.blockListHeight"
-            :label="$t('ExplorerLang.table.block')"
+              :min-width="ColumnMinWidth.blockListHeight"
+              :label="$t('ExplorerLang.table.block')"
           >
             <template slot-scope="scope">
               <router-link :to="`/block/${scope.row.blockHeight}`"
-                >{{ scope.row.blockHeight }}
+              >{{ scope.row.blockHeight }}
               </router-link>
             </template>
           </el-table-column>
           <el-table-column
-            class-name="hash_status"
-            :min-width="ColumnMinWidth.addressTxHash"
-            :label="$t('ExplorerLang.table.txHash')"
+              class-name="hash_status"
+              :min-width="ColumnMinWidth.addressTxHash"
+              :label="$t('ExplorerLang.table.txHash')"
           >
             <template slot-scope="scope">
               <div class="address_transaction_content_hash">
                 <div class="status">
                   <img
-                    class="status_icon"
-                    :src="
+                      class="status_icon"
+                      :src="
                       require(`../assets/${
                         scope.row.status == TX_STATUS.success ? 'success.png' : 'failed.png'
                       }`)
@@ -552,31 +474,31 @@
             </template>
           </el-table-column>
           <el-table-column
-            class-name="requestId"
-            :min-width="ColumnMinWidth.requestId"
-            :label="$t('ExplorerLang.table.requestId')"
+              class-name="requestId"
+              :min-width="ColumnMinWidth.requestId"
+              :label="$t('ExplorerLang.table.requestId')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                :content="scope.row.requestContextId"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.requestContextId)"
+                  :content="scope.row.requestContextId"
+                  placement="top"
+                  effect="dark"
+                  :disabled="Tools.disabled(scope.row.requestContextId)"
               >
                 <span>{{ formatAddress(scope.row.requestContextId) }}</span>
               </el-tooltip>
             </template>
           </el-table-column>
           <el-table-column
-            class-name="address"
-            :min-width="ColumnMinWidth.address"
-            :label="$t('ExplorerLang.table.provider')"
+              class-name="address"
+              :min-width="ColumnMinWidth.address"
+              :label="$t('ExplorerLang.table.provider')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                v-if="scope.row.txType == TX_TYPE_DISPLAY.respond_service"
-                :content="scope.row.provider"
-                placement="top"
+                  v-if="scope.row.txType == TX_TYPE_DISPLAY.respond_service"
+                  :content="scope.row.provider"
+                  placement="top"
               >
                 <router-link :to="`/address/${scope.row.provider}`">
                   {{ formatAddress(scope.row.provider) }}
@@ -584,9 +506,9 @@
               </el-tooltip>
               <div v-if="scope.row.txType == TX_TYPE_DISPLAY.call_service">
                 <el-tooltip
-                  v-if="(scope.row.provider || []).length === 1"
-                  :content="scope.row.provider[0]"
-                  placement="top"
+                    v-if="(scope.row.provider || []).length === 1"
+                    :content="scope.row.provider[0]"
+                    placement="top"
                 >
                   <router-link :to="`/address/${scope.row.provider[0]}`">
                     {{ formatAddress(scope.row.provider[0]) }}
@@ -601,8 +523,8 @@
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.timestamp')"
+              :min-width="ColumnMinWidth.time"
+              :label="$t('ExplorerLang.table.timestamp')"
           >
             <template slot-scope="scope">
               <span>{{ `${scope.row.time}` }}</span>
@@ -611,30 +533,30 @@
         </el-table>
         <div class="pagination_content" v-show="consumerTxCount > consumerTxPageSize">
           <m-pagination
-            :page-size="consumerTxPageSize"
-            :total="consumerTxCount"
-            :page="consumerTxPageNum"
-            :page-change="consumerTxPageChange"
+              :page-size="consumerTxPageSize"
+              :total="consumerTxCount"
+              :page="consumerTxPageNum"
+              :page-change="consumerTxPageChange"
           >
           </m-pagination>
         </div>
       </div>
       <div
-        class="provider_transaction_content"
-        v-if="moduleSupport('105', prodConfig.navFuncList)"
-        v-show="isIservice"
+          class="provider_transaction_content"
+          v-if="moduleSupport('105', prodConfig.navFuncList)"
+          v-show="isIservice"
       >
         <div class="content_title">
           {{ $t('ExplorerLang.addressDetail.providerTitle') }}
         </div>
         <el-table
-          class="table"
-          :data="providerTxList"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
+            class="table"
+            :data="providerTxList"
+            :empty-text="$t('ExplorerLang.table.emptyDescription')"
         >
           <el-table-column
-            :min-width="ColumnMinWidth.serviceName"
-            :label="$t('ExplorerLang.table.serviceName')"
+              :min-width="ColumnMinWidth.serviceName"
+              :label="$t('ExplorerLang.table.serviceName')"
           >
             <template slot-scope="scope">
               <el-tooltip :content="scope.row.serviceName" placement="top">
@@ -645,8 +567,8 @@
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.respondTimes"
-            :label="$t('ExplorerLang.table.respondTimes')"
+              :min-width="ColumnMinWidth.respondTimes"
+              :label="$t('ExplorerLang.table.respondTimes')"
           >
             <template slot-scope="scope">
               <router-link :to="`/service/respond/${scope.row.serviceName}/${address}`">
@@ -655,18 +577,18 @@
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.available"
-            :label="$t('ExplorerLang.table.isAvailable')"
+              :min-width="ColumnMinWidth.available"
+              :label="$t('ExplorerLang.table.isAvailable')"
           >
             <template slot-scope="scope">
               <div class="provider_transaction_content_available">
                 <span
-                  class="provider_transaction_content_available_icon"
-                  :style="`background:${scope.row.isAvailable ? '#B1E96E' : '#C4C4C4'}`"
+                    class="provider_transaction_content_available_icon"
+                    :style="`background:${scope.row.isAvailable ? '#B1E96E' : '#C4C4C4'}`"
                 ></span>
                 <span class="provider_transaction_content_available_status">{{
-                  scope.row.isAvailable
-                }}</span>
+                    scope.row.isAvailable
+                  }}</span>
               </div>
             </template>
           </el-table-column>
@@ -681,24 +603,24 @@
 								  </template>
 							  </el-table-column> -->
           <el-table-column
-            :min-width="ColumnMinWidth.qos"
-            :label="$t('ExplorerLang.table.minBlock')"
+              :min-width="ColumnMinWidth.qos"
+              :label="$t('ExplorerLang.table.minBlock')"
           >
             <template slot-scope="scope">
               <span>{{ `${scope.row.qos} ${$t('ExplorerLang.unit.blocks')}` }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.bindTime')"
+              :min-width="ColumnMinWidth.time"
+              :label="$t('ExplorerLang.table.bindTime')"
           >
             <template slot-scope="scope">
               <span>{{ `${scope.row.time}` }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            :width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.disabledTime')"
+              :width="ColumnMinWidth.time"
+              :label="$t('ExplorerLang.table.disabledTime')"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.isAvailable ? '--' : scope.row.unbindTime }}</span>
@@ -707,10 +629,10 @@
         </el-table>
         <div class="pagination_content" v-show="providerTxCount > providerTxPageSize">
           <m-pagination
-            :page-size="providerTxPageSize"
-            :total="providerTxCount"
-            :page="providerTxPageNum"
-            :page-change="providerTxPageChange"
+              :page-size="providerTxPageSize"
+              :total="providerTxCount"
+              :page="providerTxPageNum"
+              :page-change="providerTxPageChange"
           >
           </m-pagination>
         </div>
@@ -718,19 +640,19 @@
           {{ $t('ExplorerLang.addressDetail.respondRecord') }}
         </div>
         <el-table
-          class="table"
-          :data="respondRecordList"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
+            class="table"
+            :data="respondRecordList"
+            :empty-text="$t('ExplorerLang.table.emptyDescription')"
         >
           <el-table-column
-            :min-width="ColumnMinWidth.serviceName"
-            :label="$t('ExplorerLang.table.serviceName')"
+              :min-width="ColumnMinWidth.serviceName"
+              :label="$t('ExplorerLang.table.serviceName')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                v-if="scope.row.serviceName"
-                :content="scope.row.serviceName"
-                placement="top"
+                  v-if="scope.row.serviceName"
+                  :content="scope.row.serviceName"
+                  placement="top"
               >
                 <router-link :to="`/service?serviceName=${scope.row.serviceName}`">
                   {{ scope.row.serviceName }}
@@ -740,22 +662,22 @@
             </template>
           </el-table-column>
           <el-table-column
-            class-name="tx_type"
-            :width="ColumnMinWidth.txType"
-            :label="$t('ExplorerLang.table.txType')"
-            prop="type"
+              class-name="tx_type"
+              :width="ColumnMinWidth.txType"
+              :label="$t('ExplorerLang.table.txType')"
+              prop="type"
           ></el-table-column>
           <el-table-column
-            class-name="hash_status"
-            :min-width="ColumnMinWidth.respondHash"
-            :label="$t('ExplorerLang.table.respondHash')"
+              class-name="hash_status"
+              :min-width="ColumnMinWidth.respondHash"
+              :label="$t('ExplorerLang.table.respondHash')"
           >
             <template slot-scope="scope">
               <div class="respond_transaction_content_hash">
                 <div class="status">
                   <img
-                    class="status_icon"
-                    :src="
+                      class="status_icon"
+                      :src="
                       require(`../assets/${
                         scope.row.respondStatus == TX_STATUS.success ? 'success.png' : 'failed.png'
                       }`)
@@ -773,48 +695,48 @@
             </template>
           </el-table-column>
           <el-table-column
-            class-name="requestId"
-            :min-width="ColumnMinWidth.requestId"
-            :label="$t('ExplorerLang.table.requestId')"
+              class-name="requestId"
+              :min-width="ColumnMinWidth.requestId"
+              :label="$t('ExplorerLang.table.requestId')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                :content="scope.row.requestContextId"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.requestContextId)"
+                  :content="scope.row.requestContextId"
+                  placement="top"
+                  effect="dark"
+                  :disabled="Tools.disabled(scope.row.requestContextId)"
               >
                 <span>{{ formatAddress(scope.row.requestContextId) }}</span>
               </el-tooltip>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.blockListHeight"
-            :label="$t('ExplorerLang.table.block')"
+              :min-width="ColumnMinWidth.blockListHeight"
+              :label="$t('ExplorerLang.table.block')"
           >
             <template slot-scope="scope">
-              <router-link :to="`/block/${scope.row.height}`">{{ scope.row.height }} </router-link>
+              <router-link :to="`/block/${scope.row.height}`">{{ scope.row.height }}</router-link>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.timestamp')"
-            prop="time"
+              :min-width="ColumnMinWidth.time"
+              :label="$t('ExplorerLang.table.timestamp')"
+              prop="time"
           >
             <template slot-scope="scope">
               <span>{{ Tools.formatLocalTime(scope.row.time) }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            class-name="address"
-            :min-width="ColumnMinWidth.address"
-            :label="$t('ExplorerLang.table.consumer')"
+              class-name="address"
+              :min-width="ColumnMinWidth.address"
+              :label="$t('ExplorerLang.table.consumer')"
           >
             <template slot-scope="scope">
               <el-tooltip :content="scope.row.consumer" placement="top">
                 <router-link
-                  v-if="scope.row.consumer && scope.row.consumer.length"
-                  :to="`/address/${scope.row.consumer}`"
+                    v-if="scope.row.consumer && scope.row.consumer.length"
+                    :to="`/address/${scope.row.consumer}`"
                 >
                   {{ formatAddress(scope.row.consumer) }}
                 </router-link>
@@ -823,23 +745,23 @@
             </template>
           </el-table-column>
           <el-table-column
-            class-name="hash_status"
-            :min-width="ColumnMinWidth.requestHash"
-            :label="$t('ExplorerLang.table.requestHash')"
+              class-name="hash_status"
+              :min-width="ColumnMinWidth.requestHash"
+              :label="$t('ExplorerLang.table.requestHash')"
           >
             <template slot-scope="scope">
               <div class="address_transaction_content_hash">
                 <div class="status">
                   <img
-                    v-if="scope.row.requestHash && scope.row.requestHash != '--'"
-                    class="status_icon"
-                    src="../assets/success.png"
+                      v-if="scope.row.requestHash && scope.row.requestHash != '--'"
+                      class="status_icon"
+                      src="../assets/success.png"
                   />
                 </div>
                 <el-tooltip
-                  v-if="scope.row.requestHash && scope.row.requestHash != '--'"
-                  :content="scope.row.requestHash"
-                  placement="top"
+                    v-if="scope.row.requestHash && scope.row.requestHash != '--'"
+                    :content="scope.row.requestHash"
+                    placement="top"
                 >
                   <div>
                     <router-link :to="`/tx?txHash=${scope.row.requestHash}`">
@@ -854,56 +776,56 @@
         </el-table>
         <div class="pagination_content" v-show="respondRecordCount > respondRecordPageSize">
           <m-pagination
-            :page-size="respondRecordPageSize"
-            :total="respondRecordCount"
-            :page="respondRecordPageNum"
-            :page-change="respondRecordPageChange"
+              :page-size="respondRecordPageSize"
+              :total="respondRecordCount"
+              :page="respondRecordPageNum"
+              :page-change="respondRecordPageChange"
           >
           </m-pagination>
         </div>
       </div>
 
       <div
-        class="address_content"
-        v-if="moduleSupport('106', prodConfig.navFuncList)"
-        v-show="isIdentity"
+          class="address_content"
+          v-if="moduleSupport('106', prodConfig.navFuncList)"
+          v-show="isIdentity"
       >
         <div class="content_title">
           {{ $t('ExplorerLang.addressDetail.identities') }}
         </div>
         <el-table
-          class="table"
-          :data="identityList"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
+            class="table"
+            :data="identityList"
+            :empty-text="$t('ExplorerLang.table.emptyDescription')"
         >
           <el-table-column
-            :min-width="ColumnMinWidth.identity"
-            :label="$t('ExplorerLang.table.identity')"
+              :min-width="ColumnMinWidth.identity"
+              :label="$t('ExplorerLang.table.identity')"
           >
             <template slot-scope="scope">
-              <router-link :to="`/identity/${scope.row.id}`">{{ scope.row.id }} </router-link>
+              <router-link :to="`/identity/${scope.row.id}`">{{ scope.row.id }}</router-link>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.txHash"
-            :label="$t('ExplorerLang.table.txHash')"
+              :min-width="ColumnMinWidth.txHash"
+              :label="$t('ExplorerLang.table.txHash')"
           >
             <template slot-scope="scope">
               <el-tooltip
-                :content="scope.row.txHash"
-                placement="top"
-                :disabled="!Tools.isValid(scope.row.txHash)"
+                  :content="scope.row.txHash"
+                  placement="top"
+                  :disabled="!Tools.isValid(scope.row.txHash)"
               >
                 <router-link :to="`/tx?txHash=${scope.row.txHash}`"
-                  >{{ formatTxHash(scope.row.txHash) }}
+                >{{ formatTxHash(scope.row.txHash) }}
                 </router-link>
               </el-tooltip>
             </template>
           </el-table-column>
           <el-table-column
-            :min-width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.timestamp')"
-            prop="time"
+              :min-width="ColumnMinWidth.time"
+              :label="$t('ExplorerLang.table.timestamp')"
+              prop="time"
           >
             <template slot-scope="scope">
               <span>{{ scope.row.time }}</span>
@@ -912,10 +834,10 @@
         </el-table>
         <div class="pagination_content" v-show="identityCount > identityPageSize">
           <m-pagination
-            :page-size="identityPageSize"
-            :total="identityCount"
-            :page="identityPageNum"
-            :page-change="identityPageChange"
+              :page-size="identityPageSize"
+              :total="identityCount"
+              :page="identityPageNum"
+              :page-change="identityPageChange"
           >
           </m-pagination>
         </div>
@@ -953,49 +875,49 @@
 				</div>-->
         <!--				<TxListComponent v-if="address" :txData="txList" :address="address"></TxListComponent>-->
         <list-component
-          :is-show-token-type="true"
-          :is-loading="isLoading"
-          :token-symbol="mainTokenSymbol"
-          :list-data="transactionArray"
-          :column-list="txColumnList"
-          :pagination="{
+            :is-show-token-type="true"
+            :is-loading="isLoading"
+            :token-symbol="mainTokenSymbol"
+            :list-data="transactionArray"
+            :column-list="txColumnList"
+            :pagination="{
             pageSize: Number(pageSize),
             dataCount: totalTxNumber,
             pageNum: Number(pageNum),
           }"
-          @pageChange="pageChange"
+            @pageChange="pageChange"
         >
           <template v-slot:msgType>
             <tabs-component
-              :tab-list="txTypeOption"
-              @onSelectMagType="getFilterTxs"
+                :tab-list="txTypeOption"
+                @onSelectMagType="getFilterTxs"
             ></tabs-component>
           </template>
           <template v-slot:resetButton>
             <tx-reset-button-component
-              @resetParams="resetFilterCondition"
+                @resetParams="resetFilterCondition"
             ></tx-reset-button-component>
           </template>
 
           <template v-slot:datePicket>
             <tx-status-tabs-components
-              :is-show-date-picker="false"
-              @onChangTxStatus="changeTxStatus"
-              @onChangeDate="changeTime"
-              ref="statusDatePicker"
+                :is-show-date-picker="false"
+                @onChangTxStatus="changeTxStatus"
+                @onChangeDate="changeTime"
+                ref="statusDatePicker"
             ></tx-status-tabs-components>
           </template>
           <template v-slot:txCount>
             <!-- todo start -->
             <div class="txCountWrap">
               <tx-count-component
-                :title="$t('ExplorerLang.transactions.txs')"
-                :icon="'iconTrainsaction'"
-                :tx-count="totalTxNumber"
+                  :title="$t('ExplorerLang.transactions.txs')"
+                  :icon="'iconTrainsaction'"
+                  :tx-count="totalTxNumber"
               >
-	              <template v-slot:displayShowAddressSendTx>
-		              <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
-	              </template>
+                <template v-slot:displayShowAddressSendTx>
+                  <address-send-and-receive-tx v-if="isShowSendAndReceiveTxComponent"></address-send-and-receive-tx>
+                </template>
               </tx-count-component>
             </div>
             <!-- todo end -->
@@ -1004,32 +926,32 @@
       </div>
       <!-- bsn ddc -->
       <div
-        class="address_transaction_content"
-        v-if="moduleSupport('117', prodConfig.navFuncList)"
-        v-show="isDDC"
+          class="address_transaction_content"
+          v-if="moduleSupport('117', prodConfig.navFuncList)"
+          v-show="isDDC"
       >
         <div class="content_title">
           {{ $t('ExplorerLang.ddc.mainTitle') }}
         </div>
         <list-component
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-          :list-data="ddcList"
-          :column-list="ddcListColumn"
-          :pagination="{
+            :empty-text="$t('ExplorerLang.table.emptyDescription')"
+            :list-data="ddcList"
+            :column-list="ddcListColumn"
+            :pagination="{
             pageSize: Number(ddcPageSize),
             dataCount: ddcCount,
             pageNum: Number(ddcPageNum),
           }"
-          @pageChange="ddcPageChange"
+            @pageChange="ddcPageChange"
         />
       </div>
       <!-- energy asset -->
       <div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
         <list-component
-          :is-loading="isLoading"
-          :list-data="energyAssetData"
-          :column-list="energyAssetColumn"
-          :pagination="{ pageSize: 5, dataCount: 0, pageNum: 1 }"
+            :is-loading="isLoading"
+            :list-data="energyAssetData"
+            :column-list="energyAssetColumn"
+            :pagination="{ pageSize: 5, dataCount: 0, pageNum: 1 }"
         >
         </list-component>
       </div>
@@ -1069,8 +991,8 @@ import BigNumber from 'bignumber.js';
 import moveDecimal from 'move-decimal-point';
 import Tools from '../util/Tools';
 import MPagination from './common/MPagination';
-import { TxHelper } from '../helper/TxHelper';
-import { moduleSupport } from '../helper/ModulesHelper';
+import {TxHelper} from '../helper/TxHelper';
+import {moduleSupport} from '../helper/ModulesHelper';
 import TxListComponent from './common/TxListComponent';
 import prodConfig from '../productionConfig';
 import Constant, {
@@ -1087,9 +1009,9 @@ import LargeString from './common/LargeString';
 import ListComponent from './common/ListComponent';
 import txCommonTable from './tableListColumnConfig/txCommonTable';
 import txCommonLatestTable from './tableListColumnConfig/txCommonLatestTable';
-import { needAddColumn } from './tableListColumnConfig/allTxTableColumnConfig';
+import {needAddColumn} from './tableListColumnConfig/allTxTableColumnConfig';
 import TabsComponent from './common/TabsComponent';
-import { getAmountByTx, getDenomMap, getDenomTheme } from '../helper/txListAmoutHelper';
+import {getAmountByTx, getDenomMap, getDenomTheme} from '../helper/txListAmoutHelper';
 import TxStatusTabsComponents from './common/TxStatusTabsComponents';
 import TxCountComponent from './TxCountComponent';
 import MClip from './common/MClip';
@@ -1097,13 +1019,14 @@ import SignerColunmn from './tableListColumnConfig/SignerColunmn';
 import TxResetButtonComponent from './common/TxResetButtonComponent';
 import ddcListColumnConfig from './tableListColumnConfig/ddcListColumnConfig';
 import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
-import { energyAsset, assetInfo, nftCount, ddc, identity, iService, tx } from './ownerDetail/lib';
+import {energyAsset, assetInfo, nftCount, ddc, identity, iService, tx} from './ownerDetail/lib';
 import AddressSendAndReceiveTx from "@/components/common/AddressSendAndReceiveTx";
+import addressDetailNftTabColumnConfig from "@/components/tableListColumnConfig/addressDetailNftTabColumnConfig";
 
 export default {
   name: 'OwnerDetail',
   components: {
-	  AddressSendAndReceiveTx,
+    AddressSendAndReceiveTx,
     TxResetButtonComponent,
     MClip,
     TxCountComponent,
@@ -1117,6 +1040,7 @@ export default {
   },
   data() {
     return {
+      assetLoading: false,
       feeDecimals: decimals.fee,
       isShowDenom: prodConfig.fee.isShowDenom,
       isShowFee: prodConfig.fee.isShowFee,
@@ -1242,7 +1166,8 @@ export default {
       energyAssetData: [],
       energyAssetColumn,
       isEnergyAsset: false,
-	    isShowSendAndReceiveTxComponent: false
+      isShowSendAndReceiveTxComponent: false,
+      assetColumnArray: [],
     };
   },
   watch: {
@@ -1273,9 +1198,11 @@ export default {
   async created() {
     this.mainToken = await getMainToken();
     await this.getConfigTokenData();
+    this.assetColumnArray = addressDetailNftTabColumnConfig
   },
   async mounted() {
-		this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
+
+    this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
     this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
     this.ddcListColumn = ddcListColumnConfig;
     await this.getTxTypeData();
@@ -1320,7 +1247,8 @@ export default {
       this.getTxByAddressCount();
       this.getTxByAddress();
     },
-    changeTime() {},
+    changeTime() {
+    },
     async getTxTypeData() {
       try {
         const res = await getTxType();
@@ -1338,11 +1266,11 @@ export default {
     getTabList() {
       this.tabList = [];
       if (moduleSupport('116', prodConfig.navFuncList)) {
-        this.tabList.push({ ...energyAsset });
+        this.tabList.push({...energyAsset});
         this.getEnergyAssetList();
       }
       if (moduleSupport('107', prodConfig.navFuncList)) {
-        this.tabList.push({ ...assetInfo });
+        this.tabList.push({...assetInfo});
         this.getAddressInformation();
         this.getRewardsItems();
         this.getAssetList();
@@ -1350,22 +1278,22 @@ export default {
         this.getUnBondingDelegationList();
       }
       if (moduleSupport('103', prodConfig.navFuncList)) {
-        this.tabList.push({ ...nftCount });
+        this.tabList.push({...nftCount});
         this.getNftListCount();
         this.getNftList();
       }
       if (moduleSupport('117', prodConfig.navFuncList)) {
-        this.tabList.push({ ...ddc });
+        this.tabList.push({...ddc});
         this.getDdcListCount();
         this.getDdcList();
       }
       if (moduleSupport('106', prodConfig.navFuncList)) {
-        this.tabList.push({ ...identity });
+        this.tabList.push({...identity});
         this.getIdentityListCount();
         this.getIdentityList();
       }
       if (moduleSupport('105', prodConfig.navFuncList)) {
-        this.tabList.push({ ...iService });
+        this.tabList.push({...iService});
         this.getRspondRecordListCount();
         this.getRspondRecordList();
         this.getProviderTxListCount();
@@ -1373,7 +1301,7 @@ export default {
         this.getConsumerTxListCount();
         this.getConsumerTxList();
       }
-      this.tabList.push({ ...tx });
+      this.tabList.push({...tx});
       this.tabList[0].isActive = true;
       this.showAndHideByModule();
     },
@@ -1429,14 +1357,16 @@ export default {
     },
     async getNftList() {
       try {
+        this.assetLoading = true
         const nftData = await getNfts(
-          this.assetPageNum,
-          this.assetPageSize,
-          false,
-          '',
-          '',
-          this.$route.params.param
+            this.assetPageNum,
+            this.assetPageSize,
+            false,
+            '',
+            '',
+            this.$route.params.param
         );
+        this.assetLoading = false
         if (nftData && nftData.data) {
           this.assetArray = nftData.data.map((item) => {
             return {
@@ -1451,6 +1381,7 @@ export default {
           });
         }
       } catch (e) {
+        this.assetLoading = false
         console.error(e);
       }
     },
@@ -1472,10 +1403,10 @@ export default {
     async getIdentityList() {
       try {
         const res = await getIdentityListByAddress(
-          this.$route.params.param,
-          this.identityPageNum,
-          this.identityPageSize,
-          false
+            this.$route.params.param,
+            this.identityPageNum,
+            this.identityPageSize,
+            false
         );
         if (res?.data?.length > 0) {
           this.identityList = res.data.map((item) => {
@@ -1625,20 +1556,20 @@ export default {
                   requestIdArr.push(item.msg.request_id);
                 }
                 if (
-                  item?.type === TX_TYPE.burn_nft ||
-                  item?.type === TX_TYPE.edit_nft ||
-                  item?.type === TX_TYPE.mint_nft ||
-                  (item?.type === TX_TYPE.transfer_nft && item?.msg?.denom && item?.msg?.id)
+                    item?.type === TX_TYPE.burn_nft ||
+                    item?.type === TX_TYPE.edit_nft ||
+                    item?.type === TX_TYPE.mint_nft ||
+                    (item?.type === TX_TYPE.transfer_nft && item?.msg?.denom && item?.msg?.id)
                 ) {
                   denomIdArr.push(item.msg.denom);
                   nftIdArr.push(item.msg.id);
                 }
 
                 if (
-                  item?.type === TX_TYPE.start_feed ||
-                  item?.type === TX_TYPE.edit_feed ||
-                  item?.type === TX_TYPE.pause_feed ||
-                  (item?.type === TX_TYPE.create_feed && item?.msg?.feed_name && item?.msg?.creator)
+                    item?.type === TX_TYPE.start_feed ||
+                    item?.type === TX_TYPE.edit_feed ||
+                    item?.type === TX_TYPE.pause_feed ||
+                    (item?.type === TX_TYPE.create_feed && item?.msg?.feed_name && item?.msg?.creator)
                 ) {
                   feedNameArr.push(item.msg.feed_name);
                   oracleCreatorArr.push(item.msg.creator);
@@ -1648,74 +1579,74 @@ export default {
                   consumerArr.push(item.msg.consumer);
                 }
                 if (
-                  item?.type === TX_TYPE.create_client ||
-                  (item?.type === TX_TYPE.update_client && item?.msg?.client_id)
+                    item?.type === TX_TYPE.create_client ||
+                    (item?.type === TX_TYPE.update_client && item?.msg?.client_id)
                 ) {
                   clientIdArr.push(item.msg.client_id);
                 }
                 if (
-                  item?.type === TX_TYPE.call_service ||
-                  item?.type === TX_TYPE.respond_service ||
-                  (item?.msg?.consumer && item?.msg?.request_context_id && item?.msg?.service_name)
+                    item?.type === TX_TYPE.call_service ||
+                    item?.type === TX_TYPE.respond_service ||
+                    (item?.msg?.consumer && item?.msg?.request_context_id && item?.msg?.service_name)
                 ) {
                   consumerArr.push(item.msg.consumer);
                   requestContextIdArr.push(item.msg.request_context_id);
                   serviceNameArr.push(item.msg.service_name);
                 }
                 if (
-                  (item?.type === TX_TYPE.issue_denom && item?.msg?.id) ||
-                  item?.msg?.name ||
-                  item?.msg?.sender
+                    (item?.type === TX_TYPE.issue_denom && item?.msg?.id) ||
+                    item?.msg?.name ||
+                    item?.msg?.sender
                 ) {
                   senderArr.push(item.msg.sender);
                   denomIdArr.push(item.msg.id);
                   denomNameArr.push(item.msg.name);
                 }
                 if (
-                  item?.type === TX_TYPE.channel_open_init ||
-                  item?.type === TX_TYPE.channel_open_confirm ||
-                  item?.type === TX_TYPE.channel_open_try ||
-                  (item?.type === TX_TYPE.channel_open_ack &&
-                    item?.msg?.channel_id &&
-                    item?.msg?.port_id)
+                    item?.type === TX_TYPE.channel_open_init ||
+                    item?.type === TX_TYPE.channel_open_confirm ||
+                    item?.type === TX_TYPE.channel_open_try ||
+                    (item?.type === TX_TYPE.channel_open_ack &&
+                        item?.msg?.channel_id &&
+                        item?.msg?.port_id)
                 ) {
                   portIdArr.push(item.msg.port_id);
                   channelIdArr.push(item.msg.channel_id);
                 }
                 if (
-                  item?.type === TX_TYPE.connection_open_init ||
-                  item?.type === TX_TYPE.connection_open_confirm ||
-                  item?.type === TX_TYPE.connection_open_try ||
-                  (item?.type === TX_TYPE.connection_open_ack &&
-                    item?.msg?.connection_id &&
-                    item?.msg?.client_id)
+                    item?.type === TX_TYPE.connection_open_init ||
+                    item?.type === TX_TYPE.connection_open_confirm ||
+                    item?.type === TX_TYPE.connection_open_try ||
+                    (item?.type === TX_TYPE.connection_open_ack &&
+                        item?.msg?.connection_id &&
+                        item?.msg?.client_id)
                 ) {
                   clientIdArr.push(item.msg.client_id);
                   connectionIdArr.push(item.msg.connection_id);
                 }
 
                 if (
-                  item?.type === TX_TYPE.create_record &&
-                  item?.msg?.contents?.length &&
-                  item?.msg?.contents[0]?.digest &&
-                  item?.msg?.contents[0]?.digest_algo
+                    item?.type === TX_TYPE.create_record &&
+                    item?.msg?.contents?.length &&
+                    item?.msg?.contents[0]?.digest &&
+                    item?.msg?.contents[0]?.digest_algo
                 ) {
                   digestArr.push(item.msg.contents[0].digest);
                   digest_algoArr.push(item.msg.contents[0].digest_algo);
                 }
                 if (
-                  item?.type === TX_TYPE.issue_token &&
-                  item?.msg?.symbol &&
-                  item?.msg?.owner &&
-                  item?.msg?.min_unit
+                    item?.type === TX_TYPE.issue_token &&
+                    item?.msg?.symbol &&
+                    item?.msg?.owner &&
+                    item?.msg?.min_unit
                 ) {
                   symbolArr.push(item.msg.symbol);
                   minUnitArr.push(item.msg.min_unit);
                   ownerArr.push(item.msg.owner);
                 }
                 if (
-                  item?.type === TX_TYPE.acknowledge_packet &&
-                  item?.msg?.packet?.data?.receiver
+                    item?.type === TX_TYPE.acknowledge_packet &&
+                    item?.msg?.packet?.data?.receiver
                 ) {
                   receiverArr.push(item.msg.packet.data.receiver);
                 }
@@ -1724,48 +1655,48 @@ export default {
                   ownerArr.push(item.msg.owner);
                 }
                 if (
-                  item?.type === TX_TYPE.transfer_token_owner &&
-                  item?.msg?.symbol &&
-                  item?.msg?.dst_owner &&
-                  item?.msg?.src_owner
+                    item?.type === TX_TYPE.transfer_token_owner &&
+                    item?.msg?.symbol &&
+                    item?.msg?.dst_owner &&
+                    item?.msg?.src_owner
                 ) {
                   symbolArr.push(item.msg.symbol);
                   dstOwnerArr.push(item.msg.dst_owner);
                   srcOwnerArr.push(item.msg.src_owner);
                 }
                 if (
-                  item?.type === TX_TYPE.mint_token &&
-                  item?.msg?.owner &&
-                  item?.msg?.symbol &&
-                  item?.msg?.amount &&
-                  item?.msg?.to
+                    item?.type === TX_TYPE.mint_token &&
+                    item?.msg?.owner &&
+                    item?.msg?.symbol &&
+                    item?.msg?.amount &&
+                    item?.msg?.to
                 ) {
                   symbolArr.push(item.msg.symbol);
                   ownerArr.push(item.msg.owner);
                 }
                 if (
-                  item?.type === TX_TYPE.burn_token &&
-                  item?.msg?.sender &&
-                  item?.msg?.symbol &&
-                  item?.msg?.amount
+                    item?.type === TX_TYPE.burn_token &&
+                    item?.msg?.sender &&
+                    item?.msg?.symbol &&
+                    item?.msg?.amount
                 ) {
                   symbolArr.push(item.msg.symbol);
                   senderArr.push(item.msg.sender);
                 }
                 if (
-                  item?.type === TX_TYPE.vote &&
-                  item?.msg?.option &&
-                  item?.msg?.proposal_id &&
-                  item?.msg?.voter
+                    item?.type === TX_TYPE.vote &&
+                    item?.msg?.option &&
+                    item?.msg?.proposal_id &&
+                    item?.msg?.voter
                 ) {
                   proposalIdArr.push(item.msg.proposal_id);
                   optionArr.push(item.msg.option);
                   voterArr.push(item.msg.voter);
                 }
                 if (
-                  item?.type === TX_TYPE.deposit &&
-                  item?.msg?.depositor &&
-                  item?.msg?.proposal_id
+                    item?.type === TX_TYPE.deposit &&
+                    item?.msg?.depositor &&
+                    item?.msg?.proposal_id
                 ) {
                   proposalIdArr.push(item.msg.proposal_id);
                   depositorArr.push(item.msg.depositor);
@@ -1774,12 +1705,12 @@ export default {
                   title = item.msg.content.title;
                 }
                 if (
-                  item?.type === TX_TYPE.pause_request_context ||
-                  item?.type === TX_TYPE.start_request_context ||
-                  item?.type === TX_TYPE.update_request_context ||
-                  (item?.type === TX_TYPE.kill_request_context &&
-                    item?.msg?.consumer &&
-                    item?.msg?.request_context_id)
+                    item?.type === TX_TYPE.pause_request_context ||
+                    item?.type === TX_TYPE.start_request_context ||
+                    item?.type === TX_TYPE.update_request_context ||
+                    (item?.type === TX_TYPE.kill_request_context &&
+                        item?.msg?.consumer &&
+                        item?.msg?.request_context_id)
                 ) {
                   consumerArr.push(item.msg.consumer);
                   requestContextIdArr.push(item.msg.request_context_id);
@@ -1789,23 +1720,23 @@ export default {
                   serviceNameArr.push(item.msg.service_name);
                 }
                 if (
-                  item?.type === TX_TYPE.bind_service ||
-                  item?.type === TX_TYPE.refund_service_deposit ||
-                  item?.type === TX_TYPE.disable_service_binding ||
-                  item?.type === TX_TYPE.enable_service_binding ||
-                  (item?.type === TX_TYPE.update_service_binding &&
-                    item?.msg?.owner &&
-                    item?.msg?.provider &&
-                    item?.msg?.service_name)
+                    item?.type === TX_TYPE.bind_service ||
+                    item?.type === TX_TYPE.refund_service_deposit ||
+                    item?.type === TX_TYPE.disable_service_binding ||
+                    item?.type === TX_TYPE.enable_service_binding ||
+                    (item?.type === TX_TYPE.update_service_binding &&
+                        item?.msg?.owner &&
+                        item?.msg?.provider &&
+                        item?.msg?.service_name)
                 ) {
                   ownerArr.push(item.msg.owner);
                   providerArr.push(item.msg.provider);
                   serviceNameArr.push(item.msg.service_name);
                 }
                 if (
-                  item?.type === TX_TYPE.update_request_context &&
-                  item?.msg?.ex &&
-                  item?.msg?.ex?.service_name
+                    item?.type === TX_TYPE.update_request_context &&
+                    item?.msg?.ex &&
+                    item?.msg?.ex?.service_name
                 ) {
                   serviceNameArr.push(item.msg.service_name);
                 }
@@ -1857,19 +1788,19 @@ export default {
                 requestId = msg.msg.request_id;
               }
               if (
-                msg?.type === TX_TYPE.burn_nft ||
-                msg?.type === TX_TYPE.edit_nft ||
-                msg?.type === TX_TYPE.mint_nft ||
-                (msg?.type === TX_TYPE.transfer_nft && msg?.msg?.denom && msg?.msg?.id)
+                  msg?.type === TX_TYPE.burn_nft ||
+                  msg?.type === TX_TYPE.edit_nft ||
+                  msg?.type === TX_TYPE.mint_nft ||
+                  (msg?.type === TX_TYPE.transfer_nft && msg?.msg?.denom && msg?.msg?.id)
               ) {
                 denomId = msg.msg.denom;
                 nftId = msg.msg.id;
               }
               if (
-                msg?.type === TX_TYPE.start_feed ||
-                msg?.type === TX_TYPE.edit_feed ||
-                msg?.type === TX_TYPE.pause_feed ||
-                (msg?.type === TX_TYPE.create_feed && msg?.msg?.feed_name && msg?.msg?.creator)
+                  msg?.type === TX_TYPE.start_feed ||
+                  msg?.type === TX_TYPE.edit_feed ||
+                  msg?.type === TX_TYPE.pause_feed ||
+                  (msg?.type === TX_TYPE.create_feed && msg?.msg?.feed_name && msg?.msg?.creator)
               ) {
                 feedName = msg.msg.feed_name;
                 oracleCreator = msg.msg.creator;
@@ -1879,66 +1810,66 @@ export default {
                 consumer = msg.msg.consumer;
               }
               if (
-                msg?.type === TX_TYPE.create_client ||
-                (msg?.type === TX_TYPE.update_client && msg?.msg?.client_id)
+                  msg?.type === TX_TYPE.create_client ||
+                  (msg?.type === TX_TYPE.update_client && msg?.msg?.client_id)
               ) {
                 clientId = msg.msg.client_id;
               }
               if (
-                msg?.type === TX_TYPE.call_service ||
-                msg?.type === TX_TYPE.respond_service ||
-                (msg?.msg?.consumer && msg?.msg?.request_context_id && msg?.msg?.service_name)
+                  msg?.type === TX_TYPE.call_service ||
+                  msg?.type === TX_TYPE.respond_service ||
+                  (msg?.msg?.consumer && msg?.msg?.request_context_id && msg?.msg?.service_name)
               ) {
                 consumer = msg.msg.consumer;
                 requestContextId = msg.msg.request_context_id;
                 serviceName = msg.msg.service_name;
               }
               if (
-                (msg?.type === TX_TYPE.issue_denom && msg?.msg?.id) ||
-                msg?.msg?.name ||
-                msg?.msg?.sender
+                  (msg?.type === TX_TYPE.issue_denom && msg?.msg?.id) ||
+                  msg?.msg?.name ||
+                  msg?.msg?.sender
               ) {
                 sender = msg.msg.sender;
                 denomId = msg.msg.id;
                 denomName = msg.msg.name;
               }
               if (
-                msg?.type === TX_TYPE.channel_open_init ||
-                msg?.type === TX_TYPE.channel_open_confirm ||
-                msg?.type === TX_TYPE.channel_open_try ||
-                (msg?.type === TX_TYPE.channel_open_ack &&
-                  msg?.msg?.channel_id &&
-                  msg?.msg?.port_id)
+                  msg?.type === TX_TYPE.channel_open_init ||
+                  msg?.type === TX_TYPE.channel_open_confirm ||
+                  msg?.type === TX_TYPE.channel_open_try ||
+                  (msg?.type === TX_TYPE.channel_open_ack &&
+                      msg?.msg?.channel_id &&
+                      msg?.msg?.port_id)
               ) {
                 portId = msg.msg.port_id;
                 channelId = msg.msg.channel_id;
               }
               if (
-                msg?.type === TX_TYPE.connection_open_init ||
-                msg?.type === TX_TYPE.connection_open_confirm ||
-                msg?.type === TX_TYPE.connection_open_try ||
-                (msg?.type === TX_TYPE.connection_open_ack &&
-                  msg?.msg?.connection_id &&
-                  msg?.msg?.client_id)
+                  msg?.type === TX_TYPE.connection_open_init ||
+                  msg?.type === TX_TYPE.connection_open_confirm ||
+                  msg?.type === TX_TYPE.connection_open_try ||
+                  (msg?.type === TX_TYPE.connection_open_ack &&
+                      msg?.msg?.connection_id &&
+                      msg?.msg?.client_id)
               ) {
                 clientId = msg.msg.client_id;
                 connectionId = msg.msg.connection_id;
               }
 
               if (
-                msg?.type === TX_TYPE.create_record &&
-                msg?.msg?.contents?.length &&
-                msg?.msg?.contents[0]?.digest &&
-                msg?.msg?.contents[0]?.digest_algo
+                  msg?.type === TX_TYPE.create_record &&
+                  msg?.msg?.contents?.length &&
+                  msg?.msg?.contents[0]?.digest &&
+                  msg?.msg?.contents[0]?.digest_algo
               ) {
                 digest = msg.msg.contents[0].digest;
                 digest_algo = msg.msg.contents[0].digest_algo;
               }
               if (
-                msg?.type === TX_TYPE.issue_token &&
-                msg?.msg?.symbol &&
-                msg?.msg?.owner &&
-                msg?.msg?.min_unit
+                  msg?.type === TX_TYPE.issue_token &&
+                  msg?.msg?.symbol &&
+                  msg?.msg?.owner &&
+                  msg?.msg?.min_unit
               ) {
                 symbol = msg.msg.symbol;
                 minUnit = msg.msg.min_unit;
@@ -1952,39 +1883,39 @@ export default {
                 owner = msg.msg.owner;
               }
               if (
-                msg?.type === TX_TYPE.transfer_token_owner &&
-                msg?.msg?.symbol &&
-                msg?.msg?.dst_owner &&
-                msg?.msg?.src_owner
+                  msg?.type === TX_TYPE.transfer_token_owner &&
+                  msg?.msg?.symbol &&
+                  msg?.msg?.dst_owner &&
+                  msg?.msg?.src_owner
               ) {
                 symbol = msg.msg.symbol;
                 dstOwner = msg.msg.dst_owner;
                 srcOwner = msg.msg.src_owner;
               }
               if (
-                msg?.type === TX_TYPE.mint_token &&
-                msg?.msg?.owner &&
-                msg?.msg?.symbol &&
-                msg?.msg?.amount &&
-                msg?.msg?.to
+                  msg?.type === TX_TYPE.mint_token &&
+                  msg?.msg?.owner &&
+                  msg?.msg?.symbol &&
+                  msg?.msg?.amount &&
+                  msg?.msg?.to
               ) {
                 symbol = msg.msg.symbol;
                 owner = msg.msg.owner;
               }
               if (
-                msg?.type === TX_TYPE.burn_token &&
-                msg?.msg?.sender &&
-                msg?.msg?.symbol &&
-                msg?.msg?.amount
+                  msg?.type === TX_TYPE.burn_token &&
+                  msg?.msg?.sender &&
+                  msg?.msg?.symbol &&
+                  msg?.msg?.amount
               ) {
                 symbol = msg.msg.symbol;
                 sender = msg.msg.sender;
               }
               if (
-                msg?.type === TX_TYPE.vote &&
-                msg?.msg?.option &&
-                msg?.msg?.proposal_id &&
-                msg?.msg?.voter
+                  msg?.type === TX_TYPE.vote &&
+                  msg?.msg?.option &&
+                  msg?.msg?.proposal_id &&
+                  msg?.msg?.voter
               ) {
                 proposalId = msg.msg.proposal_id;
                 option = msg.msg.option;
@@ -1998,12 +1929,12 @@ export default {
                 title = msg.msg.content.title;
               }
               if (
-                msg?.type === TX_TYPE.pause_request_context ||
-                msg?.type === TX_TYPE.start_request_context ||
-                msg?.type === TX_TYPE.update_request_context ||
-                (msg?.type === TX_TYPE.kill_request_context &&
-                  msg?.msg?.consumer &&
-                  msg?.msg?.request_context_id)
+                  msg?.type === TX_TYPE.pause_request_context ||
+                  msg?.type === TX_TYPE.start_request_context ||
+                  msg?.type === TX_TYPE.update_request_context ||
+                  (msg?.type === TX_TYPE.kill_request_context &&
+                      msg?.msg?.consumer &&
+                      msg?.msg?.request_context_id)
               ) {
                 consumer = msg.msg.consumer;
                 requestContextId = msg.msg.request_context_id;
@@ -2013,23 +1944,23 @@ export default {
                 serviceName = msg.msg.name;
               }
               if (
-                msg?.type === TX_TYPE.bind_service ||
-                msg?.type === TX_TYPE.refund_service_deposit ||
-                msg?.type === TX_TYPE.disable_service_binding ||
-                msg?.type === TX_TYPE.enable_service_binding ||
-                (msg?.type === TX_TYPE.update_service_binding &&
-                  msg?.msg?.owner &&
-                  msg?.msg?.provider &&
-                  msg?.msg?.service_name)
+                  msg?.type === TX_TYPE.bind_service ||
+                  msg?.type === TX_TYPE.refund_service_deposit ||
+                  msg?.type === TX_TYPE.disable_service_binding ||
+                  msg?.type === TX_TYPE.enable_service_binding ||
+                  (msg?.type === TX_TYPE.update_service_binding &&
+                      msg?.msg?.owner &&
+                      msg?.msg?.provider &&
+                      msg?.msg?.service_name)
               ) {
                 owner = msg.msg.owner;
                 provider = msg.msg.provider;
                 serviceName = msg.msg.service_name;
               }
               if (
-                msg?.type === TX_TYPE.update_request_context &&
-                msg?.msg?.ex &&
-                msg?.msg?.ex?.service_name
+                  msg?.type === TX_TYPE.update_request_context &&
+                  msg?.msg?.ex &&
+                  msg?.msg?.ex?.service_name
               ) {
                 serviceName = msg.msg.ex.service_name;
               }
@@ -2044,8 +1975,8 @@ export default {
                 const res = await converCoin(msg?.msg?.amount);
                 farmAmount = res?.amount;
                 farmAmountDenom = res?.denom.startsWith('lpt')
-                  ? res?.denom.toLocaleUpperCase()
-                  : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+                    ? res?.denom.toLocaleUpperCase()
+                    : this.getAmountUnit(res?.denom.toLocaleUpperCase());
                 farmAmountNativeDenom = msg?.msg?.amount.denom.toLocaleUpperCase();
               }
               sender = msg?.msg?.sender;
@@ -2058,23 +1989,23 @@ export default {
             // farm -> create pool
             if (msg?.type === TX_TYPE.create_pool) {
               const len =
-                msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward)
-                  ? msg?.msg?.total_reward.length
-                  : 0;
+                  msg?.msg?.total_reward && Array.isArray(msg?.msg?.total_reward)
+                      ? msg?.msg?.total_reward.length
+                      : 0;
               if (len > 0) {
                 const res = await converCoin(msg?.msg?.total_reward?.[0]);
                 totalReward1 = Tools.toDecimal(res.amount, 2);
                 totalReward1Denom = res?.denom.startsWith('lpt')
-                  ? res?.denom.toLocaleUpperCase()
-                  : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+                    ? res?.denom.toLocaleUpperCase()
+                    : this.getAmountUnit(res?.denom.toLocaleUpperCase());
                 totalReward1NativeDenom = msg?.msg?.total_reward?.[0].denom.toLocaleUpperCase();
               }
               if (len === 2) {
                 const res = await converCoin(msg?.msg?.total_reward?.[1]);
                 totalReward2 = Tools.toDecimal(res.amount, 2);
                 totalReward2Denom = res?.denom.startsWith('lpt')
-                  ? res?.denom.toLocaleUpperCase()
-                  : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+                    ? res?.denom.toLocaleUpperCase()
+                    : this.getAmountUnit(res?.denom.toLocaleUpperCase());
                 totalReward2NativeDenom = msg?.msg?.total_reward?.[1].denom.toLocaleUpperCase();
               }
               poolCreator = msg.msg.creator;
@@ -2088,8 +2019,8 @@ export default {
                 const res = await converCoin(msg?.msg?.initial_deposit?.[0]);
                 initialDeposit = Tools.toDecimal(res?.amount, 2);
                 farmAmountDenom = res?.denom.startsWith('lpt')
-                  ? res?.denom.toLocaleUpperCase()
-                  : this.getAmountUnit(res?.denom.toLocaleUpperCase());
+                    ? res?.denom.toLocaleUpperCase()
+                    : this.getAmountUnit(res?.denom.toLocaleUpperCase());
                 farmAmountNativeDenom = msg?.msg?.initial_deposit?.[0].denom.toLocaleUpperCase();
               }
             }
@@ -2102,21 +2033,21 @@ export default {
             const addrObj = TxHelper.getFromAndToAddressFromMsg(msg);
             amounts.push(msg ? (sameMsg?.length > 1 ? ' ' : await getAmountByTx(msg, true)) : '--');
             const from =
-              sameMsg?.length > 1
-                ? sameMsgFromAddrArr?.length > 1
-                  ? ' '
-                  : sameMsgFromAddrArr?.length === 1
-                  ? sameMsgFromAddrArr[0]
-                  : '--'
-                : addrObj.from || '--';
+                sameMsg?.length > 1
+                    ? sameMsgFromAddrArr?.length > 1
+                    ? ' '
+                    : sameMsgFromAddrArr?.length === 1
+                        ? sameMsgFromAddrArr[0]
+                        : '--'
+                    : addrObj.from || '--';
             const to =
-              sameMsg?.length > 1
-                ? sameMsgToAddrArr?.length > 1
-                  ? ' '
-                  : sameMsgToAddrArr?.length === 1
-                  ? sameMsgToAddrArr[0]
-                  : '--'
-                : addrObj.to || '--';
+                sameMsg?.length > 1
+                    ? sameMsgToAddrArr?.length > 1
+                    ? ' '
+                    : sameMsgToAddrArr?.length === 1
+                        ? sameMsgToAddrArr[0]
+                        : '--'
+                    : addrObj.to || '--';
             let fromMonikers = ' ';
             let toMonikers = ' ';
             let validatorMoniker;
@@ -2137,9 +2068,9 @@ export default {
             }
             if (this.isShowFee) {
               fees.push(
-                tx.fee && tx.fee.amount && tx.fee.amount.length > 0
-                  ? await converCoin(tx.fee.amount[0])
-                  : '--'
+                  tx.fee && tx.fee.amount && tx.fee.amount.length > 0
+                      ? await converCoin(tx.fee.amount[0])
+                      : '--'
               );
             }
             let isShowMore = false;
@@ -2154,21 +2085,21 @@ export default {
               tx.msgs[0].msg &&
               tx.msgs[0].msg.amount &&
               tx.msgs[0].msg.amount.length > 1
-                ? (isShowMore = true)
-                : '';
+                  ? (isShowMore = true)
+                  : '';
               const denom = tx?.msgs?.[0]?.msg?.amount?.[0]?.denom;
               if (denom !== undefined && /(lpt|lpt-|LPT|LPT-)/g.test(denom)) {
                 isShowMore = true;
               }
             }
             const _contractMethod =
-              (this?.$i18n?.messages &&
-                this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract &&
-                this?.$i18n?.messages &&
-                this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract[
-                  tx?.msgs[0]?.msg?.ex?.ddc_method
-                ]) ||
-              tx?.msgs[0]?.msg?.ex?.ddc_method;
+                (this?.$i18n?.messages &&
+                    this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract &&
+                    this?.$i18n?.messages &&
+                    this?.$i18n?.messages[prodConfig.lang]?.ExplorerLang?.smartContract[
+                        tx?.msgs[0]?.msg?.ex?.ddc_method
+                        ]) ||
+                tx?.msgs[0]?.msg?.ex?.ddc_method;
             this.transactionArray.push({
               txHash: tx.tx_hash,
               blockHeight: tx.height,
@@ -2176,133 +2107,133 @@ export default {
               from,
               author: authorArr?.length > 1 ? ' ' : authorArr?.length === 1 ? authorArr[0] : author,
               provider:
-                providerArr?.length > 1
-                  ? ' '
-                  : providerArr?.length === 1
-                  ? providerArr[0]
-                  : provider,
+                  providerArr?.length > 1
+                      ? ' '
+                      : providerArr?.length === 1
+                      ? providerArr[0]
+                      : provider,
               requestContextId:
-                requestContextIdArr?.length > 1
-                  ? ' '
-                  : requestContextIdArr?.length === 1
-                  ? requestContextIdArr[0]
-                  : requestContextId,
+                  requestContextIdArr?.length > 1
+                      ? ' '
+                      : requestContextIdArr?.length === 1
+                      ? requestContextIdArr[0]
+                      : requestContextId,
               fromMonikers,
               toMonikers,
               receiver:
-                receiverArr?.length > 1
-                  ? ' '
-                  : receiverArr?.length === 1
-                  ? receiverArr[0]
-                  : receiver,
+                  receiverArr?.length > 1
+                      ? ' '
+                      : receiverArr?.length === 1
+                      ? receiverArr[0]
+                      : receiver,
               to,
               portId: portIdArr?.length > 1 ? ' ' : portIdArr?.length === 1 ? portIdArr[0] : portId,
               channelId:
-                channelIdArr?.length > 1
-                  ? ' '
-                  : channelIdArr?.length === 1
-                  ? channelIdArr[0]
-                  : channelId,
+                  channelIdArr?.length > 1
+                      ? ' '
+                      : channelIdArr?.length === 1
+                      ? channelIdArr[0]
+                      : channelId,
               connectionId:
-                connectionIdArr?.length > 1
-                  ? ' '
-                  : connectionIdArr?.length === 1
-                  ? connectionIdArr[0]
-                  : connectionId,
+                  connectionIdArr?.length > 1
+                      ? ' '
+                      : connectionIdArr?.length === 1
+                      ? connectionIdArr[0]
+                      : connectionId,
               validatorMoniker,
               validatorAddress,
               numberOfTo:
-                numberOfToArr?.length > 1
-                  ? ' '
-                  : numberOfToArr?.length === 1
-                  ? numberOfToArr[0]
-                  : numberOfTo,
+                  numberOfToArr?.length > 1
+                      ? ' '
+                      : numberOfToArr?.length === 1
+                      ? numberOfToArr[0]
+                      : numberOfTo,
               requestId:
-                requestIdArr?.length > 1
-                  ? ' '
-                  : requestIdArr?.length === 1
-                  ? requestIdArr[0]
-                  : requestId,
+                  requestIdArr?.length > 1
+                      ? ' '
+                      : requestIdArr?.length === 1
+                      ? requestIdArr[0]
+                      : requestId,
               denomId:
-                denomIdArr?.length > 1 ? ' ' : denomIdArr?.length === 1 ? denomIdArr[0] : denomId,
+                  denomIdArr?.length > 1 ? ' ' : denomIdArr?.length === 1 ? denomIdArr[0] : denomId,
               denomName:
-                denomNameArr?.length > 1
-                  ? ' '
-                  : denomNameArr?.length === 1
-                  ? denomNameArr[0]
-                  : denomName,
+                  denomNameArr?.length > 1
+                      ? ' '
+                      : denomNameArr?.length === 1
+                      ? denomNameArr[0]
+                      : denomName,
               nftId: nftIdArr?.length > 1 ? ' ' : nftIdArr?.length === 1 ? nftIdArr[0] : nftId,
               clientId:
-                clientIdArr?.length > 1
-                  ? ' '
-                  : clientIdArr?.length === 1
-                  ? clientIdArr[0]
-                  : clientId,
+                  clientIdArr?.length > 1
+                      ? ' '
+                      : clientIdArr?.length === 1
+                      ? clientIdArr[0]
+                      : clientId,
               feedName:
-                feedNameArr?.length > 1
-                  ? ' '
-                  : feedNameArr?.length === 1
-                  ? feedNameArr[0]
-                  : feedName,
+                  feedNameArr?.length > 1
+                      ? ' '
+                      : feedNameArr?.length === 1
+                      ? feedNameArr[0]
+                      : feedName,
               oracleCreator:
-                oracleCreatorArr?.length > 1
-                  ? ' '
-                  : oracleCreatorArr?.length === 1
-                  ? oracleCreatorArr[0]
-                  : oracleCreator,
+                  oracleCreatorArr?.length > 1
+                      ? ' '
+                      : oracleCreatorArr?.length === 1
+                      ? oracleCreatorArr[0]
+                      : oracleCreator,
               consumer:
-                consumerArr?.length > 1
-                  ? ' '
-                  : consumerArr?.length === 1
-                  ? consumerArr[0]
-                  : consumer,
+                  consumerArr?.length > 1
+                      ? ' '
+                      : consumerArr?.length === 1
+                      ? consumerArr[0]
+                      : consumer,
               serviceName:
-                serviceNameArr?.length > 1
-                  ? ' '
-                  : serviceNameArr?.length === 1
-                  ? serviceNameArr[0]
-                  : serviceName,
+                  serviceNameArr?.length > 1
+                      ? ' '
+                      : serviceNameArr?.length === 1
+                      ? serviceNameArr[0]
+                      : serviceName,
               digest: digestArr?.length > 1 ? ' ' : digestArr?.length === 1 ? digestArr[0] : digest,
               digest_algo:
-                digest_algoArr?.length > 1
-                  ? ' '
-                  : digest_algoArr?.length === 1
-                  ? digest_algoArr[0]
-                  : digest_algo,
+                  digest_algoArr?.length > 1
+                      ? ' '
+                      : digest_algoArr?.length === 1
+                      ? digest_algoArr[0]
+                      : digest_algo,
               symbol: symbolArr?.length > 1 ? ' ' : symbolArr?.length === 1 ? symbolArr[0] : symbol,
               minUnit:
-                minUnitArr?.length > 1 ? ' ' : minUnitArr?.length === 1 ? minUnitArr[0] : minUnit,
+                  minUnitArr?.length > 1 ? ' ' : minUnitArr?.length === 1 ? minUnitArr[0] : minUnit,
               owner: ownerArr?.length > 1 ? ' ' : ownerArr?.length === 1 ? ownerArr[0] : owner,
               dstOwner:
-                dstOwnerArr?.length > 1
-                  ? ' '
-                  : dstOwnerArr?.length === 1
-                  ? dstOwnerArr[0]
-                  : dstOwner,
+                  dstOwnerArr?.length > 1
+                      ? ' '
+                      : dstOwnerArr?.length === 1
+                      ? dstOwnerArr[0]
+                      : dstOwner,
               srcOwner:
-                srcOwnerArr?.length > 1
-                  ? ' '
-                  : srcOwnerArr?.length === 1
-                  ? srcOwnerArr[0]
-                  : srcOwner,
+                  srcOwnerArr?.length > 1
+                      ? ' '
+                      : srcOwnerArr?.length === 1
+                      ? srcOwnerArr[0]
+                      : srcOwner,
               sender: senderArr?.length > 1 ? ' ' : senderArr?.length === 1 ? senderArr[0] : sender,
               proposalId:
-                proposalIdArr?.length > 1
-                  ? ' '
-                  : proposalIdArr?.length === 1
-                  ? proposalIdArr[0]
-                  : proposalId,
+                  proposalIdArr?.length > 1
+                      ? ' '
+                      : proposalIdArr?.length === 1
+                      ? proposalIdArr[0]
+                      : proposalId,
               option: optionArr?.length > 1 ? ' ' : optionArr?.length === 1 ? optionArr[0] : option,
               voter: voterArr?.length > 1 ? ' ' : voterArr?.length === 1 ? voterArr[0] : voter,
               depositor:
-                depositorArr?.length > 1
-                  ? ' '
-                  : depositorArr?.length === 1
-                  ? depositorArr[0]
-                  : depositor,
+                  depositorArr?.length > 1
+                      ? ' '
+                      : depositorArr?.length === 1
+                      ? depositorArr[0]
+                      : depositor,
               title,
               signer:
-                tx.signers?.length > 1 ? ' ' : tx.signers?.length === 1 ? tx.signers[0] : '--',
+                  tx.signers?.length > 1 ? ' ' : tx.signers?.length === 1 ? tx.signers[0] : '--',
               status: tx.status,
               msgCount: tx?.msgs?.length,
               // time :Tools.getDisplayDate(tx.time),
@@ -2314,9 +2245,9 @@ export default {
               swapAmount2: '',
               swapDenomTheme2: '',
               ageTime: Tools.formatAge(
-                Tools.getTimestamp(),
-                tx.time * 1000,
-                this.$t('ExplorerLang.table.suffix')
+                  Tools.getTimestamp(),
+                  tx.time * 1000,
+                  this.$t('ExplorerLang.table.suffix')
               ),
               isShowMore,
               denomTheme: {
@@ -2325,11 +2256,11 @@ export default {
               },
               // farm stake/unstake/harvest
               poolId:
-                poolIdArr?.length > 1
-                  ? ' '
-                  : poolIdArr?.length === 1
-                  ? Tools.formatPoolId(poolIdArr[0])
-                  : poolId,
+                  poolIdArr?.length > 1
+                      ? ' '
+                      : poolIdArr?.length === 1
+                      ? Tools.formatPoolId(poolIdArr[0])
+                      : poolId,
               farmAmount,
               farmAmountDenom,
               farmAmountNativeDenom,
@@ -2346,7 +2277,7 @@ export default {
               initialDeposit,
               // EVM智能合约
               contractAddr:
-                tx?.contract_addrs && tx?.contract_addrs.length > 0 ? tx?.contract_addrs[0] : '--',
+                  tx?.contract_addrs && tx?.contract_addrs.length > 0 ? tx?.contract_addrs[0] : '--',
               contractMethod: _contractMethod || '--',
             });
             /**
@@ -2360,11 +2291,11 @@ export default {
               // this.transactionArray[index].Tx_Fee = fee[index] && fee[index].amount ?  this.isShowDenom ? `${Tools.toDecimal(fee[index].amount,this.feeDecimals)} ${fee[index].denom.toLocaleUpperCase()}` : `${Tools.toDecimal(fee[index].amount,this.feeDecimals)}` : '--';
               // remove denom
               this.transactionArray[index].Tx_Fee =
-                fee[index] && fee[index].amount
-                  ? this.isShowDenom
-                    ? `${Tools.toDecimal(fee[index].amount, this.feeDecimals)}`
-                    : `${Tools.toDecimal(fee[index].amount, this.feeDecimals)}`
-                  : '--';
+                  fee[index] && fee[index].amount
+                      ? this.isShowDenom
+                      ? `${Tools.toDecimal(fee[index].amount, this.feeDecimals)}`
+                      : `${Tools.toDecimal(fee[index].amount, this.feeDecimals)}`
+                      : '--';
             });
           }
           if (amounts && amounts.length > 0) {
@@ -2378,12 +2309,12 @@ export default {
                 const result1 = amount[index][0].split('%');
                 const result2 = amount[index][1].split('%');
                 this.transactionArray[index].swapDenomTheme1 = getDenomTheme(
-                  result1[1],
-                  this.denomMap
+                    result1[1],
+                    this.denomMap
                 );
                 this.transactionArray[index].swapDenomTheme2 = getDenomTheme(
-                  result2[1],
-                  this.denomMap
+                    result2[1],
+                    this.denomMap
                 );
                 this.transactionArray[index].swapAmount1 = this.getAmount(result1[0]);
                 this.transactionArray[index].swapAmount1Denom = this.getAmountUnit(result1[0]);
@@ -2398,8 +2329,8 @@ export default {
                 this.transactionArray[index].amount = this.getAmount(result[0]);
                 this.transactionArray[index].denom = this.getAmountUnit(result[0]);
                 const denom = /[A-Za-z\-]{2,15}/.exec(amount[index])?.length
-                  ? /[A-Za-z\-]{2,15}/.exec(amount[index])[0]
-                  : ' ';
+                    ? /[A-Za-z\-]{2,15}/.exec(amount[index])[0]
+                    : ' ';
                 if (denom !== undefined && /(lpt|LPT|lpt-|LPT-)/g.test(denom)) {
                   this.transactionArray[index].amount = '';
                 }
@@ -2411,17 +2342,17 @@ export default {
                */
               if (this.transactionArray[index].farmAmountDenom) {
                 this.transactionArray[index].denomTheme = getDenomTheme(
-                  this.transactionArray[index].farmAmountNativeDenom,
-                  this.denomMap
+                    this.transactionArray[index].farmAmountNativeDenom,
+                    this.denomMap
                 );
               } else if (this.transactionArray[index].totalReward1Denom) {
                 this.transactionArray[index].swapDenomTheme1 = getDenomTheme(
-                  this.transactionArray[index].totalReward1NativeDenom,
-                  this.denomMap
+                    this.transactionArray[index].totalReward1NativeDenom,
+                    this.denomMap
                 );
                 this.transactionArray[index].swapDenomTheme2 = getDenomTheme(
-                  this.transactionArray[index].totalReward2NativeDenom,
-                  this.denomMap
+                    this.transactionArray[index].totalReward2NativeDenom,
+                    this.denomMap
                 );
               }
             });
@@ -2469,25 +2400,25 @@ export default {
       }
 
       !this.txListTimer &&
-        (this.txListTimer = setInterval(() => {
-          Array.isArray(txListKeys)
+      (this.txListTimer = setInterval(() => {
+        Array.isArray(txListKeys)
             ? txListKeys.forEach((txListKey) => {
-                this[txListKey].forEach((item) => {
-                  item[parsedKey] = Tools.formatAge(
+              this[txListKey].forEach((item) => {
+                item[parsedKey] = Tools.formatAge(
                     Tools.getTimestamp(),
                     item[key] * 1000,
                     this.$t('ExplorerLang.table.suffix')
-                  );
-                });
-              })
+                );
+              });
+            })
             : this[txListKeys].forEach((item) => {
-                item[parsedKey] = Tools.formatAge(
+              item[parsedKey] = Tools.formatAge(
                   Tools.getTimestamp(),
                   item[key] * 1000,
                   this.$t('ExplorerLang.table.suffix')
-                );
-              });
-        }, 1000));
+              );
+            });
+      }, 1000));
     },
 
     // 地址相关交易记录
@@ -2495,12 +2426,12 @@ export default {
       this.isLoading = true;
       try {
         const res = await getAddressTxList(
-          this.$route.params.param,
-          this.type,
-          this.status,
-          this.pageNum,
-          this.pageSize,
-          false
+            this.$route.params.param,
+            this.type,
+            this.status,
+            this.pageNum,
+            this.pageSize,
+            false
         );
         if (res?.data && res.data.length > 0) {
           this.txList = res.data;
@@ -2519,12 +2450,12 @@ export default {
     async getTxByAddressCount() {
       try {
         const res = await getAddressTxList(
-          this.$route.params.param,
-          this.type,
-          this.status,
-          null,
-          null,
-          true
+            this.$route.params.param,
+            this.type,
+            this.status,
+            null,
+            null,
+            true
         );
         if (res?.count) {
           this.totalTxNumber = res.count;
@@ -2539,8 +2470,8 @@ export default {
       this.pageNum = pageNum;
       this.getTxByAddress();
       this.type
-        ? (this.txTypeArray = TxHelper.getTxTypeArray(this.txTypeOption, this.type))
-        : (this.txTypeArray = ['']);
+          ? (this.txTypeArray = TxHelper.getTxTypeArray(this.txTypeOption, this.type))
+          : (this.txTypeArray = ['']);
       this.status_temp = this.status;
       this.type_temp = this.type;
     },
@@ -2548,10 +2479,10 @@ export default {
     async getConsumerTxList() {
       try {
         const res = await getCallServiceWithAddress(
-          this.consumerTxPageNum,
-          this.consumerTxPageSize,
-          false,
-          this.$route.params.param
+            this.consumerTxPageNum,
+            this.consumerTxPageSize,
+            false,
+            this.$route.params.param
         );
         if (res?.data?.length > 0) {
           this.consumerTxList = [];
@@ -2639,11 +2570,11 @@ export default {
     async getRspondRecordList() {
       try {
         const res = await getRespondServiceRecord(
-          '',
-          this.$route.params.param,
-          this.respondRecordPageNum,
-          this.respondRecordPageSize,
-          false
+            '',
+            this.$route.params.param,
+            this.respondRecordPageNum,
+            this.respondRecordPageSize,
+            false
         );
         if (res?.data?.length > 0) {
           this.respondRecordList = (res.data || []).map((tx) => {
@@ -2679,10 +2610,10 @@ export default {
     async getProviderTxList() {
       try {
         const res = await getRespondServiceWithAddress(
-          this.$route.params.param,
-          this.providerTxPageNum,
-          this.providerTxPageSize,
-          false
+            this.$route.params.param,
+            this.providerTxPageNum,
+            this.providerTxPageSize,
+            false
         );
         if (res?.data?.length > 0) {
           this.providerTxList = [];
@@ -2709,8 +2640,8 @@ export default {
             (bindings.result || []).forEach((bind) => {
               if (result.provider === bind.provider && result.owner == bind.owner) {
                 result.isAvailable = bind.available
-                  ? this.$t('ExplorerLang.common.true')
-                  : this.$t('ExplorerLang.common.false');
+                    ? this.$t('ExplorerLang.common.true')
+                    : this.$t('ExplorerLang.common.false');
                 result.pricing = JSON.parse(bind.pricing || '{}').price;
                 result.qos = bind.qos;
                 if (bind.disabled_time) {
@@ -2890,67 +2821,67 @@ export default {
           assetList.unshift({
             token: this.mainToken.symbol.toUpperCase(),
             balance:
-              balanceAmount && balanceAmount.amount
-                ? `${new BigNumber(
+                balanceAmount && balanceAmount.amount
+                    ? `${new BigNumber(
                     Tools.formatStringToFixedNumber(balanceAmount.amount, this.fixedNumber)
-                  ).toFormat()} ${balanceAmount.denom.toUpperCase()}`
-                : 0,
+                    ).toFormat()} ${balanceAmount.denom.toUpperCase()}`
+                    : 0,
             balanceNumber: balanceAmount.amount,
             delegatedValue: this.totalDelegator ? this.totalDelegator : 0,
             delegated: this.totalDelegator
-              ? `${Tools.formatStringToFixedNumber(
-                  new BigNumber(this.totalDelegator).toFormat(),
-                  this.fixedNumber
+                ? `${Tools.formatStringToFixedNumber(
+                    new BigNumber(this.totalDelegator).toFormat(),
+                    this.fixedNumber
                 )} ${this.mainToken.symbol.toUpperCase()}`
-              : 0,
+                : 0,
             unBondingValue: this.totalUnBondingDelegator ? this.totalUnBondingDelegator : 0,
             unBonding: this.totalUnBondingDelegator
-              ? `${Tools.formatStringToFixedNumber(
-                  new BigNumber(this.totalUnBondingDelegator).toFormat(),
-                  this.fixedNumber
+                ? `${Tools.formatStringToFixedNumber(
+                    new BigNumber(this.totalUnBondingDelegator).toFormat(),
+                    this.fixedNumber
                 )} ${this.mainToken.symbol.toUpperCase()}`
-              : 0,
+                : 0,
             rewards: this.allRewardsValue
-              ? `${Tools.formatStringToFixedNumber(
-                  new BigNumber(this.allRewardsAmountValue).toFormat(),
-                  this.fixedNumber
+                ? `${Tools.formatStringToFixedNumber(
+                    new BigNumber(this.allRewardsAmountValue).toFormat(),
+                    this.fixedNumber
                 )} ${this.mainToken.symbol.toUpperCase()}`
-              : 0,
+                : 0,
             rewardsValue: this.allRewardsAmountValue ? this.allRewardsAmountValue : 0,
             totalAmount: `${Tools.formatStringToFixedNumber(
-              new BigNumber(
-                (
-                  Number(
-                    Tools.formatStringToFixedNumber(
-                      balanceAmount.amount.toString(),
-                      this.computerNumber
-                    )
-                  ) +
-                  Number(
-                    Tools.formatStringToFixedNumber(
-                      this.totalDelegator.toString(),
-                      this.computerNumber
-                    )
-                  ) +
-                  Number(
-                    Tools.formatStringToFixedNumber(
-                      this.totalUnBondingDelegator.toString(),
-                      this.computerNumber
-                    )
-                  ) +
-                  Number(
-                    Tools.formatStringToFixedNumber(
-                      this.allRewardsAmountValue.toString(),
-                      this.computerNumber
-                    )
-                  )
-                ).toString()
-              ).toFormat(),
-              this.fixedNumber
+                new BigNumber(
+                    (
+                        Number(
+                            Tools.formatStringToFixedNumber(
+                                balanceAmount.amount.toString(),
+                                this.computerNumber
+                            )
+                        ) +
+                        Number(
+                            Tools.formatStringToFixedNumber(
+                                this.totalDelegator.toString(),
+                                this.computerNumber
+                            )
+                        ) +
+                        Number(
+                            Tools.formatStringToFixedNumber(
+                                this.totalUnBondingDelegator.toString(),
+                                this.computerNumber
+                            )
+                        ) +
+                        Number(
+                            Tools.formatStringToFixedNumber(
+                                this.allRewardsAmountValue.toString(),
+                                this.computerNumber
+                            )
+                        )
+                    ).toString()
+                ).toFormat(),
+                this.fixedNumber
             )} ${this.mainToken.symbol.toUpperCase()}`,
           });
         } else if (balanceAmount && balanceAmount.denom) {
-          let { denom } = balanceAmount;
+          let {denom} = balanceAmount;
           if (denom.startsWith(ibcDenomPrefix)) {
             const hash = denom.replace(ibcDenomPrefix, '');
             const res = await getIbcTransferByHash(hash);
@@ -2961,16 +2892,16 @@ export default {
           assetList.push({
             token: item.denom.toUpperCase(),
             balance: balanceAmount.amount
-              ? `${new BigNumber(balanceAmount.amount).toFormat()} ${denom.toUpperCase()}`
-              : 0,
+                ? `${new BigNumber(balanceAmount.amount).toFormat()} ${denom.toUpperCase()}`
+                : 0,
             delegated: 0,
             unBonding: 0,
             rewards: 0,
             totalAmount: balanceAmount.amount
-              ? `${new BigNumber(
-                  balanceAmount.amount
+                ? `${new BigNumber(
+                    balanceAmount.amount
                 ).toFormat()} ${balanceAmount.denom.toUpperCase()}`
-              : 0,
+                : 0,
           });
         }
       }
@@ -2991,7 +2922,7 @@ export default {
     },
     async getDelegationList() {
       try {
-        const { data: res, count } = await getDelegationListApi(this.$route.params.param, 1, 1000);
+        const {data: res, count} = await getDelegationListApi(this.$route.params.param, 1, 1000);
         if (res && res.length > 0) {
           this.delegationCountNum = count;
           const copyResult = JSON.parse(JSON.stringify(res));
@@ -3026,8 +2957,8 @@ export default {
             this.totalDelegator = totalAmount.amount;
           }
           this.totalDelegatorValue = `${Tools.formatStringToFixedNumber(
-            new BigNumber(this.totalDelegator.toString()).toFormat(),
-            this.fixedNumber
+              new BigNumber(this.totalDelegator.toString()).toFormat(),
+              this.fixedNumber
           )} ${this.mainToken.symbol.toUpperCase()}`;
         } else {
           this.delegationsItems = [];
@@ -3039,10 +2970,10 @@ export default {
     },
     async getUnBondingDelegationList() {
       try {
-        const { data: res, count } = await getUnBondingDelegationListApi(
-          this.$route.params.param,
-          1,
-          1000
+        const {data: res, count} = await getUnBondingDelegationListApi(
+            this.$route.params.param,
+            1,
+            1000
         );
         if (res && res.length > 0) {
           this.unBondingDelegationCountNum = count;
@@ -3071,8 +3002,8 @@ export default {
             this.totalUnBondingDelegator = totalUnBondingDelegator.amount;
           }
           this.totalUnBondingDelegatorValue = `${Tools.formatStringToFixedNumber(
-            new BigNumber(this.totalUnBondingDelegator.toString()).toFormat(),
-            this.fixedNumber
+              new BigNumber(this.totalUnBondingDelegator.toString()).toFormat(),
+              this.fixedNumber
           )} ${this.mainToken.symbol.toUpperCase()}`;
         } else {
           this.unBondingDelegationCountNum = 0;
@@ -3106,14 +3037,14 @@ export default {
           this.rewardsDelegationCountNum = res.rewards.length;
           this.rewardsDelegationPageChange(this.rewardsDelegationCurrentPage);
           this.totalDelegatorRewardValue = `${Tools.formatStringToFixedNumber(
-            new BigNumber(moveDecimal(this.totalDelegatorReward.toString(), 0)).toFormat(),
-            this.fixedNumber
+              new BigNumber(moveDecimal(this.totalDelegatorReward.toString(), 0)).toFormat(),
+              this.fixedNumber
           )} ${this.mainToken.symbol.toUpperCase()}`;
           this.allRewardsAmountValue =
-            Number(this.delegatorRewardsValue) + Number(this.validatorRewardsValue);
+              Number(this.delegatorRewardsValue) + Number(this.validatorRewardsValue);
           this.allRewardsValue = `${Tools.formatStringToFixedNumber(
-            new BigNumber(this.allRewardsAmountValue.toString()).toFormat(),
-            this.fixedNumber
+              new BigNumber(this.allRewardsAmountValue.toString()).toFormat(),
+              this.fixedNumber
           )} ${this.mainToken.symbol.toUpperCase()}`;
           this.getAssetList();
         }
@@ -3127,26 +3058,26 @@ export default {
           const data = await getValidatorRewardsApi(this.OperatorAddress);
           if (data) {
             const commission =
-              data.val_commission &&
-              data.val_commission.commission &&
-              data.val_commission.commission[0];
+                data.val_commission &&
+                data.val_commission.commission &&
+                data.val_commission.commission[0];
             if (commission) {
               const amount = await converCoin(commission);
               this.validatorRewardsValue = amount.amount;
               // this.totalValidatorRewards = `${ Number(amount.amount).toFixed(2)} ${this.mainToken.symbol.toUpperCase()}` || '--'
               this.totalValidatorRewards =
-                `${Tools.formatStringToFixedNumber(
-                  new BigNumber(amount.amount.toString()).toFormat(),
-                  this.fixedNumber
-                )} ${this.mainToken.symbol.toUpperCase()}` || '--';
+                  `${Tools.formatStringToFixedNumber(
+                      new BigNumber(amount.amount.toString()).toFormat(),
+                      this.fixedNumber
+                  )} ${this.mainToken.symbol.toUpperCase()}` || '--';
               this.allRewardsAmountValue =
-                Number(this.delegatorRewardsValue) + Number(amount.amount);
+                  Number(this.delegatorRewardsValue) + Number(amount.amount);
             } else {
               this.totalValidatorRewards = '--';
             }
             this.allRewardsValue = `${Tools.formatStringToFixedNumber(
-              this.allRewardsAmountValue.toString(),
-              this.fixedNumber
+                this.allRewardsAmountValue.toString(),
+                this.fixedNumber
             )} ${this.mainToken.symbol.toUpperCase()}`;
             this.getAssetList();
           }
@@ -3159,8 +3090,8 @@ export default {
       const pageNum = pageNums - 1;
       this.delegationsItems = [];
       const data = this.flDelegationNextPage
-        ? this.delegationPageNationArrayData[pageNum]
-        : this.delegationPageNationArrayData;
+          ? this.delegationPageNationArrayData[pageNum]
+          : this.delegationPageNationArrayData;
       for (const item of data) {
         const amount = await converCoin(item.amount);
         this.delegationsItems.push({
@@ -3177,8 +3108,8 @@ export default {
       const pageNum = pageNums - 1;
       this.unBondingDelegationsItems = [];
       const data = this.flUnBondingDelegationNextPage
-        ? this.unBondingDelegationPageNationArrayData[pageNum]
-        : this.unBondingDelegationPageNationArrayData;
+          ? this.unBondingDelegationPageNationArrayData[pageNum]
+          : this.unBondingDelegationPageNationArrayData;
       for (const item of data) {
         const amount = await converCoin(item.amount);
         this.unBondingDelegationsItems.push({
@@ -3196,8 +3127,8 @@ export default {
       const pageNum = pageNums - 1;
       this.rewardsItems = [];
       const data = this.flRewardsDelegationNextPage
-        ? this.rewardsDelegationPageNationArrayData[pageNum]
-        : this.rewardsDelegationPageNationArrayData;
+          ? this.rewardsDelegationPageNationArrayData[pageNum]
+          : this.rewardsDelegationPageNationArrayData;
       for (const item of data) {
         if (item.reward && item.reward.length > 0) {
           const amount = await converCoin(item.reward[0]);
@@ -3207,8 +3138,8 @@ export default {
           address: item.validator_address,
           // amount: `${Tools.formatStringToFixedNumber(new BigNumber(item.reward[0].amount).toFormat(), this.fixedNumber)} ${this.mainToken.symbol.toUpperCase()}`,
           amount: `${Tools.formatStringToFixedNumber(
-            new BigNumber(item.reward[0].amount).toFormat(),
-            this.fixedNumber
+              new BigNumber(item.reward[0].amount).toFormat(),
+              this.fixedNumber
           )}`,
           moniker: item.moniker,
         });
@@ -3310,6 +3241,7 @@ a {
 .txCountWrap {
   display: flex;
   flex-wrap: wrap;
+
   > div + div {
     margin-left: 20px;
   }
@@ -3365,9 +3297,11 @@ a {
           font-size: 0.14rem;
           background-color: $bg_white_c;
         }
+
         .address_tab_item:first-child {
           border-radius: 0.08rem 0 0 0.08rem;
         }
+
         .address_tab_item:last-child {
           border-right: 0.01rem solid $bd_first_c;
           border-radius: 0 0.08rem 0.08rem 0;
@@ -3383,10 +3317,6 @@ a {
 
     .address_nft_content {
       background: $bg_white_c;
-      padding: 0.25rem;
-      border-radius: 0.05rem;
-      // border: 0.01rem solid $bd_first_c;
-      margin-bottom: 0.48rem;
     }
 
     .address_content {
@@ -3511,10 +3441,12 @@ a {
         font-weight: 600;
         line-height: 22px;
       }
+
       .list_table_content_container .box-card {
         padding-left: 0.25rem;
         padding-top: 0;
       }
+
       .address_transaction_content_hash {
         display: flex;
         align-items: center;
