@@ -146,7 +146,10 @@ export default {
       LargeStringLineHeight: 19,
       feeDecimals: decimals.fee,
       TX_TYPE_DISPLAY: {},
-      lastBlockTime: null,
+      times: {
+        lastBlockTime: null,
+        newestTxTime: null,
+      },
     };
   },
   async mounted() {
@@ -159,10 +162,10 @@ export default {
     // 最新交易时间和 NFT 最近更新时间进行匹配，就是最新详情
     // 即详情里的lastBlockTime 和 列表的第一条数据时间判断
     isNewest() {
-      if (!this.lastBlockTime || !this.txListByToken.length) {
+      if (!this.times.lastBlockTime || !this.times.newestTxTime) {
         return false;
       }
-      return Tools.formatLocalTime(this.lastBlockTime) === this.txListByToken[0].Time;
+      return this.times.lastBlockTime === this.times.newestTxTime;
     },
   },
   methods: {
@@ -188,7 +191,7 @@ export default {
           this.owner = nftDetail.owner;
           this.tokenData = nftDetail.tokenData || '--';
           this.tokenUri = nftDetail.tokenUri || '--';
-          this.lastBlockTime = nftDetail.denomDetail?.last_block_time;
+          this.times.lastBlockTime = nftDetail?.last_block_time;
           this.getTokenTxCount();
           this.getTokenTx();
         }
@@ -310,6 +313,10 @@ export default {
                   : '';
               }
             });
+          }
+          // 取第一条数据，为了比较是否是最新数据
+          if (this.pageNum === 1) {
+            this.times.newestTxTime = res.data[0].time;
           }
         } else {
           this.txListByToken = [];
