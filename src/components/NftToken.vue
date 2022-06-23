@@ -19,8 +19,8 @@
         </div>
         <div class="nft_token_information_item">
           <span>{{ $t('ExplorerLang.nftDetail.tokenId') }}：</span>
-          <span>
-            {{ tokenID }}
+          <div class="flex">
+            <div>{{ tokenID }}</div>
             <el-tooltip
               v-if="isNewest"
               class="item"
@@ -28,9 +28,9 @@
               :content="$t('ExplorerLang.nftDetail.newest')"
               placement="top"
             >
-              <div class="newIcon">new</div>
+              <div class="newIcon">NEW</div>
             </el-tooltip>
-          </span>
+          </div>
         </div>
         <div class="nft_token_information_item">
           <span>{{ $t('ExplorerLang.nftDetail.schema') }}：</span>
@@ -359,10 +359,12 @@ a {
 }
 
 .newIcon {
+  box-sizing: border-box;
   display: inline-block;
   font-size: 12px;
-  line-height: 1.6;
-  padding: 0 10px;
+  line-height: 1;
+  padding: 3px 8px;
+  margin-left: 8px;
   color: #67c77e;
   font-weight: 600;
   background: rgba(103, 199, 126, 0.1);

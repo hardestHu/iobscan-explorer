@@ -1,6 +1,9 @@
 .block {
   display: block;
 }
+.flex {
+  display: flex;
+}
 
 .text-left {
   text-align: left;
