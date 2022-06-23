@@ -347,160 +347,79 @@
                   >
                   <span v-show="OperatorAddress === '--'">{{ OperatorAddress }}</span>
                 </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div
-        class="address_nft_content"
-        v-if="moduleSupport('103', prodConfig.navFuncList)"
-        v-show="isNftInfo"
-      >
-        <div class="content_title">
-          {{ $t('ExplorerLang.addressDetail.assets') }}
-          <span> {{ this.assetCount }}</span>
-        </div>
-        <el-table
-          class="table"
-          :data="assetArray"
-          row-key="nft_id"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-        >
-          <el-table-column
-            :min-width="ColumnMinWidth.denom"
-            :label="$t('ExplorerLang.table.denom')"
-            prop="denomName"
-          ></el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.tokenId"
-            :label="$t('ExplorerLang.table.tokenName')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                :content="scope.row.nftName"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.nftName)"
-              >
-                <router-link
-                  v-if="formatAddress(scope.row.nftName) != '--'"
-                  :to="`/nft/token?denom=${scope.row.denomId}&&tokenId=${scope.row.id}`"
-                >
-                  {{ formatAddress(scope.row.nftName) }}
-                </router-link>
-                <span v-else>{{ '--' }}</span>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.tokenId"
-            :label="$t('ExplorerLang.table.tokenId')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                :content="scope.row.id"
-                placement="top"
-                effect="dark"
-                :disabled="Tools.disabled(scope.row.id)"
-              >
-                <router-link :to="`/nft/token?denom=${scope.row.denomId}&&tokenId=${scope.row.id}`">
-                  {{ formatAddress(scope.row.id) }}
-                </router-link>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :width="ColumnMinWidth.schema"
-            :label="$t('ExplorerLang.table.data')"
-            prop="tokenData"
-          >
-            <template slot-scope="scope">
-              <LargeString
-                :isShowPre="Tools.isJSON(scope.row.tokenData)"
-                :key="scope.row.nftName + scope.row.id + nftKey"
-                v-if="scope.row.tokenData"
-                :text="scope.row.tokenData"
-                mode="cell"
-                :minHeight="LargeStringMinHeight"
-                :lineHeight="LargeStringLineHeight"
-              />
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.URI"
-            :label="$t('ExplorerLang.table.uri')"
-            prop="tokenUri"
-          >
-            <template slot-scope="scope">
-              <a
-                v-if="scope.row.tokenUri"
-                :download="scope.row.tokenUri"
-                :href="scope.row.tokenUri"
-                target="_blank"
-                >{{ scope.row.tokenUri }}</a
-              >
-              <span v-else>--</span>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination_content" v-show="assetCount > assetPageSize">
-          <m-pagination
-            :page-size="assetPageSize"
-            :total="assetCount"
-            :page="assetPageNum"
-            :page-change="assetPageChange"
-          >
-          </m-pagination>
-        </div>
-      </div>
-
-      <div
-        class="consumer_transaction_content"
-        v-if="moduleSupport('105', prodConfig.navFuncList)"
-        v-show="isIservice"
-      >
-        <div class="content_title">
-          {{ $t('ExplorerLang.addressDetail.consumerTitle') }}
-        </div>
-        <el-table
-          class="table"
-          :data="consumerTxList"
-          row-key="txHash"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-          :span-method="arraySpanMethod"
-        >
-          <el-table-column
-            :min-width="ColumnMinWidth.serviceName"
-            :label="$t('ExplorerLang.table.serviceName')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                v-if="!scope.row.isChildren"
-                :content="scope.row.serviceName"
-                placement="top"
-              >
-                <router-link :to="`/service?serviceName=${scope.row.serviceName}`">
-                  {{ scope.row.serviceName }}
-                </router-link>
-              </el-tooltip>
-              <span class="serviceNameText" v-if="scope.row.isChildren && scope.row.index == 0">{{
-                getRespondCount(scope.row.count)
-              }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column
-            class-name="tx_type"
-            :width="ColumnMinWidth.minTxType"
-            :label="$t('ExplorerLang.table.txType')"
-            prop="txType"
-          ></el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.state"
-            :label="$t('ExplorerLang.table.requestStatus')"
-          >
-            <template slot-scope="scope">
-              <div v-if="scope.row.state" class="consumer_transaction_content_available">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div
+				class="address_nft_content"
+				v-if="moduleSupport('103', prodConfig.navFuncList)"
+				v-show="isNftInfo"
+			>
+<!--				<div class="content_title">
+					{{ $t('ExplorerLang.addressDetail.assets') }}
+					<span> {{ this.assetCount }}</span>
+				</div>-->
+				<list-component
+					:is-loading="assetLoading"
+					:list-data="assetArray"
+					:column-list="assetColumnArray"
+					:pagination="{pageSize:Number(assetPageSize),dataCount:assetCount,pageNum:Number(assetPageNum)}"
+					@pageChange="assetPageChange"
+				>
+					<template v-slot:txCount>
+						<tx-count-component :title="assetCount > 1 ? $t('ExplorerLang.nftAsset.subTitles') : $t('ExplorerLang.nftAsset.subTitle')" :icon="'iconNFT'" :tx-count="assetCount"></tx-count-component>
+					</template>
+				</list-component>
+			</div>
+			
+			<div
+				class="consumer_transaction_content"
+				v-if="moduleSupport('105', prodConfig.navFuncList)"
+				v-show="isIservice"
+			>
+				<div class="content_title">
+					{{ $t('ExplorerLang.addressDetail.consumerTitle') }}
+				</div>
+				<el-table
+					class="table"
+					:data="consumerTxList"
+					row-key="txHash"
+					:empty-text="$t('ExplorerLang.table.emptyDescription')"
+					:span-method="arraySpanMethod"
+				>
+					<el-table-column
+						:min-width="ColumnMinWidth.serviceName"
+						:label="$t('ExplorerLang.table.serviceName')"
+					>
+						<template slot-scope="scope">
+							<el-tooltip
+								v-if="!scope.row.isChildren"
+								:content="scope.row.serviceName"
+								placement="top"
+							>
+								<router-link :to="`/service?serviceName=${scope.row.serviceName}`">
+									{{ scope.row.serviceName }}
+								</router-link>
+							</el-tooltip>
+							<span class="serviceNameText" v-if="scope.row.isChildren && scope.row.index == 0">{{
+									getRespondCount(scope.row.count)
+								}}</span>
+						</template>
+					</el-table-column>
+					<el-table-column
+						class-name="tx_type"
+						:width="ColumnMinWidth.minTxType"
+						:label="$t('ExplorerLang.table.txType')"
+						prop="txType"
+					></el-table-column>
+					<el-table-column
+						:min-width="ColumnMinWidth.state"
+						:label="$t('ExplorerLang.table.requestStatus')"
+					>
+						<template slot-scope="scope">
+							<div v-if="scope.row.state" class="consumer_transaction_content_available">
                 <span
                   class="consumer_transaction_content_available_icon"
                   :style="`background:${getBgColorWithState(scope.row.state)}`"
@@ -1099,512 +1018,521 @@ import ddcListColumnConfig from './tableListColumnConfig/ddcListColumnConfig';
 import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
 import { energyAsset, assetInfo, nftCount, ddc, identity, iService, tx } from './ownerDetail/lib';
 import AddressSendAndReceiveTx from "@/components/common/AddressSendAndReceiveTx";
+import addressDetailNftTabColumnConfig from "@/components/tableListColumnConfig/addressDetailNftTabColumnConfig";
 
 export default {
-  name: 'OwnerDetail',
-  components: {
-	  AddressSendAndReceiveTx,
-    TxResetButtonComponent,
-    MClip,
-    TxCountComponent,
-    TxStatusTabsComponents,
-    TabsComponent,
-    ListComponent,
-    MPagination,
-    TxListComponent,
-    AddressInformationComponent,
-    LargeString,
-  },
-  data() {
-    return {
-      feeDecimals: decimals.fee,
-      isShowDenom: prodConfig.fee.isShowDenom,
-      isShowFee: prodConfig.fee.isShowFee,
-      transactionArray: [],
-      isLoading: false,
-      txColumnList: [],
-      TX_TYPE_DISPLAY: {},
-      IBC: 'IBC',
-      HashLock: 'Hash Lock',
-      addressRoute,
-      formatMoniker,
-      monikerNum,
-      TX_TYPE,
-      TX_STATUS,
-      ColumnMinWidth,
-      prodConfig,
-      moduleSupport,
-      Tools,
-      assetArray: [],
-      assetPageNum: 1,
-      assetPageSize: 5,
-      assetCount: 0,
-      denomArray: [],
-      address: '',
-      pageNum: 1,
-      pageSize: 5,
-      txList: [],
-      totalTxNumber: 0,
-      providerTxList: [],
-      providerTxPageNum: 1,
-      providerTxPageSize: 5,
-      providerTxCount: 0,
-      consumerTxPageNum: 1,
-      consumerTxPageSize: 5,
-      consumerTxCount: 0,
-      consumerTxList: [],
-      respondRecordList: [],
-      respondRecordPageNum: 1,
-      respondRecordPageSize: 5,
-      respondRecordCount: 0,
-      identityList: [],
-      identityPageNum: 1,
-      identityPageSize: 5,
-      identityCount: 0,
-      type: '',
-      status: '',
-      type_temp: '',
-      status_temp: '',
-      txTypeArray: [''],
-      statusOpt: [
-        {
-          value: '',
-          label: this.$t('ExplorerLang.common.allTxStatus'),
-        },
-        {
-          value: 1,
-          label: this.$t('ExplorerLang.common.success'),
-        },
-        {
-          value: 2,
-          label: this.$t('ExplorerLang.common.failed'),
-        },
-      ],
-      txTypeOption: [
-        {
-          value: '',
-          label: this.$t('ExplorerLang.common.allTxType'),
-        },
-      ],
-      isProfiler: false,
-      assetsItems: [],
-      assetList: [],
-      withdrewToAddress: '',
-      validatorMoniker: '',
-      validatorStatus: '',
-      OperatorAddress: '',
-      fixedNumber: 2, // 展示2位小数
-      computerNumber: 5, // 计算保留5位小数
-      totalDelegatorReward: 0,
-      totalDelegatorRewardValue: 0,
-      totalUnBondingDelegator: 0,
-      totalUnBondingDelegatorValue: 0,
-      totalDelegator: 0,
-      totalDelegatorValue: 0,
-      totalValidatorRewards: 0,
-      delegatorRewardsValue: 0,
-      validatorRewardsValue: 0,
-      allRewardsValue: 0,
-      allRewardsAmountValue: 0,
-      tablePageSize: 5,
-      flDelegationNextPage: false,
-      flUnBondingDelegationNextPage: false,
-      flRewardsDelegationNextPage: false,
-      delegationCountNum: 0,
-      unBondingDelegationCountNum: 0,
-      rewardsDelegationCountNum: 0,
-      delegationCurrentPage: 1,
-      unBondingDelegationCurrentPage: 1,
-      rewardsDelegationCurrentPage: 1,
-      delegationsItems: [],
-      unBondingDelegationsItems: [],
-      rewardsItems: [],
-      delegationPageNationArrayData: [],
-      unBondingDelegationPageNationArrayData: [],
-      rewardsDelegationPageNationArrayData: [],
-      mainToken: {},
-      tabList: [],
-      isAsset: false,
-      isNftInfo: false,
-      nftKey: 0,
-      isIdentity: false,
-      isIservice: false,
-      isTx: false,
-      isDDC: false,
-      ddcList: [],
-      ddcListColumn: [],
-      ddcPageSize: 5,
-      ddcCount: 0,
-      ddcPageNum: 1,
-      LargeStringMinHeight: 69,
-      LargeStringLineHeight: 23,
-      mainTokenSymbol: '',
-      energyAssetData: [],
-      energyAssetColumn,
-      isEnergyAsset: false,
-	    isShowSendAndReceiveTxComponent: false
-    };
-  },
-  watch: {
-    $route() {
-      this.address = this.$route.params.param;
-      this.getAssetList();
-      this.getTxByAddress();
-      this.getConsumerTxListCount();
-      this.getConsumerTxList();
-      this.getRspondRecordListCount();
-      this.getRspondRecordList();
-      this.getProviderTxListCount();
-      this.getProviderTxList();
-    },
-    totalDelegatorReward(totalDelegatorReward) {
-      this.getAssetList();
-    },
-    totalUnBondingDelegator(totalDelegatorReward) {
-      this.getAssetList();
-    },
-    totalDelegator() {
-      this.getAssetList();
-    },
-    OperatorAddress() {
-      this.getValidatorRewards();
-    },
-  },
-  async created() {
-    this.mainToken = await getMainToken();
-    await this.getConfigTokenData();
-  },
-  async mounted() {
+	name: 'OwnerDetail',
+	components: {
+		AddressSendAndReceiveTx,
+		TxResetButtonComponent,
+		MClip,
+		TxCountComponent,
+		TxStatusTabsComponents,
+		TabsComponent,
+		ListComponent,
+		MPagination,
+		TxListComponent,
+		AddressInformationComponent,
+		LargeString,
+	},
+	data() {
+		return {
+			assetLoading:false,
+			feeDecimals: decimals.fee,
+			isShowDenom: prodConfig.fee.isShowDenom,
+			isShowFee: prodConfig.fee.isShowFee,
+			transactionArray: [],
+			isLoading: false,
+			txColumnList: [],
+			TX_TYPE_DISPLAY: {},
+			IBC: 'IBC',
+			HashLock: 'Hash Lock',
+			addressRoute,
+			formatMoniker,
+			monikerNum,
+			TX_TYPE,
+			TX_STATUS,
+			ColumnMinWidth,
+			prodConfig,
+			moduleSupport,
+			Tools,
+			assetArray: [],
+			assetPageNum: 1,
+			assetPageSize: 5,
+			assetCount: 0,
+			denomArray: [],
+			address: '',
+			pageNum: 1,
+			pageSize: 5,
+			txList: [],
+			totalTxNumber: 0,
+			providerTxList: [],
+			providerTxPageNum: 1,
+			providerTxPageSize: 5,
+			providerTxCount: 0,
+			consumerTxPageNum: 1,
+			consumerTxPageSize: 5,
+			consumerTxCount: 0,
+			consumerTxList: [],
+			respondRecordList: [],
+			respondRecordPageNum: 1,
+			respondRecordPageSize: 5,
+			respondRecordCount: 0,
+			identityList: [],
+			identityPageNum: 1,
+			identityPageSize: 5,
+			identityCount: 0,
+			type: '',
+			status: '',
+			type_temp: '',
+			status_temp: '',
+			txTypeArray: [''],
+			statusOpt: [
+				{
+					value: '',
+					label: this.$t('ExplorerLang.common.allTxStatus'),
+				},
+				{
+					value: 1,
+					label: this.$t('ExplorerLang.common.success'),
+				},
+				{
+					value: 2,
+					label: this.$t('ExplorerLang.common.failed'),
+				},
+			],
+			txTypeOption: [
+				{
+					value: '',
+					label: this.$t('ExplorerLang.common.allTxType'),
+				},
+			],
+			isProfiler: false,
+			assetsItems: [],
+			assetList: [],
+			withdrewToAddress: '',
+			validatorMoniker: '',
+			validatorStatus: '',
+			OperatorAddress: '',
+			fixedNumber: 2, // 展示2位小数
+			computerNumber: 5, // 计算保留5位小数
+			totalDelegatorReward: 0,
+			totalDelegatorRewardValue: 0,
+			totalUnBondingDelegator: 0,
+			totalUnBondingDelegatorValue: 0,
+			totalDelegator: 0,
+			totalDelegatorValue: 0,
+			totalValidatorRewards: 0,
+			delegatorRewardsValue: 0,
+			validatorRewardsValue: 0,
+			allRewardsValue: 0,
+			allRewardsAmountValue: 0,
+			tablePageSize: 5,
+			flDelegationNextPage: false,
+			flUnBondingDelegationNextPage: false,
+			flRewardsDelegationNextPage: false,
+			delegationCountNum: 0,
+			unBondingDelegationCountNum: 0,
+			rewardsDelegationCountNum: 0,
+			delegationCurrentPage: 1,
+			unBondingDelegationCurrentPage: 1,
+			rewardsDelegationCurrentPage: 1,
+			delegationsItems: [],
+			unBondingDelegationsItems: [],
+			rewardsItems: [],
+			delegationPageNationArrayData: [],
+			unBondingDelegationPageNationArrayData: [],
+			rewardsDelegationPageNationArrayData: [],
+			mainToken: {},
+			tabList: [],
+			isAsset: false,
+			isNftInfo: false,
+			nftKey: 0,
+			isIdentity: false,
+			isIservice: false,
+			isTx: false,
+			isDDC: false,
+			ddcList: [],
+			ddcListColumn: [],
+			ddcPageSize: 5,
+			ddcCount: 0,
+			ddcPageNum: 1,
+			LargeStringMinHeight: 69,
+			LargeStringLineHeight: 23,
+			mainTokenSymbol: '',
+			energyAssetData: [],
+			energyAssetColumn,
+			isEnergyAsset: false,
+			isShowSendAndReceiveTxComponent: false,
+			assetColumnArray:[],
+		};
+	},
+	watch: {
+		$route() {
+			this.address = this.$route.params.param;
+			this.getAssetList();
+			this.getTxByAddress();
+			this.getConsumerTxListCount();
+			this.getConsumerTxList();
+			this.getRspondRecordListCount();
+			this.getRspondRecordList();
+			this.getProviderTxListCount();
+			this.getProviderTxList();
+		},
+		totalDelegatorReward(totalDelegatorReward) {
+			this.getAssetList();
+		},
+		totalUnBondingDelegator(totalDelegatorReward) {
+			this.getAssetList();
+		},
+		totalDelegator() {
+			this.getAssetList();
+		},
+		OperatorAddress() {
+			this.getValidatorRewards();
+		},
+	},
+	async created() {
+		this.mainToken = await getMainToken();
+		await this.getConfigTokenData();
+		this.assetColumnArray = addressDetailNftTabColumnConfig
+	},
+	async mounted() {
+		
 		this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
-    this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
-    this.ddcListColumn = ddcListColumnConfig;
-    await this.getTxTypeData();
-    document.documentElement.scrollTop = 0;
-    this.address = this.$route.params.param;
-    this.getTabList();
-    this.setMainToken();
-  },
-  methods: {
-    getFilterTxs(param) {
-      if (param?.value) {
-        this.type = param.value;
-      } else if (param?.value === '') {
-        // 处理点击all的情况
-        this.type = '';
-      } else if (Array.isArray(param)) {
-        const notAllMsgType = param.filter((item) => {
-          return item.label !== 'secondaryAll';
-        });
-        const currentSelectSecondMsgTypes = notAllMsgType.map((item) => {
-          return item.value;
-        });
-
-        if (currentSelectSecondMsgTypes?.length) {
-          this.type = currentSelectSecondMsgTypes.join(',');
-        }
-      }
-      this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
-      if (this.type && needAddColumn[this.type]) {
-        this.txColumnList = txCommonTable.concat(needAddColumn[this.type], txCommonLatestTable);
-      }
-      this.totalTxNumber = 0;
-      this.pageNum = 1;
-      this.getTxByAddressCount();
-      this.getTxByAddress();
-    },
-    changeTxStatus(status) {
-      this.status = status;
-      if (!status) {
-        this.status = '';
-      }
-      this.getTxByAddressCount();
-      this.getTxByAddress();
-    },
-    changeTime() {},
-    async getTxTypeData() {
-      try {
-        const res = await getTxType();
-        this.TX_TYPE_DISPLAY = res?.TX_TYPE_DISPLAY;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async setMainToken() {
-      const mainToken = await getMainToken();
-      if (mainToken && mainToken.symbol) {
-        this.mainTokenSymbol = mainToken.symbol.toUpperCase();
-      }
-    },
-    getTabList() {
-      this.tabList = [];
-      if (moduleSupport('116', prodConfig.navFuncList)) {
-        this.tabList.push({ ...energyAsset });
-        this.getEnergyAssetList();
-      }
-      if (moduleSupport('107', prodConfig.navFuncList)) {
-        this.tabList.push({ ...assetInfo });
-        this.getAddressInformation();
-        this.getRewardsItems();
-        this.getAssetList();
-        this.getDelegationList();
-        this.getUnBondingDelegationList();
-      }
-      if (moduleSupport('103', prodConfig.navFuncList)) {
-        this.tabList.push({ ...nftCount });
-        this.getNftListCount();
-        this.getNftList();
-      }
-      if (moduleSupport('117', prodConfig.navFuncList)) {
-        this.tabList.push({ ...ddc });
-        this.getDdcListCount();
-        this.getDdcList();
-      }
-      if (moduleSupport('106', prodConfig.navFuncList)) {
-        this.tabList.push({ ...identity });
-        this.getIdentityListCount();
-        this.getIdentityList();
-      }
-      if (moduleSupport('105', prodConfig.navFuncList)) {
-        this.tabList.push({ ...iService });
-        this.getRspondRecordListCount();
-        this.getRspondRecordList();
-        this.getProviderTxListCount();
-        this.getProviderTxList();
-        this.getConsumerTxListCount();
-        this.getConsumerTxList();
-      }
-      this.tabList.push({ ...tx });
-      this.tabList[0].isActive = true;
-      this.showAndHideByModule();
-    },
-    showAndHideByModule() {
-      this.isNftInfo = false;
-      this.isIservice = false;
-      this.isIdentity = false;
-      this.isAsset = false;
-      this.isTx = false;
-      this.isDDC = false;
-      this.isEnergyAsset = false;
-      this.tabList.forEach((item) => {
-        if (item.isActive) {
-          switch (item.moduleNumber) {
-            case '103':
-              this.nftKey++;
-              this.isNftInfo = true;
-              break;
-            case '105':
-              this.isIservice = true;
-              break;
-            case '106':
-              this.isIdentity = true;
-              break;
-            case '107':
-              this.isAsset = true;
-              break;
-            case '116':
-              this.isEnergyAsset = true;
-              break;
-            case '117':
-              this.isDDC = true;
-              break;
-            default:
-              this.isTx = true;
-              this.getTxByAddressCount();
-              this.getTxByAddress();
-              this.getAllTxType();
-          }
-        }
-      });
-    },
-    selectOptions(index) {
-      this.tabList.forEach((item) => {
-        item.isActive = false;
-      });
-      this.tabList[index].isActive = true;
-      this.showAndHideByModule();
-    },
-    assetPageChange(pageNum) {
-      this.assetPageNum = pageNum;
-      this.getNftList();
-    },
-    async getNftList() {
-      try {
-        const nftData = await getNfts(
-          this.assetPageNum,
-          this.assetPageSize,
-          false,
-          '',
-          '',
-          this.$route.params.param
-        );
-        if (nftData && nftData.data) {
-          this.assetArray = nftData.data.map((item) => {
-            return {
-              id: item.nft_id,
-              denomName: item.denom_name || item.denom_id,
-              denomId: item.denom_id,
-              nftName: item.nft_name,
-              owner: item.owner,
-              tokenData: item.tokenData,
-              tokenUri: item.tokenUri,
-            };
-          });
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    async getNftListCount() {
-      try {
-        const nftData = await getNfts(null, null, true, '', '', this.$route.params.param);
-        if (nftData?.count) {
-          this.assetCount = nftData.count;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    // 身份id列表
-    identityPageChange(pageNum) {
-      this.identityPageNum = pageNum;
-      this.getIdentityList();
-    },
-    async getIdentityList() {
-      try {
-        const res = await getIdentityListByAddress(
-          this.$route.params.param,
-          this.identityPageNum,
-          this.identityPageSize,
-          false
-        );
-        if (res?.data?.length > 0) {
-          this.identityList = res.data.map((item) => {
-            return {
-              id: item.identities_id,
-              txHash: item.update_tx_hash || '--',
-              time: Tools.formatLocalTime(item.update_block_time) || '--',
-            };
-          });
-        }
-      } catch (e) {
-        console.error(e);
-        this.$message.error(this.$t('ExplorerLang.message.requestFailed'));
-      }
-    },
-    async getIdentityListCount() {
-      try {
-        const res = await getIdentityListByAddress(this.$route.params.param, null, null, true);
-        if (res?.count) {
-          this.identityCount = res.count;
-        } else {
-          this.identityCount = 0;
-        }
-      } catch (e) {
-        console.error(e);
-        this.$message.error(this.$t('ExplorerLang.message.requestFailed'));
-      }
-    },
-
-    async formatTxData(msgType) {
-      this.transactionArray = [];
-      try {
-        if (this.txList && this.txList.length) {
-          const fees = [];
-          const amounts = [];
-          for (const tx of this.txList) {
-            let numberOfTo = '--';
-            let numberOfToArr = [];
-            let requestId = '--';
-            let requestIdArr = [];
-            let denomId = '--';
-            let denomIdArr = [];
-            let denomName = '--';
-            let denomNameArr = [];
-            let nftId = '--';
-            let nftIdArr = [];
-            let feedName = '--';
-            let feedNameArr = [];
-            let oracleCreator = '--';
-            let oracleCreatorArr = [];
-            let consumer = '--';
-            let consumerArr = [];
-            let digest = '--';
-            let digestArr = [];
-            let digest_algo = '--';
-            let digest_algoArr = [];
-            let symbol = '--';
-            let symbolArr = [];
-            let minUnit = '--';
-            let minUnitArr = [];
-            let owner = '--';
-            let ownerArr = [];
-            let dstOwner = '--';
-            let dstOwnerArr = [];
-            let srcOwner = '--';
-            let srcOwnerArr = [];
-            let sender = '--';
-            let senderArr = [];
-            let proposalId = '--';
-            let proposalIdArr = [];
-            let option = '--';
-            let optionArr = [];
-            let voter = '--';
-            let voterArr = [];
-            let depositor = '--';
-            let depositorArr = [];
-            let title = '--';
-            let author = '--';
-            let authorArr = [];
-            let provider = '--';
-            let providerArr = [];
-            let requestContextId = '--';
-            let requestContextIdArr = [];
-            let serviceName = '--';
-
-            let serviceNameArr = [];
-            let clientId = '--';
-            let clientIdArr = [];
-            let portId = '--';
-            let portIdArr = [];
-            let channelId = '--';
-            let channelIdArr = [];
-            let connectionId = '--';
-            let connectionIdArr = [];
-            let receiver = '--';
-            let receiverArr = [];
-            const sameMsg = [];
-            let sameMsgFromAddrArr = [];
-            let sameMsgToAddrArr = [];
-            let msg;
-            // farm => stake unstake
-            let poolId = '--';
-            let poolIdArr = [];
-            let farmAmount = '--';
-            let farmAmountDenom = '';
-            let farmAmountNativeDenom = '';
-            const farmAmountArr = [];
-            // farm => create pool
-            let totalReward1 = '--';
-            let totalReward1Denom = '';
-            let totalReward1NativeDenom = '';
-            let totalReward2 = '--';
-            let totalReward2Denom = '';
-            let totalReward2NativeDenom = '';
-            let poolCreator = '--';
-            // farm => Create Pool With Community Pool
-            let proposer = '--';
-            let initialDeposit = '--';
-            // farm => destory pool/ adjust pool : poolId poolCreator
-            if (tx?.msgs?.length > 0) {
-              tx.msgs.forEach((item) => {
-                if (item.type === msgType) {
-                  sameMsg.push(item);
-                  msg = item;
-                }
-              });
-            }
-
-            /*
+		this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
+		this.ddcListColumn = ddcListColumnConfig;
+		await this.getTxTypeData();
+		document.documentElement.scrollTop = 0;
+		this.address = this.$route.params.param;
+		this.getTabList();
+		this.setMainToken();
+	},
+	methods: {
+		getFilterTxs(param) {
+			if (param?.value) {
+				this.type = param.value;
+			} else if (param?.value === '') {
+				// 处理点击all的情况
+				this.type = '';
+			} else if (Array.isArray(param)) {
+				const notAllMsgType = param.filter((item) => {
+					return item.label !== 'secondaryAll';
+				});
+				const currentSelectSecondMsgTypes = notAllMsgType.map((item) => {
+					return item.value;
+				});
+				
+				if (currentSelectSecondMsgTypes?.length) {
+					this.type = currentSelectSecondMsgTypes.join(',');
+				}
+			}
+			this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
+			if (this.type && needAddColumn[this.type]) {
+				this.txColumnList = txCommonTable.concat(needAddColumn[this.type], txCommonLatestTable);
+			}
+			this.totalTxNumber = 0;
+			this.pageNum = 1;
+			this.getTxByAddressCount();
+			this.getTxByAddress();
+		},
+		changeTxStatus(status) {
+			this.status = status;
+			if (!status) {
+				this.status = '';
+			}
+			this.getTxByAddressCount();
+			this.getTxByAddress();
+		},
+		changeTime() {
+		},
+		async getTxTypeData() {
+			try {
+				const res = await getTxType();
+				this.TX_TYPE_DISPLAY = res?.TX_TYPE_DISPLAY;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		async setMainToken() {
+			const mainToken = await getMainToken();
+			if (mainToken && mainToken.symbol) {
+				this.mainTokenSymbol = mainToken.symbol.toUpperCase();
+			}
+		},
+		getTabList() {
+			this.tabList = [];
+			if (moduleSupport('116', prodConfig.navFuncList)) {
+				this.tabList.push({...energyAsset});
+				this.getEnergyAssetList();
+			}
+			if (moduleSupport('107', prodConfig.navFuncList)) {
+				this.tabList.push({...assetInfo});
+				this.getAddressInformation();
+				this.getRewardsItems();
+				this.getAssetList();
+				this.getDelegationList();
+				this.getUnBondingDelegationList();
+			}
+			if (moduleSupport('103', prodConfig.navFuncList)) {
+				this.tabList.push({...nftCount});
+				this.getNftListCount();
+				this.getNftList();
+			}
+			if (moduleSupport('117', prodConfig.navFuncList)) {
+				this.tabList.push({...ddc});
+				this.getDdcListCount();
+				this.getDdcList();
+			}
+			if (moduleSupport('106', prodConfig.navFuncList)) {
+				this.tabList.push({...identity});
+				this.getIdentityListCount();
+				this.getIdentityList();
+			}
+			if (moduleSupport('105', prodConfig.navFuncList)) {
+				this.tabList.push({...iService});
+				this.getRspondRecordListCount();
+				this.getRspondRecordList();
+				this.getProviderTxListCount();
+				this.getProviderTxList();
+				this.getConsumerTxListCount();
+				this.getConsumerTxList();
+			}
+			this.tabList.push({...tx});
+			this.tabList[0].isActive = true;
+			this.showAndHideByModule();
+		},
+		showAndHideByModule() {
+			this.isNftInfo = false;
+			this.isIservice = false;
+			this.isIdentity = false;
+			this.isAsset = false;
+			this.isTx = false;
+			this.isDDC = false;
+			this.isEnergyAsset = false;
+			this.tabList.forEach((item) => {
+				if (item.isActive) {
+					switch (item.moduleNumber) {
+						case '103':
+							this.nftKey++;
+							this.isNftInfo = true;
+							break;
+						case '105':
+							this.isIservice = true;
+							break;
+						case '106':
+							this.isIdentity = true;
+							break;
+						case '107':
+							this.isAsset = true;
+							break;
+						case '116':
+							this.isEnergyAsset = true;
+							break;
+						case '117':
+							this.isDDC = true;
+							break;
+						default:
+							this.isTx = true;
+							this.getTxByAddressCount();
+							this.getTxByAddress();
+							this.getAllTxType();
+					}
+				}
+			});
+		},
+		selectOptions(index) {
+			this.tabList.forEach((item) => {
+				item.isActive = false;
+			});
+			this.tabList[index].isActive = true;
+			this.showAndHideByModule();
+		},
+		assetPageChange(pageNum) {
+			this.assetPageNum = pageNum;
+			this.getNftList();
+		},
+		async getNftList() {
+			try {
+				this.assetLoading = true
+				const nftData = await getNfts(
+					this.assetPageNum,
+					this.assetPageSize,
+					false,
+					'',
+					'',
+					this.$route.params.param
+				);
+				this.assetLoading = false
+				if (nftData && nftData.data) {
+					this.assetArray = nftData.data.map((item) => {
+						return {
+							id: item.nft_id,
+							denomName: item.denom_name || item.denom_id,
+							denomId: item.denom_id,
+							nftName: item.nft_name,
+							owner: item.owner,
+							tokenData: item.tokenData,
+							tokenUri: item.tokenUri,
+						};
+					});
+				}
+			} catch (e) {
+				this.assetLoading = false
+				console.error(e);
+			}
+		},
+		async getNftListCount() {
+			try {
+				const nftData = await getNfts(null, null, true, '', '', this.$route.params.param);
+				if (nftData?.count) {
+					this.assetCount = nftData.count;
+				}
+			} catch (e) {
+				console.error(e);
+			}
+		},
+		// 身份id列表
+		identityPageChange(pageNum) {
+			this.identityPageNum = pageNum;
+			this.getIdentityList();
+		},
+		async getIdentityList() {
+			try {
+				const res = await getIdentityListByAddress(
+					this.$route.params.param,
+					this.identityPageNum,
+					this.identityPageSize,
+					false
+				);
+				if (res?.data?.length > 0) {
+					this.identityList = res.data.map((item) => {
+						return {
+							id: item.identities_id,
+							txHash: item.update_tx_hash || '--',
+							time: Tools.formatLocalTime(item.update_block_time) || '--',
+						};
+					});
+				}
+			} catch (e) {
+				console.error(e);
+				this.$message.error(this.$t('ExplorerLang.message.requestFailed'));
+			}
+		},
+		async getIdentityListCount() {
+			try {
+				const res = await getIdentityListByAddress(this.$route.params.param, null, null, true);
+				if (res?.count) {
+					this.identityCount = res.count;
+				} else {
+					this.identityCount = 0;
+				}
+			} catch (e) {
+				console.error(e);
+				this.$message.error(this.$t('ExplorerLang.message.requestFailed'));
+			}
+		},
+		
+		async formatTxData(msgType) {
+			this.transactionArray = [];
+			try {
+				if (this.txList && this.txList.length) {
+					const fees = [];
+					const amounts = [];
+					for (const tx of this.txList) {
+						let numberOfTo = '--';
+						let numberOfToArr = [];
+						let requestId = '--';
+						let requestIdArr = [];
+						let denomId = '--';
+						let denomIdArr = [];
+						let denomName = '--';
+						let denomNameArr = [];
+						let nftId = '--';
+						let nftIdArr = [];
+						let feedName = '--';
+						let feedNameArr = [];
+						let oracleCreator = '--';
+						let oracleCreatorArr = [];
+						let consumer = '--';
+						let consumerArr = [];
+						let digest = '--';
+						let digestArr = [];
+						let digest_algo = '--';
+						let digest_algoArr = [];
+						let symbol = '--';
+						let symbolArr = [];
+						let minUnit = '--';
+						let minUnitArr = [];
+						let owner = '--';
+						let ownerArr = [];
+						let dstOwner = '--';
+						let dstOwnerArr = [];
+						let srcOwner = '--';
+						let srcOwnerArr = [];
+						let sender = '--';
+						let senderArr = [];
+						let proposalId = '--';
+						let proposalIdArr = [];
+						let option = '--';
+						let optionArr = [];
+						let voter = '--';
+						let voterArr = [];
+						let depositor = '--';
+						let depositorArr = [];
+						let title = '--';
+						let author = '--';
+						let authorArr = [];
+						let provider = '--';
+						let providerArr = [];
+						let requestContextId = '--';
+						let requestContextIdArr = [];
+						let serviceName = '--';
+						
+						let serviceNameArr = [];
+						let clientId = '--';
+						let clientIdArr = [];
+						let portId = '--';
+						let portIdArr = [];
+						let channelId = '--';
+						let channelIdArr = [];
+						let connectionId = '--';
+						let connectionIdArr = [];
+						let receiver = '--';
+						let receiverArr = [];
+						const sameMsg = [];
+						let sameMsgFromAddrArr = [];
+						let sameMsgToAddrArr = [];
+						let msg;
+						// farm => stake unstake
+						let poolId = '--';
+						let poolIdArr = [];
+						let farmAmount = '--';
+						let farmAmountDenom = '';
+						let farmAmountNativeDenom = '';
+						const farmAmountArr = [];
+						// farm => create pool
+						let totalReward1 = '--';
+						let totalReward1Denom = '';
+						let totalReward1NativeDenom = '';
+						let totalReward2 = '--';
+						let totalReward2Denom = '';
+						let totalReward2NativeDenom = '';
+						let poolCreator = '--';
+						// farm => Create Pool With Community Pool
+						let proposer = '--';
+						let initialDeposit = '--';
+						// farm => destory pool/ adjust pool : poolId poolCreator
+						if (tx?.msgs?.length > 0) {
+							tx.msgs.forEach((item) => {
+								if (item.type === msgType) {
+									sameMsg.push(item);
+									msg = item;
+								}
+							});
+						}
+						
+						/*
              * 处理单一类型多msg的情况
              * */
             if (sameMsg?.length > 1) {
@@ -3383,10 +3311,6 @@ a {
 
     .address_nft_content {
       background: $bg_white_c;
-      padding: 0.25rem;
-      border-radius: 0.05rem;
-      // border: 0.01rem solid $bd_first_c;
-      margin-bottom: 0.48rem;
     }
 
     .address_content {
