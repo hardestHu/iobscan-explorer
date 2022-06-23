@@ -15,11 +15,11 @@ const i18n = new VueI18n({
 
 export default [
 	{
-		label:i18n.t('ExplorerLang.table.denom'),
-		displayValue:'denomName',
+		label: i18n.t('ExplorerLang.table.denom'),
+		displayValue: 'denomName',
 	},
 	{
-		label:i18n.t('ExplorerLang.table.tokenName'),
+		label: i18n.t('ExplorerLang.table.tokenName'),
 		displayValue: 'nftName',
 		nativeValue: 'id',
 		nftRouterParamsValue: 'denomId',
@@ -43,8 +43,8 @@ export default [
 		isFormatNftIdAndDenomId: true,
 	},
 	{
-		label:i18n.t('ExplorerLang.table.data'),
-		displayValue:'tokenData',
+		label: i18n.t('ExplorerLang.table.data'),
+		displayValue: 'tokenData',
 	},
 	{
 		label: i18n.t('ExplorerLang.table.uri'),
