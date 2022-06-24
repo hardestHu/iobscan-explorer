@@ -11,17 +11,19 @@
         </div>
       </div>
       <div class="address_tab_container">
-        <div class="address_tab_content">
-          <div
-              class="address_tab_item"
-              :key="index"
-              v-for="(item, index) in tabList"
-              :class="item.isActive ? 'active_content' : ''"
-              @click="selectOptions(index)"
-          >
-            <span>{{ item.label }}</span>
+        <vue-scroll :ops="opsConfig">
+          <div class="address_tab_content">
+            <div
+                class="address_tab_item"
+                :key="index"
+                v-for="(item, index) in tabList"
+                :class="item.isActive ? 'active_content' : ''"
+                @click="selectOptions(index)"
+            >
+              <span>{{ item.label }}</span>
+            </div>
           </div>
-        </div>
+        </vue-scroll>
       </div>
       <div v-if="moduleSupport('107', prodConfig.navFuncList)" v-show="isAsset">
         <!-- 地址详情 -->
@@ -1166,8 +1168,27 @@ export default {
       energyAssetData: [],
       energyAssetColumn,
       isEnergyAsset: false,
-      isShowSendAndReceiveTxComponent: false,
-      assetColumnArray: [],
+	    isShowSendAndReceiveTxComponent: false,
+      opsConfig: {
+        rail: {
+          opacity: 1,
+          background: '#E6E6E6',
+          // border: '1px solid #cecece',
+          size: '6px',
+        },
+        bar: {
+          keepShow: true,
+          size: '6px',
+          minSize: 0.1,
+          background: '#cdcdcd',
+        },
+        vuescroll: {
+          wheelScrollDuration: 0,
+          wheelDirectionReverse: false,
+          locking: true,
+          checkShifKey: true
+        }
+      }
     };
   },
   watch: {
@@ -3286,6 +3307,7 @@ a {
       .address_tab_content {
         display: flex;
         // margin-left: 0.28rem;
+        padding-bottom: 0.14rem;
 
         .address_tab_item {
           cursor: pointer;
