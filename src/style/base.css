@@ -17,4 +17,20 @@
 .text-justify	{
   text-align: justify;
 }
+.break-words {
+  overflow-wrap: break-word;
+}
+.break-normal {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.break-all {
+  word-break: break-all;
+}
+.whitespace-normal {
+  white-space: normal;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
 

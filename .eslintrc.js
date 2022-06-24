@@ -26,5 +26,12 @@ module.exports = {
       },
     ],
     'prettier/prettier': 'error',
+    'no-param-reassign': 'off',
+    'no-throw-literal': 'off',
+    'no-plusplus': 'off',
+    camelcase: 'off',
+    'no-nested-ternary': 'off',
+    'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off',
   },
 };
