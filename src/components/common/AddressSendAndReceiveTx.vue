@@ -18,12 +18,13 @@
 <script>
 import {getTxCountByAddress} from '@/service/api'
 import prodConfig from '../../productionConfig';
+
 export default {
 	name: "AddressSendAndReceiveTx",
 	data() {
 		return {
-			sendTxCount: '',
-			receiveTxCount:'',
+			sendTxCount: 0,
+			receiveTxCount: 0,
 			isFlShowSendTxCount: prodConfig?.isShowSendTxCount,
 			isFlShowReceiveTxCount: prodConfig?.isShowReceiveTxCount
 		}
@@ -34,26 +35,26 @@ export default {
 	methods: {
 		async getSendTxAndReceiveTxByAddress() {
 			const address = this.$route.params.param
-			if(address){
+			if (address) {
 				const sendTxParams = 198;
 				const receiveParams = 199;
 				let params = '';
-				if(prodConfig?.isShowSendTxCount){
+				if (prodConfig?.isShowSendTxCount) {
 					params = `${sendTxParams}`
 				}
-				if(prodConfig?.isShowReceiveTxCount){
+				if (prodConfig?.isShowReceiveTxCount) {
 					params = `${receiveParams}`
 				}
-				if (prodConfig?.isShowSendTxCount && prodConfig?.isShowReceiveTxCount){
+				if (prodConfig?.isShowSendTxCount && prodConfig?.isShowReceiveTxCount) {
 					params = `${sendTxParams},${receiveParams}`
 				}
-				const txCount = await getTxCountByAddress(params,address).catch(error => {
+				const txCount = await getTxCountByAddress(params, address).catch(error => {
 					console.error(error)
 				})
-				if(txCount?.send_txs_count){
+				if (txCount?.send_txs_count) {
 					this.sendTxCount = txCount.send_txs_count
 				}
-				if(txCount?.recv_txs_count){
+				if (txCount?.recv_txs_count) {
 					this.receiveTxCount = txCount.recv_txs_count
 				}
 			}
@@ -77,6 +78,7 @@ export default {
 			flex-direction: column;
 			align-items: flex-start;
 		}
+		
 		.address_send_tx_content {
 			.address_send_tx_label {
 				font-size: 0.16rem;
@@ -92,7 +94,8 @@ export default {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
-			.show_cross_line{
+			
+			.show_cross_line {
 				&::before {
 					content: ' ';
 					width: 0.01rem;
@@ -105,10 +108,12 @@ export default {
 					}
 				}
 			}
+			
 			.address_receive_tx_wrap {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
+				
 				.address_receive_tx_label {
 					font-size: 0.16rem;
 					font-weight: 400;
