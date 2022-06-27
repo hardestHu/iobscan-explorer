@@ -496,6 +496,8 @@ export const CHAIN_ICON = {
   'Cosmos Hub': { icon: 'iconfont iconCosmosHub' },
   NYANCAT: { icon: 'iconfont iconcaihongmao' },
   IRISHUB: { icon: 'iconfont iconiris' },
+  WENCHANG:{ icon: 'iconfont iconBianjie_wenchanglian_Logo-02' },
+  DATANG: {icon:'iconfont iconhuaban'},
 };
 const CHAINID = {};
 CHAINID.IRISHUB = 'Mainnet IRISHUB';
