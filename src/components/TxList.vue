@@ -77,6 +77,7 @@ import TxCountComponent from './TxCountComponent';
 import { needAddColumn } from './tableListColumnConfig/allTxTableColumnConfig';
 import SignerColunmn from './tableListColumnConfig/SignerColunmn';
 import TxResetButtonComponent from './common/TxResetButtonComponent';
+import TxTypes from '@/helper/TxTypes';
 
 export default {
   name: 'TxList',
@@ -349,8 +350,18 @@ export default {
     },
     async getAllTxType() {
       try {
-        const res = await getAllTxTypes();
-        const typeList = TxHelper.formatTxType(res.data);
+        const res = await TxTypes.getData();
+        // todo start
+        const typeList = TxHelper.formatTxType([
+          ...res.data,
+          {
+            typeName: TX_TYPE.fee_grant,
+          },
+          {
+            typeName: TX_TYPE.fee_unGrant,
+          },
+        ]);
+        // todo end
         typeList.unshift({
           value: '',
           label: this.$t('ExplorerLang.common.allTxType'),

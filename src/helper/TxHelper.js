@@ -241,52 +241,52 @@ export class TxHelper {
     }
   }
 
-  static formatTxTypeData(TxTypeData) {
-    const retOptions = [];
-    const map = new Map();
-    let index = 0;
-    const TX_TYPE_DISPLAY = {};
-    let lang = 'en';
-    if (prodConfig.lang === 'EN') {
-      lang = 'en';
-    } else {
-      lang = 'cn';
-    }
-    TxTypeData.forEach((txType) => {
-      const module = txType['module_' + `${lang}`];
-      const type = txType['type_' + `${lang}`];
-      if (!map.has(module)) {
-        retOptions.push({
-          label: module,
-          value: module,
-          children: [],
-        });
-        map.set(module, index);
-        index++;
-      }
-      retOptions[map.get(module)].children.push({
-        label: type,
-        value: txType.typeName,
-      });
-
-      TX_TYPE_DISPLAY[txType.typeName] = type;
-    });
-    // retOptions.filter(module => { module.children.length > 0 })
-
-    retOptions.forEach((module, index) => {
-      if (module.children.length === 0) {
-        retOptions.splice(index, 1);
-      }
-    });
-
-    const txType = {
-      txTypeData: TxTypeData,
-      txTypeDataOptions: retOptions,
-      TX_TYPE_DISPLAY,
-    };
-    sessionStorage.setItem('txType', JSON.stringify(txType));
-    return txType;
-  }
+  // static formatTxTypeData(TxTypeData) {
+  //   const retOptions = [];
+  //   const map = new Map();
+  //   let index = 0;
+  //   const TX_TYPE_DISPLAY = {};
+  //   let lang = 'en';
+  //   if (prodConfig.lang === 'EN') {
+  //     lang = 'en';
+  //   } else {
+  //     lang = 'cn';
+  //   }
+  //   TxTypeData.forEach((txType) => {
+  //     const module = txType['module_' + `${lang}`];
+  //     const type = txType['type_' + `${lang}`];
+  //     if (!map.has(module)) {
+  //       retOptions.push({
+  //         label: module,
+  //         value: module,
+  //         children: [],
+  //       });
+  //       map.set(module, index);
+  //       index++;
+  //     }
+  //     retOptions[map.get(module)].children.push({
+  //       label: type,
+  //       value: txType.typeName,
+  //     });
+  //
+  //     TX_TYPE_DISPLAY[txType.typeName] = type;
+  //   });
+  //   // retOptions.filter(module => { module.children.length > 0 })
+  //
+  //   retOptions.forEach((module, index) => {
+  //     if (module.children.length === 0) {
+  //       retOptions.splice(index, 1);
+  //     }
+  //   });
+  //
+  //   const txType = {
+  //     txTypeData: TxTypeData,
+  //     txTypeDataOptions: retOptions,
+  //     TX_TYPE_DISPLAY,
+  //   };
+  //   sessionStorage.setItem('txType', JSON.stringify(txType));
+  //   return txType;
+  // }
 
   // abandon
   static formatTxType(txTypeArray) {
@@ -1010,6 +1010,20 @@ export class TxHelper {
             label: TX_TYPE_DISPLAY[TX_TYPE.acknowledge_packet],
           });
           break;
+        // todo
+        case TX_TYPE.fee_grant:
+          othersObj.children.push({
+            value: TX_TYPE.fee_grant,
+            label: TX_TYPE_DISPLAY[TX_TYPE.fee_grant],
+          });
+          break;
+        case TX_TYPE.fee_unGrant:
+          othersObj.children.push({
+            value: TX_TYPE.fee_unGrant,
+            label: TX_TYPE_DISPLAY[TX_TYPE.fee_unGrant],
+          });
+          break;
+        default:
       }
     });
 

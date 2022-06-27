@@ -3218,6 +3218,11 @@ export default {
             case TX_TYPE.bsn_ddc:
               this.buildBsnDdc(msg);
               break;
+            // todo
+            case TX_TYPE.fee_grant:
+            case TX_TYPE.fee_unGrant:
+              this.buildFee(msg);
+              break;
           }
         }
       } catch (e) {
@@ -6010,6 +6015,20 @@ export default {
           label:
             !msg.ex.ddc_method && this.$t('ExplorerLang.transactionInformation.bsnddc.tradingData'),
           value: msg?.ex?.data,
+        },
+      ];
+    },
+
+    // todo
+    buildFee(msg) {
+      this.detailInfo = [
+        {
+          label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
+          value: msg.from,
+        },
+        {
+          label: this.$t('ExplorerLang.transactionInformation.farm.additionalReward'),
+          value: msg.to,
         },
       ];
     },

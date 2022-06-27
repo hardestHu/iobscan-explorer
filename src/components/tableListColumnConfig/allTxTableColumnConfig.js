@@ -1921,4 +1921,17 @@ export const needAddColumn = {
       linkRoute: '/address/',
     },
   ],
+  // todo
+  fee_grant: [
+    {
+      label: i18n.t('ExplorerLang.table.from'),
+      displayValue: 'from',
+      nativeValue: 'from',
+    },
+    {
+      label: i18n.t('ExplorerLang.table.to'),
+      displayValue: 'to',
+      nativeValue: 'to',
+    },
+  ],
 };

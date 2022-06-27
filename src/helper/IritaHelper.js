@@ -9,6 +9,7 @@ import { COSMOS_ADDRESS_PREFIX, IRIS_ADDRESS_PREFIX, DTC_ADDRESS_PREFIX } from '
 // import { ibcDenomPrefix } from '../constant';
 import { cfg } from '@/config';
 import md5 from 'js-md5';
+import TxTypes from '@/helper/TxTypes';
 import Tools from '../util/Tools';
 import { TxHelper } from './TxHelper';
 
@@ -62,20 +63,27 @@ export async function getConfig() {
 }
 
 export async function getTxType() {
-  let txType = window.sessionStorage.getItem('txType');
-  if (!txType) {
-    const res = await getAllTxTypes().catch((e) => {
-      throw e;
-    });
-    if (res) {
-      txType = TxHelper.formatTxTypeData(res.data);
-    } else {
-      txType = {};
-    }
-  } else {
-    txType = JSON.parse(txType || '{}');
+  if (TxTypes.txType) {
+    return TxTypes.txType;
   }
-  return txType;
+
+  await TxTypes.getData();
+  return TxTypes.formatTxTypeData();
+
+  // let txType = window.sessionStorage.getItem('txType');
+  // if (!txType) {
+  //   const res = await getAllTxTypes().catch((e) => {
+  //     throw e;
+  //   });
+  //   if (res) {
+  //     txType = TxHelper.formatTxTypeData(res.data);
+  //   } else {
+  //     txType = {};
+  //   }
+  // } else {
+  //   txType = JSON.parse(txType || '{}');
+  // }
+  // return txType;
 }
 
 export async function getMainToken() {

@@ -147,6 +147,11 @@ export const TX_TYPE = {
   ddc_721: 'ddc_721',
   ddc_1155: 'ddc_1155',
   ddc_other: 'ddc_other',
+
+  // todo
+  // Fee grant 链账户授权
+  fee_grant: 'fee_grant',
+  fee_unGrant: 'fee_unGrant',
 };
 
 // 展示 abandon
