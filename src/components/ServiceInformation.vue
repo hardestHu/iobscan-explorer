@@ -861,18 +861,17 @@
                 }
             }
             .service_information_transaction_content {
-                margin-bottom: 0.2rem;
-                background: $bg_white_c;
                 box-sizing: border-box;
-                padding: 0.25rem 0.27rem 0.2rem 0.27rem;
+                //padding: 0.25rem 0.27rem 0.2rem 0.27rem;
                 border-radius: 5px;
                 // border: 1px solid $bd_first_c;
                 .service_information_transaction_title {
+	                  background: #fff;
                     font-size: $s18;
                     color: $t_first_c;
                     font-weight: 600;
-                    margin-bottom: 0.36rem;
                     text-align: left;
+	                  padding: 0.25rem 0 0.2rem 0.27rem;
                 }
                 .service_information_transaction_condition_container {
                     width: 100%;
