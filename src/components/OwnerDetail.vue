@@ -1036,6 +1036,7 @@ import TxResetButtonComponent from './common/TxResetButtonComponent';
 import ddcListColumnConfig from './tableListColumnConfig/ddcListColumnConfig';
 import energyAssetColumn from './tableListColumnConfig/energyAssetColumn';
 import { energyAsset, assetInfo, nftCount, ddc, identity, iService, tx } from './ownerDetail/lib';
+import TxTypes from '@/helper/TxTypes';
 
 export default {
   name: 'OwnerDetail',
@@ -1201,6 +1202,7 @@ export default {
           checkShifKey: true,
         },
       },
+      assetColumnArray: addressDetailNftTabColumnConfig,
     };
   },
   watch: {
@@ -1231,7 +1233,6 @@ export default {
   async created() {
     this.mainToken = await getMainToken();
     await this.getConfigTokenData();
-    this.assetColumnArray = addressDetailNftTabColumnConfig;
   },
   async mounted() {
     this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
@@ -2795,8 +2796,19 @@ export default {
     },
     async getAllTxType() {
       try {
-        const res = await getAllTxTypes();
-        this.txTypeOption = TxHelper.formatTxType(res.data);
+        const res = await TxTypes.getData();
+        // todo start
+        this.txTypeOption = TxHelper.formatTxType([
+          ...res.data,
+          {
+            typeName: TX_TYPE.grant_allowance,
+          },
+          {
+            typeName: TX_TYPE.revoke_allowance,
+          },
+        ]);
+        // const res = await getAllTxTypes();
+        // this.txTypeOption = TxHelper.formatTxType(res.data);
         // this.txTypeOption = res?.txTypeDataOptions
         this.txTypeOption.unshift({
           value: '',

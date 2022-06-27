@@ -17,7 +17,7 @@ class TxTypes {
     });
 
     this.typeData = await this.typeData;
-    this.typeData = this.typeData.data;
+    // this.typeData = this.typeData.data;
     return this.typeData;
   }
 
@@ -29,7 +29,7 @@ class TxTypes {
     const lang = prodConfig.lang === 'EN' ? 'en' : 'cn';
 
     // 把平铺的typeData根据module拼装成树形结构（两层）
-    this.typeData?.forEach((typeItem) => {
+    this.typeData?.data?.forEach((typeItem) => {
       const module = typeItem[`module_${lang}`];
       const type = typeItem[`type_${lang}`];
 
@@ -55,7 +55,7 @@ class TxTypes {
     retOptions = retOptions.filter((module) => module.children.length > 0);
 
     this.txType = {
-      txTypeData: this.typeData,
+      txTypeData: this.typeData?.data || [],
       txTypeDataOptions: retOptions,
       TX_TYPE_DISPLAY,
     };

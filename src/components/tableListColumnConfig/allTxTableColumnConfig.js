@@ -1,14 +1,7 @@
-import VueI18n from 'vue-i18n';
+import i18n from '@/i18n';
 import { cfg } from '../../config';
-import prodConfig from '../../productionConfig';
 
-const i18n = new VueI18n({
-  locale: prodConfig.lang == 'EN' ? 'EN' : 'CN',
-  messages: {
-    CN: require('../../../lang/CN-Cindy'),
-    EN: require('../../../lang/EN-Cindy'),
-  },
-});
+// eslint-disable-next-line import/prefer-default-export
 export const needAddColumn = {
   send: [
     {
@@ -1922,7 +1915,19 @@ export const needAddColumn = {
     },
   ],
   // todo
-  fee_grant: [
+  grant_allowance: [
+    {
+      label: i18n.t('ExplorerLang.table.from'),
+      displayValue: 'from',
+      nativeValue: 'from',
+    },
+    {
+      label: i18n.t('ExplorerLang.table.to'),
+      displayValue: 'to',
+      nativeValue: 'to',
+    },
+  ],
+  revoke_allowance: [
     {
       label: i18n.t('ExplorerLang.table.from'),
       displayValue: 'from',

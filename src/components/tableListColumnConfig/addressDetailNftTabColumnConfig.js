@@ -1,16 +1,7 @@
 /*
-* 地址详情页数据对象列表配置项
-* */
-import VueI18n from 'vue-i18n';
-import prodConfig from "../../productionConfig";
-
-const i18n = new VueI18n({
-  locale: prodConfig.lang == 'EN' ? 'EN' : 'CN',
-  messages: {
-    "CN": require('../../../lang/CN-Cindy'),
-    "EN": require('../../../lang/EN-Cindy')
-  }
-})
+ * 地址详情页数据对象列表配置项
+ * */
+import i18n from '@/i18n';
 
 export default [
   {
@@ -50,6 +41,6 @@ export default [
     displayValue: 'tokenUri',
     nativeValue: 'tokenUri',
     isNftHref: true,
-    isNeedFormat: true
+    isNeedFormat: true,
   },
-]
+];

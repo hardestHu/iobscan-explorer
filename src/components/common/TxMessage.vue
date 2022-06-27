@@ -3219,8 +3219,8 @@ export default {
               this.buildBsnDdc(msg);
               break;
             // todo
-            case TX_TYPE.fee_grant:
-            case TX_TYPE.fee_unGrant:
+            case TX_TYPE.grant_allowance:
+            case TX_TYPE.revoke_allowance:
               this.buildFee(msg);
               break;
           }

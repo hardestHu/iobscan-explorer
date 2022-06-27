@@ -150,8 +150,8 @@ export const TX_TYPE = {
 
   // todo
   // Fee grant 链账户授权
-  fee_grant: 'fee_grant',
-  fee_unGrant: 'fee_unGrant',
+  grant_allowance: 'grant_allowance',
+  revoke_allowance: 'revoke_allowance',
 };
 
 // 展示 abandon
@@ -303,6 +303,7 @@ export const LEVEL_TX_TYPE = {
   Gov: 'Gov',
   Other: 'Others',
   crossChain: 'CrossChain',
+  Feegrant: 'Fee Grant',
 };
 
 export const TX_STATUS = {
