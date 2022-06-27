@@ -16,9 +16,8 @@ class TxTypes {
       throw e;
     });
 
-    await this.typeData;
+    this.typeData = await this.typeData;
     this.typeData = this.typeData.data;
-
     return this.typeData;
   }
 
@@ -60,6 +59,8 @@ class TxTypes {
       txTypeDataOptions: retOptions,
       TX_TYPE_DISPLAY,
     };
+    // 这里在TabsComponents切换的时候用到，涉及页面比较多，暂时多存一下，整合所有涉及的使用页面再删除
+    sessionStorage.setItem('txType', JSON.stringify(this.txType));
 
     return this.txType;
   }

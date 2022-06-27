@@ -353,7 +353,7 @@ export default {
         const res = await TxTypes.getData();
         // todo start
         const typeList = TxHelper.formatTxType([
-          ...res.data,
+          ...res,
           {
             typeName: TX_TYPE.fee_grant,
           },

@@ -39,23 +39,23 @@ async function uploadIbcToken(denom) {
 }
 
 async function setConfig() {
-  const config = await getConfigApi().catch((e) => {
+  let config = await getConfigApi().catch((e) => {
     throw e;
   });
-  window.sessionStorage.setItem('config', JSON.stringify(config));
+
+  if (config) {
+    window.sessionStorage.setItem('config', JSON.stringify(config));
+  } else {
+    config = {};
+  }
+
+  return config;
 }
 
 export async function getConfig() {
   let config = window.sessionStorage.getItem('config');
   if (!config) {
-    config = await getConfigApi().catch((e) => {
-      throw e;
-    });
-    if (config) {
-      window.sessionStorage.setItem('config', JSON.stringify(config));
-    } else {
-      config = {};
-    }
+    config = await setConfig();
   } else {
     config = JSON.parse(config || '{}');
   }
