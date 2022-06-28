@@ -27,7 +27,7 @@
 							:prop="item.displayValue"
 							:label="item.label"
 							:sort-method="(a,b) => {return tableSort(item.sortName,a,b)}"
-							:width="tableListWidth[index]"
+							:width="tableListWidth[index] || item.width"
 							:sort-orders="item.isNeedSort ? ['descending', 'ascending'] :[]"
 							:sortable="item.isNeedSort">
 							<template slot="header" slot-scope="scope">
