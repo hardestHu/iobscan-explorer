@@ -1,14 +1,6 @@
 // 通用信息的后半部分
-import VueI18n from 'vue-i18n';
-import prodConfig from '../../productionConfig';
+import i18n from '@/i18n';
 
-const i18n = new VueI18n({
-  locale: prodConfig.lang == 'EN' ? 'EN' : 'CN',
-  messages: {
-    CN: require('../../../lang/CN-Cindy'),
-    EN: require('../../../lang/EN-Cindy'),
-  },
-});
 export default [
   {
     label: i18n.t('ExplorerLang.table.block'),
