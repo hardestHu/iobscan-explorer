@@ -3268,6 +3268,11 @@ export default {
       }
     },
   },
+	beforeDestroy(){
+		sessionStorage.removeItem('currentTxModelIndex')
+		sessionStorage.removeItem('lastChoiceMsgModelIndex')
+		sessionStorage.removeItem('currentChoiceMsgType')
+	}
 };
 </script>
 
