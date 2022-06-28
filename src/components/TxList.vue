@@ -95,7 +95,7 @@ export default {
     const { txType, status, beginTime, endTime, pageNum, pageSize } = Tools.urlParser();
     return {
       isLoading: false,
-      TX_TYPE_DISPLAY: {},
+      // TX_TYPE_DISPLAY: {}, // 无用代码待删除
       IBC: 'IBC',
       HashLock: 'Hash Lock',
       PickerOptions: {
@@ -159,9 +159,11 @@ export default {
     };
   },
   async created() {
-    await this.getTxTypeData();
-    const { txType, status, beginTime, endTime } = Tools.urlParser();
-    this.formatTxData(txType);
+    // 无用代码
+    // await this.getTxTypeData();
+    // 获取列表数据才会执行，所以这里可以删除
+    // const { txType, status, beginTime, endTime } = Tools.urlParser();
+    // this.formatTxData(txType);
     await this.getConfigTokenData();
   },
   mounted() {
@@ -353,12 +355,12 @@ export default {
         const res = await TxTypes.getData();
         // todo start
         const typeList = TxHelper.formatTxType([
-          ...res,
+          ...res.data,
           {
-            typeName: TX_TYPE.fee_grant,
+            typeName: TX_TYPE.grant_allowance,
           },
           {
-            typeName: TX_TYPE.fee_unGrant,
+            typeName: TX_TYPE.revoke_allowance,
           },
         ]);
         // todo end
@@ -415,14 +417,15 @@ export default {
       this.txTypeArray = [''];
       this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
     },
-    async getTxTypeData() {
-      try {
-        const res = await getTxType();
-        this.TX_TYPE_DISPLAY = res?.TX_TYPE_DISPLAY;
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    // 无用代码，待删除
+    // async getTxTypeData() {
+    //   try {
+    //     const res = await getTxType();
+    //     this.TX_TYPE_DISPLAY = res?.TX_TYPE_DISPLAY;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     isValid(value) {
       return !(!value || !value.length || value == '--');
     },

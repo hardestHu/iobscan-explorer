@@ -208,6 +208,15 @@ export class TxHelper {
         break;
       case TX_TYPE.multisend:
         res.from = msg.inputs && msg.inputs.length > 0 ? msg.inputs[0].address : '';
+        break;
+      // todo
+      case TX_TYPE.grant_allowance:
+      case TX_TYPE.revoke_allowance:
+        res.from = msg.from;
+        res.to = msg.to;
+        break;
+      default:
+        break;
     }
     return res;
   }
@@ -380,6 +389,12 @@ export class TxHelper {
     const smartContractObj = {
       value: LEVEL_TX_TYPE.SmartContract,
       label: LEVEL_TX_TYPE.SmartContract,
+      children: [],
+    };
+    // 新增Feegrant
+    const feegrantObj = {
+      value: LEVEL_TX_TYPE.Feegrant,
+      label: LEVEL_TX_TYPE.Feegrant,
       children: [],
     };
     txTypeArray.forEach((item) => {
@@ -1011,16 +1026,16 @@ export class TxHelper {
           });
           break;
         // todo
-        case TX_TYPE.fee_grant:
-          othersObj.children.push({
-            value: TX_TYPE.fee_grant,
-            label: TX_TYPE_DISPLAY[TX_TYPE.fee_grant],
+        case TX_TYPE.grant_allowance:
+          feegrantObj.children.push({
+            value: TX_TYPE.grant_allowance,
+            label: TX_TYPE_DISPLAY[TX_TYPE.grant_allowance],
           });
           break;
-        case TX_TYPE.fee_unGrant:
-          othersObj.children.push({
-            value: TX_TYPE.fee_unGrant,
-            label: TX_TYPE_DISPLAY[TX_TYPE.fee_unGrant],
+        case TX_TYPE.revoke_allowance:
+          feegrantObj.children.push({
+            value: TX_TYPE.revoke_allowance,
+            label: TX_TYPE_DISPLAY[TX_TYPE.revoke_allowance],
           });
           break;
         default:
@@ -1047,7 +1062,8 @@ export class TxHelper {
       iServiceObj,
       crossChainObj,
       othersObj,
-      smartContractObj
+      smartContractObj,
+      feegrantObj
     );
     allTxType = allTxType.filter((item) => item.children.length);
     allTxType.forEach((item) => {
