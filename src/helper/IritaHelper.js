@@ -34,20 +34,15 @@ async function uploadIbcToken(denom) {
   };
   const { data } = await getIbcToken(payload);
   if (data?.symbol) {
-    await setConfig();
+    await getConfig();
     return data;
   }
-}
-
-async function setConfig() {
-  const data = await ConfigClass.getConfig()
-  return data
 }
 
 export async function getConfig() {
   let config = window.sessionStorage.getItem('config');
   if (!config) {
-    config = await setConfig();
+    config = await ConfigClass.getConfig()
   } else {
     config = JSON.parse(config || '{}');
   }
