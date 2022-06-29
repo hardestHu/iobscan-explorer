@@ -12,6 +12,7 @@ import md5 from 'js-md5';
 import TxTypes from '@/helper/TxTypes';
 import Tools from '../util/Tools';
 import { TxHelper } from './TxHelper';
+import ConfigClass from "@/helper/config";
 
 export function validatePositiveInteger(value) {
   if (+value === 0 || (value && +value < 1)) {
@@ -39,17 +40,8 @@ async function uploadIbcToken(denom) {
 }
 
 async function setConfig() {
-  let config = await getConfigApi().catch((e) => {
-    throw e;
-  });
-
-  if (config) {
-    window.sessionStorage.setItem('config', JSON.stringify(config));
-  } else {
-    config = {};
-  }
-
-  return config;
+  const data = await ConfigClass.getConfig()
+  return data
 }
 
 export async function getConfig() {
