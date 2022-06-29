@@ -1,15 +1,8 @@
-import VueI18n from 'vue-i18n';
+import i18n from '@/i18n';
 import { TX_TYPE, PubKeyAlgorithm, LEVEL_TX_TYPE, TX_TYPE_DISPLAY } from '../constant';
 import prodConfig from '../productionConfig';
 import Tools from '../util/Tools';
 
-const i18n = new VueI18n({
-  locale: prodConfig.lang == 'EN' ? 'EN' : 'CN',
-  messages: {
-    CN: require('../../lang/CN-Cindy'),
-    EN: require('../../lang/EN-Cindy'),
-  },
-});
 export class TxHelper {
   // The corresponding IBC Denom was deduced through the IBC Packet path
   static getOriginalDenomFromPacket(ibc_package, type) {
@@ -21,8 +14,8 @@ export class TxHelper {
       const prefix_dc = `${destination_port}/${destination_channel}/`;
       const { denom } = data;
       if (
-        (type && type == TX_TYPE.timeout_packet) ||
-        (type && type == TX_TYPE.acknowledge_packet)
+        (type && type === TX_TYPE.timeout_packet) ||
+        (type && type === TX_TYPE.acknowledge_packet)
       ) {
         if (denom.startsWith(prefix_sc)) {
           denom_result = `ibc/${Tools.sha256(denom).toUpperCase()}`;
@@ -209,11 +202,10 @@ export class TxHelper {
       case TX_TYPE.multisend:
         res.from = msg.inputs && msg.inputs.length > 0 ? msg.inputs[0].address : '';
         break;
-      // todo
       case TX_TYPE.grant_allowance:
       case TX_TYPE.revoke_allowance:
-        res.from = msg.from;
-        res.to = msg.to;
+        res.from = msg.granter;
+        res.to = msg.grantee;
         break;
       default:
         break;
@@ -389,12 +381,6 @@ export class TxHelper {
     const smartContractObj = {
       value: LEVEL_TX_TYPE.SmartContract,
       label: LEVEL_TX_TYPE.SmartContract,
-      children: [],
-    };
-    // 新增Feegrant
-    const feegrantObj = {
-      value: LEVEL_TX_TYPE.Feegrant,
-      label: LEVEL_TX_TYPE.Feegrant,
       children: [],
     };
     txTypeArray.forEach((item) => {
@@ -1025,15 +1011,14 @@ export class TxHelper {
             label: TX_TYPE_DISPLAY[TX_TYPE.acknowledge_packet],
           });
           break;
-        // todo
         case TX_TYPE.grant_allowance:
-          feegrantObj.children.push({
+          othersObj.children.push({
             value: TX_TYPE.grant_allowance,
             label: TX_TYPE_DISPLAY[TX_TYPE.grant_allowance],
           });
           break;
         case TX_TYPE.revoke_allowance:
-          feegrantObj.children.push({
+          othersObj.children.push({
             value: TX_TYPE.revoke_allowance,
             label: TX_TYPE_DISPLAY[TX_TYPE.revoke_allowance],
           });
@@ -1062,8 +1047,7 @@ export class TxHelper {
       iServiceObj,
       crossChainObj,
       othersObj,
-      smartContractObj,
-      feegrantObj
+      smartContractObj
     );
     allTxType = allTxType.filter((item) => item.children.length);
     allTxType.forEach((item) => {

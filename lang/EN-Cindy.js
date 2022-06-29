@@ -609,6 +609,14 @@ export const ExplorerLang = {
       signer: 'Caller',
       tradingData: 'Raw Data',
     },
+    grant: {
+      granter: 'granter',
+      grantee: 'grantee',
+      expiration: 'expiration',
+      amount: 'amount',
+      ugas: 'ugas',
+      business: 'business',
+    },
   },
   addressDetail: {
     addressDetail: 'Address Details',

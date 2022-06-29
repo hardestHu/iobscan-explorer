@@ -3218,7 +3218,6 @@ export default {
             case TX_TYPE.bsn_ddc:
               this.buildBsnDdc(msg);
               break;
-            // todo
             case TX_TYPE.grant_allowance:
             case TX_TYPE.revoke_allowance:
               this.buildFee(msg);
@@ -6019,18 +6018,53 @@ export default {
       ];
     },
 
-    // todo
     buildFee(msg) {
       this.detailInfo = [
         {
-          label: this.$t('ExplorerLang.transactionInformation.farm.poolId'),
-          value: msg.from,
+          label: this.$t('ExplorerLang.transactionInformation.grant.granter'),
+          value: msg.granter,
         },
         {
-          label: this.$t('ExplorerLang.transactionInformation.farm.additionalReward'),
-          value: msg.to,
+          label: this.$t('ExplorerLang.transactionInformation.grant.grantee'),
+          value: msg.grantee,
         },
       ];
+
+      if (msg.allowance) {
+        if (msg.allowance?.expiration) {
+          const expiration = Tools.formatLocalTime(msg.allowance?.expiration);
+          this.detailInfo.push({
+            label: this.$t('ExplorerLang.transactionInformation.grant.expiration'),
+            value: expiration,
+          });
+        }
+
+        if (msg.allowance.spend_limit && msg.allowance.spend_limit.length) {
+          const values = [];
+          // xxx 能量值（ugas） xxx 业务费（business）
+          // amount denom
+          const ugas = msg.allowance.spend_limit[0];
+          values.push(
+            `${ugas.amount}${ugas.denom} ${this.$t(
+              'ExplorerLang.transactionInformation.grant.ugas'
+            )}`
+          );
+
+          msg.allowance.spend_limit.slice(1).forEach((v) => {
+            values.push(
+              `${v.amount}${v.denom} ${this.$t(
+                'ExplorerLang.transactionInformation.grant.business'
+              )}`
+            );
+          });
+
+          this.detailInfo.push({
+            label: this.$t('ExplorerLang.transactionInformation.grant.amount'),
+            value: values,
+            isArray: true,
+          });
+        }
+      }
     },
   },
 };

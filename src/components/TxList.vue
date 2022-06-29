@@ -51,6 +51,7 @@ import {
   getTxType,
   getConfig,
 } from '@/helper/IritaHelper';
+import TxTypes from '@/helper/TxTypes';
 import Tools from '../util/Tools';
 import MPagination from './common/MPagination';
 import TxListComponent from './common/TxListComponent';
@@ -66,18 +67,23 @@ import {
   COSMOS_ADDRESS_PREFIX,
 } from '../constant';
 import ListComponent from './common/ListComponent';
-import txCommonTable from './tableListColumnConfig/txCommonTable';
-import txCommonLatestTable from './tableListColumnConfig/txCommonLatestTable';
 import { getAmountByTx, getDenomMap, getDenomTheme } from '../helper/txListAmoutHelper';
 import parseTimeMixin from '../mixins/parseTime';
 import prodConfig from '../productionConfig';
 import TabsComponent from './common/TabsComponent';
 import TxStatusTabsComponents from './common/TxStatusTabsComponents';
 import TxCountComponent from './TxCountComponent';
-import { needAddColumn } from './tableListColumnConfig/allTxTableColumnConfig';
-import SignerColunmn from './tableListColumnConfig/SignerColunmn';
 import TxResetButtonComponent from './common/TxResetButtonComponent';
-import TxTypes from '@/helper/TxTypes';
+import { getColumnByTxTyp } from './tableListColumnConfig/common';
+import {
+  isMultisend,
+  isRespondService,
+  isDenomAndId,
+  isFeedNameAndCreator,
+  isConsumer,
+  isClientId,
+  isConsumerReqIdServiceName,
+} from './txList/lib';
 
 export default {
   name: 'TxList',
@@ -168,76 +174,73 @@ export default {
   },
   mounted() {
     this.getFilterTxs('init');
-    const { txType } = Tools.urlParser();
-    this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
-    if (txType && needAddColumn[txType]) {
-      this.txColumnList = txCommonTable.concat(needAddColumn[txType], txCommonLatestTable);
-    }
+    // 初始化了两次，没必要，待删除
+    // const { txType } = Tools.urlParser();
+    // this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
+    // if (txType && needAddColumn[txType]) {
+    //   this.txColumnList = txCommonTable.concat(needAddColumn[txType], txCommonLatestTable);
+    // }
     // this.getTxListData(this.pageNum,this.pageSize,true)
     this.getAllTxType();
     this.setMainToken();
-    this.setIsShowIbc();
-    this.setIsShowHashLock();
+    /** 在listComponent.vue 内部判断了，没用了 start * */
+    // this.setIsShowIbc();
+    // this.setIsShowHashLock();
+    /** 在listComponent.vue 内部判断了，没用了 end * */
   },
   methods: {
-    async setIsShowIbc() {
-      const msgTypeIbcList = await getTxType();
-      const IbcList = [
-        TX_TYPE.recv_packet,
-        TX_TYPE.create_client,
-        TX_TYPE.update_client,
-        TX_TYPE.transfer,
-        TX_TYPE.timeout_packet,
-        TX_TYPE.upgrade_client,
-        TX_TYPE.submit_misbehaviour,
-        TX_TYPE.connection_open_init,
-        TX_TYPE.connection_open_try,
-        TX_TYPE.connection_open_ack,
-        TX_TYPE.connection_open_confirm,
-        TX_TYPE.channel_open_init,
-        TX_TYPE.channel_open_try,
-        TX_TYPE.channel_open_ack,
-        TX_TYPE.channel_open_confirm,
-        TX_TYPE.channel_close_init,
-        TX_TYPE.channel_close_confirm,
-        TX_TYPE.timeout_on_close_packet,
-        TX_TYPE.acknowledge_packet,
-      ];
-
-      if (msgTypeIbcList?.txTypeData?.length) {
-        let ibcArr = [];
-        ibcArr = msgTypeIbcList.txTypeData.filter((item) => {
-          if (item?.typeName) {
-            if (IbcList.includes(item.typeName)) {
-              return item;
-            }
-          }
-        });
-        this.isShowIbc = false;
-        if (ibcArr?.length) {
-          this.isShowIbc = true;
-        }
-      }
-    },
-    async setIsShowHashLock() {
-      const msgTypeHashLockList = await getTxType();
-      const HashLockList = [TX_TYPE.create_htlc, TX_TYPE.claim_htlc];
-
-      if (msgTypeHashLockList?.txTypeData?.length) {
-        let HashLockArr = [];
-        HashLockArr = msgTypeHashLockList.txTypeData.filter((item) => {
-          if (item?.typeName) {
-            if (HashLockList.includes(item.typeName)) {
-              return item;
-            }
-          }
-        });
-        this.isShowHashLock = false;
-        if (HashLockArr?.length) {
-          this.isShowHashLock = true;
-        }
-      }
-    },
+    /** 在listComponent.vue 内部判断了，没用了 start * */
+    // async setIsShowIbc() {
+    //   const msgTypeIbcList = await getTxType();
+    //   const IbcList = [
+    //     TX_TYPE.recv_packet,
+    //     TX_TYPE.create_client,
+    //     TX_TYPE.update_client,
+    //     TX_TYPE.transfer,
+    //     TX_TYPE.timeout_packet,
+    //     TX_TYPE.upgrade_client,
+    //     TX_TYPE.submit_misbehaviour,
+    //     TX_TYPE.connection_open_init,
+    //     TX_TYPE.connection_open_try,
+    //     TX_TYPE.connection_open_ack,
+    //     TX_TYPE.connection_open_confirm,
+    //     TX_TYPE.channel_open_init,
+    //     TX_TYPE.channel_open_try,
+    //     TX_TYPE.channel_open_ack,
+    //     TX_TYPE.channel_open_confirm,
+    //     TX_TYPE.channel_close_init,
+    //     TX_TYPE.channel_close_confirm,
+    //     TX_TYPE.timeout_on_close_packet,
+    //     TX_TYPE.acknowledge_packet,
+    //   ];
+    //
+    //   if (msgTypeIbcList?.txTypeData?.length) {
+    //     let ibcArr = [];
+    //     ibcArr = msgTypeIbcList.txTypeData.filter((item) => {
+    //       if (item?.typeName && IbcList.includes(item.typeName)) {
+    //         return true;
+    //       }
+    //       return false;
+    //     });
+    //     this.isShowIbc = !!ibcArr?.length;
+    //   }
+    // },
+    // async setIsShowHashLock() {
+    //   const msgTypeHashLockList = await getTxType();
+    //   const HashLockList = [TX_TYPE.create_htlc, TX_TYPE.claim_htlc];
+    //
+    //   if (msgTypeHashLockList?.txTypeData?.length) {
+    //     let HashLockArr = [];
+    //     HashLockArr = msgTypeHashLockList.txTypeData.filter((item) => {
+    //       if (item?.typeName && HashLockList.includes(item.typeName)) {
+    //         return true;
+    //       }
+    //       return false;
+    //     });
+    //     this.isShowHashLock = !!HashLockArr?.length;
+    //   }
+    // },
+    /** 在listComponent.vue 内部判断了，没用了 end * */
 
     changeTxStatus(txStatus) {
       this.statusValue = Number(txStatus);
@@ -255,44 +258,26 @@ export default {
       this.getFilterTxs();
     },
     getFilterTxs(param) {
-      if (param?.value) {
-        this.txType = param.value;
-      } else if (param?.value === '') {
-        // 处理点击all的情况
-        this.txType = '';
-      } else if (Array.isArray(param)) {
-        const notAllMsgType = param.filter((item) => {
-          return item.label !== 'secondaryAll';
-        });
-        const currentSelectSecondMsgTypes = notAllMsgType.map((item) => {
-          return item.value;
-        });
+      this.updateTxtype(param);
+      this.txColumnList = getColumnByTxTyp(this.txType);
 
-        if (currentSelectSecondMsgTypes?.length) {
-          this.txType = currentSelectSecondMsgTypes.join(',');
-        }
-      }
-      this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
-      if (this.txType && needAddColumn[this.txType]) {
-        this.txColumnList = txCommonTable.concat(needAddColumn[this.txType], txCommonLatestTable);
-      }
       this.statusValue = Number(this.statusValue || 0);
       this.pageNum = 1;
-      let url = `/#/txs?pageNum=${this.pageNum}&pageSize=${this.pageSize}`;
-      if (this.txType) {
-        url += `&txType=${this.txType}`;
-      }
-      if (this.statusValue) {
-        url += `&status=${this.statusValue}`;
-      }
-      if (this.beginTime) {
-        url += `&beginTime=${this.beginTime}`;
-      }
-      if (this.endTime) {
-        url += `&endTime=${this.endTime}`;
-      }
 
-      param == 'init' ? history.replaceState(null, null, url) : history.pushState(null, null, url);
+      const url = this.stringifyUrl(
+        '/#/txs',
+        {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          txType: this.txType,
+          status: this.statusValue,
+          beginTime: this.beginTime,
+          endTime: this.endTime,
+        },
+        [undefined, null, 0, '']
+      );
+
+      param === 'init' ? history.replaceState(null, null, url) : history.pushState(null, null, url);
       this.getTxListData(null, null, true);
       this.getTxListData(this.pageNum, this.pageSize);
     },
@@ -353,17 +338,7 @@ export default {
     async getAllTxType() {
       try {
         const res = await TxTypes.getData();
-        // todo start
-        const typeList = TxHelper.formatTxType([
-          ...res.data,
-          {
-            typeName: TX_TYPE.grant_allowance,
-          },
-          {
-            typeName: TX_TYPE.revoke_allowance,
-          },
-        ]);
-        // todo end
+        const typeList = TxHelper.formatTxType(res.data);
         typeList.unshift({
           value: '',
           label: this.$t('ExplorerLang.common.allTxType'),
@@ -415,7 +390,7 @@ export default {
       sessionStorage.setItem('lastChoiceMsgModelIndex', 0);
       sessionStorage.setItem('txTimeRange', []);
       this.txTypeArray = [''];
-      this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
+      this.txColumnList = getColumnByTxTyp();
     },
     // 无用代码，待删除
     // async getTxTypeData() {
@@ -661,46 +636,29 @@ export default {
                   sameMsgToAddrArr.push(addrObj.to);
                 }
 
-                if (item?.type === TX_TYPE.multisend && item?.msg?.outputs?.length) {
+                if (isMultisend(item)) {
                   numberOfToArr.push(item.msg.outputs.length);
                 }
-                if (item?.type === TX_TYPE.respond_service && item?.msg?.request_id) {
+                if (isRespondService(item)) {
                   requestIdArr.push(item.msg.request_id);
                 }
-                if (
-                  item?.type === TX_TYPE.burn_nft ||
-                  item?.type === TX_TYPE.edit_nft ||
-                  item?.type === TX_TYPE.mint_nft ||
-                  (item?.type === TX_TYPE.transfer_nft && item?.msg?.denom && item?.msg?.id)
-                ) {
+                if (isDenomAndId(item)) {
                   denomIdArr.push(item.msg.denom);
                   nftIdArr.push(item.msg.id);
                 }
 
-                if (
-                  item?.type === TX_TYPE.start_feed ||
-                  item?.type === TX_TYPE.edit_feed ||
-                  item?.type === TX_TYPE.pause_feed ||
-                  (item?.type === TX_TYPE.create_feed && item?.msg?.feed_name && item?.msg?.creator)
-                ) {
+                if (isFeedNameAndCreator(item)) {
                   feedNameArr.push(item.msg.feed_name);
                   oracleCreatorArr.push(item.msg.creator);
                 }
 
-                if (item?.type === TX_TYPE.request_rand && item?.msg?.consumer) {
+                if (isConsumer(item)) {
                   consumerArr.push(item.msg.consumer);
                 }
-                if (
-                  item?.type === TX_TYPE.create_client ||
-                  (item?.type === TX_TYPE.update_client && item?.msg?.client_id)
-                ) {
+                if (isClientId(item)) {
                   clientIdArr.push(item.msg.client_id);
                 }
-                if (
-                  item?.type === TX_TYPE.call_service ||
-                  item?.type === TX_TYPE.respond_service ||
-                  (item?.msg?.consumer && item?.msg?.request_context_id && item?.msg?.service_name)
-                ) {
+                if (isConsumerReqIdServiceName(item)) {
                   consumerArr.push(item.msg.consumer);
                   requestContextIdArr.push(item.msg.request_context_id);
                   serviceNameArr.push(item.msg.service_name);
@@ -955,45 +913,28 @@ export default {
               sequenceArr = Array.from(new Set(sequenceArr));
               chain_nameArr = Array.from(new Set(chain_nameArr));
             } else {
-              if (msg?.type === TX_TYPE.multisend && msg?.msg?.outputs?.length) {
+              if (isMultisend(msg)) {
                 numberOfTo = msg.msg.outputs.length;
               }
-              if (msg?.type === TX_TYPE.respond_service && msg?.msg?.request_id) {
+              if (isRespondService(msg)) {
                 requestId = msg.msg.request_id;
               }
-              if (
-                msg?.type === TX_TYPE.burn_nft ||
-                msg?.type === TX_TYPE.edit_nft ||
-                msg?.type === TX_TYPE.mint_nft ||
-                (msg?.type === TX_TYPE.transfer_nft && msg?.msg?.denom && msg?.msg?.id)
-              ) {
+              if (isDenomAndId(msg)) {
                 denomId = msg.msg.denom;
                 nftId = msg.msg.id;
               }
-              if (
-                msg?.type === TX_TYPE.start_feed ||
-                msg?.type === TX_TYPE.edit_feed ||
-                msg?.type === TX_TYPE.pause_feed ||
-                (msg?.type === TX_TYPE.create_feed && msg?.msg?.feed_name && msg?.msg?.creator)
-              ) {
+              if (isFeedNameAndCreator(msg)) {
                 feedName = msg.msg.feed_name;
                 oracleCreator = msg.msg.creator;
               }
 
-              if (msg?.type === TX_TYPE.request_rand && msg?.msg?.consumer) {
+              if (isConsumer(msg)) {
                 consumer = msg.msg.consumer;
               }
-              if (
-                msg?.type === TX_TYPE.create_client ||
-                (msg?.type === TX_TYPE.update_client && msg?.msg?.client_id)
-              ) {
+              if (isClientId(msg)) {
                 clientId = msg.msg.client_id;
               }
-              if (
-                msg?.type === TX_TYPE.call_service ||
-                msg?.type === TX_TYPE.respond_service ||
-                (msg?.msg?.consumer && msg?.msg?.request_context_id && msg?.msg?.service_name)
-              ) {
+              if (isConsumerReqIdServiceName(msg)) {
                 consumer = msg.msg.consumer;
                 requestContextId = msg.msg.request_context_id;
                 serviceName = msg.msg.service_name;
@@ -1630,6 +1571,30 @@ export default {
     },
     beforeDestroy() {
       this.$store.commit('currentTxModelIndex', 0);
+    },
+
+    updateTxtype(param) {
+      if (param?.value) {
+        this.txType = param.value;
+      } else if (param?.value === '') {
+        // 处理点击all的情况
+        this.txType = '';
+      } else if (Array.isArray(param)) {
+        const notAllMsgType = param.filter((item) => {
+          return item.label !== 'secondaryAll';
+        });
+        const currentSelectSecondMsgTypes = notAllMsgType.map((item) => {
+          return item.value;
+        });
+
+        if (currentSelectSecondMsgTypes?.length) {
+          this.txType = currentSelectSecondMsgTypes.join(',');
+        }
+      }
+    },
+
+    stringifyUrl(url, param, filters) {
+      return `${url}${Tools.formatParams(param, filters)}`;
     },
   },
   beforeDestroy() {

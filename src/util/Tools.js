@@ -551,17 +551,20 @@ export default class Tools {
     return map;
   }
 
-  static formatParams(params) {
+  static formatParams(params, filters = [null, undefined]) {
     if (!params || JSON.stringify(params) === '{}') {
       return '';
     }
     let str = '';
-    for (const key in params) {
+    const keys = Object.keys(params);
+
+    keys.forEach((key) => {
       const item = params[key];
-      if (item !== null && item !== undefined) {
+      if (filters.every((v) => v !== item)) {
         str += `${key}=${item}&`;
       }
-    }
+    });
+
     if (str.length !== 0) {
       str = `?${str.substring(0, str.length - 1)}`;
     }
