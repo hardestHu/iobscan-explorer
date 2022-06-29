@@ -1914,17 +1914,24 @@ export const needAddColumn = {
       linkRoute: '/address/',
     },
   ],
-  // todo
   grant_allowance: [
     {
       label: i18n.t('ExplorerLang.table.from'),
       displayValue: 'from',
       nativeValue: 'from',
+      isLink: true,
+      isNeedFormat: true,
+      isFormatAddress: true,
+      linkRoute: '/address/',
     },
     {
       label: i18n.t('ExplorerLang.table.to'),
       displayValue: 'to',
       nativeValue: 'to',
+      isLink: true,
+      isNeedFormat: true,
+      isFormatAddress: true,
+      linkRoute: '/address/',
     },
   ],
   revoke_allowance: [
@@ -1932,11 +1939,19 @@ export const needAddColumn = {
       label: i18n.t('ExplorerLang.table.from'),
       displayValue: 'from',
       nativeValue: 'from',
+      isLink: true,
+      isNeedFormat: true,
+      isFormatAddress: true,
+      linkRoute: '/address/',
     },
     {
       label: i18n.t('ExplorerLang.table.to'),
       displayValue: 'to',
       nativeValue: 'to',
+      isLink: true,
+      isNeedFormat: true,
+      isFormatAddress: true,
+      linkRoute: '/address/',
     },
   ],
 };

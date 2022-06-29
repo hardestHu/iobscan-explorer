@@ -2797,16 +2797,7 @@ export default {
     async getAllTxType() {
       try {
         const res = await TxTypes.getData();
-        // todo start
-        this.txTypeOption = TxHelper.formatTxType([
-          ...res.data,
-          {
-            typeName: TX_TYPE.grant_allowance,
-          },
-          {
-            typeName: TX_TYPE.revoke_allowance,
-          },
-        ]);
+        this.txTypeOption = TxHelper.formatTxType(res.data);
         // const res = await getAllTxTypes();
         // this.txTypeOption = TxHelper.formatTxType(res.data);
         // this.txTypeOption = res?.txTypeDataOptions

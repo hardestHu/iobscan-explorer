@@ -83,12 +83,12 @@ export default {
   },
   methods: {
     windowOpenUrl(url) {
-      if (this.$route.path === url) {
-        window.location.href = `/#${url}`;
-        window.location.reload();
-      } else {
-        this.$router.push(url);
-      }
+      // if (this.$route.path === url) {
+      //   window.location.href = `/#${url}`;
+      //   window.location.reload();
+      // } else {
+      this.$router.push(url);
+      // }
     },
   },
 };

@@ -148,7 +148,6 @@ export const TX_TYPE = {
   ddc_1155: 'ddc_1155',
   ddc_other: 'ddc_other',
 
-  // todo
   // Fee grant 链账户授权
   grant_allowance: 'grant_allowance',
   revoke_allowance: 'revoke_allowance',
