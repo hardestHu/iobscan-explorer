@@ -2918,7 +2918,9 @@ export default {
           let { denom } = balanceAmount;
           if (denom.startsWith(ibcDenomPrefix)) {
             const hash = denom.replace(ibcDenomPrefix, '');
-            const res = await getIbcTransferByHash(hash);
+            const res = await getIbcTransferByHash(hash).catch(error => {
+							console.error(error)
+            });
             if (res && res.denom_trace && res.denom_trace.base_denom) {
               denom = (ibcDenomPrefix + res.denom_trace.base_denom).toUpperCase();
             }
