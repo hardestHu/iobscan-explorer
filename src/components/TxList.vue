@@ -108,6 +108,7 @@ import {
   isChainNameSigner,
   isSenderReceiverDenomId,
 } from './txList/lib';
+import { getValueFromArr } from './txList/common';
 
 export default {
   name: 'TxList',
@@ -544,77 +545,44 @@ export default {
           const fees = [];
           const amounts = [];
           for (const tx of this.txData) {
-            let numberOfTo = '--';
             let numberOfToArr = [];
-            let requestId = '--';
             let requestIdArr = [];
-            let denomId = '--';
             let denomIdArr = [];
-            let denomName = '--';
             let denomNameArr = [];
-            let nftId = '--';
             let nftIdArr = [];
-            let feedName = '--';
             let feedNameArr = [];
-            let oracleCreator = '--';
             let oracleCreatorArr = [];
-            let consumer = '--';
             let consumerArr = [];
-            let digest = '--';
             let digestArr = [];
-            let digest_algo = '--';
             let digest_algoArr = [];
-            let symbol = '--';
             let symbolArr = [];
-            let minUnit = '--';
             let minUnitArr = [];
-            let owner = '--';
             let ownerArr = [];
-            let dstOwner = '--';
             let dstOwnerArr = [];
-            let srcOwner = '--';
             let srcOwnerArr = [];
             let sender = '--';
             let senderArr = [];
-            let proposalId = '--';
             let proposalIdArr = [];
-            let option = '--';
             let optionArr = [];
-            let voter = '--';
             let voterArr = [];
-            let depositor = '--';
             let depositorArr = [];
             let title = '--';
-            let author = '--';
             let authorArr = [];
-            let provider = '--';
             let providerArr = [];
-            let requestContextId = '--';
             let requestContextIdArr = [];
-            let serviceName = '--';
             let serviceNameArr = [];
-            let clientId = '--';
             let clientIdArr = [];
-            let portId = '--';
             let portIdArr = [];
-            let channelId = '--';
             let channelIdArr = [];
-            let connectionId = '--';
             let connectionIdArr = [];
-            let receiver = '--';
             let receiverArr = [];
             const sameMsg = [];
             let sameMsgFromAddrArr = [];
             let sameMsgToAddrArr = [];
-            let dest_chain = '--';
             let dest_chainArr = [];
-            let source_chain = '--';
             let source_chainArr = [];
-            let sequence = '--';
             let sequenceArr = [];
-            let chain_name = '--';
             let chain_nameArr = [];
-            let signer = '--';
             const signers = [];
             let msg;
             // farm => stake unstake
@@ -647,9 +615,9 @@ export default {
             }
 
             /*
-             * 处理单一类型多msg的情况
+             * 处理msg获取相关值
              * */
-            if (sameMsg?.length > 1) {
+            if (sameMsg?.length > 0) {
               // 处理from 跟 to 的情况
               sameMsg.forEach((item) => {
                 const addrObj = TxHelper.getFromAndToAddressFromMsg(item);
@@ -830,136 +798,6 @@ export default {
               source_chainArr = Array.from(new Set(source_chainArr));
               sequenceArr = Array.from(new Set(sequenceArr));
               chain_nameArr = Array.from(new Set(chain_nameArr));
-            } else {
-              if (isMultisend(msg)) {
-                numberOfTo = msg.msg.outputs.length;
-              }
-              if (isRespondService(msg)) {
-                requestId = msg.msg.request_id;
-              }
-              if (isDenomAndId(msg)) {
-                denomId = msg.msg.denom;
-                nftId = msg.msg.id;
-              }
-              if (isFeedNameAndCreator(msg)) {
-                feedName = msg.msg.feed_name;
-                oracleCreator = msg.msg.creator;
-              }
-
-              if (isConsumer(msg)) {
-                consumer = msg.msg.consumer;
-              }
-              if (isClientId(msg)) {
-                clientId = msg.msg.client_id;
-              }
-              if (isConsumerReqIdServiceName(msg)) {
-                consumer = msg.msg.consumer;
-                requestContextId = msg.msg.request_context_id;
-                serviceName = msg.msg.service_name;
-              }
-              if (isIdSenderName(msg)) {
-                sender = msg.msg.sender;
-                denomId = msg.msg.id;
-                denomName = msg.msg.name;
-              }
-              if (isChannelIdPortId(msg)) {
-                portId = msg.msg.port_id;
-                channelId = msg.msg.channel_id;
-              }
-              if (isClientIdConnectionId(msg)) {
-                clientId = msg.msg.client_id;
-                connectionId = msg.msg.connection_id;
-              }
-
-              if (isDigestDigestAlgo(msg)) {
-                digest = msg.msg.contents[0].digest;
-                digest_algo = msg.msg.contents[0].digest_algo;
-              }
-              if (isSymbolMinUnitOwner(msg)) {
-                symbol = msg.msg.symbol;
-                minUnit = msg.msg.min_unit;
-                owner = msg.msg.owner;
-              }
-              if (isReceiver(msg)) {
-                receiver = msg.msg.packet.data.receiver;
-              }
-              if (isSymbolOwner(msg)) {
-                symbol = msg.msg.symbol;
-                owner = msg.msg.owner;
-              }
-              if (isSymbolDstOwnerSrcOwner(msg)) {
-                symbol = msg.msg.symbol;
-                dstOwner = msg.msg.dst_owner;
-                srcOwner = msg.msg.src_owner;
-              }
-              if (isSymbolOwner2(msg)) {
-                symbol = msg.msg.symbol;
-                owner = msg.msg.owner;
-              }
-              if (isSymbolSender(msg)) {
-                symbol = msg.msg.symbol;
-                sender = msg.msg.sender;
-              }
-              if (isProposalIdOptionVoter(msg)) {
-                proposalId = msg.msg.proposal_id;
-                option = msg.msg.option;
-                voter = msg.msg.voter;
-              }
-              if (isProposalIdDepositor(msg)) {
-                proposalId = msg.msg.proposal_id;
-                depositor = msg.msg.depositor;
-              }
-              if (isTitle(msg)) {
-                title = msg.msg.content.title;
-              }
-              if (isConsumerRequestContextId(msg)) {
-                consumer = msg.msg.consumer;
-                requestContextId = msg.msg.request_context_id;
-              }
-              if (isAuthorServiceName(msg)) {
-                author = msg.msg.author;
-                serviceName = msg.msg.name;
-              }
-              if (isOwnerProviderServiceName(msg)) {
-                owner = msg.msg.owner;
-                provider = msg.msg.provider;
-                serviceName = msg.msg.service_name;
-              }
-              if (isServiceName(msg)) {
-                serviceName = msg.msg.ex.service_name;
-              }
-              if (isNftIdSenderDestChain(msg)) {
-                nftId = msg.msg.id;
-                sender = msg.msg.sender;
-                dest_chain = msg.msg.dest_chain;
-              }
-              if (isNftIdReceiverSourceChain(msg)) {
-                nftId = msg.msg.packet.data.id;
-                receiver = msg.msg.packet.data.receiver;
-                source_chain = msg.msg.packet.source_chain;
-              }
-              if (isNftIdSenderDestChain2(msg)) {
-                sender = msg.msg.packet.data.sender;
-                nftId = msg.msg.packet.data.id;
-                dest_chain = msg.msg.packet.destination_chain;
-              }
-              if (isSequenceSourceChainSigner(msg)) {
-                sequence = msg.msg.clean_packet.sequence;
-                source_chain = msg.msg.clean_packet.source_chain;
-                signer = msg.msg.signer;
-              }
-              if (isSigner(msg)) {
-                signer = msg.msg.signer;
-              }
-              if (isChainNameSigner(msg)) {
-                chain_name = msg.msg.chain_name;
-                signer = msg.msg.signer;
-              }
-              if (isSenderReceiverDenomId(msg)) {
-                denomId = msg.msg.id;
-                sender = msg.msg.sender;
-                receiver = msg.msg.recipient;
-              }
             }
 
             // farm -> stake unstake
@@ -1027,24 +865,9 @@ export default {
               poolCreator = msg.msg.creator;
             }
 
-            const addrObj = TxHelper.getFromAndToAddressFromMsg(msg);
             amounts.push(msg ? (sameMsg?.length > 1 ? ' ' : await getAmountByTx(msg, true)) : '--');
-            const from =
-              sameMsg?.length > 1
-                ? sameMsgFromAddrArr?.length > 1
-                  ? ' '
-                  : sameMsgFromAddrArr?.length === 1
-                  ? sameMsgFromAddrArr[0]
-                  : '--'
-                : addrObj.from || '--';
-            const to =
-              sameMsg?.length > 1
-                ? sameMsgToAddrArr?.length > 1
-                  ? ' '
-                  : sameMsgToAddrArr?.length === 1
-                  ? sameMsgToAddrArr[0]
-                  : '--'
-                : addrObj.to || '--';
+            const from = getValueFromArr(sameMsgFromAddrArr);
+            const to = getValueFromArr(sameMsgToAddrArr);
             let fromMonikers = ' ';
             let toMonikers = ' ';
             let validatorMoniker;
@@ -1102,135 +925,42 @@ export default {
               blockHeight: tx.height,
               txType: (tx.msgs || []).map((item) => item.type),
               from,
-              author: authorArr?.length > 1 ? ' ' : authorArr?.length === 1 ? authorArr[0] : author,
-              provider:
-                providerArr?.length > 1
-                  ? ' '
-                  : providerArr?.length === 1
-                  ? providerArr[0]
-                  : provider,
-              requestContextId:
-                requestContextIdArr?.length > 1
-                  ? ' '
-                  : requestContextIdArr?.length === 1
-                  ? requestContextIdArr[0]
-                  : requestContextId,
+              author: getValueFromArr(authorArr),
+              provider: getValueFromArr(providerArr),
+              requestContextId: getValueFromArr(requestContextIdArr),
               fromMonikers,
               toMonikers,
-              receiver:
-                receiverArr?.length > 1
-                  ? ' '
-                  : receiverArr?.length === 1
-                  ? receiverArr[0]
-                  : receiver,
+              receiver: getValueFromArr(receiverArr),
               to,
-              portId: portIdArr?.length > 1 ? ' ' : portIdArr?.length === 1 ? portIdArr[0] : portId,
-              channelId:
-                channelIdArr?.length > 1
-                  ? ' '
-                  : channelIdArr?.length === 1
-                  ? channelIdArr[0]
-                  : channelId,
-              connectionId:
-                connectionIdArr?.length > 1
-                  ? ' '
-                  : connectionIdArr?.length === 1
-                  ? connectionIdArr[0]
-                  : connectionId,
+              portId: getValueFromArr(portIdArr),
+              channelId: getValueFromArr(channelIdArr),
+              connectionId: getValueFromArr(connectionIdArr),
               validatorMoniker,
               validatorAddress,
-              numberOfTo:
-                numberOfToArr?.length > 1
-                  ? ' '
-                  : numberOfToArr?.length === 1
-                  ? numberOfToArr[0]
-                  : numberOfTo,
-              requestId:
-                requestIdArr?.length > 1
-                  ? ' '
-                  : requestIdArr?.length === 1
-                  ? requestIdArr[0]
-                  : requestId,
-              denomId:
-                denomIdArr?.length > 1 ? ' ' : denomIdArr?.length === 1 ? denomIdArr[0] : denomId,
-              denomName:
-                denomNameArr?.length > 1
-                  ? ' '
-                  : denomNameArr?.length === 1
-                  ? denomNameArr[0]
-                  : denomName,
-              nftId: nftIdArr?.length > 1 ? ' ' : nftIdArr?.length === 1 ? nftIdArr[0] : nftId,
-              clientId:
-                clientIdArr?.length > 1
-                  ? ' '
-                  : clientIdArr?.length === 1
-                  ? clientIdArr[0]
-                  : clientId,
-              feedName:
-                feedNameArr?.length > 1
-                  ? ' '
-                  : feedNameArr?.length === 1
-                  ? feedNameArr[0]
-                  : feedName,
-              oracleCreator:
-                oracleCreatorArr?.length > 1
-                  ? ' '
-                  : oracleCreatorArr?.length === 1
-                  ? oracleCreatorArr[0]
-                  : oracleCreator,
-              consumer:
-                consumerArr?.length > 1
-                  ? ' '
-                  : consumerArr?.length === 1
-                  ? consumerArr[0]
-                  : consumer,
-              serviceName:
-                serviceNameArr?.length > 1
-                  ? ' '
-                  : serviceNameArr?.length === 1
-                  ? serviceNameArr[0]
-                  : serviceName,
-              digest: digestArr?.length > 1 ? ' ' : digestArr?.length === 1 ? digestArr[0] : digest,
-              digest_algo:
-                digest_algoArr?.length > 1
-                  ? ' '
-                  : digest_algoArr?.length === 1
-                  ? digest_algoArr[0]
-                  : digest_algo,
-              symbol: symbolArr?.length > 1 ? ' ' : symbolArr?.length === 1 ? symbolArr[0] : symbol,
-              minUnit:
-                minUnitArr?.length > 1 ? ' ' : minUnitArr?.length === 1 ? minUnitArr[0] : minUnit,
-              owner: ownerArr?.length > 1 ? ' ' : ownerArr?.length === 1 ? ownerArr[0] : owner,
-              dstOwner:
-                dstOwnerArr?.length > 1
-                  ? ' '
-                  : dstOwnerArr?.length === 1
-                  ? dstOwnerArr[0]
-                  : dstOwner,
-              srcOwner:
-                srcOwnerArr?.length > 1
-                  ? ' '
-                  : srcOwnerArr?.length === 1
-                  ? srcOwnerArr[0]
-                  : srcOwner,
-              sender: senderArr?.length > 1 ? ' ' : senderArr?.length === 1 ? senderArr[0] : sender,
-              proposalId:
-                proposalIdArr?.length > 1
-                  ? ' '
-                  : proposalIdArr?.length === 1
-                  ? proposalIdArr[0]
-                  : proposalId,
-              option: optionArr?.length > 1 ? ' ' : optionArr?.length === 1 ? optionArr[0] : option,
-              voter: voterArr?.length > 1 ? ' ' : voterArr?.length === 1 ? voterArr[0] : voter,
-              depositor:
-                depositorArr?.length > 1
-                  ? ' '
-                  : depositorArr?.length === 1
-                  ? depositorArr[0]
-                  : depositor,
+              numberOfTo: getValueFromArr(numberOfToArr),
+              requestId: getValueFromArr(requestIdArr),
+              denomId: getValueFromArr(denomIdArr),
+              denomName: getValueFromArr(denomNameArr),
+              nftId: getValueFromArr(nftIdArr),
+              clientId: getValueFromArr(clientIdArr),
+              feedName: getValueFromArr(feedNameArr),
+              oracleCreator: getValueFromArr(oracleCreatorArr),
+              consumer: getValueFromArr(consumerArr),
+              serviceName: getValueFromArr(serviceNameArr),
+              digest: getValueFromArr(digestArr),
+              digest_algo: getValueFromArr(digest_algoArr),
+              symbol: getValueFromArr(symbolArr),
+              minUnit: getValueFromArr(minUnitArr),
+              owner: getValueFromArr(ownerArr),
+              dstOwner: getValueFromArr(dstOwnerArr),
+              srcOwner: getValueFromArr(srcOwnerArr),
+              sender: getValueFromArr(senderArr),
+              proposalId: getValueFromArr(proposalIdArr),
+              option: getValueFromArr(optionArr),
+              voter: getValueFromArr(voterArr),
+              depositor: getValueFromArr(depositorArr),
               title,
-              signer:
-                tx.signers?.length > 1 ? ' ' : tx.signers?.length === 1 ? tx.signers[0] : '--',
+              signer: getValueFromArr(tx.signers),
               status: tx.status,
               msgCount: tx.msgs.length,
               // time :Tools.getDisplayDate(tx.time),
@@ -1251,30 +981,10 @@ export default {
                 denomColor: '',
                 tooltipContent: '',
               },
-              dest_chain:
-                dest_chainArr?.length > 1
-                  ? ' '
-                  : dest_chainArr?.length === 1
-                  ? dest_chainArr[0]
-                  : dest_chain,
-              source_chain:
-                source_chainArr?.length > 1
-                  ? ' '
-                  : source_chainArr?.length === 1
-                  ? source_chainArr[0]
-                  : source_chain,
-              sequence:
-                sequenceArr?.length > 1
-                  ? ' '
-                  : sequenceArr?.length === 1
-                  ? sequenceArr[0]
-                  : sequence,
-              chain_name:
-                chain_nameArr?.length > 1
-                  ? ' '
-                  : chain_nameArr?.length === 1
-                  ? chain_nameArr[0]
-                  : chain_name,
+              dest_chain: getValueFromArr(dest_chainArr),
+              source_chain: getValueFromArr(source_chainArr),
+              sequence: getValueFromArr(sequenceArr),
+              chain_name: getValueFromArr(chain_nameArr),
               // farm stake/unstake/harvest
               poolId,
               farmAmount,
