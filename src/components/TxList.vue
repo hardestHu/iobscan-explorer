@@ -83,6 +83,30 @@ import {
   isConsumer,
   isClientId,
   isConsumerReqIdServiceName,
+  isIdSenderName,
+  isChannelIdPortId,
+  isClientIdConnectionId,
+  isDigestDigestAlgo,
+  isSymbolMinUnitOwner,
+  isReceiver,
+  isSymbolOwner,
+  isSymbolDstOwnerSrcOwner,
+  isSymbolOwner2,
+  isSymbolSender,
+  isProposalIdOptionVoter,
+  isProposalIdDepositor,
+  isTitle,
+  isConsumerRequestContextId,
+  isAuthorServiceName,
+  isOwnerProviderServiceName,
+  isServiceName,
+  isNftIdSenderDestChain,
+  isNftIdReceiverSourceChain,
+  isNftIdSenderDestChain2,
+  isSequenceSourceChainSigner,
+  isSigner,
+  isChainNameSigner,
+  isSenderReceiverDenomId,
 } from './txList/lib';
 
 export default {
@@ -663,212 +687,106 @@ export default {
                   requestContextIdArr.push(item.msg.request_context_id);
                   serviceNameArr.push(item.msg.service_name);
                 }
-                if (
-                  item?.type === TX_TYPE.issue_denom &&
-                  item?.msg?.id &&
-                  item?.msg?.name &&
-                  item?.msg?.sender
-                ) {
+                if (isIdSenderName(item)) {
                   senderArr.push(item.msg.sender);
                   denomIdArr.push(item.msg.id);
                   denomNameArr.push(item.msg.name);
                 }
-                if (
-                  item?.type === TX_TYPE.channel_open_init ||
-                  item?.type === TX_TYPE.channel_open_confirm ||
-                  item?.type === TX_TYPE.channel_open_try ||
-                  (item?.type === TX_TYPE.channel_open_ack &&
-                    item?.msg?.channel_id &&
-                    item?.msg?.port_id)
-                ) {
+                if (isChannelIdPortId(item)) {
                   portIdArr.push(item.msg.port_id);
                   channelIdArr.push(item.msg.channel_id);
                 }
-                if (
-                  item?.type === TX_TYPE.connection_open_init ||
-                  item?.type === TX_TYPE.connection_open_confirm ||
-                  item?.type === TX_TYPE.connection_open_try ||
-                  (item?.type === TX_TYPE.connection_open_ack &&
-                    item?.msg?.connection_id &&
-                    item?.msg?.client_id)
-                ) {
+                if (isClientIdConnectionId(item)) {
                   clientIdArr.push(item.msg.client_id);
                   connectionIdArr.push(item.msg.connection_id);
                 }
 
-                if (
-                  item?.type === TX_TYPE.create_record &&
-                  item?.msg?.contents?.length &&
-                  item?.msg?.contents[0]?.digest &&
-                  item?.msg?.contents[0]?.digest_algo
-                ) {
+                if (isDigestDigestAlgo(item)) {
                   digestArr.push(item.msg.contents[0].digest);
                   digest_algoArr.push(item.msg.contents[0].digest_algo);
                 }
-                if (
-                  item?.type === TX_TYPE.issue_token &&
-                  item?.msg?.symbol &&
-                  item?.msg?.owner &&
-                  item?.msg?.min_unit
-                ) {
+                if (isSymbolMinUnitOwner(item)) {
                   symbolArr.push(item.msg.symbol);
                   minUnitArr.push(item.msg.min_unit);
                   ownerArr.push(item.msg.owner);
                 }
-                if (
-                  item?.type === TX_TYPE.acknowledge_packet &&
-                  item?.msg?.packet?.data?.receiver
-                ) {
+                if (isReceiver(item)) {
                   receiverArr.push(item.msg.packet.data.receiver);
                 }
-                if (item?.type === TX_TYPE.edit_token && item?.msg?.symbol && item?.msg?.owner) {
+                if (isSymbolOwner(item)) {
                   symbolArr.push(item.msg.symbol);
                   ownerArr.push(item.msg.owner);
                 }
-                if (
-                  item?.type === TX_TYPE.transfer_token_owner &&
-                  item?.msg?.symbol &&
-                  item?.msg?.dst_owner &&
-                  item?.msg?.src_owner
-                ) {
+                if (isSymbolDstOwnerSrcOwner(item)) {
                   symbolArr.push(item.msg.symbol);
                   dstOwnerArr.push(item.msg.dst_owner);
                   srcOwnerArr.push(item.msg.src_owner);
                 }
-                if (
-                  item?.type === TX_TYPE.mint_token &&
-                  item?.msg?.owner &&
-                  item?.msg?.symbol &&
-                  item?.msg?.amount &&
-                  item?.msg?.to
-                ) {
+                if (isSymbolOwner2(item)) {
                   symbolArr.push(item.msg.symbol);
                   ownerArr.push(item.msg.owner);
                 }
-                if (
-                  item?.type === TX_TYPE.burn_token &&
-                  item?.msg?.sender &&
-                  item?.msg?.symbol &&
-                  item?.msg?.amount
-                ) {
+                if (isSymbolSender(item)) {
                   symbolArr.push(item.msg.symbol);
                   senderArr.push(item.msg.sender);
                 }
-                if (
-                  item?.type === TX_TYPE.vote &&
-                  item?.msg?.option &&
-                  item?.msg?.proposal_id &&
-                  item?.msg?.voter
-                ) {
+                if (isProposalIdOptionVoter(item)) {
                   proposalIdArr.push(item.msg.proposal_id);
                   optionArr.push(item.msg.option);
                   voterArr.push(item.msg.voter);
                 }
-                if (
-                  item?.type === TX_TYPE.deposit &&
-                  item?.msg?.depositor &&
-                  item?.msg?.proposal_id
-                ) {
+                if (isProposalIdDepositor(item)) {
                   proposalIdArr.push(item.msg.proposal_id);
                   depositorArr.push(item.msg.depositor);
                 }
-                if (item?.type === TX_TYPE.submit_proposal && item?.msg?.content?.title) {
+                if (isTitle(item)) {
                   title = item.msg.content.title;
                 }
-                if (
-                  item?.type === TX_TYPE.pause_request_context ||
-                  item?.type === TX_TYPE.start_request_context ||
-                  item?.type === TX_TYPE.update_request_context ||
-                  (item?.type === TX_TYPE.kill_request_context &&
-                    item?.msg?.consumer &&
-                    item?.msg?.request_context_id)
-                ) {
+                if (isConsumerRequestContextId(item)) {
                   consumerArr.push(item.msg.consumer);
                   requestContextIdArr.push(item.msg.request_context_id);
                 }
-                if (item?.type === TX_TYPE.define_service && item?.msg?.author && item?.msg?.name) {
+                if (isAuthorServiceName(item)) {
                   authorArr.push(item.msg.author);
                   serviceNameArr.push(item.msg.service_name);
                 }
-                if (
-                  item?.type === TX_TYPE.bind_service ||
-                  item?.type === TX_TYPE.refund_service_deposit ||
-                  item?.type === TX_TYPE.disable_service_binding ||
-                  item?.type === TX_TYPE.enable_service_binding ||
-                  (item?.type === TX_TYPE.update_service_binding &&
-                    item?.msg?.owner &&
-                    item?.msg?.provider &&
-                    item?.msg?.service_name)
-                ) {
+                if (isOwnerProviderServiceName(item)) {
                   ownerArr.push(item.msg.owner);
                   providerArr.push(item.msg.provider);
                   serviceNameArr.push(item.msg.service_name);
                 }
-                if (
-                  item?.type === TX_TYPE.update_request_context &&
-                  item?.msg?.ex &&
-                  item?.msg?.ex?.service_name
-                ) {
+                if (isServiceName(item)) {
                   serviceNameArr.push(item.msg.service_name);
                 }
                 // 新增
-                if (
-                  item?.type === TX_TYPE.tibc_nft_transfer &&
-                  item?.msg?.id &&
-                  item?.msg?.sender &&
-                  item?.msg?.dest_chain
-                ) {
+                if (isNftIdSenderDestChain(item)) {
                   nftIdArr.push(item.msg.id);
                   senderArr.push(item.msg.sender);
                   dest_chainArr.push(item.msg.dest_chain);
                 }
-                if (
-                  item?.type === TX_TYPE.tibc_recv_packet &&
-                  item?.msg?.packet?.data?.id &&
-                  item?.msg?.packet?.data?.receiver &&
-                  item?.msg?.packet?.source_chain
-                ) {
+                if (isNftIdReceiverSourceChain(item)) {
                   nftIdArr.push(item.msg.packet.data.id);
                   receiverArr.push(item.msg.packet.data.receiver);
                   source_chainArr.push(item.msg.packet.source_chain);
                 }
-                if (
-                  item?.type === TX_TYPE.tibc_acknowledge_packet &&
-                  item?.msg?.packet?.id &&
-                  item?.msg?.packet?.data?.sender &&
-                  item?.msg?.packet?.destination_chain
-                ) {
+                if (isNftIdSenderDestChain2(item)) {
                   nftIdArr.push(item.msg.packet.id);
                   senderArr.push(item.msg.packet.data.sender);
                   dest_chainArr.push(item.msg.packet.destination_chain);
                 }
-                if (
-                  item?.type === TX_TYPE.clean_packet &&
-                  item?.msg?.clean_packet?.sequence &&
-                  item?.msg?.clean_packet?.source_chain &&
-                  item?.msg?.signer
-                ) {
+                if (isSequenceSourceChainSigner(item)) {
                   sequenceArr.push(item.msg.clean_packet.sequence);
                   source_chainArr.push(item.msg.clean_packet.source_chain);
                   signers.push(item.msg.signer);
                 }
-                if (item?.type === TX_TYPE.recv_clean_packet && item?.msg?.signer) {
+                if (isSigner(item)) {
                   signers.push(item.msg.signer);
                 }
-                if (
-                  item?.type === TX_TYPE.tibc_update_client &&
-                  item?.msg?.chain_name &&
-                  item?.msg?.signer
-                ) {
+                if (isChainNameSigner(item)) {
                   chain_nameArr.push(item.msg.chain_name);
                   signers.push(item.msg.signer);
                 }
-                if (
-                  item?.type === TX_TYPE.transfer_denom &&
-                  item?.msg?.id &&
-                  item?.msg?.sender &&
-                  item?.msg?.recipient
-                ) {
+                if (isSenderReceiverDenomId(item)) {
                   denomIdArr.push(item.msg.id);
                   senderArr.push(item.msg.sender);
                   receiverArr.push(item.msg.recipient);
@@ -939,216 +857,111 @@ export default {
                 requestContextId = msg.msg.request_context_id;
                 serviceName = msg.msg.service_name;
               }
-              if (
-                msg?.type === TX_TYPE.issue_denom &&
-                msg?.msg?.id &&
-                msg?.msg?.name &&
-                msg?.msg?.sender
-              ) {
+              if (isIdSenderName(msg)) {
                 sender = msg.msg.sender;
                 denomId = msg.msg.id;
                 denomName = msg.msg.name;
               }
-              if (
-                msg?.type === TX_TYPE.channel_open_init ||
-                msg?.type === TX_TYPE.channel_open_confirm ||
-                msg?.type === TX_TYPE.channel_open_try ||
-                (msg?.type === TX_TYPE.channel_open_ack &&
-                  msg?.msg?.channel_id &&
-                  msg?.msg?.port_id)
-              ) {
+              if (isChannelIdPortId(msg)) {
                 portId = msg.msg.port_id;
                 channelId = msg.msg.channel_id;
               }
-              if (
-                msg?.type === TX_TYPE.connection_open_init ||
-                msg?.type === TX_TYPE.connection_open_confirm ||
-                msg?.type === TX_TYPE.connection_open_try ||
-                (msg?.type === TX_TYPE.connection_open_ack &&
-                  msg?.msg?.connection_id &&
-                  msg?.msg?.client_id)
-              ) {
+              if (isClientIdConnectionId(msg)) {
                 clientId = msg.msg.client_id;
                 connectionId = msg.msg.connection_id;
               }
 
-              if (
-                msg?.type === TX_TYPE.create_record &&
-                msg?.msg?.contents?.length &&
-                msg?.msg?.contents[0]?.digest &&
-                msg?.msg?.contents[0]?.digest_algo
-              ) {
+              if (isDigestDigestAlgo(msg)) {
                 digest = msg.msg.contents[0].digest;
                 digest_algo = msg.msg.contents[0].digest_algo;
               }
-              if (
-                msg?.type === TX_TYPE.issue_token &&
-                msg?.msg?.symbol &&
-                msg?.msg?.owner &&
-                msg?.msg?.min_unit
-              ) {
+              if (isSymbolMinUnitOwner(msg)) {
                 symbol = msg.msg.symbol;
                 minUnit = msg.msg.min_unit;
                 owner = msg.msg.owner;
               }
-              if (msg?.type === TX_TYPE.acknowledge_packet && msg?.msg?.packet?.data?.receiver) {
+              if (isReceiver(msg)) {
                 receiver = msg.msg.packet.data.receiver;
               }
-              if (msg?.type === TX_TYPE.edit_token && msg?.msg?.symbol && msg?.msg?.owner) {
+              if (isSymbolOwner(msg)) {
                 symbol = msg.msg.symbol;
                 owner = msg.msg.owner;
               }
-              if (
-                msg?.type === TX_TYPE.transfer_token_owner &&
-                msg?.msg?.symbol &&
-                msg?.msg?.dst_owner &&
-                msg?.msg?.src_owner
-              ) {
+              if (isSymbolDstOwnerSrcOwner(msg)) {
                 symbol = msg.msg.symbol;
                 dstOwner = msg.msg.dst_owner;
                 srcOwner = msg.msg.src_owner;
               }
-              if (
-                msg?.type === TX_TYPE.mint_token &&
-                msg?.msg?.owner &&
-                msg?.msg?.symbol &&
-                msg?.msg?.amount &&
-                msg?.msg?.to
-              ) {
+              if (isSymbolOwner2(msg)) {
                 symbol = msg.msg.symbol;
                 owner = msg.msg.owner;
               }
-              if (
-                msg?.type === TX_TYPE.burn_token &&
-                msg?.msg?.sender &&
-                msg?.msg?.symbol &&
-                msg?.msg?.amount
-              ) {
+              if (isSymbolSender(msg)) {
                 symbol = msg.msg.symbol;
                 sender = msg.msg.sender;
               }
-              if (
-                msg?.type === TX_TYPE.vote &&
-                msg?.msg?.option &&
-                msg?.msg?.proposal_id &&
-                msg?.msg?.voter
-              ) {
+              if (isProposalIdOptionVoter(msg)) {
                 proposalId = msg.msg.proposal_id;
                 option = msg.msg.option;
                 voter = msg.msg.voter;
               }
-              if (msg?.type === TX_TYPE.deposit && msg?.msg?.depositor && msg?.msg?.proposal_id) {
+              if (isProposalIdDepositor(msg)) {
                 proposalId = msg.msg.proposal_id;
                 depositor = msg.msg.depositor;
               }
-              if (msg?.type === TX_TYPE.submit_proposal && msg?.msg?.content?.title) {
+              if (isTitle(msg)) {
                 title = msg.msg.content.title;
               }
-              if (
-                msg?.type === TX_TYPE.pause_request_context ||
-                msg?.type === TX_TYPE.start_request_context ||
-                msg?.type === TX_TYPE.update_request_context ||
-                (msg?.type === TX_TYPE.kill_request_context &&
-                  msg?.msg?.consumer &&
-                  msg?.msg?.request_context_id)
-              ) {
+              if (isConsumerRequestContextId(msg)) {
                 consumer = msg.msg.consumer;
                 requestContextId = msg.msg.request_context_id;
               }
-              if (msg?.type === TX_TYPE.define_service && msg?.msg?.author && msg?.msg?.name) {
+              if (isAuthorServiceName(msg)) {
                 author = msg.msg.author;
                 serviceName = msg.msg.name;
               }
-              if (
-                msg?.type === TX_TYPE.bind_service ||
-                msg?.type === TX_TYPE.refund_service_deposit ||
-                msg?.type === TX_TYPE.disable_service_binding ||
-                msg?.type === TX_TYPE.enable_service_binding ||
-                (msg?.type === TX_TYPE.update_service_binding &&
-                  msg?.msg?.owner &&
-                  msg?.msg?.provider &&
-                  msg?.msg?.service_name)
-              ) {
+              if (isOwnerProviderServiceName(msg)) {
                 owner = msg.msg.owner;
                 provider = msg.msg.provider;
                 serviceName = msg.msg.service_name;
               }
-              if (
-                msg?.type === TX_TYPE.update_request_context &&
-                msg?.msg?.ex &&
-                msg?.msg?.ex?.service_name
-              ) {
+              if (isServiceName(msg)) {
                 serviceName = msg.msg.ex.service_name;
+              }
+              if (isNftIdSenderDestChain(msg)) {
+                nftId = msg.msg.id;
+                sender = msg.msg.sender;
+                dest_chain = msg.msg.dest_chain;
+              }
+              if (isNftIdReceiverSourceChain(msg)) {
+                nftId = msg.msg.packet.data.id;
+                receiver = msg.msg.packet.data.receiver;
+                source_chain = msg.msg.packet.source_chain;
+              }
+              if (isNftIdSenderDestChain2(msg)) {
+                sender = msg.msg.packet.data.sender;
+                nftId = msg.msg.packet.data.id;
+                dest_chain = msg.msg.packet.destination_chain;
+              }
+              if (isSequenceSourceChainSigner(msg)) {
+                sequence = msg.msg.clean_packet.sequence;
+                source_chain = msg.msg.clean_packet.source_chain;
+                signer = msg.msg.signer;
+              }
+              if (isSigner(msg)) {
+                signer = msg.msg.signer;
+              }
+              if (isChainNameSigner(msg)) {
+                chain_name = msg.msg.chain_name;
+                signer = msg.msg.signer;
+              }
+              if (isSenderReceiverDenomId(msg)) {
+                denomId = msg.msg.id;
+                sender = msg.msg.sender;
+                receiver = msg.msg.recipient;
               }
             }
 
-            if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.id) {
-              nftId = msg.msg.id;
-            }
-            if (
-              msg?.type === TX_TYPE.tibc_recv_packet ||
-              (msg?.type === TX_TYPE.tibc_acknowledge_packet && msg?.msg?.packet?.data?.id)
-            ) {
-              nftId = msg.msg.packet.data.id;
-            }
-            if (msg?.type === TX_TYPE.tibc_recv_packet && msg?.msg?.packet?.data?.receiver) {
-              receiver = msg.msg.packet.data.receiver;
-            }
-            if (msg?.type === TX_TYPE.tibc_acknowledge_packet && msg?.msg?.packet?.data?.sender) {
-              sender = msg.msg.packet.data.sender;
-            }
-            if (msg?.type === TX_TYPE.tibc_update_client && msg?.msg?.chain_name) {
-              chain_name = msg.msg.chain_name;
-            }
-            if (msg?.type === TX_TYPE.tibc_nft_transfer && msg?.msg?.dest_chain) {
-              dest_chain = msg.msg.dest_chain;
-            }
-            if (msg?.type === TX_TYPE.tibc_recv_packet && msg?.msg?.packet?.source_chain) {
-              source_chain = msg.msg.packet.source_chain;
-            }
-            if (
-              msg?.type === TX_TYPE.tibc_acknowledge_packet &&
-              msg?.msg?.packet?.destination_chain
-            ) {
-              dest_chain = msg.msg.packet.destination_chain;
-            }
-            if (msg?.type === TX_TYPE.tibc_nft_transfer) {
-              sender = msg.msg.sender;
-            }
-            if (msg?.type === TX_TYPE.issue_denom && msg?.msg?.denomName) {
-              denomName = msg.msg.denomName;
-            }
-
-            if (msg?.type === TX_TYPE.clean_packet && msg?.msg?.clean_packet?.source_chain) {
-              source_chain = msg.msg.clean_packet.source_chain;
-            }
-            if (msg?.type === TX_TYPE.clean_packet && msg?.msg?.clean_packet?.sequence) {
-              sequence = msg.msg.clean_packet.sequence;
-            }
-
-            if (
-              msg?.type === TX_TYPE.transfer_denom ||
-              (msg?.type === TX_TYPE.issue_denom && msg?.msg?.sender)
-            ) {
-              sender = msg.msg.sender;
-            }
-
-            if (
-              msg?.type === TX_TYPE.recv_clean_packet ||
-              msg?.type === TX_TYPE.tibc_update_client ||
-              (msg?.type === TX_TYPE.clean_packet && msg?.msg?.signer)
-            ) {
-              signer = msg.msg.signer;
-            }
-            if (msg?.type === TX_TYPE.transfer_denom && (msg?.msg?.recipient || msg?.msg?.id)) {
-              receiver = msg.msg.recipient;
-              denomId = msg.msg.id;
-            }
-
-            if (msg?.type === TX_TYPE.issue_denom && msg?.msg?.denomId && msg?.msg?.sender) {
-              denomId = msg.msg.denomId;
-              sender = msg.msg.sender;
-            }
             // farm -> stake unstake
             if (msg?.type === TX_TYPE.stake || msg?.type === TX_TYPE.unstake) {
               poolId = Tools.formatPoolId(msg?.msg?.pool_id);
