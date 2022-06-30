@@ -1046,8 +1046,8 @@ export class TxHelper {
       recordObj,
       iServiceObj,
       crossChainObj,
-      othersObj,
-      smartContractObj
+      smartContractObj,
+      othersObj
     );
     allTxType = allTxType.filter((item) => item.children.length);
     allTxType.forEach((item) => {
