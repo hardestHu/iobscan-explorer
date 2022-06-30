@@ -9,23 +9,17 @@ export const isRespondService = (item) => {
 };
 
 export const isDenomAndId = (item) => {
-  if (item?.type === TX_TYPE.transfer_nft && item?.msg?.denom && item?.msg?.id) {
-    return true;
-  }
+  const types = [TX_TYPE.burn_nft, TX_TYPE.edit_nft, TX_TYPE.mint_nft, TX_TYPE.transfer_nft];
+  const flag = types.some((v) => item?.type === v);
 
-  const types = [TX_TYPE.burn_nft, TX_TYPE.edit_nft, TX_TYPE.mint_nft];
-
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.denom && item?.msg?.id;
 };
 
 export const isFeedNameAndCreator = (item) => {
-  if (item?.type === TX_TYPE.create_feed && item?.msg?.feed_name && item?.msg?.creator) {
-    return true;
-  }
+  const types = [TX_TYPE.start_feed, TX_TYPE.edit_feed, TX_TYPE.pause_feed, TX_TYPE.create_feed];
+  const flag = types.some((v) => item?.type === v);
 
-  const types = [TX_TYPE.start_feed, TX_TYPE.edit_feed, TX_TYPE.pause_feed];
-
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.feed_name && item?.msg?.creator;
 };
 
 export const isConsumer = (item) => {
@@ -33,23 +27,17 @@ export const isConsumer = (item) => {
 };
 
 export const isClientId = (item) => {
-  if (item?.type === TX_TYPE.update_client && item?.msg?.client_id) {
-    return true;
-  }
+  const types = [TX_TYPE.create_client, TX_TYPE.update_client];
+  const flag = types.some((v) => item?.type === v);
 
-  const types = [TX_TYPE.create_client];
-
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.client_id;
 };
 
 export const isConsumerReqIdServiceName = (item) => {
-  if (item?.msg?.consumer && item?.msg?.request_context_id && item?.msg?.service_name) {
-    return true;
-  }
-
   const types = [TX_TYPE.call_service, TX_TYPE.respond_service];
+  const flag = types.some((v) => item?.type === v);
 
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.consumer && item?.msg?.request_context_id && item?.msg?.service_name;
 };
 
 export const isIdSenderName = (item) => {
@@ -59,31 +47,27 @@ export const isIdSenderName = (item) => {
 };
 
 export const isChannelIdPortId = (item) => {
-  if (item?.type === TX_TYPE.channel_open_ack && item?.msg?.channel_id && item?.msg?.port_id) {
-    return true;
-  }
+  const types = [
+    TX_TYPE.channel_open_init,
+    TX_TYPE.channel_open_confirm,
+    TX_TYPE.channel_open_try,
+    TX_TYPE.channel_open_ack,
+  ];
+  const flag = types.some((v) => item?.type === v);
 
-  const types = [TX_TYPE.channel_open_init, TX_TYPE.channel_open_confirm, TX_TYPE.channel_open_try];
-
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.channel_id && item?.msg?.port_id;
 };
 
 export const isClientIdConnectionId = (item) => {
-  if (
-    item?.type === TX_TYPE.connection_open_ack &&
-    item?.msg?.connection_id &&
-    item?.msg?.client_id
-  ) {
-    return true;
-  }
-
   const types = [
     TX_TYPE.connection_open_init,
     TX_TYPE.connection_open_confirm,
     TX_TYPE.connection_open_try,
+    TX_TYPE.connection_open_ack,
   ];
+  const flag = types.some((v) => item?.type === v);
 
-  return types.some((v) => item?.type === v);
+  return flag && item?.msg?.connection_id && item?.msg?.client_id;
 };
 
 export const isDigestDigestAlgo = (item) => {
@@ -152,21 +136,20 @@ export const isTitle = (item) => {
 };
 
 export const isConsumerRequestContextId = (item) => {
-  if (
-    item?.type === TX_TYPE.kill_request_context &&
-    item?.msg?.consumer &&
-    item?.msg?.request_context_id
-  ) {
-    return true;
-  }
-
   const types = [
     TX_TYPE.pause_request_context,
     TX_TYPE.start_request_context,
     TX_TYPE.update_request_context,
+    TX_TYPE.kill_request_context,
   ];
+  const flag = types.some((v) => item?.type === v);
 
-  return types.some((v) => item?.type === v);
+  return (
+    flag &&
+    item?.type === TX_TYPE.kill_request_context &&
+    item?.msg?.consumer &&
+    item?.msg?.request_context_id
+  );
 };
 
 export const isAuthorServiceName = (item) => {
@@ -174,23 +157,17 @@ export const isAuthorServiceName = (item) => {
 };
 
 export const isOwnerProviderServiceName = (item) => {
-  if (
-    item?.type === TX_TYPE.update_service_binding &&
-    item?.msg?.owner &&
-    item?.msg?.provider &&
-    item?.msg?.service_name
-  ) {
-    return true;
-  }
-
   const types = [
     TX_TYPE.bind_service,
     TX_TYPE.refund_service_deposit,
     TX_TYPE.disable_service_binding,
     TX_TYPE.enable_service_binding,
+    TX_TYPE.update_service_binding,
   ];
 
-  return types.some((v) => item?.type === v);
+  const flag = types.some((v) => item?.type === v);
+
+  return flag && item?.msg?.owner && item?.msg?.provider && item?.msg?.service_name;
 };
 
 export const isServiceName = (item) => {
