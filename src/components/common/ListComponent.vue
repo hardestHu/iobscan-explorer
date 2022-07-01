@@ -777,7 +777,7 @@ export default {
 						}
 						this.isSetLoadingStatus = false
 					}
-				},50);
+				});
 			});
 		},
 		judgeCosmos(address){
