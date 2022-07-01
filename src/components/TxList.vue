@@ -108,7 +108,7 @@ import {
   isChainNameSigner,
   isSenderReceiverDenomId,
 } from './txList/lib';
-import { getValueFromArr } from './txList/common';
+import { getValueFromArr, arrHandle } from './txList/common';
 
 export default {
   name: 'TxList',
@@ -629,175 +629,175 @@ export default {
                 }
 
                 if (isMultisend(item)) {
-                  numberOfToArr.push(item.msg.outputs.length);
+                  numberOfToArr.push(item?.msg?.outputs?.length);
                 }
                 if (isRespondService(item)) {
-                  requestIdArr.push(item.msg.request_id);
+                  requestIdArr.push(item?.msg?.request_id);
                 }
                 if (isDenomAndId(item)) {
-                  denomIdArr.push(item.msg.denom);
-                  nftIdArr.push(item.msg.id);
+                  denomIdArr.push(item?.msg?.denom);
+                  nftIdArr.push(item?.msg?.id);
                 }
 
                 if (isFeedNameAndCreator(item)) {
-                  feedNameArr.push(item.msg.feed_name);
-                  oracleCreatorArr.push(item.msg.creator);
+                  feedNameArr.push(item?.msg?.feed_name);
+                  oracleCreatorArr.push(item?.msg?.creator);
                 }
 
                 if (isConsumer(item)) {
-                  consumerArr.push(item.msg.consumer);
+                  consumerArr.push(item?.msg?.consumer);
                 }
                 if (isClientId(item)) {
-                  clientIdArr.push(item.msg.client_id);
+                  clientIdArr.push(item?.msg?.client_id);
                 }
                 if (isConsumerReqIdServiceName(item)) {
-                  consumerArr.push(item.msg.consumer);
-                  requestContextIdArr.push(item.msg.request_context_id);
-                  serviceNameArr.push(item.msg.service_name);
+                  consumerArr.push(item?.msg?.consumer);
+                  requestContextIdArr.push(item?.msg?.request_context_id);
+                  serviceNameArr.push(item?.msg?.service_name);
                 }
                 if (isIdSenderName(item)) {
-                  senderArr.push(item.msg.sender);
-                  denomIdArr.push(item.msg.id);
-                  denomNameArr.push(item.msg.name);
+                  senderArr.push(item?.msg?.sender);
+                  denomIdArr.push(item?.msg?.id);
+                  denomNameArr.push(item?.msg?.name);
                 }
                 if (isChannelIdPortId(item)) {
-                  portIdArr.push(item.msg.port_id);
-                  channelIdArr.push(item.msg.channel_id);
+                  portIdArr.push(item?.msg?.port_id);
+                  channelIdArr.push(item?.msg?.channel_id);
                 }
                 if (isClientIdConnectionId(item)) {
-                  clientIdArr.push(item.msg.client_id);
-                  connectionIdArr.push(item.msg.connection_id);
+                  clientIdArr.push(item?.msg?.client_id);
+                  connectionIdArr.push(item?.msg?.connection_id);
                 }
 
                 if (isDigestDigestAlgo(item)) {
-                  digestArr.push(item.msg.contents[0].digest);
-                  digest_algoArr.push(item.msg.contents[0].digest_algo);
+                  digestArr.push(item?.msg?.contents[0]?.digest);
+                  digest_algoArr.push(item?.msg?.contents[0]?.digest_algo);
                 }
                 if (isSymbolMinUnitOwner(item)) {
-                  symbolArr.push(item.msg.symbol);
-                  minUnitArr.push(item.msg.min_unit);
-                  ownerArr.push(item.msg.owner);
+                  symbolArr.push(item?.msg?.symbol);
+                  minUnitArr.push(item?.msg?.min_unit);
+                  ownerArr.push(item?.msg?.owner);
                 }
                 if (isReceiver(item)) {
-                  receiverArr.push(item.msg.packet.data.receiver);
+                  receiverArr.push(item?.msg?.packet?.data?.receiver);
                 }
                 if (isSymbolOwner(item)) {
-                  symbolArr.push(item.msg.symbol);
-                  ownerArr.push(item.msg.owner);
+                  symbolArr.push(item?.msg?.symbol);
+                  ownerArr.push(item?.msg?.owner);
                 }
                 if (isSymbolDstOwnerSrcOwner(item)) {
-                  symbolArr.push(item.msg.symbol);
-                  dstOwnerArr.push(item.msg.dst_owner);
-                  srcOwnerArr.push(item.msg.src_owner);
+                  symbolArr.push(item?.msg?.symbol);
+                  dstOwnerArr.push(item?.msg?.dst_owner);
+                  srcOwnerArr.push(item?.msg?.src_owner);
                 }
                 if (isSymbolOwner2(item)) {
-                  symbolArr.push(item.msg.symbol);
-                  ownerArr.push(item.msg.owner);
+                  symbolArr.push(item?.msg?.symbol);
+                  ownerArr.push(item?.msg?.owner);
                 }
                 if (isSymbolSender(item)) {
-                  symbolArr.push(item.msg.symbol);
-                  senderArr.push(item.msg.sender);
+                  symbolArr.push(item?.msg?.symbol);
+                  senderArr.push(item?.msg?.sender);
                 }
                 if (isProposalIdOptionVoter(item)) {
-                  proposalIdArr.push(item.msg.proposal_id);
-                  optionArr.push(item.msg.option);
-                  voterArr.push(item.msg.voter);
+                  proposalIdArr.push(item?.msg?.proposal_id);
+                  optionArr.push(item?.msg?.option);
+                  voterArr.push(item?.msg?.voter);
                 }
                 if (isProposalIdDepositor(item)) {
-                  proposalIdArr.push(item.msg.proposal_id);
-                  depositorArr.push(item.msg.depositor);
+                  proposalIdArr.push(item?.msg?.proposal_id);
+                  depositorArr.push(item?.msg?.depositor);
                 }
                 if (isTitle(item)) {
-                  title = item.msg.content.title;
+                  title = item?.msg?.content?.title;
                 }
                 if (isConsumerRequestContextId(item)) {
-                  consumerArr.push(item.msg.consumer);
-                  requestContextIdArr.push(item.msg.request_context_id);
+                  consumerArr.push(item?.msg?.consumer);
+                  requestContextIdArr.push(item?.msg?.request_context_id);
                 }
                 if (isAuthorServiceName(item)) {
-                  authorArr.push(item.msg.author);
-                  serviceNameArr.push(item.msg.service_name);
+                  authorArr.push(item?.msg?.author);
+                  serviceNameArr.push(item?.msg?.service_name);
                 }
                 if (isOwnerProviderServiceName(item)) {
-                  ownerArr.push(item.msg.owner);
-                  providerArr.push(item.msg.provider);
-                  serviceNameArr.push(item.msg.service_name);
+                  ownerArr.push(item?.msg?.owner);
+                  providerArr.push(item?.msg?.provider);
+                  serviceNameArr.push(item?.msg?.service_name);
                 }
                 if (isServiceName(item)) {
-                  serviceNameArr.push(item.msg.service_name);
+                  serviceNameArr.push(item?.msg?.service_name);
                 }
                 // 新增
                 if (isNftIdSenderDestChain(item)) {
-                  nftIdArr.push(item.msg.id);
-                  senderArr.push(item.msg.sender);
-                  dest_chainArr.push(item.msg.dest_chain);
+                  nftIdArr.push(item?.msg?.id);
+                  senderArr.push(item?.msg?.sender);
+                  dest_chainArr.push(item?.msg?.dest_chain);
                 }
                 if (isNftIdReceiverSourceChain(item)) {
-                  nftIdArr.push(item.msg.packet.data.id);
-                  receiverArr.push(item.msg.packet.data.receiver);
-                  source_chainArr.push(item.msg.packet.source_chain);
+                  nftIdArr.push(item?.msg?.packet?.data?.id);
+                  receiverArr.push(item?.msg?.packet?.data?.receiver);
+                  source_chainArr.push(item?.msg?.packet?.source_chain);
                 }
                 if (isNftIdSenderDestChain2(item)) {
-                  nftIdArr.push(item.msg.packet.id);
-                  senderArr.push(item.msg.packet.data.sender);
-                  dest_chainArr.push(item.msg.packet.destination_chain);
+                  nftIdArr.push(item?.msg?.packet?.id);
+                  senderArr.push(item?.msg?.packet?.data?.sender);
+                  dest_chainArr.push(item?.msg?.packet?.destination_chain);
                 }
                 if (isSequenceSourceChainSigner(item)) {
-                  sequenceArr.push(item.msg.clean_packet.sequence);
-                  source_chainArr.push(item.msg.clean_packet.source_chain);
-                  signers.push(item.msg.signer);
+                  sequenceArr.push(item?.msg?.clean_packet?.sequence);
+                  source_chainArr.push(item?.msg?.clean_packet?.source_chain);
+                  signers.push(item?.msg?.signer);
                 }
                 if (isSigner(item)) {
-                  signers.push(item.msg.signer);
+                  signers.push(item?.msg?.signer);
                 }
                 if (isChainNameSigner(item)) {
-                  chain_nameArr.push(item.msg.chain_name);
-                  signers.push(item.msg.signer);
+                  chain_nameArr.push(item?.msg?.chain_name);
+                  signers.push(item?.msg?.signer);
                 }
                 if (isSenderReceiverDenomId(item)) {
-                  denomIdArr.push(item.msg.id);
-                  senderArr.push(item.msg.sender);
-                  receiverArr.push(item.msg.recipient);
+                  denomIdArr.push(item?.msg?.id);
+                  senderArr.push(item?.msg?.sender);
+                  receiverArr.push(item?.msg?.recipient);
                 }
               });
               /*
                * 同一类型多msg 去重
                * */
-              sameMsgFromAddrArr = Array.from(new Set(sameMsgFromAddrArr));
-              sameMsgToAddrArr = Array.from(new Set(sameMsgToAddrArr));
-              portIdArr = Array.from(new Set(portIdArr));
-              channelIdArr = Array.from(new Set(channelIdArr));
-              connectionIdArr = Array.from(new Set(connectionIdArr));
-              receiverArr = Array.from(new Set(receiverArr));
-              numberOfToArr = Array.from(new Set(numberOfToArr));
-              requestIdArr = Array.from(new Set(requestIdArr));
-              denomIdArr = Array.from(new Set(denomIdArr));
-              nftIdArr = Array.from(new Set(nftIdArr));
-              feedNameArr = Array.from(new Set(feedNameArr));
-              clientIdArr = Array.from(new Set(clientIdArr));
-              denomNameArr = Array.from(new Set(denomNameArr));
-              oracleCreatorArr = Array.from(new Set(oracleCreatorArr));
-              consumerArr = Array.from(new Set(consumerArr));
-              digestArr = Array.from(new Set(digestArr));
-              digest_algoArr = Array.from(new Set(digest_algoArr));
-              symbolArr = Array.from(new Set(symbolArr));
-              minUnitArr = Array.from(new Set(minUnitArr));
-              ownerArr = Array.from(new Set(ownerArr));
-              dstOwnerArr = Array.from(new Set(dstOwnerArr));
-              srcOwnerArr = Array.from(new Set(srcOwnerArr));
-              senderArr = Array.from(new Set(senderArr));
-              proposalIdArr = Array.from(new Set(proposalIdArr));
-              optionArr = Array.from(new Set(optionArr));
-              voterArr = Array.from(new Set(voterArr));
-              depositorArr = Array.from(new Set(depositorArr));
-              authorArr = Array.from(new Set(authorArr));
-              providerArr = Array.from(new Set(providerArr));
-              requestContextIdArr = Array.from(new Set(requestContextIdArr));
-              serviceNameArr = Array.from(new Set(serviceNameArr));
-              dest_chainArr = Array.from(new Set(dest_chainArr));
-              source_chainArr = Array.from(new Set(source_chainArr));
-              sequenceArr = Array.from(new Set(sequenceArr));
-              chain_nameArr = Array.from(new Set(chain_nameArr));
+              sameMsgFromAddrArr = arrHandle(sameMsgFromAddrArr);
+              sameMsgToAddrArr = arrHandle(sameMsgToAddrArr);
+              portIdArr = arrHandle(portIdArr);
+              channelIdArr = arrHandle(channelIdArr);
+              connectionIdArr = arrHandle(connectionIdArr);
+              receiverArr = arrHandle(receiverArr);
+              numberOfToArr = arrHandle(numberOfToArr);
+              requestIdArr = arrHandle(requestIdArr);
+              denomIdArr = arrHandle(denomIdArr);
+              nftIdArr = arrHandle(nftIdArr);
+              feedNameArr = arrHandle(feedNameArr);
+              clientIdArr = arrHandle(clientIdArr);
+              denomNameArr = arrHandle(denomNameArr);
+              oracleCreatorArr = arrHandle(oracleCreatorArr);
+              consumerArr = arrHandle(consumerArr);
+              digestArr = arrHandle(digestArr);
+              digest_algoArr = arrHandle(digest_algoArr);
+              symbolArr = arrHandle(symbolArr);
+              minUnitArr = arrHandle(minUnitArr);
+              ownerArr = arrHandle(ownerArr);
+              dstOwnerArr = arrHandle(dstOwnerArr);
+              srcOwnerArr = arrHandle(srcOwnerArr);
+              senderArr = arrHandle(senderArr);
+              proposalIdArr = arrHandle(proposalIdArr);
+              optionArr = arrHandle(optionArr);
+              voterArr = arrHandle(voterArr);
+              depositorArr = arrHandle(depositorArr);
+              authorArr = arrHandle(authorArr);
+              providerArr = arrHandle(providerArr);
+              requestContextIdArr = arrHandle(requestContextIdArr);
+              serviceNameArr = arrHandle(serviceNameArr);
+              dest_chainArr = arrHandle(dest_chainArr);
+              source_chainArr = arrHandle(source_chainArr);
+              sequenceArr = arrHandle(sequenceArr);
+              chain_nameArr = arrHandle(chain_nameArr);
             }
 
             // farm -> stake unstake
@@ -845,7 +845,6 @@ export default {
               }
               poolCreator = msg.msg.creator;
             }
-
             // farm -> create_pool_with_community_pool
             if (msg?.type === TX_TYPE.create_pool_with_community_pool) {
               proposer = msg.msg.proposer;
@@ -954,7 +953,7 @@ export default {
               owner: getValueFromArr(ownerArr),
               dstOwner: getValueFromArr(dstOwnerArr),
               srcOwner: getValueFromArr(srcOwnerArr),
-              sender: getValueFromArr(senderArr),
+              sender: senderArr?.length > 1 ? ' ' : senderArr?.length === 1 ? senderArr[0] : sender,
               proposalId: getValueFromArr(proposalIdArr),
               option: getValueFromArr(optionArr),
               voter: getValueFromArr(voterArr),

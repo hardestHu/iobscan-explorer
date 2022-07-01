@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const getValueFromArr = (values, defaultVal = { more: ' ', default: '--' }) => {
   if (!Array.isArray(values)) {
     return defaultVal.default;
@@ -11,3 +10,13 @@ export const getValueFromArr = (values, defaultVal = { more: ' ', default: '--' 
   return values.length === 1 ? values[0] : defaultVal.default;
 };
 
+export const arrHandle = (arr) => {
+  if (!Array.isArray(arr)) {
+    return [];
+  }
+
+  const filters = [null, undefined, ''];
+  const res = arr.filter((v) => !filters.includes(v));
+
+  return [...new Set(res)];
+};
