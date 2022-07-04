@@ -231,6 +231,18 @@
 									<span v-else-if="item.isFormatPoolId">
 											{{ formatPoolId(scope.row[item.displayValue]) }}
 										</span>
+									<span v-else-if="item.isLargeString" class="nft_large_string_container">
+											<LargeString
+												:isShowPre="Tools.isJSON(scope.row[item.displayValue])"
+												:key="scope.row.nftName + scope.row.id + nftKey"
+												:text="scope.row[item.displayValue]"
+												mode="cell"
+												:minHeight="LargeStringMinHeight"
+												:lineHeight="LargeStringLineHeight"
+											/>
+										</span>
+									
+								
 									<span v-else
 									      :class="item.isWrap ? 'wrap_style' : item.isRight ? 'right_style' : '' ">
 											{{
@@ -285,12 +297,14 @@ import {
 } from '../../constant';
 import {fetchAllTokens} from "../../service/api";
 import ProposalStatusComponent from "../Gov/ProposalStatusComponent";
+import LargeString from "@/components/common/LargeString";
 
 export default {
 	name: "ListComponent",
-	components: {ProposalStatusComponent, MPagination, Loading},
+	components: {LargeString, ProposalStatusComponent, MPagination, Loading},
 	data() {
 		return {
+			Tools,
 			monikerNum,
 			TX_TYPE_DISPLAY:{},
 			formatMoniker,
@@ -372,6 +386,18 @@ export default {
 		isSmallTable:{
 			type:Boolean,
 			default: false
+		},
+		LargeStringMinHeight: {
+			type:Number,
+			default:69
+		},
+		LargeStringLineHeight:{
+			type:Number,
+			default:23
+		} ,
+		nftKey :{
+			type:Number,
+			default:0
 		}
 	},
 	watch: {
@@ -1075,5 +1101,12 @@ export default {
 a{
 	white-space: nowrap;
 	color: $theme_c !important;
+}
+.nft_large_string_container{
+	width: 380px;
+	display: inline-block;
+	::-webkit-scrollbar-corner{
+		background: transparent;
+	}
 }
 </style>

@@ -35,6 +35,7 @@ export default [
   {
     label: i18n.t('ExplorerLang.table.data'),
     displayValue: 'tokenData',
+    isLargeString: true
   },
   {
     label: i18n.t('ExplorerLang.table.uri'),
