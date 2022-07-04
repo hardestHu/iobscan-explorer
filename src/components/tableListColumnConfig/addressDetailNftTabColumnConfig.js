@@ -7,6 +7,7 @@ export default [
   {
     label: i18n.t('ExplorerLang.table.denom'),
     displayValue: 'denomName',
+    nativeValue: 'denomName',
     isNeedFormat: true,
     isFormatAddress: true
   },
