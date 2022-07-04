@@ -6044,11 +6044,11 @@ export default {
           // xxx 能量值（ugas） xxx 业务费（business）
           // amount denom
           const ugas = msg.allowance.spend_limit[0];
-          values.push(
-            `${ugas.amount}${ugas.denom} ${this.$t(
-              'ExplorerLang.transactionInformation.grant.ugas'
-            )}`
-          );
+          const denomText = this.$t(`ExplorerLang.transactionInformation.grant.${ugas.denom}`);
+          const denomTextTrs = /^ExplorerLang\.transactionInformation\.grant/.test(denomText)
+            ? ugas.denom
+            : denomText;
+          values.push(`${ugas.amount}${denomTextTrs}`);
 
           msg.allowance.spend_limit.slice(1).forEach((v) => {
             values.push(
