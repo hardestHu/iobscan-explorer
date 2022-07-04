@@ -651,7 +651,8 @@ export const DISTRIBUTION = {
 export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
 
-export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目
+export const PRODUCT_WENCHANG = 'WENCHANG'; // 可用于判断是文昌链项目
+export const PRODUCT_WENCHANG_TESTNET = 'WENCHANGTESTNET'; // 可用于判断是文昌链项目
 export const DTC_ADDRESS_PREFIX = 'dtc';
 export const DDC_TYPE_LIST = {
   1: 'DDC721',
