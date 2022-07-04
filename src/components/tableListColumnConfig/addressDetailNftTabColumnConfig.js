@@ -7,6 +7,8 @@ export default [
   {
     label: i18n.t('ExplorerLang.table.denom'),
     displayValue: 'denomName',
+    isNeedFormat: true,
+    isFormatAddress: true
   },
   {
     label: i18n.t('ExplorerLang.table.tokenName'),
