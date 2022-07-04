@@ -6023,10 +6023,12 @@ export default {
         {
           label: this.$t('ExplorerLang.transactionInformation.grant.granter'),
           value: msg.granter,
+	        isAddress:true
         },
         {
           label: this.$t('ExplorerLang.transactionInformation.grant.grantee'),
           value: msg.grantee,
+	        isAddress:true
         },
       ];
 
