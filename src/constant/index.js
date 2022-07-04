@@ -498,6 +498,7 @@ export const CHAIN_ICON = {
   IRISHUB: { icon: 'iconfont iconiris' },
   WENCHANG:{ icon: 'iconfont iconBianjie_wenchanglian_Logo-02' },
   DATANG: {icon:'iconfont iconhuaban'},
+  WENCHANGTESTNET: {icon:'iconfont iconxingzhuangjiehe1'},
 };
 const CHAINID = {};
 CHAINID.IRISHUB = 'Mainnet IRISHUB';
