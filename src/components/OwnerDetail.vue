@@ -60,57 +60,58 @@
         v-if="moduleSupport('106', prodConfig.navFuncList)"
         v-show="isIdentity"
       >
-        <div class="content_title">
-          {{ $t('ExplorerLang.addressDetail.identities') }}
-        </div>
-        <el-table
-          class="table"
-          :data="identityList"
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-        >
-          <el-table-column
-            :min-width="ColumnMinWidth.identity"
-            :label="$t('ExplorerLang.table.identity')"
-          >
-            <template slot-scope="scope">
-              <router-link :to="`/identity/${scope.row.id}`">{{ scope.row.id }}</router-link>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.txHash"
-            :label="$t('ExplorerLang.table.txHash')"
-          >
-            <template slot-scope="scope">
-              <el-tooltip
-                :content="scope.row.txHash"
-                placement="top"
-                :disabled="!Tools.isValid(scope.row.txHash)"
-              >
-                <router-link :to="`/tx?txHash=${scope.row.txHash}`"
-                  >{{ formatTxHash(scope.row.txHash) }}
-                </router-link>
-              </el-tooltip>
-            </template>
-          </el-table-column>
-          <el-table-column
-            :min-width="ColumnMinWidth.time"
-            :label="$t('ExplorerLang.table.timestamp')"
-            prop="time"
-          >
-            <template slot-scope="scope">
-              <span>{{ scope.row.time }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination_content" v-show="identityCount > identityPageSize">
-          <m-pagination
-            :page-size="identityPageSize"
-            :total="identityCount"
-            :page="identityPageNum"
-            :page-change="identityPageChange"
-          >
-          </m-pagination>
-        </div>
+	      <identity-options></identity-options>
+<!--        <div class="content_title">-->
+<!--          {{ $t('ExplorerLang.addressDetail.identities') }}-->
+<!--        </div>-->
+<!--        <el-table-->
+<!--          class="table"-->
+<!--          :data="identityList"-->
+<!--          :empty-text="$t('ExplorerLang.table.emptyDescription')"-->
+<!--        >-->
+<!--          <el-table-column-->
+<!--            :min-width="ColumnMinWidth.identity"-->
+<!--            :label="$t('ExplorerLang.table.identity')"-->
+<!--          >-->
+<!--            <template slot-scope="scope">-->
+<!--              <router-link :to="`/identity/${scope.row.id}`">{{ scope.row.id }}</router-link>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+<!--          <el-table-column-->
+<!--            :min-width="ColumnMinWidth.txHash"-->
+<!--            :label="$t('ExplorerLang.table.txHash')"-->
+<!--          >-->
+<!--            <template slot-scope="scope">-->
+<!--              <el-tooltip-->
+<!--                :content="scope.row.txHash"-->
+<!--                placement="top"-->
+<!--                :disabled="!Tools.isValid(scope.row.txHash)"-->
+<!--              >-->
+<!--                <router-link :to="`/tx?txHash=${scope.row.txHash}`"-->
+<!--                  >{{ formatTxHash(scope.row.txHash) }}-->
+<!--                </router-link>-->
+<!--              </el-tooltip>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+<!--          <el-table-column-->
+<!--            :min-width="ColumnMinWidth.time"-->
+<!--            :label="$t('ExplorerLang.table.timestamp')"-->
+<!--            prop="time"-->
+<!--          >-->
+<!--            <template slot-scope="scope">-->
+<!--              <span>{{ scope.row.time }}</span>-->
+<!--            </template>-->
+<!--          </el-table-column>-->
+<!--        </el-table>-->
+<!--        <div class="pagination_content" v-show="identityCount > identityPageSize">-->
+<!--          <m-pagination-->
+<!--            :page-size="identityPageSize"-->
+<!--            :total="identityCount"-->
+<!--            :page="identityPageNum"-->
+<!--            :page-change="identityPageChange"-->
+<!--          >-->
+<!--          </m-pagination>-->
+<!--        </div>-->
       </div>
 
       <div v-if="isTx" class="address_transaction_content">
@@ -214,10 +215,12 @@ import NftTabOptions from "@/addressPage/NftTabOptions";
 import TxsOptions from "@/addressPage/TxsOptions";
 import IServiceConsumerOptions from "@/addressPage/IServiceConsumerOptions";
 import IServiceProviderOptions from "@/addressPage/IServiceProviderOptions";
+import IdentityOptions from "@/addressPage/IdentityOptions";
 
 export default {
   name: 'OwnerDetail',
   components: {
+	  IdentityOptions,
 	  IServiceProviderOptions,
 	  IServiceConsumerOptions,
 	  TxsOptions,
@@ -449,8 +452,8 @@ export default {
       }
       if (moduleSupport('106', prodConfig.navFuncList)) {
         this.tabList.push({ ...identity });
-        this.getIdentityListCount();
-        this.getIdentityList();
+        // this.getIdentityListCount();
+        // this.getIdentityList();
       }
       if (moduleSupport('105', prodConfig.navFuncList)) {
         this.tabList.push({ ...iService });
