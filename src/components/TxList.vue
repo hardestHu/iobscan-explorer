@@ -1144,9 +1144,8 @@ export default {
               receiver = msg.msg.recipient;
               denomId = msg.msg.id;
             }
-
-            if (msg?.type === TX_TYPE.issue_denom && msg?.msg?.denomId && msg?.msg?.sender) {
-              denomId = msg.msg.denomId;
+            if (msg?.type === TX_TYPE.issue_denom && msg?.msg?.id && msg?.msg?.sender) {
+              denomId = msg.msg.id;
               sender = msg.msg.sender;
             }
             // farm -> stake unstake
