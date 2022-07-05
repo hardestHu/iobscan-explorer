@@ -1,0 +1,58 @@
+<template>
+<div>
+	<list-component
+		:is-loading="isLoading"
+		:list-data="energyAssetData"
+		:column-list="energyAssetColumn"
+		:pagination="{ pageSize: 5, dataCount: 0, pageNum: 1 }"
+	>
+	</list-component>
+</div>
+</template>
+
+<script>
+import energyAssetColumn from "@/components/tableListColumnConfig/energyAssetColumn";
+import {getEnergyAssetApi} from "@/service/api";
+import {UGAS} from "@/constant";
+
+export default {
+	name: "EnergyAssetOptions",
+	data() {
+		return {
+			isLoading:false,
+			energyAssetData: [],
+			energyAssetColumn,
+		}
+	},
+	created(){
+		this.getEnergyAssetList();
+	},
+	methods:{
+		async getEnergyAssetList() {
+			this.isLoading = true;
+			const res = await getEnergyAssetApi(this.address);
+			this.isLoading = false;
+			if (res && res.result && res.result.length > 0) {
+				const energyItem = res.result.find((item) => item.denom === UGAS);
+				this.energyAssetData = [
+					{
+						title: this.$t('ExplorerLang.table.energy'),
+						amount: energyItem?.amount || '--',
+					},
+				];
+			} else {
+				this.energyAssetData = [
+					{
+						title: this.$t('ExplorerLang.table.energy'),
+						amount: '--',
+					},
+				];
+			}
+		},
+	}
+}
+</script>
+
+<style scoped>
+
+</style>

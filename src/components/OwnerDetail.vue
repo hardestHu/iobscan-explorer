@@ -127,13 +127,7 @@
       </div>
       <!-- energy asset -->
       <div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
-        <list-component
-          :is-loading="isLoading"
-          :list-data="energyAssetData"
-          :column-list="energyAssetColumn"
-          :pagination="{ pageSize: 5, dataCount: 0, pageNum: 1 }"
-        >
-        </list-component>
+        <energy-asset-options></energy-asset-options>
       </div>
     </div>
   </div>
@@ -204,10 +198,12 @@ import IServiceConsumerOptions from "@/addressPage/IServiceConsumerOptions";
 import IServiceProviderOptions from "@/addressPage/IServiceProviderOptions";
 import IdentityOptions from "@/addressPage/IdentityOptions";
 import BsnDdcOptions from "@/addressPage/BsnDdcOptions";
+import EnergyAssetOptions from "@/addressPage/EnergyAssetOptions";
 
 export default {
   name: 'OwnerDetail',
   components: {
+	  EnergyAssetOptions,
 	  BsnDdcOptions,
 	  IdentityOptions,
 	  IServiceProviderOptions,
