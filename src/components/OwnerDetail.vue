@@ -123,20 +123,7 @@
         v-if="moduleSupport('117', prodConfig.navFuncList)"
         v-show="isDDC"
       >
-        <div class="content_title">
-          {{ $t('ExplorerLang.ddc.mainTitle') }}
-        </div>
-        <list-component
-          :empty-text="$t('ExplorerLang.table.emptyDescription')"
-          :list-data="ddcList"
-          :column-list="ddcListColumn"
-          :pagination="{
-            pageSize: Number(ddcPageSize),
-            dataCount: ddcCount,
-            pageNum: Number(ddcPageNum),
-          }"
-          @pageChange="ddcPageChange"
-        />
+      <bsn-ddc-options></bsn-ddc-options>
       </div>
       <!-- energy asset -->
       <div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
@@ -216,10 +203,12 @@ import TxsOptions from "@/addressPage/TxsOptions";
 import IServiceConsumerOptions from "@/addressPage/IServiceConsumerOptions";
 import IServiceProviderOptions from "@/addressPage/IServiceProviderOptions";
 import IdentityOptions from "@/addressPage/IdentityOptions";
+import BsnDdcOptions from "@/addressPage/BsnDdcOptions";
 
 export default {
   name: 'OwnerDetail',
   components: {
+	  BsnDdcOptions,
 	  IdentityOptions,
 	  IServiceProviderOptions,
 	  IServiceConsumerOptions,
@@ -447,8 +436,8 @@ export default {
       }
       if (moduleSupport('117', prodConfig.navFuncList)) {
         this.tabList.push({ ...ddc });
-        this.getDdcListCount();
-        this.getDdcList();
+        // this.getDdcListCount();
+        // this.getDdcList();
       }
       if (moduleSupport('106', prodConfig.navFuncList)) {
         this.tabList.push({ ...identity });
