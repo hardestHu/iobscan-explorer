@@ -26,7 +26,7 @@
         </vue-scroll>
       </div>
 	    
-      <div v-if="moduleSupport('107', prodConfig.navFuncList)" v-show="isAsset">
+      <div v-if="moduleSupport('107', prodConfig.navFuncList) && isAsset" >
 	      <!-- 地址详情 -->
 	      <assets-tab-options></assets-tab-options>
       </div>
@@ -41,24 +41,21 @@
 
       <div
         class="consumer_transaction_content"
-        v-if="moduleSupport('105', prodConfig.navFuncList)"
-        v-show="isIservice"
+        v-if="moduleSupport('105', prodConfig.navFuncList) && isIservice"
       >
 	      <i-service-consumer-options></i-service-consumer-options>
       </div>
 	    
       <div
         class="provider_transaction_content"
-        v-if="moduleSupport('105', prodConfig.navFuncList)"
-        v-show="isIservice"
+        v-if="moduleSupport('105', prodConfig.navFuncList) && isIservice"
       >
 	      <i-service-provider-options></i-service-provider-options>
       </div>
 
       <div
         class="address_content"
-        v-if="moduleSupport('106', prodConfig.navFuncList)"
-        v-show="isIdentity"
+        v-if="moduleSupport('106', prodConfig.navFuncList)  && isIdentity"
       >
 	      <identity-options></identity-options>
 <!--        <div class="content_title">-->
@@ -120,13 +117,12 @@
       <!-- bsn ddc -->
       <div
         class="address_transaction_content"
-        v-if="moduleSupport('117', prodConfig.navFuncList)"
-        v-show="isDDC"
+        v-if="moduleSupport('117', prodConfig.navFuncList) && isDDC"
       >
       <bsn-ddc-options></bsn-ddc-options>
       </div>
       <!-- energy asset -->
-      <div v-if="moduleSupport('116', prodConfig.navFuncList)" v-show="isEnergyAsset">
+      <div v-if="moduleSupport('116', prodConfig.navFuncList)&& isEnergyAsset" >
         <energy-asset-options></energy-asset-options>
       </div>
     </div>
@@ -350,12 +346,12 @@ export default {
     $route() {
       this.address = this.$route.params.param;
       this.getTxByAddress();
-      this.getConsumerTxListCount();
-      this.getConsumerTxList();
+      // this.getConsumerTxListCount();
+      // this.getConsumerTxList();
       // this.getRspondRecordListCount();
       // this.getRspondRecordList();
-      this.getProviderTxListCount();
-      this.getProviderTxList();
+      // this.getProviderTxListCount();
+      // this.getProviderTxList();
     },
   },
   async created() {
@@ -365,7 +361,7 @@ export default {
   async mounted() {
     this.isShowSendAndReceiveTxComponent = prodConfig.isShowSendAndReceiveTxCount;
     this.txColumnList = txCommonTable.concat(SignerColunmn, txCommonLatestTable);
-    this.ddcListColumn = ddcListColumnConfig;
+    // this.ddcListColumn = ddcListColumnConfig;
     await this.getTxTypeData();
     document.documentElement.scrollTop = 0;
     this.address = this.$route.params.param;
@@ -422,7 +418,7 @@ export default {
       this.tabList = [];
       if (moduleSupport('116', prodConfig.navFuncList)) {
         this.tabList.push({ ...energyAsset });
-        this.getEnergyAssetList();
+        // this.getEnergyAssetList();
       }
       if (moduleSupport('107', prodConfig.navFuncList)) {
         this.tabList.push({ ...assetInfo });
@@ -724,6 +720,8 @@ export default {
     //       }
     //     }
     //   } catch (e) {
+	  
+	  
     //     console.error(e);
     //     this.$message.error(this.$t('ExplorerLang.message.requestFailed'));
     //   }
@@ -767,21 +765,6 @@ export default {
           break;
       }
       return content;
-    },
-    getBgColorWithState(state) {
-      let bgColor = '';
-      switch (state) {
-        case 0:
-          bgColor = '#B1E96E';
-          break;
-        case 1:
-          bgColor = '#E96E6E';
-          break;
-        case 2:
-          bgColor = '#FFC456';
-          break;
-      }
-      return bgColor;
     },
     arraySpanMethod(table) {
       if (table.columnIndex === 0) {
@@ -1016,54 +999,54 @@ export default {
       const res = await getConfig();
       this.tokenData = res.tokenData;
     },
-    ddcPageChange(pageNum) {
-      this.ddcPageNum = pageNum;
-      this.getDdcList();
-    },
-    async getDdcList() {
-      try {
-        const ddcData = await getDdcList({
-          owner: this.$route.params.param,
-          ddc_id: '',
-          contract_address: '',
-          useCount: false,
-          pageNum: this.ddcPageNum,
-          pageSize: this.ddcPageSize,
-        });
-        if (ddcData && ddcData.data) {
-          this.ddcList = ddcData.data.map((item) => {
-            return {
-              ddcId: item.ddc_id,
-              ddcName: item.ddc_name,
-              contractAddr: item.contract_address,
-              owner: item.owner,
-              creator: item.creator,
-              ddcUri: item.ddc_uri || '--',
-              Time: Tools.formatLocalTime(item.lastest_tx_time),
-            };
-          });
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    async getDdcListCount() {
-      try {
-        const res = await getDdcList({
-          owner: this.$route.params.param,
-          ddc_id: '',
-          contract_address: '',
-          useCount: true,
-        });
-        if (res?.count) {
-          this.ddcCount = res.count;
-        } else {
-          this.ddcCount = 0;
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    },
+    // ddcPageChange(pageNum) {
+    //   this.ddcPageNum = pageNum;
+    //   // this.getDdcList();
+    // },
+    // async getDdcList() {
+    //   try {
+    //     const ddcData = await getDdcList({
+    //       owner: this.$route.params.param,
+    //       ddc_id: '',
+    //       contract_address: '',
+    //       useCount: false,
+    //       pageNum: this.ddcPageNum,
+    //       pageSize: this.ddcPageSize,
+    //     });
+    //     if (ddcData && ddcData.data) {
+    //       this.ddcList = ddcData.data.map((item) => {
+    //         return {
+    //           ddcId: item.ddc_id,
+    //           ddcName: item.ddc_name,
+    //           contractAddr: item.contract_address,
+    //           owner: item.owner,
+    //           creator: item.creator,
+    //           ddcUri: item.ddc_uri || '--',
+    //           Time: Tools.formatLocalTime(item.lastest_tx_time),
+    //         };
+    //       });
+    //     }
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // },
+    // async getDdcListCount() {
+    //   try {
+    //     const res = await getDdcList({
+    //       owner: this.$route.params.param,
+    //       ddc_id: '',
+    //       contract_address: '',
+    //       useCount: true,
+    //     });
+    //     if (res?.count) {
+    //       this.ddcCount = res.count;
+    //     } else {
+    //       this.ddcCount = 0;
+    //     }
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // },
     async getEnergyAssetList() {
       this.isLoading = true;
       const res = await getEnergyAssetApi(this.address);

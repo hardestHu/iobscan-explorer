@@ -994,6 +994,7 @@ export default {
 									: '--';
 						});
 					}
+					console.log(this.transactionArray,'这个数据又是啥')
 					if (amounts && amounts.length > 0) {
 						const amount = await Promise.all(amounts);
 						this.denomMap = await getDenomMap();
@@ -1053,7 +1054,6 @@ export default {
 							}
 						});
 					}
-					console.log(this.transactionArray, '333333333333333333')
 					/* this.$nextTick(() => {
 						setTimeout(() => {
 							this.colWidthList = this.$adjustColumnWidth(this.$refs['listTable'].$el);

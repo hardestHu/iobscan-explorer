@@ -599,7 +599,6 @@ export default {
 				const item = this.assetList[key];
 				// let balanceAmount = item && item.amount ? await converCoin(item) : {};
 				const balanceAmount = balanceAmounts[key];
-				console.log(this.mainToken,'?????')
 				if (item && item.denom && item.denom === this.mainToken.denom) {
 					assetList.unshift({
 						token: this.mainToken.symbol.toUpperCase(),

@@ -14,17 +14,24 @@
 import energyAssetColumn from "@/components/tableListColumnConfig/energyAssetColumn";
 import {getEnergyAssetApi} from "@/service/api";
 import {UGAS} from "@/constant";
+import ListComponent from "@/components/common/ListComponent";
 
 export default {
 	name: "EnergyAssetOptions",
+	components: {ListComponent},
 	data() {
 		return {
 			isLoading:false,
 			energyAssetData: [],
 			energyAssetColumn,
+			address:'',
 		}
 	},
 	created(){
+	
+	},
+	mounted(){
+		this.address = this.$route.params.param
 		this.getEnergyAssetList();
 	},
 	methods:{

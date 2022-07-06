@@ -34,12 +34,10 @@ export default {
 			ddcPageNum: 1,
 		}
 	},
-	created(){
-		this.getDdcListCount();
-		this.getDdcList();
-	},
 	mounted(){
 		this.ddcListColumn = ddcListColumnConfig;
+		this.getDdcListCount();
+		this.getDdcList();
 	},
 	methods:{
 		ddcPageChange(pageNum) {

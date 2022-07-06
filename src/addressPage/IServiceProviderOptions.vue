@@ -260,6 +260,8 @@ export default {
 			respondRecordPageSize: 5,
 			respondRecordPageNum: 1,
 			respondRecordList: [],
+			address:'',
+			Tools,
 		}
 	},
 	created(){
@@ -306,9 +308,9 @@ export default {
 						if (item.msgs[0].msg.deposit && item.msgs[0].msg.deposit.length) {
 							result.deposit = `${item.msgs[0].msg.deposit[0].amount} ${item.msgs[0].msg.deposit[0].denom}`;
 						}
-						const bindings = await getServiceBindingByServiceName(result.serviceName);
+						const bindings = await getServiceBindingByServiceName(result.serviceName).catch(error => {console.log(error)});
 						result.isAvailable = this.$t('ExplorerLang.common.false');
-						(bindings.result || []).forEach((bind) => {
+						(bindings?.result || []).forEach((bind) => {
 							if (result.provider === bind.provider && result.owner == bind.owner) {
 								result.isAvailable = bind.available
 									? this.$t('ExplorerLang.common.true')
@@ -386,6 +388,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+	color: $t_link_c !important;
+}
 .content_title {
 	padding-top: 0.25rem;
 	color: #171d44;

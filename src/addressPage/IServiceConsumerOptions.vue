@@ -180,6 +180,7 @@ export default {
 			consumerTxCount: 0,
 			consumerTxPageSize: 5,
 			consumerTxPageNum: 1,
+			Tools,
 		}
 	},
 	created(){
@@ -351,6 +352,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+a {
+	color: $t_link_c !important;
+}
 .address_transaction_content_hash {
 	display: flex;
 	

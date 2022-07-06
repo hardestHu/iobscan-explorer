@@ -58,9 +58,11 @@
 import {ColumnMinWidth} from "@/constant";
 import Tools from "@/util/Tools";
 import {getIdentityListByAddress} from "@/service/api";
+import MPagination from "@/components/common/MPagination";
 
 export default {
 	name: "IdentityOptions",
+	components: {MPagination},
 	data () {
 		return {
 			identityList: [],
