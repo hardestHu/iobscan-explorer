@@ -368,6 +368,9 @@
           :is-loading="assetLoading"
           :list-data="assetArray"
           :column-list="assetColumnArray"
+          :large-string-min-height="LargeStringMinHeight"
+          :large-string-line-height="LargeStringLineHeight"
+          :nft-key="nftKey"
           :pagination="{
             pageSize: Number(assetPageSize),
             dataCount: assetCount,

@@ -497,7 +497,8 @@ export const CHAIN_ICON = {
   NYANCAT: { icon: 'iconfont iconcaihongmao' },
   IRISHUB: { icon: 'iconfont iconiris' },
   WENCHANG:{ icon: 'iconfont iconBianjie_wenchanglian_Logo-02' },
-  DATANG: {icon:'iconfont iconhuaban'},
+  datangchain: {icon:'iconfont iconhuaban'},
+  WENCHANGTESTNET: {icon:'iconfont iconxingzhuangjiehe1'},
 };
 const CHAINID = {};
 CHAINID.IRISHUB = 'Mainnet IRISHUB';
@@ -509,8 +510,8 @@ CHAINID.STARGATE = 'Testnet STARGATE';
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub';
 CHAINID.WENCHANG = 'Mainnet WenChang';
 CHAINID.IRITA = 'Testnet IRITA';
-CHAINID.DATANGCHAINMAIN = '大唐链主网';
-CHAINID.DATANGCHAINTESTNET = '大唐链测试网';
+CHAINID.DATANGCHAINMAIN = 'Mainnet DaTang';
+CHAINID.DATANGCHAINTESTNET = 'Testnet DaTang';
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
@@ -650,7 +651,8 @@ export const DISTRIBUTION = {
 export const COSMOS_ADDRESS_PREFIX = 'cosmos';
 export const IRIS_ADDRESS_PREFIX = 'iaa';
 
-export const PRODUCT_WENCHANG = 'bsn opb'; // 可用于判断是文昌链项目
+export const PRODUCT_WENCHANG = 'WENCHANG'; // 可用于判断是文昌链项目
+export const PRODUCT_WENCHANG_TESTNET = 'WENCHANGTESTNET'; // 可用于判断是文昌链项目
 export const DTC_ADDRESS_PREFIX = 'dtc';
 export const DDC_TYPE_LIST = {
   1: 'DDC721',
