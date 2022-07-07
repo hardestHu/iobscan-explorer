@@ -511,7 +511,7 @@ CHAINID.COSMOSHUB = 'Mainnet CosmosHub';
 CHAINID.WENCHANG = 'Mainnet WenChang';
 CHAINID.IRITA = 'Testnet IRITA';
 CHAINID.DATANGCHAINMAIN = 'Mainnet DaTang';
-CHAINID.DATANGCHAINTESTNET = '大唐链测试网';
+CHAINID.DATANGCHAINTESTNET = 'Testnet DaTang';
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
