@@ -210,7 +210,7 @@ export const ExplorerLang = {
     last100Blocs: 'Last 100 Blocks',
     validators: 'Consensus Nodes',
     services: 'iService',
-    denoms: 'Denom',
+    denoms: 'Denoms',
     assets: 'NFTs',
     identities: 'Idendity',
     blocks: 'Blocks',
@@ -222,7 +222,7 @@ export const ExplorerLang = {
     bondedTokens: 'Bonded Tokens',
     votingPower: 'Voting Power',
     communityPool: 'Community Pool',
-    address: 'Address',
+    address: 'Addresses',
   },
   block: {
     title: 'Blockchain',
