@@ -497,7 +497,7 @@ export const CHAIN_ICON = {
   NYANCAT: { icon: 'iconfont iconcaihongmao' },
   IRISHUB: { icon: 'iconfont iconiris' },
   WENCHANG:{ icon: 'iconfont iconBianjie_wenchanglian_Logo-02' },
-  DATANG: {icon:'iconfont iconhuaban'},
+  datangchain: {icon:'iconfont iconhuaban'},
   WENCHANGTESTNET: {icon:'iconfont iconxingzhuangjiehe1'},
 };
 const CHAINID = {};
@@ -510,8 +510,8 @@ CHAINID.STARGATE = 'Testnet STARGATE';
 CHAINID.COSMOSHUB = 'Mainnet CosmosHub';
 CHAINID.WENCHANG = 'Mainnet WenChang';
 CHAINID.IRITA = 'Testnet IRITA';
-CHAINID.DATANGCHAINMAIN = '大唐链主网';
-CHAINID.DATANGCHAINTESTNET = '大唐链测试网';
+CHAINID.DATANGCHAINMAIN = 'Mainnet DaTang';
+CHAINID.DATANGCHAINTESTNET = 'Testnet DaTang';
 
 export const pageTitleConfig = {
   BlockchainBlocks: 'Block List',
