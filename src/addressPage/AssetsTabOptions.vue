@@ -106,9 +106,9 @@
 								<template v-slot:default="{ row }">
 									<el-tooltip :content="`${row.address}`">
                     <span
-                      v-if="row.moniker"
-                      class="address_link"
-                      @click="addressRoute(row.address)"
+	                    v-if="row.moniker"
+	                    class="address_link"
+	                    @click="addressRoute(row.address)"
                     >
                       {{ formatMoniker(row.moniker, monikerNum.otherTable) }}
                     </span>
@@ -340,7 +340,7 @@ import {
 } from "@/service/api";
 import {addressRoute, converCoin, formatMoniker, getMainToken} from "@/helper/IritaHelper";
 import Tools from "@/util/Tools";
-import {ibcDenomPrefix,monikerNum} from "@/constant";
+import {ibcDenomPrefix, monikerNum} from "@/constant";
 import AddressInformationComponent from "@/components/AddressInformationComponent";
 import {ColumnMinWidth} from "@/constant";
 import BigNumber from 'bignumber.js';
@@ -368,7 +368,7 @@ export default {
 			unBondingDelegationCurrentPage: 1,
 			delegationCurrentPage: 1,
 			delegationCountNum: 0,
-			totalUnBondingDelegator:0,
+			totalUnBondingDelegator: 0,
 			totalUnBondingDelegatorValue: 0,
 			unBondingDelegationsItems: [],
 			totalDelegatorRewardValue: 0,
@@ -400,7 +400,7 @@ export default {
 	},
 	mounted() {
 	},
-	watch:{
+	watch: {
 		totalDelegator() {
 			this.getAssetList();
 		},
